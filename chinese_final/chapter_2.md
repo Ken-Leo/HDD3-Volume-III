@@ -479,3 +479,79 @@ $$
 $$ \frac{\alpha_k(u)}{\beta_k(u)} $$
 对于每个 $k \in \{0, 1, 2, 3\}$ 和 $u \in \{a, b\}$。前向递归结束时（归一化后）的结果为：
 $$ \alpha_4(a) = 0.2214 \quad \text{且} \quad \alpha_4(b) = 0.7786 $$
+5. 设定状态度量的初始值 $\beta_4(u) = \alpha_4(u)$（其中 $u \in \{a, b\}$），即：
+$$ \beta_4(a) = 0.2214 \quad \text{且} \quad \beta_4(b) = 0.7786 $$
+
+**后向递归**
+
+6. 阶段 3（当 $k=3$ 时）：BCJR 算法接收数据 $y_3 = 0.6$，计算所有支路度量如下：
+$$
+\begin{array}{l} \gamma_ {3} (a, a) = \exp \left\{- \pi | 0. 6 - (- 1. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0 \\ \gamma_ {3} (b, a) = \exp \left\{- \pi | 0. 6 - (- 0. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 0 2 2 3 \\ \gamma_ {3} (a, b) = \exp \left\{- \pi | 0. 6 - (0. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 9 6 9 1 \\ \gamma_ {3} (b, b) = \exp \left\{- \pi | 0. 6 - (1. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 0 7 8 5 \\ \end{array}
+$$
+随后调整状态度量 $\beta_3(a)$ 和 $\beta_3(b)$：
+$$
+\begin{array}{l} \beta_ {3} (a) = \gamma_ {3} (a, a) \beta_ {4} (a) + \gamma_ {3} (a, b) \beta_ {4} (b) \\ = (0) (0. 2 2 1 4) + (0. 9 6 9 1) (0. 7 7 8 6) = 0. 7 5 4 5 4 \\ \end{array}
+$$
+$$
+\begin{array}{l} \beta_ {3} (b) = \gamma_ {3} (b, a) \beta_ {4} (a) + \gamma_ {3} (b, b) \beta_ {4} (b) \\ = (0. 0 2 2 3) (0. 2 2 1 4) + (0. 0 7 8 5) (0. 7 7 8 6) = 0. 0 6 6 0 5 7 \\ \end{array}
+$$
+进行归一化，可得：
+$$
+\beta_ {3} (a) = 0. 7 5 4 5 4 / (0. 7 5 4 5 4 + 0. 0 6 6 0 5 7) \approx 0. 9 1 9 5
+$$
+$$
+\beta_ {3} (b) = 0. 0 6 6 0 5 7 / (0. 7 5 4 5 4 + 0. 0 6 6 0 5 7) \approx 0. 0 8 0 5
+$$
+接着，根据方程 (2.24) 计算 $\lambda_p(a_3)$：
+$$
+\begin{array}{l} \lambda_ {p} (a _ {3}) = \ln \left(\frac {\alpha_ {3} (a) \gamma_ {3} (a , b) \beta_ {4} (b) + \alpha_ {3} (b) \gamma_ {3} (b , b) \beta_ {4} (b)}{\alpha_ {3} (a) \gamma_ {3} (a , a) \beta_ {4} (a) + \alpha_ {3} (b) \gamma_ {3} (b , a) \beta_ {4} (a)}\right) \\ = \ln \left(\frac {(0 . 0 0 0 1) (0 . 9 6 9 1) (0 . 7 7 8 6) + (0 . 9 9 9 9) (0 . 0 7 8 5) (0 . 7 7 8 6)}{(0 . 0 0 0 1) (0) (0 . 2 2 1 4) + (0 . 9 9 9 9) (0 . 0 2 2 3) (0 . 2 2 1 4)}\right) \\ \approx 2. 5 2 \\ \end{array}
+$$
+由于 $\lambda_p(a_3) > 0$，因此 BCJR 算法将数据位 $a_3$ 解码为 $\hat{a}_3 = +1$。
+*注：由于发射端发送的输入数据位仅为 $\{a_0, a_1, a_2\}$，因此系统中并不实际存在数据位 $a_3$。$a_3$ 是由于输入数据与信道进行卷积运算而产生的新信息。不过，$\lambda_p(a_3)$ 的值可在迭代解码过程中被利用。*
+
+7. 阶段 2（当 $k=2$ 时）：BCJR 算法接收数据 $y_2 = 0.3$，计算所有支路度量如下：
+$$
+\gamma_ {2} (a, a) = \exp \left\{- \pi | 0. 3 - (- 1. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 0 0 0 0 4
+$$
+$$
+\gamma_ {2} (b, a) = \exp \left\{- \pi | 0. 3 - (- 0. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 1 3 3 9
+$$
+$$
+\gamma_ {2} (a, b) = \exp \left\{- \pi | 0. 3 - (0. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 8 8 1 9
+$$
+$$
+\gamma_ {2} (b, b) = \exp \left\{- \pi | 0. 3 - (1. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 0 1 0 8
+$$
+随后调整状态度量 $\beta_2(a)$ 和 $\beta_2(b)$：
+$$
+\begin{array}{l} \beta_ {2} (a) = \gamma_ {2} (a, a) \beta_ {3} (a) + \gamma_ {2} (a, b) \beta_ {3} (b) \\ = (0. 0 0 0 0 4) (0. 9 1 9 5) + (0. 8 8 1 9) (0. 0 8 0 5) = 0. 0 7 1 0 3 \\ \beta_ {2} (b) = \gamma_ {2} (b, a) \beta_ {3} (a) + \gamma_ {2} (b, b) \beta_ {3} (b) \\ = (0. 1 3 3 9) (0. 9 1 9 5) + (0. 0 1 0 8) (0. 0 8 0 5) = 0. 1 2 3 9 9 \\ \end{array}
+$$
+进行归一化，可得：
+$$
+\beta_ {2} (a) = 0. 0 7 1 0 3 / (0. 0 7 1 0 3 + 0. 1 2 3 9 9) \approx 0. 3 6 4 2
+$$
+$$
+\beta_ {2} (b) = 0. 1 2 3 9 9 / (0. 0 7 1 0 3 + 0. 1 2 3 9 9) \approx 0. 6 3 5 8
+$$
+接着计算 $\lambda_p(a_2)$：
+$$
+\begin{array}{l} \lambda_ {p} (a _ {2}) = \ln \left(\frac {\alpha_ {2} (a) \gamma_ {2} (a , b) \beta_ {3} (b) + \alpha_ {2} (b) \gamma_ {2} (b , b) \beta_ {3} (b)}{\alpha_ {2} (a) \gamma_ {2} (a , a) \beta_ {3} (a) + \alpha_ {2} (b) \gamma_ {2} (b , a) \beta_ {3} (a)}\right) \\ = \ln \left(\frac {(0 . 9 9 9 9) (0 . 8 8 1 9) (0 . 0 8 0 5) + (0 . 0 0 0 1) (0 . 0 1 0 8) (0 . 0 8 0 5)}{(0 . 9 9 9 9) (0 . 0 0 0 0 4) (0 . 9 1 9 5) + (0 . 0 0 0 1) (0 . 1 3 3 9) (0 . 9 1 9 5)}\right) \\ \approx 7. 2 \\ \end{array}
+$$
+由于 $\lambda_p(a_2) > 0$，因此 BCJR 算法将数据位 $a_2$ 解码为 $\hat{a}_2 = +1$。
+
+8. 阶段 1 和 0（当 $k \in \{1, 0\}$ 时）：BCJR 算法接收数据 $y_1 = -0.2$ 和 $y_0 = 0.9$，采用与步骤 6 和 7 相同的方法计算支路度量并调整状态度量 $\beta_k(u)$（其中 $u \in \{a, b\}$）。结果如图 2.14 所示。后向递归结束时可得：
+$$ \lambda_p(a_0) = 18.28 \quad \text{且} \quad \lambda_p(a_1) = -8.24 $$
+即 BCJR 算法将数据位 $a_0$ 和 $a_1$ 分别解码为 $\hat{a}_0 = +1$ 和 $\hat{a}_1 = -1$。
+
+9. 运行结束，BCJR 算法得出数据位 $a_k$ 的后验 LLR 值为 $\{\lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3)\} = \{18.28, -8.24, 7.2, 2.52\}$，解码得到的数据位序列为 $\{\hat{a}_0, \hat{a}_1, \hat{a}_2\} = \{1, -1, 1\}$。该结果与发射端发送的数据位 $\{a_k\}$ 完全一致，表明使用 BCJR 算法进行数据解码未出现错误。
+
+**示例 2.5** 根据图 2.10 中的信道模型，假设输入数据序列 $a_k = \{1, -1, 1\}$，信道 $H(D) = 1 - D^2$，噪声 $n_k = \{0.2, 0.3, -0.2, -0.5, 0.3\}$。请演示使用 BCJR 算法对数据 $y_k$ 进行解码的步骤（假设系统不获知数据位 $a_k$ 的先验信息）。
+
+**解**：信道输出信号 $r_k$ 可由下式求得：
+$$ r_k = a_k * h_k = \{r_0, r_1, r_2, r_3, r_4\} = \{1, -1, 0, 1, -1\} $$
+且
+$$ y_k = r_k + n_k = \{1.2, -0.7, -0.2, 0.5, -0.7\} = \{y_0, y_1, y_2, y_3, y_4\} $$
+随后，为信道 $H(D) = 1 - D^2$ 构建状态图 (trellis)，如图 2.15 所示，该图包含四个状态：状态 (a)、(b)、(c) 和 (d)。
+接着采用与示例 2.4 相同的方法使用 BCJR 算法进行解码，可得支路度量和状态度量如图 2.16 所示。其中支路上的数值为 $\gamma_k(u, q)$，状态节点上的数值表示状态度量 $\alpha_k(u)$ 与 $\beta_k(u)$ 的比值 $\alpha_k(u)/\beta_k(u)$（对于每个 $k \in \{0, 1, \dots, 4\}$ 和 $u \in \{a, b, c, d\}$）。
+根据图 2.16 中的支路度量和状态度量，可根据方程 (2.24) 计算出数据位 $a_k$ 的后验 LLR 值为：
+$$ \{\lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3), \lambda_p(a_4)\} = \{4.778, -27.646, 4.778, -12.566, 4.525\} $$
