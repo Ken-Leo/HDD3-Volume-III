@@ -2,4 +2,4 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---|---|---|---|
-| Chapter 1 | In Progress | 557 | Section 1.3: Ideal Channel Model |
+| Chapter 1 | In Progress | 566 | Section 1.4: Iterative Decoding |
