@@ -2,4 +2,4 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---|---|---|---|
-| Chapter 1 | In Progress | 331 | Section 1.2: Hard Disk Drive Channel Model |
+| Chapter 1 | In Progress | 400 | Section 1.2: Pulse Shapes and ND |
