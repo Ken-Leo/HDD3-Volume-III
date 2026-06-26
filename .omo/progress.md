@@ -2,4 +2,4 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---|---|---|---|
-| Chapter 1 | In Progress | 566 | Section 1.4: Iterative Decoding |
+| Chapter 1 | In Progress | 143 (source chapter_2.md) | Section 1.5.3 Soft Output |

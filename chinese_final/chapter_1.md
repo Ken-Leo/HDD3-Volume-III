@@ -447,3 +447,37 @@ $$
 $$
 p (a = C) = \frac {e ^ {C \lambda (a) / 2}}{e ^ {\lambda (a) / 2} + e ^ {- \lambda (a) / 2}} \tag {1.16}
 $$
+
+# 1.5.3 信道的软输出
+
+考虑一个二进制通信系统，其中数据位 $x \in \{0, 1\}$ 通过映射器 (mapper) 转换为 $u \in \{-1, 1\}$，然后通过一个无记忆信道。接收端接收到的信号为 $y = u + n$，其中 $n$ 是均值为零、方差为 $2\sigma^2$ 的加性高斯白噪声 (AWGN: additive white Gaussian noise)。
+
+条件概率密度函数 (conditional probability density function) $p(y|x)$ 表示在给定 $x$ 时的概率密度。反之，如果给定 $y$，则 $p(y|x)$ 作为 $x$ 的函数被称为“似然函数 (likelihood function)” [4]。
+
+在实践中，接收机在收到数据 $y$ 之前，$x$ 的先验概率 (a priori probability) 为 $p(x=1)$ 和 $p(x=0)$。然而，在收到数据 $y$ 之后，$p(x=1|y)$ 和 $p(x=0|y)$ 变为后验概率 (APP: a posteriori probability)。根据贝叶斯定理 (Bayes' rule)，可得：
+
+$$
+\begin{array}{l} p (x = i \mid y) = p (x = i; y) / p (y) \\ = p (y \mid x = i) p (x = i) / p (y) \tag {1.17} \\ \end{array}
+$$
+
+其中 $i \in \{0, 1\}$，且 $p(a; b)$ 是随机变量 $a$ 和 $b$ 的联合概率密度函数 (joint pdf)。因此，给定 $y$ 时数据位 $x$ 的 LLR 定义为：
+
+$$
+\lambda (x \mid y) = \ln \left(\frac {p (x = 1 \mid y)}{p (x = 0 \mid y)}\right) \tag {1.18}
+$$
+
+根据贝叶斯定理可得：
+
+$$
+\begin{array}{l} \ln \left(\frac {p (x = 1 \mid y)}{p (x = 0 \mid y)}\right) = \ln \left(\frac {p (y \mid x = 1)}{p (y \mid x = 0)}\right) + \ln \left(\frac {p (x = 1)}{p (x = 0)}\right) \\ = L _ {c} y + \lambda (x) \tag {1.19} \\ \end{array}
+$$
+
+其中 $L_c$ 是信道的软输出，被认为是与数据位 $x$ 相关且由数据 $y$ 产生的软信息；而 $\lambda(x)$ 被称为“先验信息 (a priori information)”，即接收机在收到数据 $y$ 之前关于数据位 $x$ 的信息。如果在接收端没有先验信息，则设定 $\lambda(x) = 0$。
+
+通常，公式 (1.19) 中的 $L_c$ 被称为信道可靠性 (channel reliability)，它取决于信道的特性。例如，在 $n_k$ 为 AWGN 噪声的情况下，可得：
+
+$$
+\begin{array}{l} \ln \left(\frac {p (y \mid x = 1)}{p (y \mid x = 0)}\right) \equiv \ln \left(\frac {p (y \mid u = + 1)}{p (y \mid u = - 1)}\right) \\ = \ln \left(\frac {\exp \left(- \frac {1}{2 \sigma^ {2}} (y - 1) ^ {2}\right)}{\exp \left(- \frac {1}{2 \sigma^ {2}} (y + 1) ^ {2}\right)}\right) = \frac {2}{\sigma^ {2}} y \tag {1.20} \\ \end{array}
+$$
+
+即 $L_c = 2 / \sigma^2$。
