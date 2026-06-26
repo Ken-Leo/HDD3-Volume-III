@@ -60,3 +60,34 @@ graph TD
 图 1.1 硬盘驱动器数字数据存储系统的框图 [9, 10]
 
 对于读取过程，读头 (read head) 从存储介质中读取数据。当读头移动到磁化状态 (magnetization) 发生变化的区域时，会产生一个通常被称为“读回信号 (readback signal)”的电压波形信号。随后，该读回信号被送入读信道进行处理，读信道由多个组件组成，例如：低通滤波器 (LPF: low-pass filter)、采样器 (sampler 或 analog-to-digital converter)、均衡器 (equalizer) 以及符号检测器 (symbol detector) 等。最后，输出数据将依次通过调制解码器 (modulation decoder) 和纠错解码器 (ECC decoder) 进行解码，以获得所需信息位的估计值。
+![](images/a7be9ce008911768d81eaa7c897a43e9f1c763264d695aaf025b75f65ef67215.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph LR
+    A["a_k"] --> B["1 - D"]
+    B --> C["b_k"]
+    C --> D["g(t)"]
+    D --> E["+"]
+    E --> F["r(t)"]
+    F --> G["LPF"]
+    G --> H["×"]
+    H --> I["equalizer"]
+    I --> J["symbol detector"]
+    J --> K["â_k"]
+    L["Timing Recovery"] --> H
+    M["Target H(D)"] --> L
+    N["n(t)"] --> E
+```
+</details>
+
+
+# 1.2 硬盘驱动器信道模型
+
+图 1.1 中的子系统 A (system A) 可以通过图 1.2 [1, 10] 的数学模型来表示。当一个比特周期为 $T$ 的二进制输入数据序列 $a_k \in \{0, 1\}$ 通过一个多项式为 $1 - D$ 的理想微分器 (ideal differentiator) 时（其中 $D$ 是延迟 $T$ 个单位的延迟算子），将产生一个状态转移序列 (transition sequence) $b_k \in \{-1, 0, 1\}$。其中 $b_k = \pm 1$ 表示正向或负向的状态转移 (positive or negative transition)，而 $b_k = 0$ 表示没有状态转移 (no transition)。随后，状态转移序列 $b_k$ 通过一个冲激响应为转移脉冲信号 $g(t)$ 的信道，并受到噪声 $n(t)$ 的干扰，从而产生读回信号 $r(t)$。其数学表达式为：
+
+$$ r(t) = \sum_k b_k g(t - kT) + n(t) \tag{1.1} $$
+
+随后，在接收端，读回信号 $r(t)$ 通过低通滤波器 (LPF) 以消除带外噪声，并在定时恢复 (timing recovery) 系统的控制下进行采样 [10]。采样电路的输出数据被送入均衡器和符号检测器，以寻找最可能的输入数据序列 $\hat{a}_k$（即 $a_k$ 的估计值）。

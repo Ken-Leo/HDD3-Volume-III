@@ -2,4 +2,4 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---|---|---|---|
-| Chapter 1 | In Progress | 296 | Section 1.1: Digital Data Storage Systems (Read Process) |
+| Chapter 1 | In Progress | 331 | Section 1.2: Hard Disk Drive Channel Model |
