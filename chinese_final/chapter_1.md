@@ -14,3 +14,7 @@
 # 引言
 
 本章将介绍用于代表硬盘驱动器中磁记录系统 (magnetic recording system) 的读信道 (read channel) [1] 的数学模型，使读者能够了解硬盘驱动器的信号处理系统，这为后续章节的学习奠定了基础。此外，本章还将阐述在硬盘驱动器信号处理系统中应用迭代解码 (iterative decoding) 技术 [2-5] 的概念和基础，使读者理解迭代解码技术的优势，该技术已在新型硬盘驱动器中实际采用 [6]，能够显著提高系统性能。
+
+# 1.1 数字数据存储系统
+
+硬盘驱动器中的数字数据存储系统 (digital data storage system) 可以通过图 1.1 [1, 5, 7] 的框图来模拟。当信息位 (message bits) 被发送到纠错编码器 (ECC encoder) 时，通常采用硬盘驱动器中常用的 RS (Reed Solomon) 码 [2, 8]。随后，编码后的数据将再次通过调制编码器 (modulation encoder) 进行编码，以调整数据的特性，使其适应硬盘驱动器的信道。常用的调制码是 RLL (run-length limited code) [5, 9]。调制编码器的输出数据被认为是将要写入存储介质的数据，称为“记录位 (recorded bit)”。之后，记录位将被发送至调制器 (modulator)，将数据位转换为写电流波形 (write current waveform)，然后输入到写头中将数据写入存储介质。
