@@ -424,3 +424,58 @@ $$ r_k = a_k * h_k = \{r_0, r_1, r_2, r_3\} = \{1, -0.5, 0.5, 0.5\} $$
 其中 $*$ 为卷积运算符 (convolution operator)，且
 $$ y_k = r_k + n_k = \{0.9, -0.2, 0.3, 0.6\} = \{y_0, y_1, y_2, y_3\} $$
 随后，为信道 $H(D) = 1 + 0.5D$ 构建状态图 (trellis)，如图 2.13 所示，该图包含两个状态：状态 (a) 和状态 (b)。
+1. 设定状态度量的初始值 $\alpha_0(a) = 1$ 且 $\alpha_0(b) = 0$。
+
+**前向递归**
+
+2. 阶段 0（当 $k=0$ 时）：BCJR 算法接收数据 $y_0 = 0.9$，并根据方程 (2.29) 计算图 2.13 状态图中所有满足转移条件 $(u, q)$ 的支路度量 $\gamma_0(u, q)$，结果如下：
+$$
+\begin{array}{l} \gamma_ {0} (a, a) = \exp \left\{- \pi | 0. 9 - (- 1. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0 \\ \gamma_ {0} (b, a) = \exp \left\{- \pi | 0. 9 - (- 0. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 0 0 2 1 \\ \gamma_ {0} (a, b) = \exp \left\{- \pi | 0. 9 - (0. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 6 0 4 9 \\ \gamma_ {0} (b, b) = \exp \left\{- \pi | 0. 9 - (1. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 3 2 2 7 \\ \end{array}
+$$
+随后，根据方程 (2.14) 调整状态度量 $\alpha_1(a)$ 和 $\alpha_1(b)$：
+$$
+\alpha_ {1} (a) = \alpha_ {0} (a) \gamma_ {0} (a, a) + \alpha_ {0} (b) \gamma_ {0} (b, a) = (1) (0) + (0) (0. 0 0 2 1) = 0
+$$
+$$
+\alpha_ {1} (b) = \alpha_ {0} (a) \gamma_ {0} (a, b) + \alpha_ {0} (b) \gamma_ {0} (b, b) = (1) (0. 6 0 4 9) + (0) (0. 3 2 2 7) = 0. 6 0 4 9
+$$
+进行归一化（根据方程 2.30），可得：
+$$
+\alpha_ {1} (a) = 0 / (0 + 0. 6 0 4 9) = 0
+$$
+$$
+\alpha_ {1} (b) = 0. 6 0 4 9 / (0 + 0. 6 0 4 9) = 1
+$$
+
+3. 阶段 1（当 $k=1$ 时）：BCJR 算法接收数据 $y_1 = -0.2$，计算所有支路度量如下：
+$$
+\gamma_ {1} (a, a) = \exp \left\{- \pi | - 0. 2 - (- 1. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 0 0 4 9
+$$
+$$
+\gamma_ {1} (b, a) = \exp \left\{- \pi | - 0. 2 - (- 0. 5) | ^ {2} \right\} \times \exp \left(\frac {(- 1) (0)}{2}\right) \approx 0. 7 5 3 7
+$$
+$$
+\gamma_ {1} (a, b) = \exp \left\{- \pi | - 0. 2 - (0. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 2 1 4 5
+$$
+$$
+\gamma_ {1} (b, b) = \exp \left\{- \pi | - 0. 2 - (1. 5) | ^ {2} \right\} \times \exp \left(\frac {(+ 1) (0)}{2}\right) \approx 0. 0 0 0 1
+$$
+随后调整状态度量 $\alpha_2(a)$ 和 $\alpha_2(b)$：
+$$
+\alpha_ {2} (a) = \alpha_ {1} (a) \gamma_ {1} (a, a) + \alpha_ {1} (b) \gamma_ {1} (b, a) = (0) (0. 0 0 4 9) + (1) (0. 7 5 3 7) = 0. 7 5 3 7
+$$
+$$
+\alpha_ {2} (b) = \alpha_ {1} (a) \gamma_ {1} (a, b) + \alpha_ {1} (b) \gamma_ {1} (b, b) = (0) (0. 2 1 4 5) + (1) (0. 0 0 0 1) = 0. 0 0 0 1
+$$
+进行归一化，可得：
+$$
+\alpha_ {1} (a) = 0. 7 5 3 7 / (0. 7 5 3 7 + 0. 0 0 0 1) \approx 0. 9 9 9 9
+$$
+$$
+\alpha_ {1} (b) = 0. 0 0 0 1 / (0. 7 5 3 7 + 0. 0 0 0 1) \approx 0. 0 0 0 1
+$$
+
+4. 阶段 2 和 3（当 $k \in \{2, 3\}$ 时）：BCJR 算法接收数据 $y_2 = 0.3$ 和 $y_3 = 0.6$，并采用与步骤 2 和 3 相同的方法计算支路度量及调整状态度量 $\alpha_{k+1}(q)$（其中 $q \in \{a, b\}$）。结果如图 2.14 所示，其中支路上的数值为对应的 $\gamma_k(u, q)$，状态节点上的数值表示状态度量 $\alpha_k(u)$ 与 $\beta_k(u)$ 的比值：
+$$ \frac{\alpha_k(u)}{\beta_k(u)} $$
+对于每个 $k \in \{0, 1, 2, 3\}$ 和 $u \in \{a, b\}$。前向递归结束时（归一化后）的结果为：
+$$ \alpha_4(a) = 0.2214 \quad \text{且} \quad \alpha_4(b) = 0.7786 $$
