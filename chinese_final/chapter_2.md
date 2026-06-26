@@ -368,3 +368,9 @@ $$ \alpha_0(u) = \begin{cases} 1, & u = 0 \\ 0, & \text{otherwise} \end{cases} \
 在计算后验概率 $\text{Pr}[a_k = a \mid \mathbf{y}]$（见公式 2.8）时，由于 $p(\mathbf{y})$ 对所有 $k$ 都是常数，因此在寻找最大值时可以忽略。但若需具体计算，根据全概率原则，所有可能状态转移的概率之和必须为 1：
 $$ \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \frac{\alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)}{p(\mathbf{y})} = 1 \tag{2.19} $$
 由此可求得 $p(\mathbf{y})$。
+即：
+$$ p(\mathbf{y}) = \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q) \tag{2.20} $$
+根据方程 (2.16) 可得：
+$$ p(\mathbf{y}) = \sum_{u=0}^{Q-1} \alpha_k(u) \beta_k(u) \tag{2.21} $$
+方程 (2.21) 表明，在任何时刻 $k$，状态图（trellis）中所有状态的 $\alpha_k(u)$ 与 $\beta_k(u)$ 之积的和恒等于 $p(\mathbf{y})$。因此，根据方程 (2.17)，可以得出以下关系：
+$$ p(\mathbf{y}) = \beta_0(0) = \alpha_{L+\nu}(0) \tag{2.22} $$
