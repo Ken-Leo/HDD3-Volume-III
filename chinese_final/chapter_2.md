@@ -374,3 +374,11 @@ $$ p(\mathbf{y}) = \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \alpha_k(u) \gamma_k(u, q) 
 $$ p(\mathbf{y}) = \sum_{u=0}^{Q-1} \alpha_k(u) \beta_k(u) \tag{2.21} $$
 方程 (2.21) 表明，在任何时刻 $k$，状态图（trellis）中所有状态的 $\alpha_k(u)$ 与 $\beta_k(u)$ 之积的和恒等于 $p(\mathbf{y})$。因此，根据方程 (2.17)，可以得出以下关系：
 $$ p(\mathbf{y}) = \beta_0(0) = \alpha_{L+\nu}(0) \tag{2.22} $$
+### 2.2.4 二进制数据位的 BCJR 算法
+
+在输入数据位为二进制，即 $a_k \in \{-1, 1\}$ 的情况下，方程 (2.8) 中的后验概率 $\text{Pr}[a_k = a \mid \mathbf{y}]$ 可由 $\text{Pr}[a_k = 1 \mid \mathbf{y}] = 1 - \text{Pr}[a_k = -1 \mid \mathbf{y}]$ 或比率 $\text{Pr}[a_k = 1 \mid \mathbf{y}] / \text{Pr}[a_k = -1 \mid \mathbf{y}]$ 来定义。在对数域 (logarithm domain) 中，可写作：
+$$ \lambda_p(a_k) = \ln \left( \frac{\text{Pr}[a_k = 1 \mid \mathbf{y}]}{\text{Pr}[a_k = -1 \mid \mathbf{y}]} \right) \tag{2.23} $$
+其中 $\lambda_p(a_k)$ 为数据位 $a_k$ 的后验 LLR 值。因此，根据方程 (2.8) 可得：
+$$ \lambda_p(a_k) = \ln \left( \frac{\sum_{(u, q) \in S_1} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)}{\sum_{(u, q) \in S_{-1}} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)} \right) \tag{2.24} $$
+针对二进制数据的 BCJR 算法利用方程 (2.24) 来计算发射端发送的每个数据位的 LLR 值。$\lambda_p(a_k)$ 将用于决定数据位 $a_k$ 的估计值，以使错误概率最小化，判定规则如下：
+$$ \hat{a}_k = \begin{cases} 1, & \text{if } \lambda_p(a_k) \geq 0 \\ -1, & \text{if } \lambda_p(a_k) < 0 \end{cases} \tag{2.25} $$
