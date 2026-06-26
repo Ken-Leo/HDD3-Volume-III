@@ -399,3 +399,19 @@ BCJR 算法的工作原理可总结为图 2.12 所示的步骤。
 在实际应用中，对于图 2.12 所述的 BCJR 算法，必须对所有状态 $u$ 及所有时刻 $k$ 的状态度量 $\alpha_k(u)$ 和 $\beta_k(u)$ 进行归一化 (normalization) [22]，以避免计算机程序中的数值下溢 (numerical underflow) 问题。具体而言，在每个时刻 $k$ 计算 $\alpha_k(u)$ 和 $\beta_k(u)$ 时，一旦根据方程 (2.14) 和 (2.16) 得到了所有状态的 $\alpha_k(u)$ 和 $\beta_k(u)$，需按照以下关系对这两个状态度量进行归一化：
 $$ \alpha_k(u) = \frac{\alpha_k(u)}{\sum_i \alpha_k(i)} \quad \text{且} \quad \beta_k(u) = \frac{\beta_k(u)}{\sum_i \beta_k(i)} \tag{2.30} $$
 这样可以确保所有状态的 $\alpha_k(u)$ 之和为 1，且所有状态的 $\beta_k(u)$ 之和为 1。随后，再开始计算下一时刻的 $\alpha_k(u)$ 和 $\beta_k(u)$。
+**BCJR 算法步骤**
+
+1. 设定状态度量的初始值 $[\alpha_0(0), \alpha_0(1), \dots, \alpha_0(Q-1)] = [1, 0, \dots, 0]$。
+2. 前向递归 (forward recursion)：
+   - 对于 $k = 0, 1, \dots, L + \nu - 1$：
+     - 对于 $q = 0, 1, \dots, Q - 1$：
+       - 根据方程 (2.29) 计算所有满足转移条件 $(u, q)$ 的 $\gamma_k(u, q)$。
+       - 根据方程 (2.14) 计算 $\alpha_{k+1}(q)$。
+3. 设定状态度量的初始值 $[\beta_{L+\nu}(0), \beta_{L+\nu}(1), \dots, \beta_{L+\nu}(Q-1)] = [1, 0, \dots, 0]$。
+4. 后向递归 (backward recursion)：
+   - 对于 $k = L + \nu - 1, L + \nu - 2, \dots, 0$：
+     - 对于 $u = 0, 1, \dots, Q - 1$：
+       - 根据方程 (2.29) 计算所有满足转移条件 $(u, q)$ 的 $\gamma_k(u, q)$。
+       - 根据方程 (2.16) 计算 $\beta_k(u)$。
+     - 根据方程 (2.24) 计算 $\lambda_p(a_k)$。
+     - 根据方程 (2.25) 判定数据位 $\hat{a}_k$。
