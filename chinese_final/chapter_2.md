@@ -65,3 +65,55 @@ graph TD
 此外，系统卷积编码器 (systematic convolutional encoder) 是一种使其中一组输出数据与输入数据相同 的卷积编码器，如图 2.1 (b) 所示，其生成多项式为 $[1, 1 \oplus D^2]$。而具有反馈结构的系统卷积编码器被称为递归系统卷积编码器 (recursive systematic convolutional encoder)，如图 2.1 (c) 所示，其生成多项式为 $\left[ 1, 1 / (1 \oplus D^2) \right]$。通常，递归系统卷积编码器比其他类型的卷积编码器更为常用 [2]。
 
 卷积码的分析通常基于有限状态机 (FSM: finite state machine)，该模型能够展示输入数据、起始状态 (start state)、下一状态 (next state) 以及系统输出数据的变化过程（详见 [10] 第 4.3.1 节）。图 2.2 (左) 展示了图 2.1 (a) 中卷积编码器的有限状态机，共有 $2^\mu = 4$ 个状态，分别为 00, 01, 10 和 11。其中，箭头表示状态转移路径，箭头旁的 $x / y^1 y^2$ 分别代表输入比特 $x$ 以及输出比特 $y^1$ 和 $y^2$。此外，可以使用格图 (trellis diagram) 来描述卷积码在每个时间段的状态转移。图 2.2 (右) 展示了图 2.1 (a) 中卷积编码器的格图。在时间 $k$ 的格图中，展示了从时间 $k$ 的某个状态转移到时间 $k+1$ 时刻所有可能的转移路径。箭头旁的 $x / y^1 y^2$ 与有限状态机中的定义一致。由于在格图上行走的一条路径代表了一组分支（每时间单位一个分支），因此每个码字（即卷积编码器的所有输出数据）在格图中必须对应唯一的一条路径（见图 2.5）。
+
+其中 $\oplus$ 是模 2 加法算子，$G_1(D)$ 是输出数据 $y_k^1$ 的生成多项式，$G_2(D)$ 是输出数据 $y_k^2$ 的生成多项式，且存储量 $\mu = 2$。
+
+此外，系统卷积编码器 (systematic convolutional encoder) 是一种使其中一组输出数据与输入数据相同 的卷积编码器，如图 2.1 (b) 所示，其生成多项式为 $[1, 1 \oplus D^2]$。而具有反馈结构的系统卷积编码器被称为递归系统卷积编码器 (recursive systematic convolutional encoder)，如图 2.1 (c) 所示，其生成多项式为 $\left[ 1, 1 / (1 \oplus D^2) \right]$。通常，递归系统卷积编码器比其他类型的卷积编码器更为常用 [2]。
+
+卷积码的分析通常基于有限状态机 (FSM: finite state machine)，该模型能够展示输入数据、起始状态 (start state)、下一状态 (next state) 以及系统输出数据的变化过程（详见 [10] 第 4.3.1 节）。图 2.2 (左) 展示了图 2.1 (a) 中卷积编码器的有限状态机，共有 $2^\mu = 4$ 个状态，分别为 00, 01, 10 和 11。其中，箭头表示状态转移路径，箭头旁的 $x / y^1 y^2$ 分别代表输入比特 $x$ 以及输出比特 $y^1$ 和 $y^2$。此外，可以使用格图 (trellis diagram) 来描述卷积码在每个时间段的状态转移。图 2.2 (右) 展示了图 2.1 (a) 中卷积编码器的格图。在时间 $k$ 的格图中，展示了从时间 $k$ 的某个状态转移到时间 $k+1$ 时刻所有可能的转移路径。箭头旁的 $x / y^1 y^2$ 与有限状态机中的定义一致。由于在格图上行走的一条路径代表了一组分支（每时间单位一个分支），因此每个码字（即卷积编码器的所有输出数据）在格图中必须对应唯一的一条路径（见图 2.5）。
+
+![](images/chapter_2/91ef4e2d01de145d9dbc04b5966a2155c614e0a94a72a00d9fcc671dc68de720.jpg)
+
+如果操作正确，则需要输入编码器的尾比特 (tail bits) 为 111，编码后的结果为 10101110001。
+
+![](images/chapter_2/3393bd825fa6105c27939f1f63744549817d3d561e378d87452b234469371e4f.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+\`\`\`mermaid
+graph LR
+    A["x_k"] --> B["⊕"]
+    B --> C["D"]
+    C --> D["M"]
+    D --> E["z_k"]
+    E --> F["{z_k^0 z_k^1} = {x_k y_k}"]
+    style A fill:#f9f,stroke:#333
+    style B fill:#ccf,stroke:#333
+    style C fill:#cfc,stroke:#333
+    style D fill:#fcc,stroke:#333
+    style E fill:#fcf,stroke:#333
+    style F fill:#cff,stroke:#333
+\`\`\`
+</details>
+
+(a) 卷积编码器
+
+![](images/chapter_2/32b08a23f705dc26cb92e56021877f8ead9fb4eeec068d9841903e44439521bd.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+\`\`\`mermaid
+graph TD
+    A["0"] -->|0/00| B["0"]
+    A -->|1/10| C["1"]
+    D["1"] -->|0/01| E["0"]
+    B -->|x_k / x_k y_k| F
+    C -->|x_k = 0| G
+    E -->|x_k = 1| H
+\`\`\`
+</details>
+
+(b) 格图
+图 2.8 (a) 卷积编码器 和 (b) 格图
