@@ -246,3 +246,125 @@ $$
 $$
 \begin{array}{l} \operatorname{Pr} [a_k = a \mid \mathbf{y}] = \sum_{(u, q) \in S_a} \operatorname{Pr} [\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] \\ = \frac{1}{p(\mathbf{y})} \sum_{(u, q) \in S_a} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q) \tag{2.8} \\ \end{array}
 $$
+
+# 2.2.3 BCJR 算法参数的计算
+
+BCJR 算法（见公式 2.8）中的参数 $\gamma_k(u, q)$、$\alpha_k(u)$、$\beta_{k+1}(q)$ 以及 $p(\mathbf{y})$ 的计算方法如下：
+
+**AWGN 信道的分支度量 $\gamma_k(u, q)$ 计算**
+
+BCJR 算法与维特比算法 [13] 的不同之处在于，BCJR 算法通过两次遍历来计算：
+1) **前向遍历 (forward pass)**：从接收到的第一个数据开始向后计算。
+2) **后向遍历 (backward pass)**：从接收到的最后一个数据开始向前计算。
+
+此外，BCJR 算法的分支度量计算公式为：
+$$
+\begin{array}{l} \gamma_k(u, q) = p(\psi_{k+1} = q; y_k \mid \psi_k = u) \\ = p(y_k \mid \psi_k = u; \psi_{k+1} = q) p(\psi_{k+1} = q \mid \psi_k = u) \tag{2.9} \\ \end{array}
+$$
+
+对于 AWGN 信道，接收信号为 $y_k = r_k + n_k$，其中 $n_k \sim \mathcal{N}(0, \sigma^2)$ 是加性高斯白噪声。设 $\hat{a}(u, q)$ 和 $\hat{r}(u, q)$ 分别为与状态转移 $(u, q)$ 相对应的输入比特和信道输出，则公式 (2.9) 的第一项为：
+$$ p(y_k \mid \psi_k = u; \psi_{k+1} = q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ -\frac{1}{2\sigma^2} | y_k - \hat{r}(u, q) |^2 \right\} \tag{2.10} $$
+其中 $\exp(\cdot)$ 为指数函数。而公式 (2.9) 的第二项为：
+$$
+\begin{array}{l} p(\psi_{k+1} = q \mid \psi_k = u) = p(a_k = \hat{a}(u, q); \psi_k = u) / p(\psi_k = u) \\ = p(\psi_k = u \mid a_k = \hat{a}(u, q)) p(a_k = \hat{a}(u, q)) / p(\psi_k = u) \\ \end{array}
+$$
+
+BCJR 算法是一种高效地计算后验状态转移概率的方法。通过将后验状态转移概率 $\text{Pr}[\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}]$ 重新组织，可以将其分为三个部分：
+1) 第一部分取决于过去接收到的所有数据 $\mathbf{y}_{l < k} = \{y_l; l < k\} = \{y_l\}_{0}^{k-1}$。
+2) 第二部分取决于当前接收到的数据 $y_k$。
+3) 第三部分取决于未来接收到的所有数据 $\mathbf{y}_{l > k} = \{y_l; l > k\} = \{y_l\}_{k+1}^{L+\nu-1}$。
+
+根据贝叶斯定理 (Bayes' rule)，后验状态转移概率可重新表示为：
+$$
+\text{Pr}[\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] = p(\psi_k = u; \psi_{k+1} = q; \mathbf{y}) / p(\mathbf{y})
+$$
+$$
+= p(\psi_k = u; \psi_{k+1} = q; \mathbf{y}_{l < k}; y_k; \mathbf{y}_{l > k}) / p(\mathbf{y})
+$$
+$$
+= p(\mathbf{y}_{l > k} \mid \psi_k = u; \psi_{k+1} = q; \mathbf{y}_{l < k}; y_k) p(\psi_k = u; \psi_{k+1} = q; \mathbf{y}_{l < k}; y_k) / p(\mathbf{y}) \tag{2.5}
+$$
+
+其中 $p(x)$ 是 $x$ 的概率密度函数 (pdf)。根据有限状态机的马尔可夫性质 (Markov property) [4]，对于任何信道，关于时间 $k+1$ 的状态信息将取代关于时间 $k$ 的状态信息以及 $y_k$ 和 $\mathbf{y}_{l < k}$ 的信息。因此，公式 (2.5) 可简化为：
+$$
+\begin{array}{l} \text{Pr}[\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] = p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q) p(\psi_{k+1} = q; y_k \mid \psi_k = u; \mathbf{y}_{l < k}) p(\psi_k = u; \mathbf{y}_{l < k}) / p(\mathbf{y}) \\ = p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q) p(\psi_{k+1} = q; y_k \mid \psi_k = u) p(\psi_k = u; \mathbf{y}_{l < k}) / p(\mathbf{y}) \tag{2.6} \\ \end{array}
+$$
+
+同样地，利用马尔可夫性质对公式 (2.6) 进一步整理，可得：
+$$
+\begin{array}{l} \text{Pr}[\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] = \frac{p(\psi_k = u; \mathbf{y}_{l < k}) p(\psi_{k+1} = q ; y_k \mid \psi_k = u) p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q)}{p(\mathbf{y})} \\ = \alpha_k(u) \times \gamma_k(u, q) \times \beta_{k+1}(q) / p(\mathbf{y}) \tag{2.7} \\ \end{array}
+$$
+
+可以看出，参数 $\alpha_k(u)$ 是时刻 $k$ 状态 $u$ 的概率，取决于过去接收到的数据 $\mathbf{y}_{l < k}$；$\beta_{k+1}(q)$ 是时刻 $k+1$ 状态 $q$ 的概率，取决于未来接收到的数据 $\mathbf{r}_{l > k}$；而 $\gamma_k(u, q)$ 则是从状态 $u$ 转移到状态 $q$ 的转移概率，取决于当前接收到的数据 $y_k$（详见图 2.11）。通常，$\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 被称为状态度量 (state metric)，而 $\gamma_k(u, q)$ 被称为分支度量 (branch metric)。
+
+若定义 $S_a$ 为所有与比特 $a$ 相匹配的状态转移 $(u, q)$ 的集合，则后验概率 $\text{Pr}[a_k = a \mid \mathbf{y}]$ 可通过以下公式计算：
+$$
+\begin{array}{l} \text{Pr}[a_k = a \mid \mathbf{y}] = \sum_{(u, q) \in S_a} \text{Pr}[\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] \\ = \frac{1}{p(\mathbf{y})} \sum_{(u, q) \in S_a} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q) \tag{2.8} \\ \end{array}
+$$
+
+# 2.2.3 BCJR 算法参数的计算
+
+BCJR 算法（见公式 2.8）中的参数 $\gamma_k(u, q)$、$\alpha_k(u)$、$\beta_{k+1}(q)$ 以及 $p(\mathbf{y})$ 的计算方法如下：
+
+**AWGN 信道的分支度量 $\gamma_k(u, q)$ 计算**
+
+BCJR 算法与维特比算法 [13] 的不同之处在于，BCJR 算法通过两次遍历来计算：
+1) **前向遍历 (forward pass)**：从接收到的第一个数据开始向后计算。
+2) **后向遍历 (backward pass)**：从接收到的最后一个数据开始向前计算。
+
+此外，BCJR 算法的分支度量计算公式为：
+$$
+\begin{array}{l} \gamma_k(u, q) = p(\psi_{k+1} = q; y_k \mid \psi_k = u) \\ = p(y_k \mid \psi_k = u; \psi_{k+1} = q) p(\psi_{k+1} = q \mid \psi_k = u) \tag{2.9} \\ \end{array}
+$$
+
+对于 AWGN 信道，接收信号为 $y_k = r_k + n_k$，其中 $n_k \sim \mathcal{N}(0, \sigma^2)$ 是加性高斯白噪声。设 $\hat{a}(u, q)$ 和 $\hat{r}(u, q)$ 分别为与状态转移 $(u, q)$ 相对应的输入比特和信道输出，则公式 (2.9) 的第一项为：
+$$ p(y_k \mid \psi_k = u; \psi_{k+1} = q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ -\frac{1}{2\sigma^2} | y_k - \hat{r}(u, q) |^2 \right\} \tag{2.10} $$
+其中 $\exp(\cdot)$ 为指数函数。而公式 (2.9) 的第二项为：
+$$
+\begin{array}{l} p(\psi_{k+1} = q \mid \psi_k = u) = p(a_k = \hat{a}(u, q); \psi_k = u) / p(\psi_k = u) \\ = p(\psi_k = u \mid a_k = \hat{a}(u, q)) p(a_k = \hat{a}(u, q)) / p(\psi_k = u) \\ \end{array}
+$$
+
+**状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 的计算**
+
+状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$（见公式 2.7）可通过马尔可夫性质和递归技术计算。首先，$\alpha_k(u)$ 定义为：
+$$ \alpha_k(u) = p(\psi_k = u; \mathbf{y}_{l < k}) \tag{2.13} $$
+
+因此：
+$$
+\begin{array}{l} \alpha_{k+1}(q) = p(\psi_{k+1} = q; \mathbf{y}_{l < k+1}) \\ = p(\psi_{k+1} = q; y_k; \mathbf{y}_{l < k}) \\ = \sum_{u=0}^{Q-1} p(\psi_{k+1} = q; y_k; \psi_k = u; \mathbf{y}_{l < k}) \\ = \sum_{u=0}^{Q-1} p(\psi_{k+1} = q; y_k \mid \psi_k = u; \mathbf{y}_{l < k}) p(\psi_k = u; \mathbf{y}_{l < k}) \\ \end{array}
+$$
+$$
+= \sum_{u=0}^{Q-1} \gamma_k(u, q) \alpha_k(u) \tag{2.14}
+$$
+
+同样地，$\beta_{k+1}(q)$ 定义为：
+$$ \beta_{k+1}(q) = p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q) \tag{2.15} $$
+
+因此：
+$$
+\beta_k(u) = p(\mathbf{y}_{l > k-1} \mid \psi_k = u)
+$$
+$$
+= p(\mathbf{y}_{l > k}; y_k \mid \psi_k = u)
+$$
+$$
+= \sum_{q=0}^{Q-1} p(\mathbf{y}_{l > k}; y_k, \psi_{k+1} = q \mid \psi_k = u)
+$$
+$$
+= \sum_{q=0}^{Q-1} p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q) p(y_k, \psi_{k+1} = q \mid \psi_k = u)
+$$
+$$
+= \sum_{q=0}^{Q-1} \beta_{k+1}(q) \gamma_k(u, q) \tag{2.16}
+$$
+
+**$\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 的初始条件**
+
+BCJR 算法假设以下初始条件：
+$$ \alpha_0(u) = \begin{cases} 1, & u = 0 \\ 0, & \text{otherwise} \end{cases} \quad \text{以及} \quad \beta_{L+\nu}(q) = \begin{cases} 1, & q = 0 \\ 0, & \text{otherwise} \end{cases} \tag{2.17} $$
+这适用于所有路径都从状态 $\psi_0 = 0$ 开始并强制结束于 $\psi_{L+\nu} = 0$ 的情况。如果在结束时没有强制要求状态为 $0$，则通常设定 $\beta_{L+\nu}(q) = \alpha_{L+\nu}(q)$（公式 2.18），因为在 $L+\nu$ 时刻，算法对各状态的概率分布并无先验知识。
+
+**$p(\mathbf{y})$ 的计算**
+
+在计算后验概率 $\text{Pr}[a_k = a \mid \mathbf{y}]$（见公式 2.8）时，由于 $p(\mathbf{y})$ 对所有 $k$ 都是常数，因此在寻找最大值时可以忽略。但若需具体计算，根据全概率原则，所有可能状态转移的概率之和必须为 1：
+$$ \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \frac{\alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)}{p(\mathbf{y})} = 1 \tag{2.19} $$
+由此可求得 $p(\mathbf{y})$。
