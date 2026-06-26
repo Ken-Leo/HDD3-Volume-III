@@ -2,4 +2,4 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---|---|---|---|
-| Chapter 1 | In Progress | 520 | Section 1.2: Target Response and PR/GPR |
+| Chapter 1 | In Progress | 557 | Section 1.3: Ideal Channel Model |
