@@ -382,3 +382,11 @@ $$ \lambda_p(a_k) = \ln \left( \frac{\text{Pr}[a_k = 1 \mid \mathbf{y}]}{\text{P
 $$ \lambda_p(a_k) = \ln \left( \frac{\sum_{(u, q) \in S_1} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)}{\sum_{(u, q) \in S_{-1}} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q)} \right) \tag{2.24} $$
 针对二进制数据的 BCJR 算法利用方程 (2.24) 来计算发射端发送的每个数据位的 LLR 值。$\lambda_p(a_k)$ 将用于决定数据位 $a_k$ 的估计值，以使错误概率最小化，判定规则如下：
 $$ \hat{a}_k = \begin{cases} 1, & \text{if } \lambda_p(a_k) \geq 0 \\ -1, & \text{if } \lambda_p(a_k) < 0 \end{cases} \tag{2.25} $$
+此外，对于 $\tilde{a} \in \{\pm 1\}$，先验概率 $p(a_k = \tilde{a})$ 与对数概率函数的关系如下（见公式 1.6）：
+$$ p(a_k = \tilde{a}) = \frac{\exp(\tilde{a} \lambda_a(a_k) / 2)}{\exp(\lambda_a(a_k) / 2) + \exp(-\lambda_a(a_k) / 2)} \tag{2.26} $$
+其中
+$$ \lambda_a(a_k) = \ln \left( \frac{p(a_k = 1)}{p(a_k = -1)} \right) \tag{2.27} $$
+是数据位 $a_k$ 的先验 LLR 值。然而，由于方程 (2.26) 中的分母对于状态图 (trellis) 中的所有状态转移 $(u, q)$ 均相同，因此在计算方程 (2.12) 的 BCJR 支路度量时，可直接使用如下简化的先验概率：
+$$ p(a_k = \tilde{a}) = \exp\left( \frac{\tilde{a} \lambda_a(a_k)}{2} \right) \tag{2.28} $$
+由此可得：
+$$ \gamma_k(u, q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ \frac{-1}{2\sigma^2} |y_k - \hat{r}(u, q)|^2 \right\} \times \exp\left( \frac{\hat{a}(u, q) \lambda_a(a_k)}{2} \right) \tag{2.29} $$
