@@ -205,3 +205,44 @@ $$ \Phi_{k+1}(q) = \min_u \{ \Phi_k(u) + \rho_k(u, q) \} $$
 考虑图 2.10 中的信道模型。在接收端，第 $k$ 个时刻接收到的信号（或需要解码的信号）为：
 
 ![](images/chapter_2/408ab40c568346c6c1482dafab5f4b633effa59605816890e97f3d347b915c2e.jpg)
+
+![](images/chapter_2/408ab40c568346c6c1482dafab5f4b633effa59605816890e97f3d347b915c2e.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+\`\`\`mermaid
+graph LR
+    A["a_k"] --> B["H(D)"]
+    B --> C["r_k"]
+    C --> D["+"]
+    D --> E["y_k"]
+    E --> F["n_k ~ N(0,σ²)"]
+    F --> D
+    D --> G["∑_{i=0}^ν a_i h_{k-i} + n_k"]
+\`\`\`
+</details>
+
+图 2.10 信道模型
+
+当输入比特序列 $\mathbf{a} = [a_0, \dots, a_{L-1}]$ 长度为 $L$（通常一个扇区 $L=4096$ 比特），且假设在 $k < 0$ 和 $k > L-1$ 时没有数据传输，则接收端收到的信号向量为 $\mathbf{y} = \{y_l\}_{0}^{L+\nu-1} = [y_0, \dots, y_{L+\nu-1}]$。
+
+图 2.11 展示了信道 $h_k$ 的格图。其中 $\Psi_k \equiv [a_{k-1}, a_{k-2}, \dots, a_{k-\nu}]$ 表示时刻 $k$ 的状态（或移位寄存器中的当前值），$Q = |\mathcal{A}|^\nu$ 为所有可能状态的总数。第 $k$ 级 (k-th stage) 包含时刻 $k$ 到时刻 $k+1$ 之间所有可能的状态转移分支，使用 $(u, q)$ 表示从状态 $u$ 转移到状态 $q$。若状态定义为 $0$ 到 $Q-1$，则状态 $0$（即 $\psi_k \equiv [0, 0, \dots, 0]$）代表空闲状态 (idle state)，适用于 $k \leq 0$ 和 $k \geq L+\nu-1$。因此，图 2.11 描述了与第 $k$ 个输入比特 $a_k$、信道输出 $r_k$ 以及接收信号 $y_k$ 相对应的格图级。
+
+# 2.2.2 最优检测器
+
+在实践中，MAP 检测器被认为是“最优检测器 (optimal detector)”，因为它可以保证每个比特的误码率最低。例如，在判定第 $k$ 个比特 $a_k$ 时，MAP 检测器计算其后验概率 (APP)，即在给定接收序列 $\mathbf{y}$ 的条件下，$a_k$ 取某个值的概率 $\text{Pr}[a_k \mid \mathbf{y}]$。通过选择使该概率最大化的 $a_k$ 值，MAP 检测器会对每个比特进行最优判定。这一过程将针对所有 $L$ 个比特重复进行。
+
+在实际操作中，若已知格图中所有状态转移的后验概率 $\text{Pr}[\psi_k=u; \psi_{k+1}=q \mid \mathbf{y}]$，则可较为容易地计算 $\text{Pr}[a_k \mid \mathbf{y}]$。其表达式为：
+
+$$
+\begin{array}{l} \operatorname{Pr} [\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] = \frac{p(\psi_k = u ; \mathbf{y}_{l < k}) p(\psi_{k+1} = q ; y_k \mid \psi_k = u) p(\mathbf{y}_{l > k} \mid \psi_{k+1} = q)}{p(\mathbf{y})} \\ = \alpha_k(u) \times \gamma_k(u, q) \times \beta_{k+1}(q) / p(\mathbf{y}) \tag{2.7} \\ \end{array}
+$$
+
+其中，参数 $\alpha_k(u)$ 是时刻 $k$ 状态 $u$ 的概率，取决于过去接收到的数据 $\mathbf{y}_{l < k}$；$\beta_{k+1}(q)$ 是时刻 $k+1$ 状态 $q$ 的概率，取决于未来接收到的数据 $\mathbf{r}_{l > k}$；而 $\gamma_k(u, q)$ 则是从状态 $u$ 转移到状态 $q$ 的转移概率，取决于当前接收到的数据 $y_k$（详见图 2.11）。通常，$\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 被称为状态度量 (state metric)，而 $\gamma_k(u, q)$ 被称为分支度量 (branch metric)。
+
+若定义 $S_a$ 为所有与比特 $a$ 相匹配的状态转移 $(u, q)$ 的集合，则后验概率 $\text{Pr}[a_k = a \mid \mathbf{y}]$ 可通过以下公式计算：
+
+$$
+\begin{array}{l} \operatorname{Pr} [a_k = a \mid \mathbf{y}] = \sum_{(u, q) \in S_a} \operatorname{Pr} [\psi_k = u; \psi_{k+1} = q \mid \mathbf{y}] \\ = \frac{1}{p(\mathbf{y})} \sum_{(u, q) \in S_a} \alpha_k(u) \gamma_k(u, q) \beta_{k+1}(q) \tag{2.8} \\ \end{array}
+$$
