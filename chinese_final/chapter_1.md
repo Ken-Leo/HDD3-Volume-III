@@ -18,3 +18,45 @@
 # 1.1 数字数据存储系统
 
 硬盘驱动器中的数字数据存储系统 (digital data storage system) 可以通过图 1.1 [1, 5, 7] 的框图来模拟。当信息位 (message bits) 被发送到纠错编码器 (ECC encoder) 时，通常采用硬盘驱动器中常用的 RS (Reed Solomon) 码 [2, 8]。随后，编码后的数据将再次通过调制编码器 (modulation encoder) 进行编码，以调整数据的特性，使其适应硬盘驱动器的信道。常用的调制码是 RLL (run-length limited code) [5, 9]。调制编码器的输出数据被认为是将要写入存储介质的数据，称为“记录位 (recorded bit)”。之后，记录位将被发送至调制器 (modulator)，将数据位转换为写电流波形 (write current waveform)，然后输入到写头中将数据写入存储介质。
+![](images/aca344eb90b79c1200a4fa9a93b4c3e14a8d563d11d37e9b85f70a6a0c73f578.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph TD
+    A["message bits"] --> B["ECC encoder"]
+    B --> C["modulation encoder"]
+    C --> D["recorded bits"]
+    D --> E["modulator"]
+    E --> F["write current waveform"]
+    F --> G["write head/medium/read head assembly"]
+    G --> H["read channel"]
+    H --> I["readback voltage waveform"]
+    I --> J["reproduced bits"]
+    J --> K["modulation decoder"]
+    K --> L["ECC decoder"]
+    L --> M["estimated message bits"]
+    M --> N["read back voltage waveform"]
+    N --> H
+    style A fill:#f9f,stroke:#333
+    style B fill:#ccf,stroke:#333
+    style C fill:#ccf,stroke:#333
+    style D fill:#ccf,stroke:#333
+    style E fill:#cfc,stroke:#333
+    style F fill:#cfc,stroke:#333
+    style G fill:#cfc,stroke:#333
+    style H fill:#cfc,stroke:#333
+    style I fill:#cfc,stroke:#333
+    style J fill:#cfc,stroke:#333
+    style K fill:#cfc,stroke:#333
+    style L fill:#cfc,stroke:#333
+    style M fill:#cfc,stroke:#333
+    style N fill:#cfc,stroke:#333
+```
+</details>
+
+
+图 1.1 硬盘驱动器数字数据存储系统的框图 [9, 10]
+
+对于读取过程，读头 (read head) 从存储介质中读取数据。当读头移动到磁化状态 (magnetization) 发生变化的区域时，会产生一个通常被称为“读回信号 (readback signal)”的电压波形信号。随后，该读回信号被送入读信道进行处理，读信道由多个组件组成，例如：低通滤波器 (LPF: low-pass filter)、采样器 (sampler 或 analog-to-digital converter)、均衡器 (equalizer) 以及符号检测器 (symbol detector) 等。最后，输出数据将依次通过调制解码器 (modulation decoder) 和纠错解码器 (ECC decoder) 进行解码，以获得所需信息位的估计值。
