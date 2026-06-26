@@ -1,10 +1,10 @@
 # Agent Instructions: HDD3 Book Conversion
 
 ## Core Objective
-Convert `HDD3-Volume Ill - Advanced Receiver Design.pdf` into high-fidelity, equation-accurate Markdown files, split by chapter, and translated from Thai to Chinese.
+Convert `HDD3-Volume III - Advanced Receiver Design.pdf` into high-fidelity, equation-accurate Markdown files, split by chapter, and translated from Thai to Chinese.
 
 ## Project Structure
-- `thai_final/`: Source Markdown chapters (extracted from PDF).
+ - `source_final/`: Source Markdown chapters (extracted from PDF).
 - `chinese_final/`: Target Chinese translations.
 - `.omo/progress.md`: Source-of-truth for translation progress (tracks line numbers and sections).
 
@@ -23,4 +23,4 @@ Every translation task MUST follow this atomic sequence. **Do not batch sections
 
 ## Finalization Checklist
 - [ ] **README**: Update with exactly: *"I have tried to get in touch with prof Piya but I failed. Considering the copyright, I would appreciate it if those who may concern contact me. The translation work is done with the help of Gemma-4-31B-it."*
-- [ ] **Git**: Create `.gitignore` and push to `Ken-Leo/HDD1-Volume-I---Basic-Read-Write-Channels.git`.
+ - [ ] **Git**: Create `.gitignore` and perform final local commit. (Do NOT push to any remote repository).
