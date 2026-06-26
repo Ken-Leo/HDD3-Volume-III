@@ -390,3 +390,12 @@ $$ \lambda_a(a_k) = \ln \left( \frac{p(a_k = 1)}{p(a_k = -1)} \right) \tag{2.27}
 $$ p(a_k = \tilde{a}) = \exp\left( \frac{\tilde{a} \lambda_a(a_k)}{2} \right) \tag{2.28} $$
 由此可得：
 $$ \gamma_k(u, q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ \frac{-1}{2\sigma^2} |y_k - \hat{r}(u, q)|^2 \right\} \times \exp\left( \frac{\hat{a}(u, q) \lambda_a(a_k)}{2} \right) \tag{2.29} $$
+### 2.2.5 BCJR 算法工作流程总结
+
+BCJR 算法的工作原理可总结为图 2.12 所示的步骤。
+
+### 2.2.6 BCJR 算法的注意事项
+
+在实际应用中，对于图 2.12 所述的 BCJR 算法，必须对所有状态 $u$ 及所有时刻 $k$ 的状态度量 $\alpha_k(u)$ 和 $\beta_k(u)$ 进行归一化 (normalization) [22]，以避免计算机程序中的数值下溢 (numerical underflow) 问题。具体而言，在每个时刻 $k$ 计算 $\alpha_k(u)$ 和 $\beta_k(u)$ 时，一旦根据方程 (2.14) 和 (2.16) 得到了所有状态的 $\alpha_k(u)$ 和 $\beta_k(u)$，需按照以下关系对这两个状态度量进行归一化：
+$$ \alpha_k(u) = \frac{\alpha_k(u)}{\sum_i \alpha_k(i)} \quad \text{且} \quad \beta_k(u) = \frac{\beta_k(u)}{\sum_i \beta_k(i)} \tag{2.30} $$
+这样可以确保所有状态的 $\alpha_k(u)$ 之和为 1，且所有状态的 $\beta_k(u)$ 之和为 1。随后，再开始计算下一时刻的 $\alpha_k(u)$ 和 $\beta_k(u)$。
