@@ -481,3 +481,55 @@ $$
 $$
 
 即 $L_c = 2 / \sigma^2$。
+
+# 1.5.4 SISO 解码器
+
+SISO (soft-input soft-output) 解码器是一种处理软信息 (soft information) 的解码器。它接收软信息作为输入进行处理，并输出软信息。
+
+![](images/chapter_2/192a4742eed013b4a4ad062c253bd2e6559cd7a4c3a2d613ba163792040a3cad.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph LR
+    A["x_k {0,1}"] --> B["encoder"]
+    B --> C["mapper 0→-1 1→1"]
+    C --> D["+"]
+    D --> E["SISO decoder"]
+    E --> F["λ_p(x_k) = λ(x_k | y)"]
+    F --> G["∫"]
+    G --> H["\hat{x}_k"]
+    C --> I["u_k {±1}"]
+    I --> D
+    D --> J["n_k"]
+    J --> K["λ_a(x_k)"]
+    K --> E
+```
+</details>
+
+图 1.9 使用 SISO 解码器的数字通信系统
+
+考虑图 1.9 所示的通信系统。当信息序列  \in \{0, 1\}$ 通过编码器 (encoder) 和映射器 (mapper) 转换为序列  \in \{-1, 1\}$ 时，SISO 解码器对信号  = u_k + n_k$ 进行解码（其中 $ 为 AWGN 噪声）。该过程依赖于 $\lambda_a(x_k)$ 序列，其中 $\lambda_a(x_k)$ 是信息位 $ 的先验对数似然比 (a priori LLR)，定义为：
+
+57842
+\lambda_a(x_k) = \ln \left(\frac{p(x_k = 1)}{p(x_k = 0)}\right) \tag{1.21}
+57842
+
+这表示在接收机收到序列 $ 或所有数据 $ 之前的关于信息位 $ 的信息（即独立于 $）。同样地，如果接收机没有先验信息，则对于所有 $ 设定 $\lambda_a(x_k) = 0$，这意味着每个信息位 $ 出现的概率相等。
+
+随后，SISO 解码器将输出信息位 $ 的后验对数似然比 (a posteriori LLR)，即：
+
+57842
+\lambda_p(x_k) = \ln \left(\frac{p(x_k = 1 \mid \mathbf{y})}{p(x_k = 0 \mid \mathbf{y})}\right) \tag{1.22}
+57842
+
+信息位 $ 的估计值可以通过将 $\lambda_p(x_k)$ 送入阈值检测器 (threshold detector) 得到，其关系如下：
+
+57842
+\hat{x}_k = \left\{ \begin{array}{l l} 1, & \text{if } \lambda_p(x_k) \geq 0 \ 0, & \text{if } \lambda_p(x_k) < 0 \end{array} \right. \tag{1.23}
+57842
+
+注：关于信息位 $ 的 LLR 值 $\lambda(x)$，本书定义如下：
+- 若 LLR 带有下标参数 $，如 $\lambda_a(x)$，则表示信息位 $ 的先验 LLR (a priori LLR)。
+- 若 LLR 带有下标参数 $，如 $\lambda_p(x)$，则表示信息位 $ 的后验 LLR (a posteriori LLR)。
