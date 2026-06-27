@@ -344,3 +344,265 @@ $$
 **例 2.2** 考虑图 2.6 中的卷积编码器，其生成多项式用八进制表示为 $( g _ { 1 } , \ g _ { 2 } ) = ( 1 7 , \ 1 1 )$，等同于二进制的 (001111, 001001)，其中 $g _ { 1 }$ 称为反馈多项式 (feedback polynomial)，$g _ { 2 }$ 称为前馈多项式 (feedforward polynomial)。在某些书籍中，生成多项式可能表示为 $D$ 域的分式：$\begin{array} { r } { \frac { g _ { 2 } ( D ) } { g _ { 1 } ( D ) } = \frac { 1 + D ^ { 3 } } { 1 + D + D ^ { 2 } + D ^ { 3 } } } \end{array}$。请绘制其有限状态机图，并对输入数据位 11011100 进行编码（最左侧的比特为首先被编码的数据）。
 
 **解**：该卷积编码器的有限状态机图如图 2.7 所示。对于输入数据位 11011100 的编码过程，步骤与例 2.1 类似：首先将所有移位寄存器的初始状态设为 0，然后逐位输入数据，计算编码器的输出。在所有输入比特输入完成后，继续输入尾比特 (tail bits) 直到移位寄存器全部恢复为 0。
+
+![](images/chapter_2/a7040158d509ec56c8f608223a5cdee073b5e6cc12e7ed202ae4598e4b8c7811.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph TD
+    A["Input"] --> B["π⁻¹"]
+    B --> C["+"]
+    C --> D["OUTER DECODER a priori"]
+    D --> E["λ(xₖ)"]
+    E --> F["001"]
+    F --> G["1/1"]
+    G --> H["101"]
+    H --> I["1/0"]
+    I --> J["110"]
+    J --> K["0"]
+    K --> L["0"]
+    L --> M["0"]
+    M --> N["2"]
+    N --> O["2"]
+    O --> P["0"]
+    P --> Q["0"]
+    Q --> R["10"]
+    R --> S["1"]
+    S --> T["1"]
+    T --> U["1"]
+    U --> V["1"]
+    V --> W["1"]
+    W --> X["1"]
+    X --> Y["1"]
+    Y --> Z["1"]
+    Z --> AA["1"]
+    AA --> AB["1"]
+    AB --> AC["1"]
+    AC --> AD["1"]
+    AD --> AE["1"]
+    AE --> AF["1"]
+    AF --> AG["1"]
+    AG --> AH["1"]
+    AH --> AI["1"]
+    AI --> AJ["1"]
+    AJ --> AK["1"]
+    AK --> AL["1"]
+    AL --> AM["1"]
+    AM --> AN["1"]
+    AN --> AO["1"]
+    AO --> AP["1"]
+    AP --> AQ["1"]
+    AQ --> AR["1"]
+    AR --> AS["1"]
+    AS --> AT["1"]
+    AT --> AU["1"]
+    AU --> AV["1"]
+    AV --> AW["1"]
+    AW --> AX["1"]
+    AX --> AY["1"]
+    AY --> AZ["1"]
+    AZ --> BA["1"]
+    BA --> BB["1"]
+    BB --> BC["1"]
+    BC --> BD["1"]
+    BD --> BE["1"]
+    BE --> BF["1"]
+    BF --> BG["1"]
+    BG --> BH["1"]
+    BH --> BI["1"]
+    BI --> BJ["1"]
+    BJ --> BK["1"]
+    BK --> BL["1"]
+    BL --> BM["1"]
+    BM --> BN["1"]
+    BN --> BO["1"]
+    BO --> BP["1"]
+    BP --> BQ["1"]
+    BQ --> BR["1"]
+    BR --> BS["1"]
+    BS --> BT["1"]
+    BT --> BU["1"]
+    BU --> BV["1"]
+    BV --> BW["1"]
+    BW --> BX["1"]
+    BX --> BY["1"]
+    BY --> BZ["1"]
+    BZ --> CA["1"]
+    CA --> CB["1"]
+    CB --> CC["1"]
+    CC --> CD["1"]
+    CD --> CE["1"]
+    CE --> CF["1"]
+    CF --> CG["1"]
+    CG --> CH["1"]
+    CH --> CI["1"]
+    CI --> CJ["1"]
+    CJ --> CK["1"]
+    CK --> CL["1"]
+    CL --> CM["1"]
+    CM --> CN["1"]
+    CN --> CO["1"]
+    CO --> CP["1"]
+    CP --> CQ["1"]
+    CQ --> CR["1"]
+    CR --> CS["1"]
+    CS --> CT["1"]
+    CT --> CU["1"]
+    CU --> CV["1"]
+    CV --> CW["1"]
+    CW --> CX["1"]
+    CX --> CY["1"]
+    CY --> CZ["1"]
+    CZ --> DA["1"]
+    DA --> DB["1"]
+    DB --> DC["1"]
+    DC --> DD["1"]
+    DD --> DE["1"]
+    DE --> DF["1"]
+    DF --> DG["1"]
+    DG --> DH["1"]
+    DH --> DI["1"]
+    DI --> DJ["1"]
+    DJ --> DK["1"]
+    DK --> DL["1"]
+    DL --> DJ["1"]
+    DJ --> DK["1"]
+    DK --> DL["1"]
+    DL --> DJ["1"]
+    DJ --> DK["1"]
+    DK --> DL["1"]
+    DL --> DJ["1"]
+    DJ --> DK["1"]
+    DK --> DL["1"]
+    DL --> DJ["1"]
+    DJ --> DK["1"]
+    DK --> LL["1"]
+    LL --> DR["1"]
+    DR --> DL["1"]
+    DL --> DR["1"]
+    DR --> DL["1"]
+    DL --> DR["1"]
+    DR --> DL["1"]
+    DL --> DR["1"]
+    DR --> DL["1"]
+    DL --> DR["1"]
+    DR --> DL["1"]
+    DL --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> Dr["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["1"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+    DR --> DR["2"]
+```
+</details>
+
+图 2.7 图 2.6 中卷积编码器的有限状态机 (FSM) 图
+
+如果执行正确，则需要输入到编码器中的尾比特为 111，编码结果为 10101110001。
+
+![](images/chapter_2/3393bd825fa6105c27939f1f63744549817d3d561e378d87452b234469371e4f.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph LR
+    A["x_k"] --> B["⊕"]
+    B --> C["D"]
+    C --> D["M"]
+    D --> E["z_k"]
+    E --> F["{z_k^0 z_k^1} = {x_k y_k}"]
+    style A fill:#f9f,stroke:#333
+    style B fill:#ccf,stroke:#333
+    style C fill:#cfc,stroke:#333
+    style D fill:#fcc,stroke:#333
+    style E fill:#fcf,stroke:#333
+    style F fill:#cff,stroke:#333
+```
+</details>
+
+(a) 卷积编码器
+
+![](images/chapter_2/32b08a23f705dc26cb92e56021877f8ead9fb4eeec068d9841903e44439521bd.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph TD
+    A["0"] -->|0/00| B["0"]
+    A -->|1/10| C["1"]
+    D["1"] -->|0/01| E["0"]
+    B -->|x_k / x_k y_k| F
+    C -->|x_k = 0| G
+    E -->|x_k = 1| H
+    style A fill:#f9f,stroke:#333
+    style D fill:#f9f,stroke:#333
+    style B fill:#ccf,stroke:#333
+    style E fill:#ccf,stroke:#333
+    style C fill:#ccf,stroke:#333
+    style F fill:#ffc,stroke:#333
+    style G fill:#ffc,stroke:#333
+    style H fill:#ffc,stroke:#333
+```
+</details>
+
+(b) 格图
+
+图 2.8 (a) 卷积编码器和 (b) 格图
+
+## 2.1.2 解码
+
+在实践中，使用卷积码编码的数据可以通过基于 Viterbi 算法 [13] 构建的解码器（称为 Viterbi 检测器）进行解码。下面将给出卷积码解码的示例。
+
+**例 2.3** 考虑图 2.8 (a) 中的卷积编码器及其对应的格图（见图 2.8 (b)）。假设 $\left\{z_{k}\right\}$ 是解码器需要解码的数据序列，请对数据序列 $z_{k} = \{ 1 1 \ 0 1 \ 1 0 \ 1 1 \ 0 0 \}$ 进行解码。
+
+**解**：定义 $(u, q)$ 为从状态 $u$ 转移到状态 $q$ 的状态转移，在第 $k$ 阶段的支路度量 (branch metric) 定义为
+
+$$
+\rho_ {k} (u, q) = \left| z _ {k} ^ {0} - \tilde {x} _ {k} (u, q) \right| ^ {2} + \left| z _ {k} ^ {1} - \tilde {y} _ {k} (u, q) \right| ^ {2}
+$$
+
+其中 $\tilde { x } _ { k } (u, q)$ 和 $\tilde { y } _ { k } (u, q)$ 是与状态转移 $(u, q)$ 相对应的比特 $x_{k}$ 和 $y_{k}$。此外，定义时间 $k+1$ 时状态 $q$ 的路径度量 (path metric) 为
