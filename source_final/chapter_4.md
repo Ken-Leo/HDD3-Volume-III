@@ -1,4 +1,4 @@
-![](images/9be8356c6f6b2e57d7207e10004e555ff5870688cdd802b0df6a9232bd0226a0.jpg)
+![](images/chapter_4/9be8356c6f6b2e57d7207e10004e555ff5870688cdd802b0df6a9232bd0226a0.jpg)
 
 <details>
 <summary>radar</summary>
@@ -74,7 +74,7 @@ $$
 
 วิธีทำ ข้อมูลที่ต้องการให้ใช้อัลกอริทึม SOVA แบบสองทิศทางตรวจหาคือ
 
-![](images/3899675aededc2b0f82eddd21ab48710b639f5dbebf59a0da1d91f31050d4940.jpg)
+![](images/chapter_4/3899675aededc2b0f82eddd21ab48710b639f5dbebf59a0da1d91f31050d4940.jpg)
 
 <details>
 <summary>radar</summary>
@@ -194,7 +194,7 @@ $$
 
 <table><tr><td rowspan="2">MAX-LOG-MAP</td><td colspan="3">จํานวนตัวตําเนินการทางคณิตศาสตร์ (ต่อหนึ่งบิต)</td></tr><tr><td>การบวก</td><td>การดูณ</td><td>การหาค่าสูงสุด</td></tr><tr><td> $\tilde{\gamma}_{k}(u,q)$  ในสมการ (3.10) ทั้งการเวียนเกิดแบบข้างหน้าและแบบข้อนกลับ</td><td>12Q</td><td>12Q</td><td>0</td></tr><tr><td> $\tilde{\alpha}_{k+1}(q)$  ในสมการ (3.12)</td><td>2Q</td><td>0</td><td>Q</td></tr><tr><td> $\tilde{\beta}_{k}(u)$  ในสมการ (3.14)</td><td>2Q</td><td>0</td><td>Q</td></tr><tr><td>ค่า LLR  $\lambda_{p}(a_{k})$  ในสมการ (3.9)</td><td>4Q + 1</td><td>0</td><td>2(Q - 1)</td></tr><tr><td>การตัดสินใจแบบฮาร์ตของข้อมูลหนึ่งบิต</td><td>1</td><td>0</td><td>0</td></tr><tr><td>รวม</td><td>20Q + 2</td><td>12Q</td><td>4Q - 2</td></tr></table>
 
-![](images/e467a4183ae9f089aa8c525fdeafc7b2e25aba45148d331f0ed408db370ec038.jpg)
+![](images/chapter_4/e467a4183ae9f089aa8c525fdeafc7b2e25aba45148d331f0ed408db370ec038.jpg)
 
 <details>
 <summary>line</summary>
@@ -458,7 +458,7 @@ $\int \limits _ { \Delta } \eta d \theta ( \theta ( \theta _ { 1 } ) ) \sin ^ { 
 
 รหัสพาริตีเช็กสามารถถูกกำหนดด้วยกราฟแทนเนอร์ (Tanner graph) [44, 50] ได้ซึ่งเป็นการแทน เมทริกซีพาริดีเช็ก H ขนาด M×N โดยที่กราฟแทนเนอร์จะมี N โหนดบิต (หนึ่งโหนดต่อหนึ่งบิต) และมี M โหนดเช็ก (หนึ่งโหนดต่อหนึ่งสมการพาริตีเช็ก) ในที่นี้จะใช้สัญลักษณ์วงกลม 0 แทน โหนดบิต และใช้สัญลักษณ์สี่เหลี่ยม แทนโหนดเช็ก เมื่อโหนดเช็กจะเชื่อมต่อกับโหนดบิตที่ เกี่ยวข้องกับสมการพาริตีเช็กของโหนดเช็กนั้น หรือกล่าวอีกนัยหนึ่งคือเส้นเชื่อม (edge) ระหว่าง โหนดเช็กลำดับที่m กับโหนดบิตลำดับที่n จะเกิดขึ้นก็ต่อเมื่อ $h _ { m , n } = 1$ นอกจากนี้กราฟแทนเนอร์ อาจเรียกว่า "กราฟสองส่วน (bipartite graph)" เพราะภายในกราฟมีโหนดเพียงสองแบบเท่านั้น (นั่นคือโหนดบิตและโหนดเช็ก) และไม่มีเส้นเชื่อมระหว่างโหนดชนิดเดียวกัน รูปที่ 4.2 แสดงกราฟ แทนเนอร์สำหรับรหัสแอลดีพีซีปรกติแบบ (j, k) = (2, 4) ที่มีเมทริกซ์พาริตีเช็ก H ตามสมการ (4.19) ซึ่งจะพบว่าแต่ละโหนดบิตมีเส้นเชื่อมจำนวน 2 เส้น (สอดคล้องกับ j = 2) และแต่ละโหนด 2 เช็กมีเส้นเชื่อมจำนวน 4 เส้น (สอดคล้องกับ k = 4) นอกจากนี้ยังพบว่ากราฟแทนเนอร์ สอดคล้องกับสมการพาริตีเช็กทั้งหมดตามสมการ (4.20) - (4.24) เช่นกัน
 
-![](images/3e9a9bd5249923ddfea04710590385de7751938de6cd5cd715224ab7a31a4c07.jpg)
+![](images/chapter_4/3e9a9bd5249923ddfea04710590385de7751938de6cd5cd715224ab7a31a4c07.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -498,7 +498,7 @@ graph TD
 
 นอกจากนีสมรรถนะของรหัสแอลดีพีซีทีเป็นฟังก์ชันของการแจกแจงระดับขันของโหนด เช็กและของโหนดบิตสามารถถูกทำนายได้โดยใช้ทฤษฎีวิวัฒนาการของความหนาแน่น (density evolนtiอก) [48] ซึ่งจะติดตามความหนาแน่นของความน่าจะเป็นของข่าวสารที่ส่งผ่านระหว่างโหนด เช็กและโหนดบิด โดยทั่วไปถ้าระบบทำงานที่ระดับ รNR สูงเพียงพอ จะพบว่าค่าเฉลี่ยของความ หนาแน่นมีค่าเข้าใกล้ค่าอนันต์ เมื่อจำนวนรอบของการถอดรหัสภายในวงจรถอดรหัสแอลดีพีซี เพิ่มขึ้น ซึ่งหมายความว่าวงจรถอดรหัสมีความมั่นใจสูงที่จะถอดรหัสข้อมูลได้อย่างถูกต้อง ในทาง ตรงกันข้ามถ้าระบบทำงานที่ระดับ รNR ต่ำๆ ค่าเฉลี่ยของความหนาแน่นจะลู่เข้าสู่ค่าคงตัวใดๆ ซึ่งหมายความว่าวงจรถอดรหัสแอลดีพีซีมีข้อบกพร่องในการถอดรหัสข้อมล ดังนันค่า รNR ทีเป็น เส้นแบ่งขอบเขตของสมรรถนะของรหัสแอลดีพีซี(ระหว่างดีกับไม่ดี) จะเรียกว่าขีดเริ่มเปลี่ยน (threshold)"สำหรับสมรรถนะของรหัส ดังนั้นรหัสแอลดีพีซีไม่สม่ำเสมอถูกออกแบบมาเพื่อให้ ค่าขีดเริ่มเปลี่ยนนี้เข้าใกล้ขีดจำกัดความจุของแชนนอน (Shannon capacity) [25] ให้มากที่สุด (มากกว่ารหัสแอลดีพีซีปรกติ) [49]
 
-![](images/d8f11573da6620c20ccb2545394dce26c80f1a108d959fdff6b95825026789d6.jpg)
+![](images/chapter_4/d8f11573da6620c20ccb2545394dce26c80f1a108d959fdff6b95825026789d6.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -564,7 +564,7 @@ graph TD
 ```
 </details>
 
-![](images/452fdbd08cc857c2d00b34d0802e9d477a9fa21b4ecb95b388e8771f13f2a341.jpg)
+![](images/chapter_4/452fdbd08cc857c2d00b34d0802e9d477a9fa21b4ecb95b388e8771f13f2a341.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -750,7 +750,7 @@ $$
 f (x) = \log \left(\frac {e ^ {x} + 1}{e ^ {x} - 1}\right) = - \log \left(\tanh \left(\frac {x}{2}\right)\right) \tag {4.33}
 $$
 
-![](images/b0c4c501d519010e814ef805f7df4301402a259756229b5be4821e5a53a5edbc.jpg)
+![](images/chapter_4/b0c4c501d519010e814ef805f7df4301402a259756229b5be4821e5a53a5edbc.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -816,7 +816,7 @@ graph TD
 ```
 </details>
 
-![](images/fcf58dfd6436696f9ba46a48ebe0e03e8217ee5c28f1e077127e70f5e63c8055.jpg)
+![](images/chapter_4/fcf58dfd6436696f9ba46a48ebe0e03e8217ee5c28f1e077127e70f5e63c8055.jpg)
 
 <details>
 <summary>line</summary>
@@ -937,7 +937,7 @@ $$
 r _ {n} = s _ {n} + w _ {n} \tag {4.42}
 $$
 
-![](images/bcab1aeadbc7a472acf552a87d6d978783f9d0dad1cefa76c337d254041f6799.jpg)
+![](images/chapter_4/bcab1aeadbc7a472acf552a87d6d978783f9d0dad1cefa76c337d254041f6799.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -999,7 +999,7 @@ $$
 
 ตัวอย่างที่ 4.4 พิจารณาช่องสัญญาณสมมาตรแบบไบนารี (BSC: binary symmetric channel) ในรูปที่ 4.6 จงแสดงว่าค่า LLR แบบอะโพสเทอริออริของช่องสัญญาณเป็นไปตามสมการ (4.47)
 
-![](images/ec004f431f992c566202dad926a5022333ea9dd0f5d6fa648b12c9ce181ab746.jpg)
+![](images/chapter_4/ec004f431f992c566202dad926a5022333ea9dd0f5d6fa648b12c9ce181ab746.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1041,7 +1041,7 @@ $$
 
 สมการ (4.43) สามารถจัดให้อยู่ในรูปที่ใช้งานง่ายขึ้นได้ดังนี้ ให้พิจารณากราฟแทนเนอร์ ของรหัสแอลดีพีซีปรกติแบบ (j, k) สำหรับโหนดบิตตัวที่ n ตามรูปที่ 4.7 ซึ่งจะพบว่าโหนดบิตตัวที ท จะเชื่อมต่อกับโหนดเช็กจำนวน $j$ โหนด (หมายเลข 1 ถึง $\hat { \jmath } )$ และแต่ละโหนดเช็กก็จะเชื่อมต่อกับ โหนดบิตอื่นๆ เป็นจำนวน $k - 1$ โหนด นอกจากนี้กำหนดให้ $\mathbf { c } \left( i \right) = \left[ c _ { i , 2 } , c _ { i , 3 } , . . . , c _ { i , k } \right]$ คือเซตของ โหนดบิตทั้งหมดจำนวน $k - 1$ โหนด (ยกเว้นโหนดบิตตัวที่n) ที่ชื่อมต่อกับโหนดเช็กตัวที่i เมื่อ $i = \{ 1 , 2 , . . . , j \}$ ดังนั้นรูปที่ 4.7 บอกให้ทราบว่าค่า $c _ { n }$ จะขึ้นกับค่าพาริตีของ $\mathbf { c } ( 1 ) , \mathbf { c } ( 2 ) , \ldots , \mathbf { c } ( j )$ หรือ $\Phi _ { } ( \mathbf { c } _ { } ( i ) )$ ดังนี้
 
-![](images/a1dae77e163782ac02602e29d7bce3e30ac06de78dde3c77abf8211eb4560901.jpg)
+![](images/chapter_4/a1dae77e163782ac02602e29d7bce3e30ac06de78dde3c77abf8211eb4560901.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1061,7 +1061,7 @@ $$
 
 วัฏจักร (cycle) หมายถึงเส้นทางเดินภายในกราฟที่มีจุดเริ่มต้นและจุดสิ้นสุดเป็นโหนดบิตเดียวกัน โดยความยาวของวัฎจักร (cycle length) มีค่าเท่ากับจำนวนเส้นเชื่อมทั้งหมดที่ทำให้เกิดเป็นวัฎจักร เนื่องจากกราฟแทนเนอร์เป็นกราฟสองส่วน (bipลrtite graph) จึงทำให้ความยาวน้อยสุดของวัฎจักร18 มีค่าเท่ากับ 4 ตามที่แสดงด้วยเส้นปะในรูปที่4.8 อย่างไรก็ตามถ้าไม่มีเส้นปะในกราฟ ก็จะทำให้ กราฟไม่มีวัฏจักร (cycle-free) ซึ่งกราฟที่ไม่มีวัฏจักรจะเรียกว่า "แผนภาพต้นไม้ (tree diagram)" นอกจากนี้กราฟที่ไม่มีวัฏจักรมีคุณสมบัติที่น่าสนใจดังนี้
 
-![](images/0dbce3f3e3f2a1d5820fd9b41fef583515c8873ad39352b42f2c6916bd00b308.jpg)
+![](images/chapter_4/0dbce3f3e3f2a1d5820fd9b41fef583515c8873ad39352b42f2c6916bd00b308.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1127,7 +1127,7 @@ graph TD
 ```
 </details>
 
-![](images/2d11111febf41d3db3cf7818698a37f40becb486e2443fc77e43d50fb69a3f1d.jpg)
+![](images/chapter_4/2d11111febf41d3db3cf7818698a37f40becb486e2443fc77e43d50fb69a3f1d.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1237,7 +1237,7 @@ $$
 \lambda_ {n} = \frac {2}{\sigma^ {2}} r _ {n} - 2 \sum_ {i = 1} ^ {j} \tanh ^ {- 1} \left\{\prod_ {l = 2} ^ {k} \tanh \left(\frac {- \lambda_ {i , l}}{2}\right) \right\} \tag {4.56}
 $$
 
-![](images/d8d7aeff4e27073dbfbb2d0dc897af9439bc165431038658f590ec5e40bd4c6e.jpg)
+![](images/chapter_4/d8d7aeff4e27073dbfbb2d0dc897af9439bc165431038658f590ec5e40bd4c6e.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1258,7 +1258,7 @@ graph TD
 ```
 </details>
 
-![](images/209ac230fa8dbd1731378746b4c054caef0d77ebabaa625a5280d380fcc3e899.jpg)
+![](images/chapter_4/209ac230fa8dbd1731378746b4c054caef0d77ebabaa625a5280d380fcc3e899.jpg)
 
 <details>
 <summary>text_image</summary>
@@ -1289,7 +1289,7 @@ $$
 
 ตัวอย่างที่ 4.5 พิจารณากราฟแทนเนอร์ในรูปที่ 4.10 ที่มีโหนดบิตจำนวนสี่โหนดเชื่อมต่อกับโหนด เช็กจำนวนหนึ่งโหนด (โหนดบิตทั้งสี่จะต้องสอดคล้องกับสมการพาริตีเช็กที่โหนดเช็ก) เมื่อกำหนด
 
-![](images/9bfeae8ce0555c6518b1d2d4b31b2955f5dc69ef75cca938a2b0a47aeadf7816.jpg)
+![](images/chapter_4/9bfeae8ce0555c6518b1d2d4b31b2955f5dc69ef75cca938a2b0a47aeadf7816.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1355,7 +1355,7 @@ graph TD
 ```
 </details>
 
-![](images/34094bf79bc1eb21fb042fec68b6a013e224b9818b51e42232bac4b427df4797.jpg)
+![](images/chapter_4/34094bf79bc1eb21fb042fec68b6a013e224b9818b51e42232bac4b427df4797.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1485,7 +1485,7 @@ $$
 
 รูปที่ 4.11 ขั้นตอนการทำงานของอัลกอริทึม MP สำหรับการถอดรหัสแอลดีพีซี [4, 17]
 
-![](images/67108415cb3d37f4f6fbf460de6499b7c7d2fb163b9f04dc9584493cdff84c71.jpg)
+![](images/chapter_4/67108415cb3d37f4f6fbf460de6499b7c7d2fb163b9f04dc9584493cdff84c71.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1551,7 +1551,7 @@ graph TD
 ```
 </details>
 
-![](images/af0d2ef29e4017834c2b8b15a3faecb0052eb4e40d4cc56ab32c0151c731b3a2.jpg)
+![](images/chapter_4/af0d2ef29e4017834c2b8b15a3faecb0052eb4e40d4cc56ab32c0151c731b3a2.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1601,7 +1601,7 @@ $$
 
 เมื่อ $L _ { c } = 2 / \sigma ^ { 2 }$ คือความน่าเชื่อถือของช่องสัญญาณ รูปที่ 4.13 การส่งผ่านข่าวสาร (ก) จากโหนดบิตไปยังโหนดเช็ก และ (ข) จากโหนดเช็กไปยังโหนดบิต เมื่อ สิ้นสุดการวนซ้ำรอบที่ 1
 
-![](images/57754386ba31a564a521c025922474816edfccaff6886596988bceab52101249.jpg)
+![](images/chapter_4/57754386ba31a564a521c025922474816edfccaff6886596988bceab52101249.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1642,7 +1642,7 @@ graph TD
 
 (ก)
 
-![](images/6c2a990413deb98319524ae391f564a87dc94e4e96d79d49d68f0d0715837eb6.jpg)
+![](images/chapter_4/6c2a990413deb98319524ae391f564a87dc94e4e96d79d49d68f0d0715837eb6.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1679,7 +1679,7 @@ $$
 
 ในทำนองเดียวกันโหนดบิตแต่ละโหนดจะส่งข่าวสารไปยังโหนดเช็กตามที่แสดงในรูปที่ 4.14 (ก) จากนั้นโหนดเช็กแต่ละโหนดจะนำข่าวสารทีได้รับมาคำนวณตามสมการ (4.59) แล้วก็ส่งผลลัพธ์ กลับไปยังโหนดบิตตามที่แสดงในรูปที่ 4.14 (ข) หลังจากนั้นโหนดบิตจะนำข่าวสารทีได้รับทั้งหมด มาคำนวณตามสมการ (4.60) ซึ่งจะได้ว่าค่า $\lambda _ { n } ^ { ( 2 ) }$ ของบิตข้อมูลตัวที่ n มีค่าเท่ากับ
 
-![](images/1bb9c49b3304e6a444234ef255dbc8933ed16655fa6be19160d6bbfa8deeb84b.jpg)
+![](images/chapter_4/1bb9c49b3304e6a444234ef255dbc8933ed16655fa6be19160d6bbfa8deeb84b.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1789,7 +1789,7 @@ graph TD
 ```
 </details>
 
-![](images/28bd4652b392b0829ca7f6f672c1d3dc866fc750325047cf2d110c3c020c77d0.jpg)
+![](images/chapter_4/28bd4652b392b0829ca7f6f672c1d3dc866fc750325047cf2d110c3c020c77d0.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1812,7 +1812,7 @@ graph TD
 
 (ก)
 
-![](images/d6b1ab135cc9cafca17568db131a97371cd5e8a775d3039c76128f1a4f1996e8.jpg)
+![](images/chapter_4/d6b1ab135cc9cafca17568db131a97371cd5e8a775d3039c76128f1a4f1996e8.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1899,7 +1899,7 @@ $$
 \left[ u _ {1 \rightarrow 1} ^ {(1)}, u _ {1 \rightarrow 3} ^ {(1)}, u _ {1 \rightarrow 4} ^ {(1)} \right] = \left[ 1. 3 2 5 0, 1. 3 2 5 0, - 1. 3 2 5 0 \right]
 $$
 
-![](images/5bdf74cb3238a4314af1f0274f828592cb0a42117ad5292c1d8d33eaa1393cd2.jpg)
+![](images/chapter_4/5bdf74cb3238a4314af1f0274f828592cb0a42117ad5292c1d8d33eaa1393cd2.jpg)
 
 <details>
 <summary>flowchart</summary>
@@ -1965,7 +1965,7 @@ graph TD
 ```
 </details>
 
-![](images/cd6e1084b7fc6482515548493e659a211d230a461f63c201513da620fe2e216a.jpg)
+![](images/chapter_4/cd6e1084b7fc6482515548493e659a211d230a461f63c201513da620fe2e216a.jpg)
 
 <details>
 <summary>flowchart</summary>
