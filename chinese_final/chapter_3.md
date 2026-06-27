@@ -109,3 +109,62 @@ $$ \tilde{\alpha}_4(a) = -1.7124 \quad \text{且} \quad \tilde{\alpha}_4(b) = -0
 
 5. 设定状态度量的初始值 $\tilde{\beta}_4(u) = \tilde{\alpha}_4(u)$（其中 $u \in \{a, b\}$），即：
 $$ \tilde{\beta}_4(a) = -1.7124 \quad \text{且} \quad \tilde{\beta}_4(b) = -0.4558 $$
+**示例 3.1** 参考示例 2.4，演示使用 Max-Log-MAP 算法对数据 $y_k$ 进行解码的步骤。设定数据位 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{2, -2, 2, 0\}$。
+
+**解**：根据示例 2.4，需要使用 Max-Log-MAP 算法检测的数据为：
+$$ y_k = \{y_0, y_1, y_2, y_3\} = \{0.9, -0.2, 0.3, 0.6\} $$
+信道 $H(D) = 1 + 0.5D$ 的状态图如图 2.13 所示，包含两个状态：状态 (a) 和状态 (b)。Max-Log-MAP 算法的解码步骤如下：
+
+1. 设定状态度量的初始值 $\tilde{\alpha}_0(a) = 0$ 且 $\tilde{\alpha}_0(b) = -\infty$。
+
+**前向递归**
+
+2. 阶段 0（当 $k=0$ 时）：Max-Log-MAP 算法接收数据 $y_0 = 0.9$ 以及先验信息 $\lambda_a(a_0) = 2$，根据方程 (3.10) 计算图 2.13 中所有满足转移条件 $(u, q)$ 的支路度量 $\tilde{\gamma}_0(u, q)$，结果如下：
+$$
+\tilde {\gamma} _ {0} (a, a) = 0 - \pi | 0. 9 - (- 1. 5) | ^ {2} + \frac {(- 1) (2)}{2} \approx - 1 9. 0 9 5 6
+$$
+$$
+\tilde {\gamma} _ {0} (b, a) = 0 - \pi \left| 0. 9 - (- 0. 5) \right| ^ {2} + \frac {(- 1) (2)}{2} \approx - 7. 1 5 7 5
+$$
+$$
+\tilde {\gamma} _ {0} (a, b) = 0 - \pi | 0. 9 - (0. 5) | ^ {2} + \frac {(+ 1) (2)}{2} \approx 0. 4 9 7 3
+$$
+$$
+\tilde {\gamma} _ {0} (b, b) = 0 - \pi | 0. 9 - (1. 5) | ^ {2} + \frac {(+ 1) (2)}{2} \approx - 0. 1 3 0 9
+$$
+已知 $\sigma^2 = 1/(2\pi)$，随后根据方程 (3.12) 调整状态度量：
+$$
+\begin{array}{l} \tilde {\alpha} _ {1} (a) = \max \left\{\tilde {\alpha} _ {0} (a) + \tilde {\gamma} _ {0} (a, a), \tilde {\alpha} _ {0} (b) + \tilde {\gamma} _ {0} (b, a) \right\} \\ = \max \left\{0 + (- 1 9. 0 9 5 6), - \infty + (- 7. 1 5 7 5) \right\} = - 1 9. 0 9 5 6 \\ \end{array}
+$$
+$$
+\tilde {\alpha} _ {1} (b) = \max \left\{\tilde {\alpha} _ {0} (a) + \tilde {\gamma} _ {0} (a, b), \tilde {\alpha} _ {0} (b) + \tilde {\gamma} _ {0} (b, b) \right\}
+$$
+$$
+= \max \left\{0 + (0. 4 9 7 3), - \infty + (- 0. 1 3 0 9) \right\} = 0. 4 9 7 3
+$$
+
+3. 阶段 1（当 $k=1$ 时）：Max-Log-MAP 算法接收数据 $y_1 = -0.2$ 以及先验信息 $\lambda_a(a_1) = -2$，计算所有支路度量如下：
+$$
+\tilde {\gamma} _ {1} (a, a) = 0 - \pi \left| - 0. 2 - (- 1. 5) \right| ^ {2} + \frac {(- 1) (- 2)}{2} \approx - 4. 3 0 9 3
+$$
+$$
+\tilde {\gamma} _ {1} (b, a) = 0 - \pi \left| - 0. 2 - (- 0. 5) \right| ^ {2} + \frac {(- 1) (- 2)}{2} \approx 0. 7 1 7 3
+$$
+$$
+\tilde {\gamma} _ {1} (a, b) = 0 - \pi \left| - 0. 2 - (0. 5) \right| ^ {2} + \frac {(+ 1) (- 2)}{2} \approx - 2. 5 3 9 4
+$$
+$$
+\tilde {\gamma} _ {1} (b, b) = 0 - \pi | - 0. 2 - (1. 5) | ^ {2} + \frac {(+ 1) (- 2)}{2} \approx - 1 0. 0 7 9 2
+$$
+随后调整状态度量 $\tilde{\alpha}_2(a)$ 和 $\tilde{\alpha}_2(b)$：
+$$
+\begin{array}{l} \tilde {\alpha} _ {2} (a) = \max \left\{\tilde {\alpha} _ {1} (a) + \tilde {\gamma} _ {1} (a, a), \tilde {\alpha} _ {1} (b) + \tilde {\gamma} _ {1} (b, a) \right\} \\ = \max \left\{\left(- 1 9. 0 9 5 6\right) + (- 4. 3 0 9 3), (0. 4 9 7 3) + (0. 7 1 7 3) \right\} = 1. 2 1 4 6 \\ \end{array}
+$$
+$$
+\begin{array}{l} \tilde {\alpha} _ {2} (b) = \max \left\{\tilde {\alpha} _ {1} (a) + \tilde {\gamma} _ {1} (a, b), \tilde {\alpha} _ {1} (b) + \tilde {\gamma} _ {1} (b, b) \right\} \\ = \max \left\{(- 1 9. 0 9 5 6) + (- 2. 5 3 9 4), (0. 4 9 7 3) + (- 1 0. 0 7 9 2) \right\} = - 9. 5 8 1 9 \\ \end{array}
+$$
+
+4. 阶段 2 和 3（当 $k \in \{2, 3\}$ 时）：Max-Log-MAP 算法接收数据 $\{y_2, y_3\} = \{0.3, 0.6\}$ 以及先验信息 $\{\lambda_a(a_2), \lambda_a(a_3)\} = \{2, 0\}$。采用与步骤 2 和 3 相同的方法计算支路度量并调整状态度量 $\tilde{\alpha}_{k+1}(q)$（其中 $q \in \{a, b\}$）。计算结果如图 3.3 所示，支路上的数值为对应的 $\tilde{\gamma}_k(u, q)$，状态节点上的数值表示状态度量 $\tilde{\alpha}_k(u)$ 与 $\tilde{\beta}_k(u)$ 的比值：
+$$ \frac{\tilde{\alpha}_k(u)}{\tilde{\beta}_k(u)} $$
+对于每个 $k \in \{0, 1, 2, 3\}$ 和 $u \in \{a, b\}$。前向递归结束时（归一化后）的结果为：
+$$ \tilde{\alpha}_4(a) = -1.7124 \quad \text{且} \quad \tilde{\alpha}_4(b) = -0.4558 $$
