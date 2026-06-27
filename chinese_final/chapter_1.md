@@ -558,3 +558,55 @@ graph LR
 8. 请解释对数似然比 (LLR: log-likelihood ratio) 的含义。
 9. 请解释先验 LLR 和后验 LLR 的含义。
 10. 请解释 SISO 检测器和 SISO 解码器的含义。
+
+# 1.5.4 SISO 解码器
+
+SISO (软输入软输出, soft-input soft-output) 解码器是一种处理软信息的解码器。它接收软信息作为输入进行处理，并输出软信息。
+
+![](images/192a4742eed013b4a4ad062c253bd2e6559cd7a4c3a2d613ba163792040a3cad.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph LR
+    A["x_k {0,1}"] --> B["编码器"]
+    B --> C["映射器 0→-1 1→1"]
+    C --> D["+"]
+    D --> E["SISO 解码器"]
+    E --> F["λ_p(x_k) = λ(x_k | y)"]
+    F --> G["∫"]
+    G --> H["\hat{x}_k"]
+    C --> I["u_k {±1}"]
+    I --> D
+    D --> J["n_k"]
+    J --> K["λ_a(x_k)"]
+    K --> E
+```
+</details>
+
+图 1.9 采用 SISO 解码器的数字通信系统
+
+考虑图 1.9 所示的通信系统。当数据序列 $x_k \in \{0, 1\}$ 被送入编码器 (encoder) 和映射器 (mapper) 以获得数据序列 $u_k \in \{-1, 1\}$ 时，SISO 解码器将对信号 $y_k = u_k + n_k$ 进行解码，其中 $n_k$ 为 AWGN 噪声。该过程依赖于先验 LLR 序列 $\lambda_a(x_k)$，其定义为：
+
+$$
+\lambda_ {a} \left(x _ {k}\right) = \ln \left(\frac {p \left(x _ {k} = 1\right)}{p \left(x _ {k} = 0\right)}\right) \tag {1.21}
+$$
+
+这代表了在接收端收到序列 $y$ 或具体数值 $y_k$ 之前关于数据位 $x_k$ 的信息（即与 $y$ 独立）。同样地，如果接收端没有先验信息，则将 $\lambda_a(x_k)$ 设定为 0，这意味着所有数据位 $x_k$ 出现的概率相等。
+
+随后，SISO 解码器将输出数据位 $x_k$ 的后验 LLR (a posteriori LLR)：
+
+$$
+\lambda_ {p} \left(x _ {k}\right) = \ln \left(\frac {p \left(x _ {k} = 1 \mid \mathbf {y}\right)}{p \left(x _ {k} = 0 \mid \mathbf {y}\right)}\right) \tag {1.22}
+$$
+
+数据位 $x_k$ 的估计值可以通过将 $\lambda_p(x_k)$ 送入阈值检测器 (threshold detector) 获得，其关系如下：
+
+$$
+\hat {x} _ {k} = \left\{ \begin{array}{l l} 1, & \text { if } \lambda_ {p} (x _ {k}) \geq 0 \\ 0, & \text { if } \lambda_ {p} (x _ {k}) <   0 \end{array} \right. \tag {1.23}
+$$
+
+注：关于数据位 $x$ 的 LLR $\lambda(x)$ 在本书中定义如下：
+- 如果 LLR 带有下标 $a$，如 $\lambda_a(x)$，则表示数据位 $x$ 的先验 LLR (a priori LLR)。
+- 如果 LLR 带有下标 $p$，如 $\lambda_p(x)$，则表示数据位 $x$ 的后验 LLR (a posteriori LLR)。
