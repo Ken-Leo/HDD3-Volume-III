@@ -136,3 +136,211 @@ $$
 $$
 
 即 $\left\{ y_0^1, y_1^1, y_2^1, y_3^1, y_4^1, y_5^1 \right\} = \{1, 1, 1, 0, 1, 0\}$ 且 $\left\{ y_0^2, y_1^2, y_2^2, y_3^2, y_4^2, y_5^2 \right\} = \{1, 0, 0, 1, 1, 1\}$，这与图 2.3-2.5 中得到的结果一致。
+
+![](images/chapter_2/e25f8c64960b37cf6cb05d5c0d815c1a8b175d4a808f458968d9374c8374d6e7.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph TD
+    A["0/01"] -->|0/11| B["0/10"]
+    B -->|0/10| C["1/10"]
+    C -->|1/01| D["1/01"]
+    D --> E["1/11"]
+    E --> F["0/11"]
+    F --> G["0/11"]
+    G --> H["0/11"]
+    H --> I["0/11"]
+    I --> J["0/11"]
+    J --> K["0/11"]
+    K --> L["0/11"]
+    L --> M["0/11"]
+    M --> N["0/11"]
+    N --> O["0/11"]
+    O --> P["0/11"]
+    P --> Q["0/11"]
+    Q --> R["0/11"]
+    R --> S["0/11"]
+    S --> T["0/11"]
+    T --> U["0/11"]
+    U --> V["0/11"]
+    V --> W["0/11"]
+    W --> X["0/11"]
+    X --> Y["0/11"]
+    Y --> Z["0/11"]
+    Z --> A["0/11"]
+    A -->|1/11| B
+    B -->|0/10| C
+    C -->|1/10| D
+    D -->|1/01| E
+    E -->|1/11| F
+    F -->|0/11| G
+    G -->|0/11| H
+    H -->|0/11| I
+    I -->|0/11| J
+    J -->|0/11| K
+    K -->|0/11| L
+    L -->|0/11| M
+    M -->|0/11| N
+    N -->|0/11| O
+    O -->|0/11| P
+    P -->|0/11| Q
+    Q -->|0/11| R
+    R -->|0/11| S
+    S -->|0/11| T
+    T -->|0/11| U
+    U -->|0/11| V
+    V -->|0/11| W
+    W -->|0/11| X
+    X -->|0/11| Y
+    Y -->|0/11| Z
+    Z -->|0/11| A
+    style A fill:#f9f,stroke:#333
+    style B fill:#f9f,stroke:#333
+    style C fill:#f9f,stroke:#333
+    style D fill:#f9f,stroke:#333
+    style E fill:#f9f,stroke:#333
+    style F fill:#f9f,stroke:#333
+    style G fill:#f9f,stroke:#333
+    style H fill:#f9f,stroke:#333
+    style I fill:#f9f,stroke:#333
+    style J fill:#f9f,stroke:#333
+    style K fill:#f9f,stroke:#333
+    style L fill:#f9f,stroke:#333
+    style M fill:#f9f,stroke:#333
+    style N fill:#f9f,stroke:#333
+    style O fill:#f9f,stroke:#333
+    style P fill:#f9f,stroke:#333
+    style Q fill:#f9f,stroke:#333
+    style R fill:#f9f,stroke:#333
+    style S fill:#f9f,stroke:#333
+    style T fill:#f9f,stroke:#333
+    style U fill:#f9f,stroke:#333
+    style V fill:#f9f,stroke:#333
+    style W fill:#f9f,stroke:#333
+    style X fill:#f9f,stroke:#333
+    style Y fill:#f9f,stroke:#333
+    style Z fill:#f9f,stroke:#333
+```
+</details>
+
+图 2.5 例 2.1 的格图（仅显示唯一可能的码字路径）
+
+$$
+\begin{array}{l} Y _ {1} (D) = G _ {1} (D) X (D) = (1 \oplus D) \left(1 + D ^ {2} + D ^ {3}\right) \\ = \left(1 + D ^ {2} + D ^ {3}\right) \oplus \left(D + D ^ {3} + D ^ {4}\right) \\ = 1 + D + D ^ {2} + D ^ {4} \\ \end{array}
+$$
+
+$$
+\begin{array}{l} Y _ {2} (D) = G _ {2} (D) X (D) = \left(1 \oplus D ^ {2}\right) \left(1 + D ^ {2} + D ^ {3}\right) \\ = \left(1 + D ^ {2} + D ^ {3}\right) \oplus \left(D ^ {2} + D ^ {4} + D ^ {5}\right) \\ = 1 + D ^ {3} + D ^ {4} + D ^ {5} \\ \end{array}
+$$
+
+即 $\left\{ y _ { 0 } ^ { 1 } , y _ { 1 } ^ { 1 } , y _ { 2 } ^ { 1 } , y _ { 3 } ^ { 1 } , y _ { 4 } ^ { 1 } , y _ { 5 } ^ { 1 } \right\} = \left\{ 1 \ 1 \ 1 \ 0 \ 1 \ 0 \right\}$ 且 $\left\{ y _ { 0 } ^ { 2 } , y _ { 1 } ^ { 2 } , y _ { 2 } ^ { 2 } , y _ { 3 } ^ { 2 } , y _ { 4 } ^ { 2 } , y _ { 5 } ^ { 2 } \right\} = \left\{ 1 0 0 1 1 1 \right\}$，这与图 2.3 – 2.5 中得到的结果一致。
+
+**例 2.2** 考虑图 2.6 中的卷积编码器，其生成多项式用八进制表示为 $( g _ { 1 } , \ g _ { 2 } ) = ( 1 7 , \ 1 1 )$，等同于二进制的 (001111, 001001)，其中 $g _ { 1 }$ 称为反馈多项式 (feedback polynomial)，$g _ { 2 }$ 称为前馈多项式 (feedforward polynomial)。在某些书籍中，生成多项式可能表示为 $D$ 域的分式：$\begin{array} { r } { \frac { g _ { 2 } ( D ) } { g _ { 1 } ( D ) } = \frac { 1 + D ^ { 3 } } { 1 + D + D ^ { 2 } + D ^ { 3 } } } \end{array}$。请绘制其有限状态机图，并对输入数据位 11011100 进行编码（最左侧的比特为首先被编码的数据）。
+
+**解**：该卷积编码器的有限状态机图如图 2.7 所示。对于输入数据位 11011100 的编码过程，步骤与例 2.1 类似：首先将所有移位寄存器的初始状态设为 0，然后逐位输入数据，计算编码器的输出。在所有输入比特输入完成后，继续输入尾比特 (tail bits) 直到移位寄存器全部恢复为 0。
+
+![](images/chapter_2/e25f8c64960b37cf6cb05d5c0d815c1a8b175d4a808f458968d9374c8374d6e7.jpg)
+
+<details>
+<summary>flowchart</summary>
+
+```mermaid
+graph TD
+    A["0/01"] -->|0/11| B["0/10"]
+    B -->|0/10| C["1/10"]
+    C -->|1/01| D["1/01"]
+    D --> E["1/11"]
+    E --> F["0/11"]
+    F --> G["0/11"]
+    G --> H["0/11"]
+    H --> I["0/11"]
+    I --> J["0/11"]
+    J --> K["0/11"]
+    K --> L["0/11"]
+    L --> M["0/11"]
+    M --> N["0/11"]
+    N --> O["0/11"]
+    O --> P["0/11"]
+    P --> Q["0/11"]
+    Q --> R["0/11"]
+    R --> S["0/11"]
+    S --> T["0/11"]
+    T --> U["0/11"]
+    U --> V["0/11"]
+    V --> W["0/11"]
+    W --> X["0/11"]
+    X --> Y["0/11"]
+    Y --> Z["0/11"]
+    Z --> A["0/11"]
+    A -->|1/11| B
+    B -->|0/10| C
+    C -->|1/10| D
+    D -->|1/01| E
+    E -->|1/11| F
+    F -->|0/11| G
+    G -->|0/11| H
+    H -->|0/11| I
+    I -->|0/11| J
+    J -->|0/11| K
+    K -->|0/11| L
+    L -->|0/11| M
+    M -->|0/11| N
+    N -->|0/11| O
+    O -->|0/11| P
+    P -->|0/11| Q
+    Q -->|0/11| R
+    R -->|0/11| S
+    S -->|0/11| T
+    T -->|0/11| U
+    U -->|0/11| V
+    V -->|0/11| W
+    W -->|0/11| X
+    X -->|0/11| Y
+    Y -->|0/11| Z
+    Z -->|0/11| A
+    style A fill:#f9f,stroke:#333
+    style B fill:#f9f,stroke:#333
+    style C fill:#f9f,stroke:#333
+    style D fill:#f9f,stroke:#333
+    style E fill:#f9f,stroke:#333
+    style F fill:#f9f,stroke:#333
+    style G fill:#f9f,stroke:#333
+    style H fill:#f9f,stroke:#333
+    style I fill:#f9f,stroke:#333
+    style J fill:#f9f,stroke:#333
+    style K fill:#f9f,stroke:#333
+    style L fill:#f9f,stroke:#333
+    style M fill:#f9f,stroke:#333
+    style N fill:#f9f,stroke:#333
+    style O fill:#f9f,stroke:#333
+    style P fill:#f9f,stroke:#333
+    style Q fill:#f9f,stroke:#333
+    style R fill:#f9f,stroke:#333
+    style S fill:#f9f,stroke:#333
+    style T fill:#f9f,stroke:#333
+    style U fill:#f9f,stroke:#333
+    style V fill:#f9f,stroke:#333
+    style W fill:#f9f,stroke:#333
+    style X fill:#f9f,stroke:#333
+    style Y fill:#f9f,stroke:#333
+    style Z fill:#f9f,stroke:#333
+```
+</details>
+
+图 2.5 例 2.1 的格图（仅显示唯一可能的码字路径）
+
+$$
+\begin{array}{l} Y _ {1} (D) = G _ {1} (D) X (D) = (1 \oplus D) \left(1 + D ^ {2} + D ^ {3}\right) \\ = \left(1 + D ^ {2} + D ^ {3}\right) \oplus \left(D + D ^ {3} + D ^ {4}\right) \\ = 1 + D + D ^ {2} + D ^ {4} \\ \end{array}
+$$
+
+$$
+\begin{array}{l} Y _ {2} (D) = G _ {2} (D) X (D) = \left(1 \oplus D ^ {2}\right) \left(1 + D ^ {2} + D ^ {3}\right) \\ = \left(1 + D ^ {2} + D ^ {3}\right) \oplus \left(D ^ {2} + D ^ {4} + D ^ {5}\right) \\ = 1 + D ^ {3} + D ^ {4} + D ^ {5} \\ \end{array}
+$$
+
+即 $\left\{ y _ { 0 } ^ { 1 } , y _ { 1 } ^ { 1 } , y _ { 2 } ^ { 1 } , y _ { 3 } ^ { 1 } , y _ { 4 } ^ { 1 } , y _ { 5 } ^ { 1 } \right\} = \left\{ 1 \ 1 \ 1 \ 0 \ 1 \ 0 \right\}$ 且 $\left\{ y _ { 0 } ^ { 2 } , y _ { 1 } ^ { 2 } , y _ { 2 } ^ { 2 } , y _ { 3 } ^ { 2 } , y _ { 4 } ^ { 2 } , y _ { 5 } ^ { 2 } \right\} = \left\{ 1 0 0 1 1 1 \right\}$，这与图 2.3 – 2.5 中得到的结果一致。
+
+**例 2.2** 考虑图 2.6 中的卷积编码器，其生成多项式用八进制表示为 $( g _ { 1 } , \ g _ { 2 } ) = ( 1 7 , \ 1 1 )$，等同于二进制的 (001111, 001001)，其中 $g _ { 1 }$ 称为反馈多项式 (feedback polynomial)，$g _ { 2 }$ 称为前馈多项式 (feedforward polynomial)。在某些书籍中，生成多项式可能表示为 $D$ 域的分式：$\begin{array} { r } { \frac { g _ { 2 } ( D ) } { g _ { 1 } ( D ) } = \frac { 1 + D ^ { 3 } } { 1 + D + D ^ { 2 } + D ^ { 3 } } } \end{array}$。请绘制其有限状态机图，并对输入数据位 11011100 进行编码（最左侧的比特为首先被编码的数据）。
+
+**解**：该卷积编码器的有限状态机图如图 2.7 所示。对于输入数据位 11011100 的编码过程，步骤与例 2.1 类似：首先将所有移位寄存器的初始状态设为 0，然后逐位输入数据，计算编码器的输出。在所有输入比特输入完成后，继续输入尾比特 (tail bits) 直到移位寄存器全部恢复为 0。
