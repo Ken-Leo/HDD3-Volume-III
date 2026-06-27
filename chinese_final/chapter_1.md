@@ -668,3 +668,26 @@ $$
 在本章中，介绍了用于代表磁记录系统的读信道模型（包括图 1.6 所示的理想信道模型和真实信道模型），以便读者能够将其用于分析硬盘驱动器的信号处理系统。
 
 由于目前市面上的新型硬盘驱动器普遍采用迭代解码 (iterative decoding) 技术，因为该技术能进一步提高系统性能。因此，本章阐述了迭代解码技术的基本概念和基础，包括 SISO 解码器、先验概率、后验概率、软信息以及对数似然比 (LLR) 等，旨在为读者在学习第 2-4 章中关于 SISO 检测器和解码器的具体工作原理打下基础。
+
+# 1.7 本章习题
+
+1. 请描述图 1.1 中硬盘驱动器数字数据存储系统的工作原理。
+2. 请使用 SCILAB 程序绘制以下图形 (http://home.npru.ac.th/piya/webscilab 或 http://www.scilab.org)：
+    2.1) 如图 1.3 所示，在不同 ND 值下的状态转移脉冲信号。
+    2.2) 如图 1.4 所示，在不同 ND 值下的双比特响应。
+3. 证明纵向记录系统的双比特响应 $m(t)$ 在公式 (1.6) 中的傅里叶变换为：
+$$
+M (\Omega) = \exp \left\{- \pi | \Omega | \mathrm{ND} \right\} \left(1 - \exp \left\{- j 2 \pi \Omega \right\}\right)
+$$
+而垂直记录系统的傅里叶变换为：
+$$
+M (\Omega) = \frac {T}{j \pi \Omega} \exp \left\{- \frac {\pi^ {2} \Omega^ {2} \mathrm{ND} ^ {2}}{\ln (1 6)} \right\} (1 - \exp \{- j 2 \pi \Omega \})
+$$
+其中 $\exp\{\cdot\}$ 为指数函数，$\Omega = f T$ 为归一化频率 (normalized frequency)，$f$ 为单位为赫兹的频率，$|x|$ 为 $x$ 的绝对值，$j = \sqrt{-1}$。
+4. 根据习题 3 的傅里叶变换结果，使用 SCILAB 程序绘制图 1.5 中不同 ND 值下的信道频率响应图。
+5. 请解释图 1.2 中的真实信道模型与图 1.6 中的理想信道模型之间的区别。
+6. 请描述图 1.7 中硬盘驱动器迭代信号处理系统的工作原理。
+7. 请解释软信息 (soft information) 的含义。
+8. 请解释对数似然比 (LLR: log-likelihood ratio) 的含义。
+9. 请解释先验 LLR (a priori LLR) 和后验 LLR (a posteriori LLR) 的含义。
+10. 请解释 SISO 检测器和 SISO 解码器的含义。
