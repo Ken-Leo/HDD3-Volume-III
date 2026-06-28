@@ -755,3 +755,96 @@ $$
 
 
 然而，如果将卷积码用作 Turbo 码的组件，则无法在 Turbo 解码器中使用 Viterbi 检测器，因为 Turbo 解码器仅使用比特数据的软信息 (soft information) 工作（而 Viterbi 检测器提供的是硬信息或比特数据的估计值）。因此，用于解码卷积码的 Turbo 解码器必须是基于 BCJR 算法 [18] 或 SOVA (Soft-Output Viterbi Algorithm) [19] 构建的检测器，这将在 2.2 节和第 3 章中分别详细说明。
+
+# 2.2 BCJR 算法
+
+Viterbi 检测器 [1, 13] 是一种最大似然 (ML, maximum-likelihood) 检测器，用于解码卷积码编码的数据。其输出结果是待检测数据序列的估计值。也就是说，ML 检测器能够使数据序列的整体错误率最低，但不能保证序列中的每个比特都是最优的。这意味着 ML 检测器不能使每个单独的比特错误率达到最低。
+
+此外，Viterbi 检测器不能用于迭代解码系统，因为该系统在检测器和纠错解码器之间需要交换软信息 (soft information)。因此，迭代解码系统必须使用最大后验概率 (MAP, maximum a posteriori probability) 检测器。MAP 检测器能够保证所检测的每个比特都是最优的（即每个比特的错误率最低）。
+
+本节将介绍 BCJR 算法 [18] 的工作原理，因为它是构建 MAP 检测器的基础。该算法由 Bahl, Cock, Jelinek 和 Raviv 提出，用于在存在符号间干扰 (ISI) 和加性高斯白噪声 (AWGN) 的信道中检测最大后验概率 (APP, a posteriori probability) 信号。
+
+# 2.2.1 信道模型与格图 (Trellis Diagram)
+考虑图 2.10 所示的信道模型。当接收端接收到的信号（或待解码信号）在第 $k$ 个序列时为：
+
+![](images/chapter_2/408ab40c568346c6c1482dafab5f4b633effa59605816890e97f3d347b915c2e.jpg)
+
+<details>
+<summary>流程图</summary>
+
+```mermaid
+graph TD
+    A["Input"] --> B["π⁻¹"]
+    B --> C["+"]
+    C --> D["OUTER DECODER a priori"]
+    D --> E["λ(xₖ)"]
+    E --> F["001"]
+    F --> G["1/1"]
+    G --> H["101"]
+    H --> I["1/0"]
+    I --> J["110"]
+    J --> K["0"]
+    K --> L["0"]
+    L --> M["0"]
+    M --> N["2"]
+    N --> O["2"]
+    O --> P["0"]
+    P --> Q["0"]
+    Q --> R["10"]
+    R --> S["1"]
+    S --> T["1"]
+    T --> U["1"]
+    U --> V["1"]
+    V --> W["1"]
+    W --> X["1"]
+    X --> Y["1"]
+    Y --> Z["1"]
+    Z --> AA["1"]
+    AA --> AB["1"]
+    AB --> AC["1"]
+    AC --> AD["1"]
+    AD --> AE["1"]
+    AE --> AF["1"]
+```
+</details>
+
+
+<details>
+<summary>流程图</summary>
+
+```mermaid
+graph TD
+    A["Input"] --> B["π⁻¹"]
+    B --> C["+"]
+    C --> D["OUTER DECODER a priori"]
+    D --> E["λ(xₖ)"]
+    E --> F["001"]
+    F --> G["1/1"]
+    G --> H["101"]
+    H --> I["1/0"]
+    I --> J["110"]
+    J --> K["0"]
+    K --> L["0"]
+    L --> M["0"]
+    M --> N["2"]
+    N --> O["2"]
+    O --> P["0"]
+    P --> Q["0"]
+    Q --> R["10"]
+    R --> S["1"]
+    S --> T["1"]
+    T --> U["1"]
+    U --> V["1"]
+    V --> W["1"]
+    W --> X["1"]
+    X --> Y["1"]
+    Y --> Z["1"]
+    Z --> AA["1"]
+    AA --> AB["1"]
+    AB --> AC["1"]
+    AC --> AD["1"]
+    AD --> AE["1"]
+    AE --> AF["1"]
+```
+</details>
+
