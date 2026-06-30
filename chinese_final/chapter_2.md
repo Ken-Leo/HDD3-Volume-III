@@ -789,3 +789,131 @@ $$
 \begin{array}{l} p(\psi_{k+1}=q \mid \psi_{k}=u) = p(a_{k}=\hat{a}(u,q); \psi_{k}=u) / p(\psi_{k}=u) \\ = p(\psi_{k}=u \mid a_{k}=\hat{a}(u,q)) p(a_{k}=\hat{a}(u,q)) / p(\psi_{k}=u) \end{array}
 $$
 
+由于 $p(\psi_k = u \mid a_k = \hat{a}(u,q)) = p(\psi_k = u)$（即状态 $\psi_k = u$ 与数据位 $a_k = \hat{a}(u,q)$ 同时发生的概率归一化后等于 $\psi_k = u$ 的概率），因此方程简化后可得：
+
+$$
+= p(a_k = \hat{a}(u,q)) \tag{2.11}
+$$
+
+在实际中，方程 (2.11) 中的概率称为数据位 $a_k$ 的先验概率 (a priori probability)。将方程 (2.10) 和 (2.11) 代入方程 (2.9)，可得 BCJR 算法的分支度量等于：
+
+$$
+\gamma_k(u,q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{\frac{-1}{2\sigma^2} |y_k - \hat{r}(u,q)|^2\right\} \times p(a_k = \hat{a}(u,q)) \tag{2.12}
+$$
+
+由此可以看出，BCJR 算法的分支度量相比维特比算法 [4] 的分支度量多了一项 $p(a_k = \hat{a}(u,q))$。当所有数据位 $a_k$ 具有相等出现概率时，先验概率 $p(a_k = a)$ 是一个与 a 无关的常数。因此，在这种情况下，BCJR 算法的分支度量等于维特比算法的分支度量。然而，当各个数据位 $a_k$ 的出现概率不相等时，如果预先知道关于每个 $a_k$ 的信息，则将有助于提高数据解码的准确性。
+
+# 状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 的计算
+
+方程 (2.7) 中的状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 可以利用马尔可夫性质和递归技术方便地计算。由方程 (2.7) 可得：
+
+$$
+\alpha_{k}(u) = p(\psi_{k}=u; \mathbf{y}_{l<k}) \tag{2.13}
+$$
+
+因此：
+
+$$
+\begin{array}{l} \alpha_{k+1}(q) = p(\psi_{k+1}=q; \mathbf{y}_{l<k+1}) \\ = p(\psi_{k+1}=q; y_{k}; \mathbf{y}_{l<k}) \\ = \sum_{u=0}^{Q-1} p(\psi_{k+1}=q; y_{k}; \psi_{k}=u; \mathbf{y}_{l<k}) \\ = \sum_{u=0}^{Q-1} p(\psi_{k+1}=q; y_{k} \mid \psi_{k}=u; \mathbf{y}_{l<k}) p(\psi_{k}=u; \mathbf{y}_{l<k}) \end{array}
+$$
+
+$$
+= \sum_{u=0}^{Q-1} p(\psi_{k+1}=q; y_{k} \mid \psi_{k}=u) p(\psi_{k}=u; \mathbf{y}_{l<k})
+$$
+
+$$
+= \sum_{u=0}^{Q-1} \gamma_{k}(u,q) \alpha_{k}(u) \tag{2.14}
+$$
+
+同理，由方程 (2.7) 可得：
+
+$$
+\beta_{k+1}(q) = p(\mathbf{y}_{l>k} \mid \psi_{k+1}=q) \tag{2.15}
+$$
+
+因此：
+
+$$
+\beta_{k}(u) = p(\mathbf{y}_{l>k-1} \mid \psi_{k}=u)
+$$
+
+$$
+= p(\mathbf{y}_{l>k}; y_{k} \mid \psi_{k}=u)
+$$
+
+$$
+= \sum_{q=0}^{Q-1} p(\mathbf{y}_{l>k}; y_{k}; \psi_{k+1}=q \mid \psi_{k}=u)
+$$
+
+$$
+= \sum_{q=0}^{Q-1} p(\mathbf{y}_{l>k} \mid y_{k}; \psi_{k+1}=q; \psi_{k}=u) p(y_{k}; \psi_{k+1}=q \mid \psi_{k}=u)
+$$
+
+$$
+= \sum_{q=0}^{Q-1} p(\mathbf{y}_{l>k} \mid \psi_{k+1}=q) p(y_{k}; \psi_{k+1}=q \mid \psi_{k}=u)
+$$
+
+$$
+= \sum_{q=0}^{Q-1} \beta_{k+1}(q) \gamma_{k}(u,q) \tag{2.16}
+$$
+
+# $\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 初始条件的确定
+
+本节描述的 BCJR 算法假定方程 (2.15) 和 (2.16) 在开始计算时，状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$ 使用如下初始条件：
+
+$$
+\alpha_{0}(u) = \left\{ \begin{array}{ll} 1, & u = 0 \\ 0, & \text{其他} \end{array} \right. \quad \text{和} \quad \beta_{L+\nu}(q) = \left\{ \begin{array}{ll} 1, & q = 0 \\ 0, & \text{其他} \end{array} \right. \tag{2.17}
+$$
+
+这适用于格图中所有分支起始于状态 $\psi_0 = 0$，并且强制所有分支终止于状态 $\psi_{L+\nu} = 0$ 的情况。即，前向递归中的所有分支必须终止于状态 $\psi_{L+\nu} = 0$，后向递归中的所有分支必须终止于状态 $\psi_0 = 0$。
+
+然而，在不强制格图中所有分支终止于状态 $\psi_{L+\nu} = 0$ 的情况下，通常将状态度量 $\beta_{L+\nu}(q)$ 的初始值设为等于状态度量 $\alpha_{L+\nu}(q)$，即：
+
+$$
+\beta_{L+\nu}(q) = \alpha_{L+\nu}(q) \tag{2.18}
+$$
+
+对于所有状态 $q \in \{0, 1, \ldots, Q-1\}$，因为 BCJR 算法在时间 $L+\nu$ 时没有关于每个状态概率的先验知识。
+
+# $p(\mathbf{y})$ 的计算
+
+在实际中，用于根据公式 (2.8) 计算后验概率 $\operatorname{Pr}[a_k \mid \mathbf{y}]$ 的 $p(\mathbf{y})$ 值可以忽略，因为 $p(\mathbf{y})$ 对于所有时间 k 都是常数。因此，最大化 $\operatorname{Pr}[a_k \mid \mathbf{y}]$ 的过程仍然得到相同的结果。然而，这里将展示 $p(\mathbf{y})$ 的计算方法如下。由于所有事件的条件概率之和始终等于 1，因此由方程 (2.7) 可得：
+
+$$
+\sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \operatorname{Pr}[\psi_k=u; \psi_{k+1}=q \mid \mathbf{y}] = \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \left(\frac{\alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q)}{p(\mathbf{y})}\right) = 1 \tag{2.19}
+$$
+
+即：
+
+$$
+p(\mathbf{y}) = \sum_{u=0}^{Q-1} \sum_{q=0}^{Q-1} \alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q) \tag{2.20}
+$$
+
+由方程 (2.16) 可得：
+
+$$
+p(\mathbf{y}) = \sum_{u=0}^{Q-1} \alpha_k(u) \beta_k(u) \tag{2.21}
+$$
+
+方程 (2.21) 表明，格图中所有状态 u 的 $\alpha_k(u)$ 和 $\beta_k(u)$ 的乘积在每个时间 k 都相等，且等于 $p(\mathbf{y})$。因此，由方程 (2.17) 可得如下关系：
+
+$$
+p(\mathbf{y}) = \beta_0(0) = \alpha_{L+\nu}(0) \tag{2.22}
+$$
+
+# 2.2.4 二进制数据位的 BCJR 算法
+
+当输入数据位为二进制时，即 $a_k \in \{-1, 1\}$，方程 (2.8) 中的后验概率 $\operatorname{Pr}[a_k=a \mid \mathbf{y}]$ 可由 $\operatorname{Pr}[a_k=1 \mid \mathbf{y}] = 1 - \operatorname{Pr}[a_k=-1 \mid \mathbf{y}]$ 或比值 $\operatorname{Pr}[a_k=1 \mid \mathbf{y}] / \operatorname{Pr}[a_k=-1 \mid \mathbf{y}]$ 确定。在对数域中可写为：
+
+$$
+\lambda_p(a_k) = \ln\left(\frac{\operatorname{Pr}[a_k=1 \mid \mathbf{y}]}{\operatorname{Pr}[a_k=-1 \mid \mathbf{y}]}\right) \tag{2.23}
+$$
+
+其中 $\lambda_p(a_k)$ 是数据位 $a_k$ 的后验 LLR 值。因此，由方程 (2.8) 可得：
+
+$$
+\lambda_p(a_k) = \ln\left(\frac{\sum_{(u,q) \in S_1} \alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q)}{\sum_{(u,q) \in S_{-1}} \alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q)}\right) \tag{2.24}
+$$
+
+用于二进制数据位的 BCJR 算法使用公式 (2.24) 计算从发送端发送的每个数据位的 LLR 值。该 $\lambda_p(a_k)$ 值将用于判定数据位 $a_k$ 的估计值，以使错误概率最小化，采用如下判定规则：</think>
+
