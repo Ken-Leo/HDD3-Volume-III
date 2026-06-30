@@ -1,17 +1,7 @@
 # Translation Progress
 
-| Chapter   | Status      | Lines    | Topic                        |
-|-----------|-------------|----------|------------------------------|
-| Chapter 1 | Completed   | 505      | Introduction                 |
-| Chapter 2 | Completed   | 1400     | Turbo codes, BCJR algorithm  |
-| Chapter 3 | Completed   | 273      | Soft detectors               |
-| Chapter 4 | Completed   | 351      | LDPC codes                   |
-| Chapter 5 | Completed   | 119      | Iterative decoding apps      |
-| Chapter 6 | Completed   | 99       | BPMR technology              |
-| **Total** | **Done**    | **2747** | **Source: 12069 lines**      |
+| Chapter | Status | Last Line | Key Content |
+|---------|--------|-----------|-------------|
+| Ch1 | In Progress | 52 (chinese) / 55 (source) | 1.1 Digital data storage system - done |
 
-## Notes
-- All chapters translated from Thai to Chinese
-- Source files reorganized for clean chapter boundaries
-- Equations preserved in LaTeX; images referenced per chapter
-- Translation focused on faithful technical content with key derivations
+**Current**: Chapter 1, Section 1.2, Source line 56
