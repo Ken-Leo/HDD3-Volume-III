@@ -915,5 +915,137 @@ $$
 \lambda_p(a_k) = \ln\left(\frac{\sum_{(u,q) \in S_1} \alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q)}{\sum_{(u,q) \in S_{-1}} \alpha_k(u) \gamma_k(u,q) \beta_{k+1}(q)}\right) \tag{2.24}
 $$
 
-用于二进制数据位的 BCJR 算法使用公式 (2.24) 计算从发送端发送的每个数据位的 LLR 值。该 $\lambda_p(a_k)$ 值将用于判定数据位 $a_k$ 的估计值，以使错误概率最小化，采用如下判定规则：</think>
+用于二进制数据位的 BCJR 算法使用公式 (2.24) 计算从发送端发送的每个数据位的 LLR 值。该 $\lambda_p(a_k)$ 值将用于判定数据位 $a_k$ 的估计值，以使错误概率最小化，采用如下判定规则：
+
+$$
+\hat{a}_k = \left\{ \begin{array}{ll} 1, & \text{如果 } \lambda_p(a_k) \geq 0 \\ -1, & \text{如果 } \lambda_p(a_k) < 0 \end{array} \right. \tag{2.25}
+$$
+
+此外，先验概率 $p(a_k=\tilde{a})$（其中 $\tilde{a} \in \{\pm 1\}$）与对数似然比函数的关系如下（见公式 (1.6)）：
+
+$$
+p(a_k=\tilde{a}) = \frac{\exp(\tilde{a} \lambda_a(a_k) / 2)}{\exp(\lambda_a(a_k) / 2) + \exp(-\lambda_a(a_k) / 2)} \tag{2.26}
+$$
+
+其中：
+
+$$
+\lambda_a(a_k) = \ln\left(\frac{p(a_k=1)}{p(a_k=-1)}\right) \tag{2.27}
+$$
+
+是数据位 $a_k$ 的先验 LLR 值。由于方程 (2.26) 中的分母对于格图中所有状态转移 $(u,q)$ 都是相同的，因此可以使用先验概率：
+
+$$
+p(a_k=\tilde{a}) = \exp\left(\frac{\tilde{a} \lambda_a(a_k)}{2}\right) \tag{2.28}
+$$
+
+来计算方程 (2.12) 中 BCJR 算法的分支度量，即：
+
+$$
+\gamma_k(u,q) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{\frac{-1}{2\sigma^2} |y_k - \hat{r}(u,q)|^2\right\} \times \exp\left(\frac{\hat{a}(u,q) \lambda_a(a_k)}{2}\right) \tag{2.29}
+$$
+
+# 2.2.5 BCJR 算法步骤总结
+
+BCJR 算法的工作原理可按图 2.12 所示的步骤进行总结。
+
+# 2.2.6 BCJR 算法的注意事项
+
+在实际应用中实现图 2.12 所述的 BCJR 算法时，需要对每个状态 u 和每个时间 k 的状态度量 $\alpha_k(u)$ 和 $\beta_k(u)$ 进行归一化 (normalization) [22]，以避免计算机程序中的数值下溢 (numerical underflow) 问题。即，在根据方程 (2.14) 和 (2.16) 计算完每个时间 k 的所有状态 u 的 $\alpha_k(u)$ 和 $\beta_k(u)$ 后，按如下关系对这两个状态度量进行归一化：
+
+$$
+\alpha_k(u) = \frac{\alpha_k(u)}{\sum_i \alpha_k(i)} \quad \text{和} \quad \beta_k(u) = \frac{\beta_k(u)}{\sum_i \beta_k(i)} \tag{2.30}
+$$
+
+使得所有 u 的 $\alpha_k(u)$ 之和为 1，且所有 u 的 $\beta_k(u)$ 之和为 1。然后才开始计算下一个时间 k 的 $\alpha_k(u)$ 和 $\beta_k(u)$ 值。
+
+# BCJR 算法
+
+1. 设置状态度量的初始值 $[\alpha_0(0), \alpha_0(1), \ldots, \alpha_0(Q-1)] = [1, 0, \ldots, 0]$
+2. 前向递归 (forward recursion)
+
+$$
+\text{对于 } k = 0, 1, \ldots, L+\nu-1
+$$
+
+$$
+\text{对于 } q = 0, 1, \ldots, Q-1
+$$
+
+$$
+\text{计算 } \gamma_k(u,q) \text{ 根据公式 (2.29) 对于所有使 } (u,q) \text{ 成立的条件}
+$$
+
+$$
+\text{计算 } \alpha_{k+1}(q) \text{ 根据公式 (2.14)}
+$$
+
+$$
+(\text{结束 } q \text{ 循环})
+$$
+
+$$
+(\text{结束 } k \text{ 循环})
+$$
+
+3. 设置状态度量的初始值 $[\beta_{L+\nu}(0), \beta_{L+\nu}(1), \ldots, \beta_{L+\nu}(Q-1)] = [1, 0, \ldots, 0]$
+4. 后向递归 (backward recursion)
+
+$$
+\text{对于 } k = L+\nu-1, L+\nu-2, \ldots, 0
+$$
+
+$$
+\text{对于 } u = 0, 1, \ldots, Q-1
+$$
+
+$$
+\text{计算 } \gamma_k(u,q) \text{ 根据公式 (2.29) 对于所有使 } (u,q) \text{ 成立的条件}
+$$
+
+$$
+\text{计算 } \beta_k(u) \text{ 根据公式 (2.16)}
+$$
+
+$$
+(\text{结束 } u \text{ 循环})
+$$
+
+$$
+\text{计算 } \lambda_p(a_k) \text{ 根据公式 (2.24)}
+$$
+
+$$
+\text{判定 } a_k \text{ 根据公式 (2.25)}
+$$
+
+$$
+(\text{结束 } k \text{ 循环})
+$$
+
+# 图 2.12 BCJR 算法的工作步骤
+
+尽管使用 BCJR 算法的 MAP 检测器是最优检测器，因为它能保证每个数据位具有最小的错误概率，但在实际中，BCJR 算法并不常用于各种应用的信号处理芯片中。这是因为 BCJR 算法的计算资源消耗高，且对噪声方差 $\sigma^2$ 敏感 [23, 24]（公式 (2.29) 中需要用到 $\sigma^2$）。在真实系统中，无法获知准确的 $\sigma^2$ 值（只能通过各种技术来估计 $\sigma^2$）。因此，如果 $\sigma^2$ 值不准确，将导致 BCJR 算法的所有参数出现偏差，从而使 MAP 检测器的性能严重下降。为此，研究人员开发了各种改进算法，如 Max-Log-MAP、Log-MAP 和 SOVA，它们具有与 BCJR 算法相近或相当的性能，但计算资源消耗更低且对 $\sigma^2$ 不敏感 [24]，因此能够高效地应用于实际的信号处理芯片中（第 3 章将解释这些算法的工作原理）。
+
+**例 2.4** 对于图 2.10 中的信道模型，设输入数据序列 $a_k = \{1, -1, 1\}$，信道 $H(D) = 1 + 0.5D$，噪声 $n_k = \{-0.1, 0.3, -0.2, -0.1\}$，方差 $\sigma^2 = 1/(2\pi)$。请演示使用 BCJR 算法对数据 $y_k$ 进行解码的步骤（假设系统不知道数据位 $a_k$ 的先验信息）。
+
+**解**：信道输出数据 $r_k$ 由下式求得：
+
+$$
+r_k = a_k * h_k = \{r_0, r_1, r_2, r_3\} = \{1, -0.5, 0.5, 0.5\}
+$$
+
+其中 $*$ 是卷积算子，且：
+
+$$
+y_k = r_k + n_k = \{0.9, -0.2, 0.3, 0.6\} = \{y_0, y_1, y_2, y_3\}
+$$
+
+然后，建立信道 $H(D) = 1 + 0.5D$ 的格图如图 2.13 所示，共有两个状态：状态 (a) 和状态 (b)。
+
+1. 设置状态度量的初始值 $\alpha_0(a) = 1$ 和 $\alpha_0(b) = 0$
+
+# 前向递归
+
+2. 阶段 0（当 $k = 0$ 时）：BCJR 算法接收数据 $y_0 = 0.9$，根据公式 (2.29) 计算分支度量 $\Upsilon_0(u,q)$ 对于所有使状态转移 (u,q) 在图 2.13 格图中成立的条件，得到：</think>
 
