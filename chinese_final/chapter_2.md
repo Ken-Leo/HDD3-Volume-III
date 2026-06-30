@@ -1047,5 +1047,225 @@ $$
 
 # 前向递归
 
-2. 阶段 0（当 $k = 0$ 时）：BCJR 算法接收数据 $y_0 = 0.9$，根据公式 (2.29) 计算分支度量 $\Upsilon_0(u,q)$ 对于所有使状态转移 (u,q) 在图 2.13 格图中成立的条件，得到：</think>
+2. 阶段 0（当 $k = 0$ 时）：BCJR 算法接收数据 $y_0 = 0.9$，根据公式 (2.29) 计算分支度量 $\Upsilon_0(u,q)$ 对于所有使状态转移 (u,q) 在图 2.13 格图中成立的条件。
+
+图 2.13 信道 $H(D) = 1 + 0.5D$ 的格图（输入数据 $a_k \in \{\pm 1\}$）
+
+$$
+\begin{array}{l} \gamma_0(a,a) = \exp\{-\pi |0.9 - (-1.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0 \\ \gamma_0(b,a) = \exp\{-\pi |0.9 - (-0.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.0021 \\ \gamma_0(a,b) = \exp\{-\pi |0.9 - (0.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.6049 \\ \gamma_0(b,b) = \exp\{-\pi |0.9 - (1.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.3227 \end{array}
+$$
+
+然后根据公式 (2.14) 更新状态度量 $\alpha_1(a)$ 和 $\alpha_1(b)$：
+
+$$
+\alpha_1(a) = \alpha_0(a)\gamma_0(a,a) + \alpha_0(b)\gamma_0(b,a) = (1)(0) + (0)(0.0021) = 0
+$$
+
+$$
+\alpha_1(b) = \alpha_0(a)\gamma_0(a,b) + \alpha_0(b)\gamma_0(b,b) = (1)(0.6049) + (0)(0.3227) = 0.6049
+$$
+
+根据公式 (2.30) 进行归一化：
+
+$$
+\alpha_1(a) = 0 / (0 + 0.6049) = 0
+$$
+
+$$
+\alpha_1(b) = 0.6049 / (0 + 0.6049) = 1
+$$
+
+3. 阶段 1（当 $k = 1$ 时）：BCJR 算法接收数据 $y_1 = -0.2$，计算所有分支度量：
+
+$$
+\gamma_1(a,a) = \exp\{-\pi |-0.2 - (-1.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.0049
+$$
+
+$$
+\gamma_1(b,a) = \exp\{-\pi |-0.2 - (-0.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.7537
+$$
+
+$$
+\gamma_1(a,b) = \exp\{-\pi |-0.2 - (0.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.2145
+$$
+
+$$
+\gamma_1(b,b) = \exp\{-\pi |-0.2 - (1.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.0001
+$$
+
+更新状态度量 $\alpha_2(a)$ 和 $\alpha_2(b)$：
+
+$$
+\alpha_2(a) = \alpha_1(a)\gamma_1(a,a) + \alpha_1(b)\gamma_1(b,a) = (0)(0.0049) + (1)(0.7537) = 0.7537
+$$
+
+$$
+\alpha_2(b) = \alpha_1(a)\gamma_1(a,b) + \alpha_1(b)\gamma_1(b,b) = (0)(0.2145) + (1)(0.0001) = 0.0001
+$$
+
+归一化：
+
+$$
+\alpha_2(a) = 0.7537 / (0.7537 + 0.0001) \approx 0.9999
+$$
+
+$$
+\alpha_2(b) = 0.0001 / (0.7537 + 0.0001) \approx 0.0001
+$$
+
+4. 阶段 2 和 3（当 $k = \{2, 3\}$ 时）：BCJR 算法接收数据 $y_2 = 0.3$ 和 $y_3 = 0.6$，采用与阶段 0 和 1 相同的方法计算所有分支度量和更新状态度量 $\alpha_{k+1}(q)$（$q \in \{a, b\}$）。得到的 $\Upsilon_k(u,q)$ 和 $\alpha_{k+1}(q)$ 值如图 2.14 所示，其中每条分支旁的数字是对应的 $\Upsilon_k(u,q)$ 值，每个状态节点上的数字以分数形式显示状态度量 $\frac{\alpha_k(u)}{\beta_k(u)}$。
+
+对于每个 $k \in \{0, 1, 2, 3\}$ 和 $u \in \{a, b\}$，前向递归完成后（归一化后）得到：
+
+$$
+\alpha_4(a) = 0.2214 \quad \text{和} \quad \alpha_4(b) = 0.7786
+$$
+
+5. 设置状态度量的初始值 $\beta_4(u) = \alpha_4(u)$（$u \in \{a, b\}$），即：
+
+$$
+\beta_4(a) = 0.2214 \quad \text{和} \quad \beta_4(b) = 0.7786
+$$
+
+# 后向递归
+
+6. 阶段 3（当 $k = 3$ 时）：BCJR 算法接收数据 $y_3 = 0.6$，计算所有分支度量：
+
+$$
+\begin{array}{l} \gamma_3(a,a) = \exp\{-\pi |0.6 - (-1.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0 \\ \gamma_3(b,a) = \exp\{-\pi |0.6 - (-0.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.0223 \\ \gamma_3(a,b) = \exp\{-\pi |0.6 - (0.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.9691 \\ \gamma_3(b,b) = \exp\{-\pi |0.6 - (1.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.0785 \end{array}
+$$
+
+然后更新状态度量 $\beta_3(a)$ 和 $\beta_3(b)$：
+
+$$
+\begin{array}{l} \beta_3(a) = \gamma_3(a,a)\beta_4(a) + \gamma_3(a,b)\beta_4(b) \\ = (0)(0.2214) + (0.9691)(0.7786) = 0.75454 \end{array}
+$$
+
+$$
+\begin{array}{l} \beta_3(b) = \gamma_3(b,a)\beta_4(a) + \gamma_3(b,b)\beta_4(b) \\ = (0.0223)(0.2214) + (0.0785)(0.7786) = 0.066057 \end{array}
+$$
+
+归一化：
+
+$$
+\beta_3(a) = 0.75454 / (0.75454 + 0.066057) \approx 0.9195
+$$
+
+$$
+\beta_3(b) = 0.066057 / (0.75454 + 0.066057) \approx 0.0805
+$$
+
+根据公式 (2.24) 计算 $\lambda_p(a_3)$：
+
+$$
+\begin{array}{l} \lambda_p(a_3) = \ln\left(\frac{\alpha_3(a)\gamma_3(a,b)\beta_4(b) + \alpha_3(b)\gamma_3(b,b)\beta_4(b)}{\alpha_3(a)\gamma_3(a,a)\beta_4(a) + \alpha_3(b)\gamma_3(b,a)\beta_4(a)}\right) \\ = \ln\left(\frac{(0.0001)(0.9691)(0.7786) + (0.9999)(0.0785)(0.7786)}{(0.0001)(0)(0.2214) + (0.9999)(0.0223)(0.2214)}\right) \\ \approx 2.52 \end{array}
+$$
+
+由于 $\lambda_p(a_3) > 0$，BCJR 算法解码得到 $\hat{a}_3 = +1$。注意，发送端实际发送的输入数据位仅为 $\{a_0, a_1, a_2\}$，因此 $a_3$ 并非系统中真实存在的比特，而是输入数据与信道卷积产生的新数据。然而，$\lambda_p(a_3)$ 的值仍可用于迭代解码过程。
+
+# 2.3 Turbo 码
+
+Turbo 码 (turbo code) 是一种信道编解码技术，由 Berrou、Glavieux 和 Thitimajshima [3] 于 1993 年提出。Turbo 码的优点在于：即使在低 SNR 的信道条件下也能良好工作，纠错能力强，且性能接近香农定理 [25] 的极限，同时编解码过程并不复杂。在 1993 年之前，没有任何信道编码方法能够实现这一点，即使能够实现，也需要极其复杂的解码电路。因此，Turbo 码的发现被认为是一项重要突破，极大地改变了信道编码领域的研究方向。近年来，与 Turbo 码相关的研究成果和开发应用大量涌现。此外，Turbo 码已被广泛应用于多个领域，如第三代移动通信系统 (3G) 已将 Turbo 码作为基站与移动台之间通信的标准。
+
+Turbo 码的基本结构与其他编解码方法有三个显著区别：采用并行级联编码 (parallel concatenated encoding)、使用反馈编码器 (feedback encoder)、以及采用迭代解码 (iterative decoding)。图 2.17 展示了使用 Turbo 编解码的系统结构。二进制数据序列 $x_k \in \{0, 1\}$ 送入 Turbo 编码器，输出三个数据序列。然后，这三个数据序列送入多路复用器 (MUX: multiplexer) 合并为单一数据序列 $d_k$，再送入映射器将比特值 0 转换为 -1。结果得到数据序列 $s_k$，发送到受噪声 $n_k$ 干扰的接收端。接收端接收到的信号 $z_k$ 通过解复用器 (DEMUX: demultiplexer) 将 $z_k$ 分离为三个数据序列，然后送入 Turbo 解码器进行数据解码。以下将解释图 2.17 中 Turbo 编解码系统各组件的原理。
+
+# 2.3.1 Turbo 编码器
+
+Turbo 编码器的结构如图 2.18 所示。输入数据序列 $x_k$ 被送入 Turbo 编码器的三个子组件，分别转换为数据序列 $x_k$、$y_k^1$ 和 $y_k^2$（即该 Turbo 编码器的码率为 1/3）。从图 2.18 可以看出，数据序列 $y_k^1$ 通过将 $x_k$ 送入子编码器 1 得到，而数据序列 $y_k^2$ 通过将 $x_k$ 送入交织器 (interleaver) $\pi$（用于重新排列 $x_k$ 中每个数据的位置，使其顺序与原始序列不同），然后将结果送入子编码器 2 得到。子编码器 2 的基本结构可以与子编码器 1 相同或不同。
+
+# 2.3.2 多路复用器与解复用器
+
+多路复用器 (MUX: multiplexer) 用于将多个编码后的数据序列合并为单一数据序列。解复用器 (DEMUX: demultiplexer) 的功能与多路复用器相反，即将输入的数据序列分离为多个数据序列，这些序列与输入多路复用器的序列相对应，如图 2.19 所示。
+
+7. 阶段 2（当 $k = 2$ 时）：BCJR 算法接收数据 $y_2 = 0.3$，计算所有分支度量：
+
+$$
+\gamma_2(a,a) = \exp\{-\pi |0.3 - (-1.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.00004
+$$
+
+$$
+\gamma_2(b,a) = \exp\{-\pi |0.3 - (-0.5)|^2\} \times \exp\left(\frac{(-1)(0)}{2}\right) \approx 0.1339
+$$
+
+$$
+\gamma_2(a,b) = \exp\{-\pi |0.3 - (0.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.8819
+$$
+
+$$
+\gamma_2(b,b) = \exp\{-\pi |0.3 - (1.5)|^2\} \times \exp\left(\frac{(+1)(0)}{2}\right) \approx 0.0108
+$$
+
+更新状态度量 $\beta_2(a)$ 和 $\beta_2(b)$：
+
+$$
+\begin{array}{l} \beta_2(a) = \gamma_2(a,a)\beta_3(a) + \gamma_2(a,b)\beta_3(b) \\ = (0.00004)(0.9195) + (0.8819)(0.0805) = 0.07103 \\ \beta_2(b) = \gamma_2(b,a)\beta_3(a) + \gamma_2(b,b)\beta_3(b) \\ = (0.1339)(0.9195) + (0.0108)(0.0805) = 0.12399 \end{array}
+$$
+
+归一化：
+
+$$
+\beta_2(a) = 0.07103 / (0.07103 + 0.12399) \approx 0.3642
+$$
+
+$$
+\beta_2(b) = 0.12399 / (0.07103 + 0.12399) \approx 0.6358
+$$
+
+计算 $\lambda_p(a_2)$：
+
+$$
+\begin{array}{l} \lambda_p(a_2) = \ln\left(\frac{\alpha_2(a)\gamma_2(a,b)\beta_3(b) + \alpha_2(b)\gamma_2(b,b)\beta_3(b)}{\alpha_2(a)\gamma_2(a,a)\beta_3(a) + \alpha_2(b)\gamma_2(b,a)\beta_3(a)}\right) \\ = \ln\left(\frac{(0.9999)(0.8819)(0.0805) + (0.0001)(0.0108)(0.0805)}{(0.9999)(0.00004)(0.9195) + (0.0001)(0.1339)(0.9195)}\right) \\ \approx 7.2 \end{array}
+$$
+
+由于 $\lambda_p(a_2) > 0$，BCJR 算法解码得到 $\hat{a}_2 = +1$。
+
+8. 阶段 1 和 0（当 $k = \{1, 0\}$ 时）：BCJR 算法接收数据 $y_1 = -0.2$ 和 $y_0 = 0.9$，采用与阶段 6 和 7 相同的方法计算所有分支度量和更新状态度量 $\beta_k(u)$（$u \in \{a, b\}$）。得到的 $\Upsilon_k(u,q)$ 和 $\beta_k(u)$ 值如图 2.14 所示。后向递归完成后得到：
+
+$$
+\lambda_p(a_0) = 18.28 \quad \text{和} \quad \lambda_p(a_1) = -8.24
+$$
+
+即 BCJR 算法解码得到 $\hat{a}_0 = +1$ 和 $\hat{a}_1 = -1$。
+
+9. 算法运行完成后，BCJR 算法给出数据位 $a_k$ 的后验 LLR 值为 $\{\lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3)\} = \{18.28, -8.24, 7.2, 2.52\}$，解码数据位为 $\{\hat{a}_0, \hat{a}_1, \hat{a}_2\} = \{1, -1, 1\}$，与发送端发送的数据位 $\{a_k\}$ 完全一致，表明 BCJR 算法解码没有产生错误。
+
+# 2.3.3 Turbo 解码器
+
+Turbo 码的解码过程是迭代的，这意味着它不是由单个解码器只进行一轮解码，而是由多个子解码器组成（见图 2.20），每个子解码器交替工作：当一个在进行解码时，另一个等待。一个解码器的解码结果会传递给另一个解码器，作为下一轮解码的参考信息。两个解码器交替工作，直至结果收敛到合适的值。注意，子解码器的数量与发送端子编码器的数量相同，且它们协同工作 [18]。
+
+图 2.20 显示了 Turbo 解码器的基本结构，其工作步骤如下。接收端接收到的信号经过解复用器，得到数据序列 $\tilde{x}_k$、$\tilde{y}_k^1$ 和 $\tilde{y}_k^2$，然后按以下步骤进行 Turbo 解码：
+
+1) 将 $\tilde{x}_k + \lambda_2^{\text{ext}}(x_k)$ 和 $\tilde{y}_k^1$ 送入子解码器 1。其中 $\lambda_2^{\text{ext}}(x_k)$ 是数据位 $x_k$ 的先验信息，即数据位 $x_k$ 的外部信息 (extrinsic information) 的 LLR 值。在第一轮解码中，$\lambda_2^{\text{ext}}(x_k)$ 的值为零（这意味着每个数据位 $x_k = 0$ 或 $x_k = 1$ 的概率相等）。解码结果包含两部分：第一部分是数据位 $x_k$ 的 LLR 值 $\lambda(x_k)$，第二部分是数据位 $y_k^1$ 的 LLR 值 $\lambda(y_k^1)$。
+
+2) 计算从子解码器 1 得到的数据位 $x_k$ 的外部信息 LLR 值 $\lambda_1^{\text{ext}}(x_k)$，关系如下：
+
+$$
+\lambda_1^{\text{ext}}(x_k) = \lambda(x_k) - \lambda_2^{\text{ext}}(x_k)
+$$
+
+3) $\lambda_1^{\text{ext}}(x_k)$ 被送入交织器 ($\pi$)，然后作为从子解码器 1 获得的先验信息传递给子解码器 2。注意，在子解码器 1 和子解码器 2 之间进行交织处理 $\pi(x_k)$ 的目的是使比特顺序重新排列，以与子解码器 2 中使用的比特顺序一致。
+
+4) 从子解码器 1 获得的先验信息和数据序列 $\tilde{y}_k^2$ 被送入子解码器 2。解码结果包含两部分：第一部分是数据位 $\pi(x_k)$ 的 LLR 值 $\lambda(\pi(x_k))$，第二部分是数据位 $y_k^2$ 的 LLR 值 $\lambda(y_k^2)$。
+
+5) $\lambda(\pi(x_k))$ 被送入解交织器 ($\pi^{-1}$)，得到 $\lambda(x_k)$ 值，用于判定每个数据位应为 0 或 1（当达到 Turbo 解码设定的迭代次数时）。
+
+6) 计算从子解码器 2 得到的数据位 $x_k$ 的外部信息 LLR 值 $\lambda_2^{\text{ext}}(x_k)$，关系如下：
+
+$$
+\lambda_2^{\text{ext}}(x_k) = \lambda(x_k) - \lambda_1^{\text{ext}}(x_k)
+$$
+
+7) 步骤 1-6 构成一轮完整的 Turbo 解码。对于下一轮 Turbo 解码，返回步骤 1，此时 $\tilde{x}_k + \lambda_2^{\text{ext}}(x_k)$ 的值会改变，因为 $\lambda_2^{\text{ext}}(x_k)$ 变为上一轮 Turbo 解码得到的新值，但 $\tilde{x}_k$ 保持不变。
+
+8) 当达到设定的迭代次数后，使用子解码器 2 得到的 LLR 值 $\lambda(x_k)$ 通过阈值检测器来估计 $\hat{x}_k$，关系如下：
+
+$$
+\hat{x}_k = \left\{ \begin{array}{ll} 0, & \text{如果 } \lambda(x_k) \leq 0 \\ 1, & \text{如果 } \lambda(x_k) > 0 \end{array} \right. \tag{2.31}
+$$
+
+注意，子解码器之间传递的信息仅限于外部信息部分。仅交换这部分信息被认为是 Turbo 码成功的关键所在。
+
+# 2.3.4 交织器
+
+交织器 (interleaver) 用于重新排列每个输入数据位的位置，使输出数据尽可能具有随机性。换句话说，交织器的功能是将可能出现在连续多位错误 (error burst) 中的每个错误位分散到数据序列的其他位置。因此，交织器是影响 Turbo 码性能的重要组件 [26]，有助于降低错误平层 (error floor) [2, 4] 的影响。在实际中，性能最优的交织器应使输出数据序列尽可能随机。因此，理想交织器 (ideal interleaver) 就是随机交织器 (random interleaver) [26]，但其在实际中难以实现。因此，设计适合信道条件以获得最优性能的交织器至关重要（详见 [26]）。本节将介绍以下几种值得关注的交织器的工作原理：</think>
 
