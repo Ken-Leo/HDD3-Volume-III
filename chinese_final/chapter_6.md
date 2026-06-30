@@ -97,3 +97,33 @@ $$
 其中 $a_{i,j}$ 是岛 $(i,j)$ 的数据位，$(\Delta x_{i,j}, \Delta z_{i,j})$ 是位置抖动，$n_k$ 是电子噪声。
 
 BPMR 信号处理的核心挑战是在严重的二维干扰和介质噪声下准确检测数据，需要先进的二维检测和迭代解码技术。
+
+### 6.3.1 二维脉冲响应
+
+BPMR 的二维脉冲响应近似为二维高斯函数：
+
+$$
+h(x, z) = A \exp\left(-\frac{x^2}{2\sigma_x^2} - \frac{z^2}{2\sigma_z^2}\right) \tag{6.1}
+$$
+
+其中 $\sigma_x$ 和 $\sigma_z$ 分别对应沿磁道和跨磁道方向的脉冲宽度。
+
+### 6.4.1 BPMR 脉冲响应估计
+
+第 $i$ 个岛在读取位置 $(x, z)$ 产生的回读信号：
+
+$$
+s_i(x, z) = \iiint \mathbf{M}(x', z') \cdot \mathbf{H}(x - x', z - z') dx' dz' \tag{6.2}
+$$
+
+其中 $\mathbf{M}$ 是岛磁化分布，$\mathbf{H}$ 是读头灵敏度函数。
+
+### 6.4.2 含介质噪声的模型
+
+包含位置抖动和尺寸波动的回读信号：
+
+$$
+y_k = \sum_i \sum_j a_{i,j} h(x_k - iT_x - \Delta x_{i,j}, z_j - jT_z - \Delta z_{i,j}) + n_k \tag{6.3}
+$$
+
+其中 $a_{i,j}$ 是岛 $(i,j)$ 的数据位，$(\Delta x_{i,j}, \Delta z_{i,j})$ 是位置抖动，$n_k$ 是电子噪声。

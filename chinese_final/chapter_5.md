@@ -117,3 +117,41 @@ TA 波形 $g_k$ 包含以下参数：
 3. 解释 TA 对 PRML 检测器分支度量计算的影响。
 4. 设计一个迭代 TA 检测算法，给出参数估计和信号补偿的完整流程。
 5. 推导 PSP-BCJR 的前向递归中定时相位更新公式。
+
+### 5.1.1 信道模型（续）
+
+接收信号建模：
+
+$$ r(t) = \sum_k a_k h(t - kT - \tau_k) + n(t) \tag{5.1} $$
+
+其中 $\tau_k$ 是时变定时相位偏移。
+
+### PSP-BCJR 算法（续）
+
+前向递归：
+
+$$ \alpha_{k+1}(q, \hat{\tau}_{k+1}) = \max_u^*[\alpha_k(u, \hat{\tau}_k) + \gamma_k(u,q,\hat{\tau}_k)] \tag{5.2} $$
+
+后向递归：
+
+$$ \beta_k(u, \hat{\tau}_k) = \max_q^*[\beta_{k+1}(q, \hat{\tau}_{k+1}) + \gamma_k(u,q,\hat{\tau}_k)] \tag{5.3} $$
+
+定时更新：
+
+$$ \hat{\tau}_{k+1} = \hat{\tau}_k + \Delta \cdot \frac{\partial \gamma_k(u,q,\tau)}{\partial \tau}\bigg|_{\tau=\hat{\tau}_k} \tag{5.4} $$
+
+### 5.2.1 TA信道模型
+
+TA 信号模型：
+
+$$ y_k = r_k \cdot (1 + m_k \cdot g_k) + n_k \tag{5.5} $$
+
+TA 波形：
+
+$$ g_k = e^{-(k-k_0)/\tau} \cdot u(k - k_0) \tag{5.6} $$
+
+### 5.2.3 TA校正
+
+幅度归一化校正：
+
+$$ \tilde{y}_k = \frac{y_k}{1 + A_{TA} \cdot e^{-(k - k_0)/\tau}} \tag{5.7} $$
