@@ -421,3 +421,104 @@ r _ { k } = a _ { k } * h _ { k } = \{ r _ { 0 } , r _ { 1 } , r _ { 2 } , r _ {
 $$
 
 其中 * 是卷积算子（convolution operator），且
+
+$$
+y _ { k } = r _ { k } + n _ { k } = \{ 0 . 9 , ~ - 0 . 2 , ~ 0 . 3 , ~ 0 . 6 \} = \{ y _ { 0 } , ~ y _ { 1 } , ~ y _ { 2 } , ~ y _ { 3 } \}
+$$
+
+然后创建信道 $H ( D ) = 1 + 0 . 5 D$ 的网格图，如图2.13所示，共有两个状态：状态 (a) 和状态 (b)。
+
+1. 设置状态度量的初始值 $\alpha _ { 0 } ( a ) = 1$ 和 $\alpha _ { 0 } ( b ) = 0$
+
+前向递归
+
+2. 阶段 0（$k = 0$）：BCJR 算法接收数据 $y _ { 0 } = 0 . 9$，根据方程(2.29)计算对所有根据图2.13中网格图使状态转移 (u, q) 成立的 u 和 q 的分支度量 $\gamma _ { 0 } ( u , q )$
+
+![](images/chapter_2/f4f8be5df831c87bfa934ee0a697cd4292fece06e7503ab77aabe5b5ea60f7ee.jpg)  
+图2.13 信道 $H ( D ) = 1 + 0 . 5 D$ 的网格图，输入数据为 $a _ { k } \in \{ \pm 1 \}$
+
+$$
+\gamma _ { 0 } \left( a , a \right) = \exp \left\{ - \pi \left| 0 . 9 - \left( - 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( - 1 ) ( 0 ) } { 2 } \right) \approx 0
+$$
+
+$$
+\gamma _ { 0 } \left( b , a \right) = \exp \left\{ - \pi \left| 0 . 9 - \left( - 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( - 1 ) ( 0 ) } { 2 } \right) \approx 0 . 0 0 2 1
+$$
+
+$$
+\gamma _ { 0 } \left( a , b \right) = \exp \left\{ - \pi \left| 0 . 9 - \left( 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( + 1 ) ( 0 ) } { 2 } \right) \approx 0 . 6 0 4 9
+$$
+
+$$
+\gamma _ { 0 } \left( b , b \right) = \exp \left\{ - \pi \left| 0 . 9 - \left( 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( + 1 ) ( 0 ) } { 2 } \right) \approx 0 . 3 2 2 7
+$$
+
+然后按照方程(2.14)更新状态度量 $\alpha _ { 1 } ( a )$ 和 $\alpha _ { 1 } ( b )$
+
+$$
+\begin{array} { r } { \alpha _ { 1 } \left( a \right) = \alpha _ { 0 } \left( a \right) \gamma _ { 0 } \left( a , a \right) + \alpha _ { 0 } \left( b \right) \gamma _ { 0 } \left( b , a \right) = \left( 1 \right) \left( 0 \right) + \left( 0 \right) \left( 0 . 0 0 2 1 \right) = 0 } \end{array}
+$$
+
+$$
+\begin{array} { r } { \alpha _ { 1 } \left( b \right) = \alpha _ { 0 } \left( a \right) \gamma _ { 0 } \left( a , b \right) + \alpha _ { 0 } \left( b \right) \gamma _ { 0 } \left( b , b \right) = \left( 1 \right) \left( 0 . 6 0 4 9 \right) + \left( 0 \right) \left( 0 . 3 2 2 7 \right) = 0 . 6 0 4 9 } \end{array}
+$$
+
+按照方程(2.30)进行归一化
+
+$$
+\alpha _ { 1 } \left( a \right) = 0 / \left( 0 + 0 . 6 0 4 9 \right) = 0
+$$
+
+$$
+\alpha _ { 1 } \left( b \right) = 0 . 6 0 4 9 / \left( 0 + 0 . 6 0 4 9 \right) = 1
+$$
+
+3. 阶段 1（$k = 1$）：BCJR 算法接收数据 $y _ { 1 } = - 0 . 2$，计算所有分支度量
+
+$$
+\gamma _ { 1 } \left( a , a \right) = \exp \left\{ - \pi \left| - 0 . 2 - \left( - 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { \left( - 1 \right) \left( 0 \right) } { 2 } \right) \approx 0 . 0 0 4 9
+$$
+
+$$
+\gamma _ { 1 } \left( b , a \right) = \exp \left\{ - \pi \left| - 0 . 2 - \left( - 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { \left( - 1 \right) \left( 0 \right) } { 2 } \right) \approx 0 . 7 5 3 7
+$$
+
+$$
+\gamma _ { 1 } \left( a , b \right) = \exp \left\{ - \pi \left| - 0 . 2 - \left( 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( { \frac { ( + 1 ) ( 0 ) } { 2 } } \right) \approx 0 . 2 1 4 5
+$$
+
+$$
+\gamma _ { 1 } \left( b , b \right) = \exp \left\{ - \pi \left| - 0 . 2 - { \left( 1 . 5 \right) } \right| ^ { 2 } \right\} \times \exp \left( { \frac { { \left( + 1 \right) } { \left( 0 \right) } } { 2 } } \right) \approx 0 . 0 0 0 1
+$$
+
+然后更新状态度量 $\alpha _ { 2 } ( a )$ 和 $\alpha _ { 2 } ( b )$
+
+$$
+\mathrm { { \alpha } } _ { 2 } \left( a \right) = \mathrm { { \alpha } } _ { 1 } \left( a \right) \gamma _ { 1 } \left( a , a \right) + \mathrm { { \alpha } } _ { 1 } \left( b \right) \gamma _ { 1 } \left( b , a \right) = \left( 0 \right) \left( 0 . 0 0 4 9 \right) + \left( 1 \right) \left( 0 . 7 5 3 7 \right) = 0 . 7 5 3 7
+$$
+
+$$
+\begin{array} { r } { \alpha _ { 2 } \left( b \right) = \alpha _ { 1 } \left( a \right) \gamma _ { 1 } \left( a , b \right) + \alpha _ { 1 } \left( b \right) \gamma _ { 1 } \left( b , b \right) = \left( 0 \right) \left( 0 . 2 1 4 5 \right) + \left( 1 \right) \left( 0 . 0 0 0 1 \right) = 0 . 0 0 0 1 } \end{array}
+$$
+
+归一化
+
+$$
+\alpha _ { 2 } \left( a \right) = 0 . 7 5 3 7 / \left( 0 . 7 5 3 7 + 0 . 0 0 0 1 \right) \approx 0 . 9 9 9 9
+$$
+
+$$
+\alpha _ { 2 } \left( b \right) = 0 . 0 0 0 1 / \left( 0 . 7 5 3 7 + 0 . 0 0 0 1 \right) \approx 0 . 0 0 0 1
+$$
+
+4. 阶段 2 和 3（$k = \{ 2 , 3 \}$）：BCJR 算法接收数据 $y _ { 2 } = 0 . 3$ 和 $y _ { 3 } = 0 . 6$，以与步骤 2 和 3 相同的方法计算所有分支度量并更新状态度量 $\alpha _ { k + 1 } ( q )$ 对于 $q \in \{ a , b \}$。得到的 $\gamma _ { k } ( u , q )$ 和 $\alpha _ { k + 1 } ( q )$ 如图2.14所示。每条分支旁的值是对应于状态转移 $(u, q)$ 的 $\gamma _ { k } ( u , q )$，每个状态节点处的数字表示状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$，以分数形式表示
+
+$$
+\frac { \alpha _ { k } \left( u \right) } { \beta _ { k } \left( u \right) }
+$$
+
+对于每个 $k \in \{ 0 , 1 , 2 , 3 \}$ 和 $u \in \{ a , b \}$。也就是说，前向递归结束时（归一化后）得到
+
+$$
+\alpha _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \mathrm { a n d } \quad \alpha _ { 4 } \left( b \right) = 0 . 7 7 8 6
+$$
