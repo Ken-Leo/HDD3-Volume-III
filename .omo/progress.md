@@ -38,6 +38,6 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 ## Translation Log
 | Date | Chapter | Lines | Content |
 |------|---------|-------|---------|
-| — | — | — | — |
+| 2026-07-01 | Ch1 §1.1 | 1-15 | 概述 + 数字数据存储系统 |
 
-**Current**: Phase 1 — 开始提取 Ch1
+**Current**: Ch1 第1.1节完成 — 开始第1.2节（硬盘驱动器读通道模型）
