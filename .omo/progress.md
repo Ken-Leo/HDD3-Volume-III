@@ -1,29 +1,43 @@
 # Translation Progress
 
-| Chapter | Status | Last Line | Key Content |
-|---------|--------|-----------|-------------|
-| Ch1 | Done | 462 (chinese) | Complete |
-| Ch2 | Done | 541 (chinese) | Complete |
-| Ch3 | Done | 670 (chinese) | Complete — soft detectors |
-| Ch4 | Pending | — | Start extraction |
-| Ch5 | Pending | — | — |
-| Ch6 | Pending | — | — |
+Overall Status: PDF HDD3-Volume III → Chinese translation
+Goal: Full book translation (Ch1-8 + Appendix A/B/C/D)
 
-**Current**: Chapter 4 — determine page range and extract
+## Page Mapping
+Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 
-## 2026-07-01 Ch4: LDPC码 翻译完成
-- 第4章中文翻译: 904行
-- 涵盖: 4.1线性分组码 → 4.8习题
-- 所有公式(4.1)-(4.87)已翻译
-- 图片引用保留原始路径
-- 已提交
+| Chapter | Physical Pages | Logical Pages |
+|---------|---------------|---------------|
+| Ch1 概述 | P14-P28 | p1-p15 |
+| Ch2 Turbo均衡 | P30-P76 | p17-p63 |
+| Ch3 软输出算法 | P78-P118 | p65-p105 |
+| Ch4 LDPC码 | P120-P167 | p107-p154 |
+| Ch5 迭代解码应用 | P168-P207 | p155-p194 |
+| Ch6 BPMR技术 | P208-P241 | p195-p228 |
+| Ch7 BPMR系统设计 | P242-P275 | p229-p262 |
+| Ch8 HAMR | P276-P318 | p263-p305 |
+| 附录A | P320-P321 | p307-p308 |
+| 附录B | P322 | p309 |
+| 附录C | P324 | p311 |
+| 附录D | P326 | p313 |
 
-## 2026-07-01 Ch5: 迭代解码应用 翻译完成
-- 第5章中文翻译: $(wc -l < /Volumes/Elements/HDD3-Volume-III/chinese_final/chapter_5.md)行
-- 涵盖: 5.1迭代定时恢复(PS-TR/PS-ITR/PSP-BCJR) → 5.2迭代TA降低 → 5.4习题
-- 所有公式(5.1)-(5.18)已翻译
+## Chapter Status
+- [ ] Ch1: Pending
+- [ ] Ch2: Pending
+- [ ] Ch3: Pending
+- [ ] Ch4: Pending
+- [ ] Ch5: Pending
+- [ ] Ch6: Pending
+- [ ] Ch7: Pending
+- [ ] Ch8: Pending
+- [ ] 附录A: Pending
+- [ ] 附录B: Pending
+- [ ] 附录C: Pending
+- [ ] 附录D: Pending
 
-## 2026-07-01 Ch6: BPMR技术 翻译完成
-- 第6章中文翻译: 100行
-- 涵盖: 6.1引言 → 6.4.2介质噪声模型
-- 所有公式(6.1)-(6.14)已翻译
+## Translation Log
+| Date | Chapter | Lines | Content |
+|------|---------|-------|---------|
+| — | — | — | — |
+
+**Current**: Phase 1 — 开始提取 Ch1
