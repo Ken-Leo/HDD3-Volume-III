@@ -521,4 +521,15 @@ $$
 
 $$
 \alpha _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \mathrm { a n d } \quad \alpha _ { 4 } \left( b \right) = 0 . 7 7 8 6
+
+![](images/chapter_2/32cecb154c323e0aa1dea5a27a7ddb733a1fb6c87e7e55a336f7cb320d24282a.jpg)
+
+![](images/chapter_2/3c7ee0b38c46d71574763706d5608a073772e80079badb4e2d9ea5ae2b137dea.jpg)  
+图2.14 例2.4中BCJR算法的内部计算
+
+5. 初始化状态度量 $\beta _ { 4 } \left( u \right) = \alpha _ { 4 } \left( u \right)$ 对于 $u \in \{ a , b \}$，即
+
+$$
+\beta _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \quad \mathrm { a n d } \quad \beta _ { 4 } \left( b \right) = 0 . 7 7 8 6
+$$
 $$
