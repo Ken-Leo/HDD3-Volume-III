@@ -23,7 +23,7 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 
 ## Chapter Status
 - [x] Ch1: 完成（317行，公式24/24，图片27/27，标题12/12）
-- [ ] Ch2: Pending
+- [ ] Ch2: In Progress（54行翻译，§2.1.1编码 开始）
 - [ ] Ch3: Pending
 - [ ] Ch4: Pending
 - [ ] Ch5: Pending
@@ -39,5 +39,6 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 | Date | Chapter | Lines | Content |
 |------|---------|-------|---------|
 | 2026-07-01 | Ch1 | 1-317 | 全部完成（公式1.1-1.23，图片27张） |
+| 2026-07-01 | Ch2 | 1-54 | 简介 + §2.1卷积码 + §2.1.1编码 |
 
-**Current**: Ch1 完成 — 开始提取 Ch2（P30-P76）
+**Current**: Ch2 §2.1.1 编码 进行中
