@@ -270,3 +270,77 @@ $$
 $$
 \alpha _ { k } \left( u \right) = p \left( \psi _ { k } = u ; \ \mathbf { y } _ { l < k } \right)\tag{2.13}
 $$
+
+因此
+
+$$
+\begin{array} { r l } & { \alpha _ { k + 1 } \left( q \right) = p \left( \Psi _ { k + 1 } = q ; \ y _ { k } , \ \mathbf { y } _ { l < k } \right) } \\ & { \qquad = \displaystyle \sum _ { u = 0 } ^ { Q - 1 } p \left( \Psi _ { k + 1 } = q ; \ y _ { k } \mid \Psi _ { k } = u ; \ \mathbf { y } _ { l < k } \right) p \left( \Psi _ { k } = u ; \ \mathbf { y } _ { l < k } \right) } \end{array}
+$$
+
+$$
+\begin{array} { l } { { \displaystyle = \sum _ { u = 0 } ^ { Q - 1 } p \big ( \psi _ { k + 1 } = q ; \ y _ { k } \mid \psi _ { k } = u \big ) p \big ( \psi _ { k } = u ; \ \mathbf { y } _ { l < k } \big ) } } \\ { { \displaystyle } } \\ { { \displaystyle = \sum _ { u = 0 } ^ { Q - 1 } \gamma _ { k } \big ( u , q \big ) \alpha _ { k } \big ( u \big ) } } \end{array}\tag{2.14}
+$$
+
+类似地，由方程(2.7)可得
+
+$$
+\begin{array} { r } { \beta _ { k + 1 } \left( q \right) = p \left( \mathbf { y } _ { l > k } \mid \psi _ { k + 1 } = q \right) } \end{array}\tag{2.15}
+$$
+
+#### $\alpha _ { k } ( u )$ 和 $\beta _ { k + 1 } ( q )$ 初始条件的设定
+
+本节描述的 BCJR 算法假设方程(2.14)和(2.15)在计算时使用状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k + 1 } ( q )$ 的初始条件如下
+
+$$
+\alpha _ { 0 } \left( u \right) = \left\{ \begin{array} { l l } { 1 , } & { u = 0 } \\ { 0 , } & { \mathrm { e l s e } } \end{array} \right. \quad \mathrm { a n d } \quad \beta _ { L + \nu } \left( q \right) = \left\{ \begin{array} { l l } { 1 , } & { q = 0 } \\ { 0 , } & { \mathrm { e l s e } } \end{array} \right.\tag{2.17}
+$$
+
+这适用于网格图中所有分支从状态 $\psi _ { 0 } = 0$ 开始，且所有分支强制终止于状态 $\psi _ { L + \nu } = 0$ 的情况。即前向递归（forward recursion）期间的所有分支必须终止于状态 $\psi _ { L + \nu } = 0$，后向递归（backward recursion）期间的所有分支必须起始于状态 $\psi _ { 0 } = 0$。
+
+然而，在不强制要求网格图中所有分支终止于状态 $\psi _ { L + \nu } = 0$ 的情况下，通常将状态度量 $\beta _ { L + \nu } ( q )$ 的初始值设为等于状态度量 $\alpha _ { L + \nu } ( q )$，即
+
+$$
+\beta _ { L + \nu } \left( q \right) = \alpha _ { L + \nu } \left( q \right)\tag{2.18}
+$$
+
+对于所有状态 $q \in \{ 0 , 1 , . . . , Q - 1 \}$，因为 BCJR 算法在时刻 $L + \nu$ 时不知道每个状态的任何概率信息。
+
+#### $p ( \mathbf { y } )$ 的计算
+
+在实践中，计算方程(2.8)中的后验概率 $\operatorname { P r } [ a _ { k } \mid \mathbf { y } ]$ 时所用的 $p ( \mathbf { y } )$ 可以忽略，因为 $p ( \mathbf { y } )$ 对于所有时刻 k 是常数。因此最大化 $\operatorname* { P r } [ a _ { k } \mid \mathbf { y } ]$ 的过程仍然得到相同的结果。然而，这里展示求 $p ( \mathbf { y } )$ 的方法如下。由于所有事件的条件概率之和必须始终为 1，因此由方程(2.7)可得
+
+$$
+\sum _ { u = 0 } ^ { Q - 1 } \sum _ { q = 0 } ^ { Q - 1 } \mathrm { P r } \big [ \Psi _ { k } = u ; \Psi _ { k + 1 } = q | \mathbf { y } \big ] = \sum _ { u = 0 } ^ { Q - 1 } \sum _ { q = 0 } ^ { Q - 1 } \left( \frac { \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right) } { p \left( \mathbf { y } \right) } \right) = 1\tag{2.19}
+$$
+
+即
+
+$$
+p \left( \mathbf { y } \right) = \sum _ { u = 0 } ^ { Q - 1 } \sum _ { q = 0 } ^ { Q - 1 } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right)\tag{2.20}
+$$
+
+由方程(2.16)可得
+
+$$
+p \left( \mathbf { y } \right) = \sum _ { u = 0 } ^ { Q - 1 } \alpha _ { k } \left( u \right) \beta _ { k } \left( u \right)\tag{2.21}
+$$
+
+方程(2.21)表明，网格图中所有状态 u 的 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$ 的乘积对于所有时刻 k 都相等，且等于 $p ( \mathbf { y } )$。因此由方程(2.17)可得如下关系
+
+$$
+p \left( \mathbf { y } \right) = \beta _ { 0 } \left( 0 \right) = \alpha _ { L + \nu } \left( 0 \right)\tag{2.22}
+$$
+
+### 2.2.4 二进制数据比特的 BCJR 算法
+
+在输入数据比特为二进制的情况下，即 $a _ { k } \in \{ - 1 , 1 \}$，方程(2.8)中的后验概率 $\operatorname* { P r } [ a _ { k } = a \mid \mathbf { y } ]$ 由 $\operatorname* { P r } [ a _ { k } = 1 \mid \mathbf { y } ] = 1 - \operatorname* { P r } [ a _ { k } = - 1 \mid \mathbf { y } ]$ 或比值 $\operatorname* { P r } [ a _ { k } = 1 \mid \mathbf { y } ] / \operatorname* { P r } [ a _ { k } = - 1 \mid \mathbf { y } ]$ 确定。在对数域中可写为
+
+$$
+\lambda _ { p } \left( a _ { k } \right) = \ln \left( { \frac { \operatorname* { P r } \left[ a _ { k } = 1 \mid \mathbf { y } \right] } { \operatorname* { P r } \left[ a _ { k } = - 1 \mid \mathbf { y } \right] } } \right)\tag{2.23}
+$$
+
+其中 $\lambda _ { p } ( a _ { k } )$ 是数据比特 $a _ { k }$ 的后验 LLR。因此由方程(2.8)可得
+
+$$
+\lambda _ { p } \left( a _ { k } \right) = \ln \left( \frac { \displaystyle \sum _ { \left( u , q \right) \in S _ { 1 } } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right) } { \displaystyle \sum _ { \left( u , q \right) \in S _ { - 1 } } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right) } \right)\tag{2.24}
+$$
