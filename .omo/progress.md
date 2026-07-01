@@ -39,6 +39,6 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 | Date | Chapter | Lines | Content |
 |------|---------|-------|---------|
 | 2026-07-01 | Ch1 | 1-317 | 全部完成（公式1.1-1.23，图片27张） |
-| 2026-07-01 | Ch2 | 1-346 | §2.2.3递归 + §2.2.4二进制BCJR |
+| 2026-07-01 | Ch2 | 1-423 | §2.2.4-§2.2.6 BCJR总结 + 例2.4 |
 
-**Current**: Ch2 §2.2.5 BCJR示例 — 开始
+**Current**: Ch2 例2.4 进行中 — 继续 §2.3 Turbo均衡

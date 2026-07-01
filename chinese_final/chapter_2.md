@@ -344,3 +344,80 @@ $$
 $$
 \lambda _ { p } \left( a _ { k } \right) = \ln \left( \frac { \displaystyle \sum _ { \left( u , q \right) \in S _ { 1 } } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right) } { \displaystyle \sum _ { \left( u , q \right) \in S _ { - 1 } } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right) } \right)\tag{2.24}
 $$
+
+二进制数据比特的 BCJR 算法使用方程(2.24)计算从发送端发送的每个数据比特的 LLR 值。$\lambda _ { p } ( a _ { k } )$ 将用于按照以下决策规则判断使错误概率最小的数据比特 $a _ { k }$ 的估计值
+
+$$
+\hat { a } _ { k } = \left\{ \begin{array} { l l } { 1 , } & { \mathrm { i f } \ \lambda _ { p } \left( a _ { k } \right) \ge 0 } \\ { - 1 , } & { \mathrm { i f } \ \lambda _ { p } \left( a _ { k } \right) < 0 } \end{array} \right.\tag{2.25}
+$$
+
+此外，先验概率 $p ( a _ { k } = \tilde { a } )$ 对于 $\tilde { a } \in \{ \pm 1 \}$ 与对数似然函数的关系如下（见方程(1.6)）
+
+$$
+p \left( a _ { k } = \tilde { a } \right) = \frac { \exp \left( \tilde { a } \lambda _ { a } \left( a _ { k } \right) / 2 \right) } { \exp \left( \lambda _ { a } \left( a _ { k } \right) / 2 \right) + \exp \left( - \lambda _ { a } \left( a _ { k } \right) / 2 \right) }\tag{2.26}
+$$
+
+其中
+
+$$
+\lambda _ { a } \left( a _ { k } \right) = \ln \left( \frac { p \left( a _ { k } = 1 \right) } { p \left( a _ { k } = - 1 \right) } \right)\tag{2.27}
+$$
+
+是数据比特 $a _ { k }$ 的先验 LLR。由于方程(2.26)中的分母对于网格图中的所有状态转移 $(u, q)$ 都相同，因此可以使用先验概率
+
+$$
+p \big ( a _ { k } = \tilde { a } \big ) = \exp \left( \frac { \tilde { a } \lambda _ { a } \left( a _ { k } \right) } { 2 } \right)\tag{2.28}
+$$
+
+来求得方程(2.12)中 BCJR 算法的分支度量，即
+
+$$
+\gamma _ { k } \left( u , q \right) = \frac { 1 } { \sqrt { 2 \pi \sigma ^ { 2 } } } \exp \left\{ \frac { - 1 } { 2 \sigma ^ { 2 } } { \left| { y _ { k } - \hat { r } \left( u , q \right) } \right| ^ { 2 } } \right\} \times \exp \left( \frac { { \hat { a } \left( u , q \right) \lambda _ { a } \left( a _ { k } \right) } } { 2 } \right)\tag{2.29}
+$$
+
+### 2.2.5 BCJR 算法工作步骤总结
+
+BCJR 算法的工作原理可总结为如图2.12所示的步骤。
+
+### 2.2.6 BCJR 算法的注意事项
+
+在实际应用中实施图2.12中描述的 BCJR 算法时，需要对所有状态 u 和所有时刻 k 的状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$ 进行归一化（normalization）[22]，以避免计算机程序中的数值下溢（numerical underflow）问题。即在每个时刻 k 计算 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$ 时，当按照方程(2.14)和(2.16)对所有状态 u 求得 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$ 后，按照以下关系对两个状态度量进行归一化
+
+$$
+\alpha _ { k } \left( u \right) = \frac { \alpha _ { k } \left( u \right) } { \displaystyle \sum _ { i } \alpha _ { k } \left( i \right) } \quad \mathrm { a n d } \quad \beta _ { k } \left( u \right) = \frac { \beta _ { k } \left( u \right) } { \displaystyle \sum _ { i } \beta _ { k } \left( i \right) }\tag{2.30}
+$$
+
+使得所有 u 的 $\alpha _ { k } ( u )$ 之和等于 1，所有 u 的 $\beta _ { k } ( u )$ 之和等于 1，然后再继续计算下一个时刻 k 的 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$。
+
+BCJR 算法步骤：
+1. 设置初始状态度量 $\left[ \alpha _ { 0 } \left( 0 \right) , \alpha _ { 0 } \left( 1 \right) , . . . , \alpha _ { 0 } \left( Q - 1 \right) \right] = \left[ 1 , 0 , . . . , 0 \right]$
+2. 前向递归（forward recursion）
+   对于 $k = 0 , 1 , . . . , L + \nu - 1$
+   对于 $q = 0 , 1 , \ldots , Q - 1$
+   按照方程(2.29)计算对所有使 $(u, q)$ 成立的 u 的 $\gamma _ { k } ( u , q )$
+   按照方程(2.14)计算 $\alpha _ { k + 1 } ( q )$
+   （结束 q 循环）
+   （结束 k 循环）
+3. 设置初始状态度量 $\left[ \beta _ { L + \nu } \left( 0 \right) , \beta _ { L + \nu } \left( 1 \right) , \ldots , \beta _ { L + \nu } \left( Q - 1 \right) \right] = \left[ 1 , 0 , \ldots , 0 \right]$
+4. 后向递归（backward recursion）
+   对于 $k = L + \nu - 1 , L + \nu - 2 , . . . , 0$
+   对于 $u = 0 , 1 , \ldots , Q - 1$
+   按照方程(2.29)计算对所有使 $(u, q)$ 成立的 q 的 $\gamma _ { k } ( u , q )$
+   按照方程(2.16)计算 $\beta _ { k } ( u )$
+   （结束 u 循环）
+   按照方程(2.24)计算 $\lambda _ { p } ( a _ { k } )$
+   按照方程(2.25)判决 $a _ { k }$ 的值
+   （结束 k 循环）
+图2.12 BCJR 算法的工作步骤
+
+尽管使用 BCJR 算法的 MAP 检测器是最优检测器，因为它能保证每个数据比特的错误最小化，但在实践中 BCJR 算法并不常用于各种应用中的信号处理芯片，因为 BCJR 算法计算资源消耗高，且对噪声方差 $\sigma ^ { 2 }$ [23, 24] 敏感——该参数用于求方程(2.29)中的 $\gamma _ { k } ( u , q )$。也就是说，在实际系统中无法获知真实的 $\sigma ^ { 2 }$ 值（只能通过各种技术估计 $\sigma ^ { 2 }$ 的值）。因此，如果 $\sigma ^ { 2 }$ 不准确，BCJR 算法的所有参数都会出现偏差，导致 MAP 检测器的性能大幅下降。因此，研究人员开发了各种算法，如 Max-Log-MAP、Log-MAP 和 SOVA，它们的性能接近或等同于 BCJR 算法，但计算资源消耗更少且对 $\sigma ^ { 2 }$ [24] 不敏感，从而可以高效地应用于实际的信号处理芯片（第3章将解释这些算法的工作原理）。
+
+例2.4 在图2.10的信道模型中，给定输入数据序列 $a _ { k } = \{ 1 , -1 , 1 \}$，信道 $H ( D ) = 1 + 0.5 D$，噪声 $n _ { k } = \{ -0.1 , 0.3 , -0.2 , -0.1 \}$，方差 $\sigma ^ { 2 } = 1 / ( 2 \pi )$。请展示使用 BCJR 算法解码数据 $y _ { k }$ 的步骤（假设系统不知道数据比特 $a _ { k }$ 的先验信息）。
+
+解法 信道输出数据 $r _ { k }$ 由下式求得
+
+$$
+r _ { k } = a _ { k } * h _ { k } = \{ r _ { 0 } , r _ { 1 } , r _ { 2 } , r _ { 3 } \} = \{ 1 , - 0 . 5 , 0 . 5 , 0 . 5 \}
+$$
+
+其中 * 是卷积算子（convolution operator），且
