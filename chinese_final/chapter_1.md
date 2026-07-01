@@ -170,3 +170,147 @@ $$
 $$
 \hat { x } = \left\{ { \begin{array} { l l } { 1 , } & { { \mathrm { i f } } \ \lambda ( x ) \geq 0 } \\ { 0 , } & { { \mathrm { i f } } \ \lambda ( x ) < 0 } \end{array} } \right.\tag{1.11}
 $$
+
+## 1.5.2 对数似然比
+
+对数似然比（LLR）是迭代解码过程中各种算法（如 BCJR 算法、SOVA 和 LDPC 等）中广泛使用的度量或信息指标。本书使用符号 $\lambda ( x )$ 表示比特数据 $x \in \{ 0 , 1 \}$ 的 LLR 值
+
+![](images/chapter_1/833c8ee5c270e812a27aa636008fa32d14f12514d131cb5ff16eb19ba39356ae.jpg)
+
+![](images/chapter_1/031af0133c9a7441f11009d39759271c006e8ca5451c2707be7f9ad20ac473de.jpg)  
+图1.8 比特数据 a 的 LLR 值与概率 $p ( a = + 1 )$ 的关系
+
+即方程 (1.10) 所定义的比特1与比特0概率之比的自然对数。
+
+对于使用双极性二进制输入数据的通信系统，即 $a \in \{ - 1 , 1 \}$，LLR 定义为
+
+$$
+\lambda { \big ( } a { \big ) } = \ln \left( { \frac { p { \big ( } a = + 1 { \big ) } } { p { \big ( } a = - 1 { \big ) } } } \right)\tag{1.12}
+$$
+
+这在解码算法中广泛使用，因为 λ(a) 的符号可以直接用作比特数据 a 的估计值（或硬信息）。类似地，λ(a) 的大小也用于指示比特数据 a 的置信度（或软信息）。图1.8显示了比特数据 a 的 LLR 值与概率 $p ( a = + 1 )$ 的关系。当 $p ( a = + 1 ) > 0.5$ 时 $\lambda ( a )$ 为正，即比特数据 a 更可能是比特1而非比特-1；当 $p ( a = + 1 ) < 0.5$ 时 λ(a) 为负，即比特数据 a 更可能是比特-1而非比特1。此外，如果 $p ( a = + 1 ) = 0.5$，则 $\lambda ( a ) = 0$，比特1和比特-1出现的概率相等。
+
+由于 $p ( a = + 1 ) = 1 - p ( a = - 1 )$，方程 (1.12) 可重新整理为
+
+![](images/chapter_1/c612c1e64f66e045ea68154e28b85d4fd94e49890c160a6ecaa3210279b45c02.jpg)
+
+![](images/chapter_1/67dcc58c07221aa115080cae40a6681b53bda8f2f4edaf47ba4094d56d48c34b.jpg)
+
+$$
+e ^ { \lambda ( a ) } = \frac { p ( a = + 1 ) } { 1 - p ( a = + 1 ) }\tag{1.13}
+$$
+
+以及
+
+$$
+p \big ( a = + 1 \big ) = \frac { e ^ { \lambda ( a ) } } { 1 + e ^ { \lambda ( a ) } } = \frac { 1 } { 1 + e ^ { - \lambda ( a ) } } = \frac { e ^ { \lambda ( a ) / 2 } } { e ^ { \lambda ( a ) / 2 } + e ^ { - \lambda ( a ) / 2 } }\tag{1.14}
+$$
+
+$$
+p \left( a = - 1 \right) = \frac { e ^ { - \lambda \left( a \right) } } { 1 + e ^ { - \lambda \left( a \right) } } = \frac { 1 } { 1 + e ^ { + \lambda \left( a \right) } } = \frac { e ^ { - \lambda \left( a \right) / 2 } } { e ^ { - \lambda \left( a \right) / 2 } + e ^ { \lambda \left( a \right) / 2 } }\tag{1.15}
+$$
+
+从方程 (1.14) 和 (1.15) 可以总结出，对于 $C \in \{ - 1 , + 1 \}$，有
+
+$$
+p \left( a = C \right) = \frac { e ^ { C \lambda \left( a \right) / 2 } } { e ^ { \lambda \left( a \right) / 2 } + e ^ { - \lambda \left( a \right) / 2 } }\tag{1.16}
+$$
+
+## 1.5.3 信道的软输出
+
+考虑一个二进制通信系统。比特数据 $x \in \{ 0 , 1 \}$ 被发送到映射器（mapper），转换为比特数据 $u \in \{ - 1 , 1 \}$，然后通过无记忆信道传输，接收端接收到的信号为 $y = u + n$，其中 n 是均值为零、方差为 $\sigma ^ { 2 }$ 的加性高斯白噪声（AWGN: additive white Gaussian noise）。
+
+定义条件概率密度函数（conditional probability density function） $p \big ( \boldsymbol { y } \mid \boldsymbol { x } \big )$ 为给定 x 时随机变量 y 的概率密度函数。反之，给定 y 时，作为 x 函数的 $p ( y \mid x )$ 称为"似然函数（likelihood function）" [4]。
+
+在实际中，在接收端接收到数据 y 之前，x 的先验概率（a priori probability）为 $p ( x = 1 )$ 和 $p \big ( x = 0 \big )$。然而，在接收端接收到数据 y 之后，概率 $p ( x = 1 | y )$ 和 $p ( x = 0 | y )$ 变为后验概率（APP: a posteriori probability）。根据贝叶斯规则（Bayes' rule），有
+
+$$
+\begin{array} { c } { { p \big ( x = i \mid y \big ) = p \big ( x = i ; y \big ) / p \big ( y \big ) } } \\ { { { } } } \\ { { = p \big ( y \mid x = i \big ) p \big ( x = i \big ) / p \big ( y \big ) } } \end{array}\tag{1.17}
+$$
+
+![](images/chapter_1/db0aeba28c74e54a71cdd51b60b75b5c61510c14003e3bd1b101f8dc1c0386d6.jpg)
+
+其中 $i \in \{ 0 , 1 \}$，$p \big ( a ; b \big )$ 是随机变量 a 和 b 的联合概率密度函数（joint pdf）。因此，给定 y 时比特数据 x 的 LLR 定义为
+
+$$
+\lambda { \big ( } x \mid y { \big ) } = \ln \left( { \frac { p { \big ( } x = 1 \mid y { \big ) } } { p { \big ( } x = 0 \mid y { \big ) } } } \right)\tag{1.18}
+$$
+
+由贝叶斯规则可得
+
+$$
+\begin{array} { c } { \displaystyle \ln \left( \frac { p \big ( x = 1 | y \big ) } { p \big ( x = 0 | y \big ) } \right) = \ln \left( \frac { p \big ( y | x = 1 \big ) } { p \big ( y | x = 0 \big ) } \right) + \ln \left( \frac { p \big ( x = 1 \big ) } { p \big ( x = 0 \big ) } \right) } \\ { = L _ { c } y + \lambda \big ( x \big ) } \end{array}\tag{1.19}
+$$
+
+其中 $L _ { c }$ 是信道的软输出，被视为与从数据 y 获得的比特数据 x 相对应的软信息，而 $\lambda ( x )$ 称为"先验信息（a priori information）"，即接收端在接收到数据 y 之前关于比特数据 x 的信息。在接收端没有先验信息的情况下，设 $\lambda ( x ) = 0$。
+
+通常，方程 (1.19) 中的 $L _ { c }$ 称为信道置信度（channel reliability），它取决于信道的特性。例如，在 $n _ { k }$ 为 AWGN 噪声的情况下，有
+
+$$
+\begin{array} { r l } & { \ln \left( \frac { p \left( y \mid x = 1 \right) } { p \left( y \mid x = 0 \right) } \right) \equiv \ln \left( \frac { p \left( y \mid u = + 1 \right) } { p \left( y \mid u = - 1 \right) } \right) } \\ & { \qquad = \ln \left( \frac { \exp \left( - \frac { 1 } { 2 \sigma ^ { 2 } } \left( y - 1 \right) ^ { 2 } \right) } { \exp \left( - \frac { 1 } { 2 \sigma ^ { 2 } } \left( y + 1 \right) ^ { 2 } \right) } \right) = \frac { 2 } { \sigma ^ { 2 } } y } \end{array}\tag{1.20}
+$$
+
+即 $L _ { c } = 2 / \sigma ^ { 2 }$。
+
+## 1.5.4 SISO 解码器
+
+SISO（soft-input soft-output）解码器是一种使用软信息进行数据解码的解码器，它接收软信息作为输入进行处理，并输出软信息作为结果。
+
+![](images/chapter_1/1925f72ac05757d6cc72319d9907218067280586a46824cc6b8ce5244dba00fa.jpg)
+
+![](images/chapter_1/023e56b726c3cf083dcfacd03c4d5c57baa2cfd892369f2c3f185d44db0d008d.jpg)  
+图1.9 使用 SISO 解码器的数字通信系统
+
+考虑图1.9中的通信系统。数据序列 $x _ { k } \in \{ 0 , 1 \}$ 被发送到编码器（encoder）和映射器（mapper），得到数据序列 $u _ { k } \in \{ - 1 , 1 \}$。然后 SISO 解码器对信号 $y _ { k } = u _ { k } + n _ { k }$（其中 $n _ { k }$ 是 AWGN 噪声）进行数据解码，并借助数据序列 ${ \lambda } _ { a } \left( x _ { k } \right)$，其中 ${ \lambda } _ { a } \left( x _ { k } \right)$ 是比特数据 $x _ { k }$ 的先验 LLR（a priori LLR），即
+
+$$
+\lambda _ { a } \left( x _ { k } \right) = \ln \left( \frac { p \left( x _ { k } = 1 \right) } { p \left( x _ { k } = 0 \right) } \right)\tag{1.21}
+$$
+
+这表示在接收端接收数据序列 y 或所有数据 $y _ { k }$ 之前关于比特数据 $x _ { k }$ 的信息（即独立于 y）。类似地，如果接收端没有先验信息，则对于所有 k 设 $\lambda _ { a } \left( x _ { k } \right) = 0$，这意味着每个比特数据 $x _ { k }$ 具有相同的出现概率。
+
+然后 SISO 解码器输出比特数据 $x _ { k }$ 的后验 LLR（a posteriori LLR），即
+
+$$
+\lambda _ { p } \left( x _ { k } \right) = \ln \left( { \frac { p \left( x _ { k } = 1 \mid \mathbf { y } \right) } { p \left( x _ { k } = 0 \mid \mathbf { y } \right) } } \right)\tag{1.22}
+$$
+
+其中比特数据 $x _ { k }$ 的估计值可以通过将 $\lambda _ { p } \left( x _ { k } \right)$ 送入阈值检测器（threshold detector）得到，关系如下
+
+$$
+\hat { x } _ { k } = \left\{ \begin{array} { l l } { 1 , } & { \mathrm { i f } ~ \lambda _ { p } \left( x _ { k } \right) \ge 0 } \\ { 0 , } & { \mathrm { i f } ~ \lambda _ { p } \left( x _ { k } \right) < 0 } \end{array} \right.\tag{1.23}
+$$
+
+注意，对于比特数据 x 的 LLR，即 $\lambda ( x )$，本书定义如下
+
+![](images/chapter_1/111481879c1a013aecc999d96d8451869f81007c80693026dabdb451b584a049.jpg)
+
+如果 LLR 的下标为参数 a，例如 ${ \lambda } _ { a } \left( x \right)$，表示比特数据 x 的先验 LLR（a priori LLR）。
+
+如果 LLR 的下标为参数 $p$，例如 $\lambda _ { p } \left( x \right)$，表示比特数据 x 的后验 LLR（a posteriori LLR）。
+
+## 1.6 本章小结
+
+本章介绍了用于替代磁记录系统的读信道模型（包括图1.2中的真实信道模型和图1.6中的理想信道模型），以使读者能够将这些模型用于分析硬盘驱动器的信号处理系统。
+
+由于市场上销售的新型硬盘驱动器采用了迭代解码技术，因为它能有效提升系统性能，因此本章解释了迭代解码技术的概念和基础，包括 SISO、先验概率、后验概率、软信息和对数似然比（LLR）等的含义，为读者后续学习第2-4章中 SISO 检测器和 SISO 解码器的工作原理做好准备。
+
+## 1.7 本章习题
+
+1. 请解释图1.1中硬盘驱动器数字数据存储系统的工作原理。
+
+2. 请使用 SCILAB 程序绘制以下图形（http://home.npru.ac.th/piya/webscilab 或 http://www.scilab.org）
+
+2.1) 不同 ND 值下的转换脉冲信号，如图1.3所示
+
+2.2) 不同 ND 值下的双比特响应，如图1.4所示
+
+3. 请证明纵向记录系统中双比特响应 m(t) 在方程 (1.6) 中的傅里叶变换结果为
+
+$$
+M \left( \Omega \right) = \exp \left\{ - \pi \left| \Omega \right| \mathrm { N D } \right\} \left( 1 - \exp \left\{ - j 2 \pi \Omega \right\} \right)
+$$
+
+垂直记录系统的结果为
+
+![](images/chapter_1/11bc6da7d0196e469147cda14ee298d1e88f57cddd23a3d29a55c350b19f7e40.jpg)

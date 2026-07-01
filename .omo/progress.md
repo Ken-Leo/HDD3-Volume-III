@@ -22,7 +22,7 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 | 附录D | P326 | p313 |
 
 ## Chapter Status
-- [ ] Ch1: Pending
+- [x] Ch1: 完成（317行，公式24/24，图片27/27，标题12/12）
 - [ ] Ch2: Pending
 - [ ] Ch3: Pending
 - [ ] Ch4: Pending
@@ -38,8 +38,6 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 ## Translation Log
 | Date | Chapter | Lines | Content |
 |------|---------|-------|---------|
-| 2026-07-01 | Ch1 §1.1 | 1-15 | 概述 + 数字数据存储系统 |
-| 2026-07-01 | Ch1 §1.2 | 16-96 | 硬盘驱动器信道模型（公式1.1-1.8） |
-| 2026-07-01 | Ch1 §1.3-1.5.1 | 97-172 | PR目标、理想信道模型、迭代解码、硬/软判决 |
+| 2026-07-01 | Ch1 | 1-317 | 全部完成（公式1.1-1.23，图片27张） |
 
-**Current**: Ch1 §1.5.1完成 — 开始§1.5.2（对数似然比续）
+**Current**: Ch1 完成 — 开始提取 Ch2（P30-P76）
