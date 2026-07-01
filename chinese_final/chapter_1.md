@@ -94,3 +94,79 @@ $$
 ![](images/chapter_1/aff673ec985bb849abbca7483ff837c956d57273e3c04fca72e5bd7c94d6030d.jpg)
 
 ![](images/chapter_1/81d91bb79074986f9b7a49339a048e6c71c086be375c9bba2b6305de2d4e8d68.jpg)
+
+![](images/chapter_1/a45bbe1ca5bc724659d741f9e46e6017660a15fd9c3b2c191f473e329c90e8be.jpg)  
+(b) 归一化频率 (fT)  
+图1.5 各种目标对于记录信道的频率响应 (a) 纵向 (b) 垂直
+
+图1.5比较了各种目标的频率响应（frequency response），信道的频率响应即为双比特脉冲 [1] 在方程 (1.6) 中的傅里叶变换结果。方括号 [-] 中的数字表示目标每个抽头的系数。例如：
+
+PR4 [1 0 –1] 表示 PR4 目标（PR class-IV），其 D 域传递函数 [1] 为 $H ( D ) = 1 - D ^ { 2 }$
+
+EEPR2 [1 4 6 4 1] 表示 EEPR2 目标，其 D 域传递函数 H(D) $= 1 + 4 D + 6 D ^ { 2 } + 4 D ^ { 3 } + D ^ { 4 }$ 等。
+
+从图1.5可以看出，当信道的 ND 值增加时，所使用的目标应具有更多抽头（n 值更大），以使目标的响应尽可能接近信道的响应，这将有助于维特比检测器更有效地工作（详见 [10] 第3章）。
+
+此外，从方程 (1.7) 和 (1.8) 可以看出，所有 PR 目标的系数均为整数。然而，如果使用系数为实数的目标，称为"广义部分响应目标（GPR: generalized partial response target）"，则系统的整体性能将优于使用 PR 目标。感兴趣的读者可以在 [10, 14, 15] 中学习适用于硬盘驱动器信道的均衡器和目标设计技术。
+
+![](images/chapter_1/877833063d93e864a3eb26a5a92b62d515d738f6fd306999ae19143f30b70cd5.jpg)
+
+![](images/chapter_1/ba8a70aaccdedb1893288a3c36bc89756b15e0c4a6c891b664f73118e95eba42.jpg)  
+图1.6 理想信道模型
+
+## 1.3 理想信道模型
+
+图1.2中的信道模型被认为是"真实信道模型（realistic channel model）"，因其工作特性接近包含硬盘驱动器读通道架构中重要组件的实际系统 [1]。本节将介绍"理想信道模型（ideal channel model）"，该模型常用于研究和分析硬盘驱动器信号处理系统的基本工作原理，因为它不复杂且易于理解。
+
+因此，假设系统具有完美的均衡（perfect equalization）过程，则图1.2中的模型可以简化为图1.6中的理想信道模型。其中，比特周期为 T 的二进制输入数据序列 $a _ { k }$ 被送入信道 $H \left( D \right) = \sum _ { i } h _ { i } D ^ { i }$，$h _ { i }$ 是信道的第 i 个系数，并与理想奈奎斯特脉冲（ideal Nyquist pulse）q(t) = sin(πt/T)/(πt/T) [16] 进行调制，并受到噪声 w(t) 的干扰，得到读回信号
+
+$$
+r ( t ) { = } \sum _ { k } s _ { k } q { \big ( } t { - } k T { \big ) } { + } w { \big ( } t { \big ) }\tag{1.9}
+$$
+
+其中 $s _ { k } = a _ { k } * h _ { k }$ 是信道的输出数据，* 是卷积算子（convolution operator）。然后在接收端，读回信号 r(t) 被送入低通滤波器并在受定时恢复系统控制的时刻进行采样，之后将采样器的输出数据送到符号检测器以找出最可能的输入数据序列。
+
+## 1.4 迭代解码
+
+图1.2中的信道模型是"未编码系统（uncoded system）"的模型。然而，实际应用的接收端在许多应用中既使用均衡（equalization）来处理信道失真（distortion），也使用纠错编码（error correction coding）来处理信道产生的错误。通常，使用 ECC 编码的系统称为"编码系统（coded system）"。
+
+实际的硬盘驱动器信号处理系统（见图1.1）也使用纠错编码（使用 RS 码，因为它可以纠正多个连续比特错误）。也就是说，消息比特被送入纠错编码器和调制编码器，得到图1.2中的输入数据序列 $a _ { k }$。然后在接收端，图1.2中检测到的输入数据序列 $\hat { a } _ { k }$ 被送到调制解码器和纠错解码器，以获得可用的消息比特估计值。这种硬盘驱动器信号处理系统的工作方式从过去一直沿用至今，被认为是"单向处理（one-way processing）"，即符号检测器独立于 ECC 解码器工作。
+
+然而，研究 [2-5] 表明，"迭代解码（iterative decoding）"——即符号检测器和 ECC 解码器之间的协同工作——可以显著提高系统的整体性能。使用迭代信号处理系统的硬盘驱动器将具有如图1.7所示的结构，其中增加了迭代编码器（iterative encoder）和 SISO（soft-input soft-output）解码器。此外，子系统 A 中使用的符号检测器必须从维特比检测器更换为 SISO 检测器。迭代编码器是一种纠错编码器，常用的是 LDPC 码（low-density parity-check code）[17]，因为它是性能最强的 ECC 编码 [2, 5]（关于 LDPC 码的详细信息见第4章）。
+
+目前，新型硬盘驱动器已经采用了迭代解码技术（如图1.7所示），其中 SISO 检测器和 SISO 解码器之间交换软信息（soft information）[2]。用于迭代解码的 SISO 检测器可以基于 BCJR 算法 [18] 或 SOVA（soft-output Viterbi algorithm）[19] 开发（详见第2-3章）。而用于解码 LDPC 编码数据的 SISO 解码器则基于消息传递算法（message passing algorithm）[17] 开发（详见第4.4.4节）。
+
+![](images/chapter_1/ad60e1c87a71563776e299e27d22b54b1ba34248b2070c82e52bf1c7ba7742ca.jpg)
+
+![](images/chapter_1/eacbc2196baf1facc1ff7d9d3dc0bc49050d1f2cc528412109a057dd95410057.jpg)  
+图1.7 硬盘驱动器迭代信号处理系统的框图
+
+迭代解码技术的工作过程从 SISO 检测器开始，它对接收到的数据进行检测，然后将结果（软信息）发送到 SISO 解码器。然后 SISO 解码器将解码后的结果发送回 SISO 检测器，用于新一轮的检测。此过程循环进行，直到达到设定的迭代次数，SISO 解码器才将输出数据送至调制解码器和 RS 解码器进行后续解码。
+
+注意，从图1.7可以看出，系统中同时使用了 RS 码和 LDPC 码。然而，实际应用中发现 [20]，当使用 LDPC 码进行迭代解码时，可能不再需要使用 RS 码。因此，用户可以选择同时使用 RS 码和 LDPC 码，或仅使用 LDPC 码，两者都能提供相近的性能。
+
+## 1.5 基础知识与相关术语
+
+本节将解释与迭代解码相关的基础知识和重要术语，使读者在学习第2-4章内容之前理解这些术语的含义。
+
+![](images/chapter_1/efba52fc36e6e4678e0af321c59a879e1182f45b2f37dc033f77e41ed786e9a2.jpg)
+
+## 1.5.1 硬判决与软判决
+
+在数字通信系统的接收端，检测器和解码器可以选择使用硬判决（hard decision）和软判决（soft decision）两种方式。
+
+硬判决是从检测器或解码器获取比特数据或符号的估计值。得到的结果称为"硬信息（hard information）"。例如，如果检测器接收到的数据值为0.9，则可以判定发送端发送的比特数据为1。
+
+软判决是依据接收端拥有的所有数据，获取比特数据或符号的置信度（reliability）。得到的结果称为"软信息（soft information）"。例如，如果解码器输出的软信息值很大，则表明解码器得到的比特数据或符号的估计值具有很高的置信度或正确可能性。
+
+对于二进制通信系统，比特数据的置信度由"对数似然比（LLR: log-likelihood ratio）"衡量。即，设 $x \in \{ 0 , 1 \}$ 为二进制随机变量，则 x 的 LLR 定义为
+
+$$
+\lambda { \bigl ( } x { \bigr ) } = \ln \left( { \frac { p { \bigl ( } x = 1 { \bigr ) } } { p { \bigl ( } x = 0 { \bigr ) } } } \right)\tag{1.10}
+$$
+
+其中 ln(.) 是自然对数（natural logarithm），$p ( x )$ 是 x 的概率密度函数（pdf: probability density function）。此外，$\lambda ( x )$ 的绝对值（absolute value）是比特数据 x 的软信息或置信度值，而 λ(x) 的符号则是比特数据 x 的硬信息或估计值，即
+
+$$
+\hat { x } = \left\{ { \begin{array} { l l } { 1 , } & { { \mathrm { i f } } \ \lambda ( x ) \geq 0 } \\ { 0 , } & { { \mathrm { i f } } \ \lambda ( x ) < 0 } \end{array} } \right.\tag{1.11}
+$$
