@@ -193,3 +193,80 @@ BCJR 算法是一种在求解后验状态转移概率方面非常高效的算法
 3) 第三部分依赖于未来接收到的所有数据，即 ${ \bf y } _ { l > k } = \left\{ y _ { l } ; l > k \right\} = \left\{ y _ { l } \right\} _ { k + 1 } ^ { L + \nu - 1 }$
 
 根据贝叶斯规则，$\operatorname* { P r } [ \psi _ { k } = u ; \psi _ { k + 1 } = q \mid \mathbf { y } ]$ 可以重新整理为
+
+$$
+\begin{array} { r l } & { \mathrm { P r } \big [ \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q \mid \mathbf { y } \big ] = p \big ( \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q ; \mathbf { y } \big ) / p \big ( \mathbf { y } \big ) } \\ & { \quad \quad \quad = p \big ( \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q ; \mathbf { y } _ { l < k } ; \boldsymbol { y } _ { k } ; \mathbf { y } _ { l > k } \big ) / p \big ( \mathbf { y } \big ) } \\ & { \quad \quad \quad = p \big ( \mathbf { y } _ { l > k } | \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q ; \mathbf { y } _ { l < k } ; \boldsymbol { y } _ { k } \big ) p \big ( \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q ; \mathbf { y } _ { l < k } ; \boldsymbol { y } _ { k } \big ) / p \big ( \mathbf { y } \big ) } \end{array}\tag{2.5}
+$$
+
+其中 $p ( x )$ 是 x 的概率密度函数（pdf）。根据有限状态机模型的马尔可夫性质（Markov property）[4]，对于任何信道，时刻 $k+1$ 的状态信息会取代时刻 k 的状态信息以及 $y _ { k }$ 和 $\mathbf { y } _ { l < k }$ 的值。因此，方程(2.5)可简化为
+
+$$
+\begin{array} { r l r } {  { \operatorname* { P r } \bigl [ \boldsymbol { \psi } _ { k } = u ; \boldsymbol { \psi } _ { k + 1 } = q \mid \mathbf { y } \bigr ] = p \bigl ( \mathbf { y } _ { l > k } | \boldsymbol { \psi } _ { k + 1 } = q \bigr ) p \bigl ( \boldsymbol { \psi } _ { k } = u ; \boldsymbol { \psi } _ { k + 1 } = q ; \mathbf { y } _ { l < k } ; y _ { k } \bigr ) / p \bigl ( \mathbf { y } \bigr ) } } \\ & { } & \\ & { } & { = p \bigl ( \mathbf { y } _ { l > k } | \psi _ { k + 1 } = q \bigr ) p \bigl ( \psi _ { k + 1 } = q ; y _ { k } \mid \boldsymbol { \psi } _ { k } = u ; \mathbf { y } _ { l < k } \bigr ) p \bigl ( \boldsymbol { \psi } _ { k } = u ; \mathbf { y } _ { l < k } \bigr ) / p \bigl ( \mathbf { y } \bigr ) } \quad \mathrm { (2.6) } \end{array}
+$$
+
+类似地，利用马尔可夫性质，方程(2.6)可整理为
+
+$$
+\begin{array} { l } { { \displaystyle \mathsf { P r } \big [ \boldsymbol { \Psi } _ { k } = u ; \boldsymbol { \Psi } _ { k + 1 } = q | \mathbf { y } \big ] = \frac { p \big ( \boldsymbol { \Psi } _ { k } = u ; \mathbf { y } _ { l < k } \big ) p \big ( \boldsymbol { \Psi } _ { k + 1 } = q ; y _ { k } \mid \boldsymbol { \Psi } _ { k } = u \big ) p \big ( \mathbf { y } _ { l > k } | \boldsymbol { \Psi } _ { k + 1 } = q \big ) } { p \big ( \mathbf { y } \big ) } \qquad } } \\ { { \displaystyle \mathsf { P r } \big [ \boldsymbol { \Psi } \big ] } } \\ { { \displaystyle \qquad = \alpha _ { k } \big ( u \big ) \times \gamma _ { k } \big ( \boldsymbol { u } , q \big ) \times \beta _ { k + 1 } \big ( q \big ) / p \big ( \mathbf { y } \big ) } } \end{array}\tag{2.7}
+$$
+
+可以看出，参数 $\alpha _ { k } ( u )$ 是时刻 k 处于状态 u 的概率，依赖于过去接收到的数据 $\mathbf { y } _ { l < k }$；参数 $\beta _ { k + 1 } ( q )$ 是时刻 $k+1$ 处于状态 q 的概率，依赖于未来接收到的数据 $\mathbf { y } _ { l > k }$；参数 $\gamma _ { k } ( u , q )$ 是从时刻 k 的状态 u 转移到时刻 $k+1$ 的状态 q 的概率，依赖于当前数据 $y _ { k }$（各参数见图2.11）。通常，参数 $\alpha _ { k } ( u )$ 和 $\beta _ { k + 1 } ( q )$ 称为状态度量（state metric），参数 $\gamma _ { k } ( u , q )$ 称为分支度量（branch metric）。
+
+设 $S _ { a }$ 为所有对应于数据比特 a 的可能状态转移 $(u, q)$ 的集合。则后验概率 $\operatorname* { P r } [ a _ { k } = a \mid \mathbf { y } ]$ 可由下式求得
+
+$$
+\operatorname* { P r } \ [ a _ { k } = a \mid \mathbf { y } ] = \sum _ { ( u , q ) \in S _ { a } } \operatorname* { P r } [ \Psi _ { k } = u ; \Psi _ { k + 1 } = q \mid \mathbf { y } ]
+$$
+
+$$
+= \frac { 1 } { p \left( \mathbf { y } \right) } \sum _ { \left( u , q \right) \in S _ { a } } \alpha _ { k } \left( u \right) \gamma _ { k } \left( u , q \right) \beta _ { k + 1 } \left( q \right)\tag{2.8}
+$$
+
+当已知所有状态转移 $(u, q)$ 和所有阶段的 $\alpha _ { k } ( u )$、$\gamma _ { k } ( u , q )$ 和 $\beta _ { k + 1 } ( q )$ 时，方程(2.8)很容易求解。
+
+### 2.2.3 BCJR 算法参数的计算
+
+BCJR 算法在方程(2.8)中的参数，即 $\gamma _ { k } ( u , q )$、$\alpha _ { k } ( u )$、$\beta _ { k + 1 } ( q )$ 和 $p ( \mathbf { y } )$，可按如下方法计算。
+
+#### 分支度量 $\gamma _ { k } ( u , q )$ 的计算（AWGN 信道）
+
+BCJR 算法与维特比算法 [13] 的不同之处在于，BCJR 算法沿两个方向进行计算：
+
+1) 前向路径（forward pass）：从第一个接收到的数据开始向前计算，直到最后一个数据。
+2) 后向路径（backward pass）：从最后一个接收到的数据开始向后计算，直到第一个数据。
+
+此外，BCJR 算法的分支度量计算如下
+
+$$
+\begin{array} { r l } & { \gamma _ { k } \left( u , q \right) = p \left( \psi _ { k + 1 } = q ; \ y _ { k } \mid \psi _ { k } = u \right) } \\ & { \qquad = p \left( y _ { k } \mid \psi _ { k } = u ; \ \psi _ { k + 1 } = q \right) p \left( \psi _ { k + 1 } = q \mid \psi _ { k } = u \right) } \end{array}\tag{2.9}
+$$
+
+对于 AWGN 信道，接收到的信号为 $y _ { k } = r _ { k } + n _ { k }$，其中 $n _ { k } \sim \mathcal N ( 0 , \sigma ^ { 2 } )$ 是加性高斯白噪声。设 $\hat { a } ( u , q )$ 和 $\hat { r } ( u , q )$ 分别为对应于状态转移 $( u , q )$ 的输入数据比特和信道输出数据。则方程(2.9)右边的第一项为
+
+$$
+p \left( \boldsymbol { y } _ { k } \mid \boldsymbol { \Psi } _ { k } = \boldsymbol { u } ; \boldsymbol { \Psi } _ { k + 1 } = \boldsymbol { q } \right) = \frac { 1 } { \sqrt { 2 \pi \sigma ^ { 2 } } } \exp \left\{ \frac { - 1 } { 2 \sigma ^ { 2 } } { \left| \boldsymbol { y } _ { k } - \boldsymbol { \hat { r } } \left( \boldsymbol { u } , \boldsymbol { q } \right) \right| } ^ { 2 } \right\}\tag{2.10}
+$$
+
+其中 exp(.) 是指数函数。方程(2.9)右边的第二项为
+
+$$
+\begin{array} { r l r } {  { p \big ( \psi _ { k + 1 } = q \mid \psi _ { k } = u \big ) = p \big ( a _ { k } = \hat { a } \big ( u , q \big ) ; \psi _ { k } = u \big ) / p \big ( \Psi _ { k } = u \big ) } } \\ & { } & \\ & { } & { = p \big ( \Psi _ { k } = u \mid a _ { k } = \hat { a } \big ( u , q \big ) \big ) p \big ( a _ { k } = \hat { a } \big ( u , q \big ) \big ) / p \big ( \Psi _ { k } = u \big ) } \end{array}
+$$
+
+![](images/chapter_2/3752693ef013b3f25d0274e904e23f0855af1cf3bb0ea2529482c16a92dd8d1b.jpg)
+
+在实践中，方程(2.11)中的概率称为数据比特 $a _ { k }$ 的先验概率（a priori probability）。将方程(2.10)和(2.11)代入方程(2.9)，可得 BCJR 算法的分支度量为
+
+$$
+\gamma _ { k } \left( u , q \right) = \frac { 1 } { \sqrt { 2 \pi \sigma ^ { 2 } } } \exp \left. \frac { - 1 } { 2 \sigma ^ { 2 } } \left| y _ { k } - \hat { r } \left( u , q \right) \right| ^ { 2 } \right. \times p \left( a _ { k } = \hat { a } \left( u , q \right) \right)\tag{2.12}
+$$
+
+可以看出，BCJR 算法的分支度量比维特比算法 [4] 的分支度量多了一项 $p ( a _ { k } = \hat { a } ( u , q ) )$。在所有数据比特 $a _ { k }$ 等概率出现的情况下，先验概率 $p ( a _ { k } = a )$ 是与 a 无关的常数。因此在这种情况下，BCJR 算法的分支度量与维特比算法的分支度量相等。然而，当每个数据比特 $a _ { k }$ 的出现概率不同时，如果预先知道关于每个 $a _ { k }$ 的信息，将有助于提高数据解码的准确性。
+
+#### 状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k + 1 } ( q )$ 的计算
+
+方程(2.7)中的状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k + 1 } ( q )$ 可以通过马尔可夫性质和递归技术（recursive）方便地计算。由方程(2.7)可得
+
+$$
+\alpha _ { k } \left( u \right) = p \left( \psi _ { k } = u ; \ \mathbf { y } _ { l < k } \right)\tag{2.13}
+$$
