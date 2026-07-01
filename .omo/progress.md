@@ -2,6 +2,6 @@
 
 | Chapter | Status | Last Line | Key Content |
 |---------|--------|-----------|-------------|
-| Ch1 | In Progress | 52 (chinese) / 55 (source) | 1.1 Digital data storage system - done |
+| Ch1 | In Progress | 110 (chinese) / 110 (source) | 1.1-1.2 done — HDD channel model, Lorentzian/erf pulse |
 
-**Current**: Chapter 1, Section 1.2, Source line 56
+**Current**: Chapter 1, Section 1.3, Source line 111
