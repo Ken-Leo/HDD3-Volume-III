@@ -113,3 +113,83 @@ $$
 
 ![](images/chapter_2/0f237b78c331bf9d3febf15d6fad5324092a214a2a29a82b925d71b5844349ba.jpg)  
 图2.8 (a) 卷积编码器 和 (b) 网格图
+
+### 2.1.2 解码
+
+在实践中，用卷积码编码的数据可以使用基于维特比算法 [13] 的解码器进行解码，即维特比检测器。下面给出卷积码解码的示例。
+
+例2.3 考虑图2.8(a)中的卷积编码器，其网格图如图2.8(b)所示。假设序列 $z _ { k }$ 是解码器需要解码的数据序列，请解码数据序列 $z _ { k } = \{ 1 1 ~ 0 1 ~ 1 0 ~ 1 1 ~ 0 0 \}$。
+
+解法 用 $(u, q)$ 表示从状态 u 到状态 q 的状态转移。在第 k 阶段的分支度量（branch metric）定义为
+
+$$
+\rho _ { k } \left( u , q \right) = \left| z _ { k } ^ { 0 } - \tilde { x } _ { k } \left( u , q \right) \right| ^ { 2 } + \left| z _ { k } ^ { 1 } - \tilde { y } _ { k } \left( u , q \right) \right| ^ { 2 }
+$$
+
+其中 $\tilde { x } _ { k } \left( u , q \right)$ 和 $\tilde { y } _ { k } \left( u , q \right)$ 是对应于状态转移 $(u, q)$ 的比特数据 $x _ { k }$ 和 $y _ { k }$。此外，在时刻 $k+1$ 时状态 q 的路径度量（path metric）定义为
+
+![](images/chapter_2/bfdcee2492d2e7984a48a41068316e14201c03ba80d353ab577b4acba9132c79.jpg)
+
+![](images/chapter_2/00d83815be7550f8bd3d127ac22877d31738af7978dec49a26468b9fae0b8694.jpg)  
+图2.9 网格图显示数据序列 $z _ { k } = \{ 1 1 ~ 0 1 ~ 1 0 ~ 1 1 ~ 0 0 \}$ 的解码过程
+
+$$
+\Phi _ { k + 1 } \left( q \right) = \operatorname* { m i n } _ { u } \left\{ \Phi _ { k } \left( u \right) + \rho _ { k } \left( u , q \right) \right\}
+$$
+
+因此维特比检测器的解码步骤如下：
+
+1) 对于每个阶段 k
+   对于每个状态 q
+   计算到达状态 q 的所有分支的分支度量 $\rho _ { k } \left( u , q \right)$
+   选择具有最小路径度量的分支
+   更新状态 q 在时刻 $k+1$ 的路径度量 $\Phi _ { k + 1 } \left( q \right)$
+   （对所有状态 q 重复）
+   （对所有阶段 k 重复）
+2) 从具有最小路径度量的路径解码输入数据 $x _ { k }$
+
+图2.9显示了网格图上的数据解码过程，其中只显示了到达每个状态的存留路径（survivor path）。每条分支旁的值是对应于状态转移 (u, q) 的分支度量 $\rho _ { k } \left( u , q \right)$，每个状态节点处的数字是路径度量 $\Phi _ { k } \left( q \right)$。从图中可以看出，卷积解码器给出的输入数据比特估计值为 $\hat { x } _ { k } = \left\{ 1 , 0 , 1 , 1 \right\}$。有关维特比检测器数据解码过程的详细步骤，可参见 [10] 的第4章。
+
+然而，当卷积码用作 Turbo 码的组成部分时，不能在 Turbo 解码器中使用维特比检测器，因为 Turbo 解码器仅使用比特数据的软信息工作（而维特比检测器输出的是硬信息或比特数据的估计值）。因此，用于解码卷积码的 Turbo 解码器必须使用基于 BCJR 算法 [18] 或 SOVA（soft-output Viterbi algorithm）[19] 的检测器。这些内容将在第2.2节和第3章中分别说明。
+
+## 2.2 BCJR 算法
+
+维特比检测器 [1, 13] 是一种最大似然（ML: maximum-likelihood）检测器，用于解码卷积码。其输出数据是待检测数据序列的估计值。或者说，ML 检测器使序列错误最小化，但不保证序列中的每个比特都是最优的。即 ML 检测器不能使每个比特的错误最小化。
+
+此外，维特比检测器不能用于迭代解码系统，因为该系统需要在检测器和纠错解码器之间交换软信息。因此，迭代解码系统必须使用最大后验概率检测器，称为"MAP 检测器（maximum a posteriori probability）"。MAP 检测器可以保证每个检测到的比特都是最优的（即每个比特的错误最小化）。
+
+本部分将解释 BCJR 算法 [18] 的工作原理，因为它是构建 MAP 检测器所使用的算法。该算法由 Bahl、Cock、Jelinek 和 Raviv 共同发明和开发，用于检测经过具有符号间干扰（ISI）和加性高斯白噪声（AWGN）的信道后的信号的最大后验概率（APP: a posteriori probability）。
+
+### 2.2.1 信道模型与网格图
+
+考虑图2.10中的信道模型。接收端接收到的信号（即待解码的信号）的第 k 个序列为
+
+![](images/chapter_2/98f482bfb4db09e868ad979b730a00ad8c3fb6261659dd759e0a9e2061a39768.jpg)
+
+![](images/chapter_2/13288854ed7e62697483a118c3cf31b6a8fd9eaeadd2cb114dc6cc44b508b4d5.jpg)  
+图2.10 信道模型
+
+![](images/chapter_2/f7031e73ef337e6de6bd95f65b0c3267b80bfbe843f60cf64742eb4366e54336.jpg)  
+图2.11 网格图第 k 阶段的状态转移 (u, q)
+
+$$
+y _ { k } = \sum _ { i = 0 } ^ { \nu } a _ { i } h _ { k - i } + n _ { k }\tag{2.4}
+$$
+
+其中 $a _ { k } \in { \mathcal { A } }$ 是从字符集 $\mathcal { A }$ 中选择的输入数据比特（例如二进制系统为 $\mathcal { A } = \{ 0 , 1 \}$ 或 $\{ - 1 , 1 \}$），$H ( D ) = \sum _ { k = 0 } ^ { \nu } h _ { k } D ^ { k }$ 是离散信道（discrete channel），$h _ { k }$ 是信道的第 k 个系数，ν 是信道存储器，$n _ { k }$ 是均值为零、方差为 $\sigma ^ { 2 }$ 的 AWGN，记为 $n _ { k } \sim \mathcal { N } ( 0 , \sigma ^ { 2 } )$，$r _ { k }$ 是信道的输出数据，L 是输入数据序列 $\{ a _ { k } \}$ 的长度。通常一个扇区的数据有 L = 4096 比特。假设发送端发送了 L 比特的输入数据序列 $\mathbf { a } = \left[ a _ { 0 } , . . . , a _ { L - 1 } \right]$，每个数据比特的可能值在集合 A 内，且在 $k < 0$ 和 $k > L - 1$ 的时间段内没有数据传输。因此，由方程(2.4)，接收端接收到的所有信号以向量形式表示为 $\mathbf { y } = \left\{ y _ { l } \right\} _ { 0 } ^ { L + \nu - 1 } = \left[ y _ { 0 } , . . . , y _ { L + \nu - 1 } \right]$。
+
+图2.11显示了信道 $h _ { k }$ 的网格图，其中 $\Psi _ { k } \equiv \left[ a _ { k - 1 } , a _ { k - 2 } , . . . , a _ { k - \nu } \right]$ 是时刻 k 的状态（state）（即时刻 k 所有移位寄存器中的值），$Q = \left| \mathcal { A } \right| ^ { \nu }$ 是所有可能的状态总数，第 k 阶段（k-th stage）是时刻 k 和时刻 $k+1$ 之间所有可能的分支（branch）组，$(u, q)$ 是表示从状态 u 到状态 q 的状态转移的符号。如果每个状态从 0 到 $Q-1$ 编号，其中状态 0 或 $\psi _ { k } \equiv \left[ 0 , 0 , . . . , 0 \right]$ 表示空闲状态（idle state），对应 $k \leq 0$ 和 $k \geq L + \nu - 1$。因此，可以说图2.11显示了网格图的第 k 阶段，对应于第 k 个输入数据比特 $a _ { k }$、第 k 个信道输出数据 $r _ { k }$ 和第 k 个接收端接收到的数据 $y _ { k }$。
+
+### 2.2.2 最优检测器
+
+在实践中，MAP 检测器被认为是最优检测器（optimal detector），因为它是能够保证每个数据比特的错误概率最小的数据检测器。例如，在判决第 k 个数据比特 $a _ { k }$ 时，MAP 检测器会计算后验概率（APP）即 $\operatorname* { P r } [ a _ { k } \mid \mathbf { y } ]$，它表示在给定序列 y 时数据比特 $a _ { k }$ 的概率。对于每个数据比特 $a _ { k }$，选择使 $\operatorname* { P r } [ a _ { k } \mid \mathbf { y } ]$ 最大的 $a _ { k }$ 值。MAP 检测器对 L 个数据比特逐个执行此操作。在实践中，如果知道网格图中每个状态转移 $(u, q)$ 的后验状态转移概率 $\operatorname* { P r } [ \psi _ { k } = u ; \Psi _ { k + 1 } = q \mid \mathbf { y } ]$，则 $\operatorname* { Pr } [ a _ { k } \mid \mathbf { y } ]$ 可以很容易地计算出来。
+
+BCJR 算法是一种在求解后验状态转移概率方面非常高效的算法。它通过将时刻 k 的状态转移概率 $\operatorname* { P r } [ \psi _ { k } = u ; \Psi _ { k + 1 } = q \mid \mathbf { y } ]$ 分解为三个部分：
+
+1) 第一部分依赖于过去接收到的所有数据，即 $\mathbf { y } _ { l < k } = \{ y _ { l } ; l < k \} = \{ y _ { l } \} _ { 0 } ^ { k - 1 }$
+
+2) 第二部分依赖于当前接收到的数据，即 $y _ { k }$
+
+3) 第三部分依赖于未来接收到的所有数据，即 ${ \bf y } _ { l > k } = \left\{ y _ { l } ; l > k \right\} = \left\{ y _ { l } \right\} _ { k + 1 } ^ { L + \nu - 1 }$
+
+根据贝叶斯规则，$\operatorname* { P r } [ \psi _ { k } = u ; \psi _ { k + 1 } = q \mid \mathbf { y } ]$ 可以重新整理为
