@@ -533,3 +533,395 @@ $$
 \beta _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \quad \mathrm { a n d } \quad \beta _ { 4 } \left( b \right) = 0 . 7 7 8 6
 $$
 $$
+
+## 后向递归
+
+6. 在时间3 (当 $k = 3$)，BCJR算法接收数据 $y _ { 3 } = 0 . 6$ 并计算所有分支度量，得到
+
+$$
+\gamma _ { 3 } \left( a , a \right) = \exp \left\{ - \pi \left| 0 . 6 - \left( - 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( - 1 ) ( 0 ) } { 2 } \right) \approx 0
+$$
+
+$$
+\gamma _ { 3 } \left( b , a \right) = \exp \left\{ - \pi \left| 0 . 6 - ( - 0 . 5 ) \right| ^ { 2 } \right\} \times \exp \left( { \frac { ( - 1 ) ( 0 ) } { 2 } } \right) \approx 0 . 0 2 2 3
+$$
+
+$$
+\gamma _ { 3 } \left( a , b \right) = \exp \left\{ - \pi \left| 0 . 6 - ( 0 . 5 ) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( + 1 ) ( 0 ) } { 2 } \right) \approx 0 . 9 6 9 1
+$$
+
+$$
+\gamma _ { 3 } \left( b , b \right) = \exp \left\{ - \pi \left| 0 . 6 - ( 1 . 5 ) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( + 1 ) ( 0 ) } { 2 } \right) \approx 0 . 0 7 8 5
+$$
+
+然后更新状态度量 $\beta _ { 3 } \left( a \right)$ 和 $\beta _ { 3 } \left( b \right)$ 如下
+
+$$
+\begin{array} { l } { { \beta _ { 3 } \left( a \right) = \Upsilon _ { 3 } \left( a , a \right) \beta _ { 4 } \left( a \right) + \Upsilon _ { 3 } \left( a , b \right) \beta _ { 4 } \left( b \right) } } \\ { { { } } } \\ { { = \left( 0 \right) \left( 0 . 2 2 1 4 \right) + \left( 0 . 9 6 9 1 \right) \left( 0 . 7 7 8 6 \right) = 0 . 7 5 4 5 4 } } \end{array}
+$$
+
+$$
+\begin{array} { l } { { \beta _ { 3 } \left( b \right) = \gamma _ { 3 } \left( b , a \right) \beta _ { 4 } \left( a \right) + \gamma _ { 3 } \left( b , b \right) \beta _ { 4 } \left( b \right) } } \\ { { { } } } \\ { { = \left( 0 . 0 2 2 3 \right) \left( 0 . 2 2 1 4 \right) + \left( 0 . 0 7 8 5 \right) \left( 0 . 7 7 8 6 \right) = 0 . 0 6 6 0 5 7 } } \end{array}
+$$
+
+根据方程(2.30)进行归一化，得到
+
+$$
+\begin{array} { l } { { \beta _ { 3 } \left( a \right) = 0 . 7 5 4 5 4 / \left( 0 . 7 5 4 5 4 + 0 . 0 6 6 0 5 7 \right) \approx 0 . 9 1 9 5 } } \\ { { \quad } } \\ { { \beta _ { 3 } \left( b \right) = 0 . 0 6 6 0 5 7 / \left( 0 . 7 5 4 5 4 + 0 . 0 6 6 0 5 7 \right) \approx 0 . 0 8 0 5 } } \end{array}
+$$
+
+然后根据方程(2.24)计算 $\lambda _ { p } \left( a _ { 3 } \right)$，即
+
+$$
+\begin{array} { c } { { \lambda _ { p } \left( a _ { 3 } \right) = \ln \left( { \frac { \displaystyle \alpha _ { 3 } \left( a \right) \gamma _ { 3 } \left( a , b \right) \beta _ { 4 } \left( b \right) + \displaystyle \alpha _ { 3 } \left( b \right) \gamma _ { 3 } \left( b , b \right) \beta _ { 4 } \left( b \right) } { \displaystyle \alpha _ { 3 } \left( a \right) \gamma _ { 3 } \left( a , a \right) \beta _ { 4 } \left( a \right) + \displaystyle \alpha _ { 3 } \left( b \right) \gamma _ { 3 } \left( b , a \right) \beta _ { 4 } \left( a \right) } } \right) } } \\ { { = \ln \left( { \frac { \displaystyle \left( 0 . 0 0 0 1 \right) \left( 0 . 9 6 9 1 \right) \left( 0 . 7 7 8 6 \right) + \displaystyle \left( 0 . 9 9 9 9 \right) \left( 0 . 0 7 8 5 \right) \left( 0 . 7 7 8 6 \right) } { \displaystyle \left( 0 . 0 0 0 1 \right) \left( 0 . 2 2 1 4 \right) + \displaystyle \left( 0 . 9 9 9 9 \right) \left( 0 . 0 2 2 3 \right) \left( 0 . 2 2 1 4 \right) } } \right) } } \end{array}
+$$
+
+$$
+\approx 2 . 5 2
+$$
+
+由于 $\lambda _ { p } \left( a _ { 3 } \right) > 0$，因此BCJR算法将数据比特 $a _ { 3 }$ 解码为 $\hat { a } _ { 3 } = + 1$
+
+注意：发送端实际发送的数据比特仅为 $\{ a _ { 0 } , a _ { 1 } , a _ { 2 } \}$，而数据比特 $a _ { 3 }$ 在系统中并不真实存在。它是由输入数据与信道进行卷积运算后产生的新增数据。然而，$\lambda _ { p } \left( a _ { 3 } \right)$ 的值仍可在迭代解码过程中加以利用。
+
+7. 在时间2 (当 $k = 2$)，BCJR算法接收数据 $y _ { 2 } = 0 . 3$ 并计算所有分支度量，得到
+
+$$
+\gamma _ { 2 } \left( a , a \right) = \exp \left\{ - \pi \left| 0 . 3 - \left( - 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { \left( - 1 \right) \left( 0 \right) } { 2 } \right) \approx 0 . 0 0 0 0 4
+$$
+
+$$
+\gamma _ { 2 } \left( b , a \right) = \exp \left\{ - \pi \left| 0 . 3 - \left( - 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( { \frac { ( - 1 ) ( 0 ) } { 2 } } \right) \approx 0 . 1 3 3 9
+$$
+
+$$
+\gamma _ { 2 } \left( a , b \right) = \exp \left\{ - \pi \left| 0 . 3 - \left( 0 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( { \frac { ( + 1 ) ( 0 ) } { 2 } } \right) \approx 0 . 8 8 1 9
+$$
+
+$$
+\gamma _ { 2 } \left( b , b \right) = \exp \left\{ - \pi \left| 0 . 3 - \left( 1 . 5 \right) \right| ^ { 2 } \right\} \times \exp \left( \frac { ( + 1 ) ( 0 ) } { 2 } \right) \approx 0 . 0 1 0 8
+$$
+
+然后更新状态度量 $\beta _ { 2 } \left( a \right)$ 和 $\beta _ { 2 } \left( b \right)$ 如下
+
+$$
+\begin{array} { l } { { \beta _ { 2 } \left( a \right) = \gamma _ { 2 } \left( a , a \right) \beta _ { 3 } \left( a \right) + \gamma _ { 2 } \left( a , b \right) \beta _ { 3 } \left( b \right) } } \\ { { \mathrm { } } } \\ { { = \left( 0 . 0 0 0 0 4 \right) \left( 0 . 9 1 9 5 \right) + \left( 0 . 8 8 1 9 \right) \left( 0 . 0 8 0 5 \right) = 0 . 0 7 1 0 3 } } \end{array}
+$$
+
+$$
+\begin{array} { l } { { \beta _ { 2 } \left( b \right) = \gamma _ { 2 } \left( b , a \right) \beta _ { 3 } \left( a \right) + \gamma _ { 2 } \left( b , b \right) \beta _ { 3 } \left( b \right) } } \\ { { \mathrm { } } } \\ { { \mathrm { } = \left( 0 . 1 3 3 9 \right) \left( 0 . 9 1 9 5 \right) + \left( 0 . 0 1 0 8 \right) \left( 0 . 0 8 0 5 \right) = 0 . 1 2 3 9 9 } } \end{array}
+$$
+
+根据方程(2.30)进行归一化，得到
+
+$$
+\beta _ { 2 } \left( a \right) = 0 . 0 7 1 0 3 / \left( 0 . 0 7 1 0 3 + 0 . 1 2 3 9 9 \right) \approx 0 . 3 6 4 2
+$$
+
+$$
+\beta _ { 2 } \left( b \right) = 0 . 1 2 3 9 9 / \left( 0 . 0 7 1 0 3 + 0 . 1 2 3 9 9 \right) \approx 0 . 6 3 5 8
+$$
+
+然后根据方程(2.24)计算 $\lambda _ { p } \left( a _ { 2 } \right)$，即
+
+$$
+\begin{array} { r l } & { \lambda _ { p } \left( a _ { 2 } \right) = \ln \left( \frac { \alpha _ { 2 } \left( a \right) \gamma _ { 2 } \left( a , b \right) \beta _ { 3 } \left( b \right) + \alpha _ { 2 } \left( b \right) \gamma _ { 2 } \left( b , b \right) \beta _ { 3 } \left( b \right) } { \alpha _ { 2 } \left( a \right) \gamma _ { 2 } \left( a , a \right) \beta _ { 3 } \left( a \right) + \alpha _ { 2 } \left( b \right) \gamma _ { 2 } \left( b , a \right) \beta _ { 3 } \left( a \right) } \right) } \\ & { \qquad = \ln \left( \frac { \left( 0 . 9 9 9 9 \right) \left( 0 . 8 8 1 9 \right) \left( 0 . 0 8 0 5 \right) + \left( 0 . 0 0 0 1 \right) \left( 0 . 0 1 0 8 \right) \left( 0 . 0 8 0 5 \right) } { \left( 0 . 9 9 9 9 \right) \left( 0 . 0 0 0 0 4 \right) \left( 0 . 9 1 9 5 \right) + \left( 0 . 0 0 0 1 \right) \left( 0 . 1 3 3 9 \right) \left( 0 . 9 1 9 5 \right) } \right) } \end{array}
+$$
+
+由于 $\lambda _ { p } \left( a _ { 2 } \right) > 0$，因此BCJR算法将数据比特 $a _ { 2 }$ 解码为 $\hat { a } _ { 2 } = + 1$
+
+8. 在时间1和0 (当 $k = \{ 1 , 0 \}$)，BCJR算法接收数据 $y _ { 1 } = - 0 . 2$ 和 $y _ { 0 } = 0 . 9$，按照步骤6和7中描述的相同方法计算所有分支度量并更新状态度量 ${ \beta } _ { k } \left( u \right)$（$u \in \{ a , b \}$），得到 $\Upsilon _ { k } \left( u , q \right)$ 和 ${ \beta } _ { k } \left( u \right)$ 如图2.14所示。因此在后向递归结束时得到
+
+![](images/chapter_2/010e5053e2bfd182f51dcc744acc26471e349a760563ea4cbefeea23c6c1a8e9.jpg)
+
+即BCJR算法将数据比特 $a _ { 0 }$ 和 $a _ { 1 }$ 解码为 $\hat { a } _ { 0 } = + 1$ 和 $\hat { a } _ { 1 } = - 1$
+
+9. 算法结束时，BCJR算法给出的数据比特 $a _ { k }$ 的LLR值为 $\left\{ \lambda _ { p } ( a _ { 0 } ) , \lambda _ { p } ( a _ { 1 } ) , \lambda _ { p } ( a _ { 2 } ) , \lambda _ { p } ( a _ { 3 } ) \right\} = \left\{ 1 8 . 2 8 , - 8 . 2 4 , 7 . 2 , 2 . 5 2 \right\}$，解码得到的数据比特为 $\left\{ \hat { a } _ { 0 } , \hat { a } _ { 1 } , \hat { a } _ { 2 } \right\} = \left\{ 1 , - 1 , 1 \right\}$，与发送端发送的数据比特 $\{ a _ { k } \}$ 一致，表明使用BCJR算法解码数据时没有发生错误。
+
+## 例2.5
+
+对于图2.10中的信道模型，假设输入数据序列 $a _ { k } =$ {1, −1, 1}，信道 $H ( D ) = 1 - D ^ { 2 }$，噪声 $n _ { k } = \{ 0 . 2 , 0 . 3 , - 0 . 2 , - 0 . 5 , 0 . 3 \}$，请展示使用BCJR算法解码数据 $y _ { k }$ 的步骤。假设系统不知道数据比特 $a _ { k }$ 的先验信息。
+
+解：信道输出数据 $r _ { k }$ 可由下式求得
+
+$$
+r _ { k } = a _ { k } * h _ { k } = \{ r _ { 0 } , r _ { 1 } , r _ { 2 } , r _ { 3 } , r _ { 4 } \} = \{ 1 , - 1 , 0 , 1 , - 1 \}
+$$
+
+并且
+
+$$
+y _ { k } = r _ { k } + n _ { k } = \{ 1 . 2 , ~ - 0 . 7 , ~ - 0 . 2 , ~ 0 . 5 , ~ - 0 . 7 \} = \{ y _ { 0 } , ~ y _ { 1 } , ~ y _ { 2 } , ~ y _ { 3 } , ~ y _ { 4 } \}
+$$
+
+然后构造信道 $H ( D ) = 1 - D ^ { 2 }$ 的网格图，如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
+
+![](images/chapter_2/6b08d63986f4b60496f997acdc682be4ca055cd55d0526e2346e874197ca6596.jpg)
+
+![](images/chapter_2/c51f2752bb27ad1dc485eb4607713987199b82dfb0ddfcf79e13d1db4f691a2a.jpg)  
+图2.15 信道 $H ( D ) = 1 - D ^ { 2 }$ 的网格图，输入数据为 $a _ { k } \in \{ \pm 1 \}$
+
+![](images/chapter_2/f8f38767bb2e2dcca2be9aa2e7bee99a6fc950a0b3b532e62edc6ee65cc77896.jpg)  
+图2.16 例2.5中BCJR算法的内部计算
+
+然后使用与例2.4中相同的BCJR算法步骤解码数据，得到分支度量和状态度量如图2.16所示。其中与每条分支相邻的数值是 $\Upsilon _ { k } \left( u , q \right)$，而与每个状态节点相邻的数值是以分数 $\alpha _ { k } \left( u \right) / \beta _ { k } \left( u \right)$ 形式表示的状态度量 $\alpha _ { k } \left( u \right)$ 和 ${ \beta } _ { k } \left( u \right)$，其中 $k \in \{ 0 , 1 , . . . , 4 \}$，$u \in \{ a , \ b , \ c , \ d \}$。
+
+利用图2.16所示的分支度量和状态度量，可以根据方程(2.24)计算数据比特 $a _ { k }$ 的LLR值，得到
+
+$$
+\left\{ \lambda _ { p } \left( a _ { 0 } \right) , \lambda _ { p } \left( a _ { 1 } \right) , \lambda _ { p } \left( a _ { 2 } \right) , \lambda _ { p } \left( a _ { 3 } \right) , \lambda _ { p } \left( a _ { 4 } \right) \right\} = \left\{ 4 . 7 7 8 , - 2 7 . 6 4 6 , 4 . 7 7 8 , - 1 2 . 5 6 6 , 4 . 5 2 5 \right\}
+$$
+
+解码得到的数据比特为
+
+$$
+\left\{ \hat { a } _ { 0 } , \hat { a } _ { 1 } , \hat { a } _ { 2 } \right\} = \left\{ 1 , - 1 , 1 \right\}
+$$
+
+与发送端发送的数据比特 $a _ { k }$ 一致（最后两个比特在系统中并不真实存在，而是由输入数据与信道进行卷积运算产生的），表明使用BCJR算法解码数据时没有发生错误。
+
+![](images/chapter_2/fa1f8beb7d1e3137803252dbcef8176fab2089a483ea08aaf4dfa2e54235286d.jpg)
+
+![](images/chapter_2/3361b0e876cf088ebebd18ae31ca14f4fc5d05c907930d2e36532cf031d3117a.jpg)  
+图2.17 使用Turbo编解码的系统结构
+
+## 2.3 Turbo 码
+
+Turbo 码（turbo code）是一种信道编解码方法，由 Berrou、Glavieux 和 Thitimajshima 于1993年提出[3]。Turbo 码的优点包括：即使在信道 SNR 较低时也能良好工作、纠错能力强、且性能接近香农定理[25]的极限，同时编解码过程并不复杂。在历史上（1993年之前），没有任何信道编码方法能够达到这种性能，即使能做到也需要极其复杂的解码电路。因此，Turbo 码的发现被认为是重要的突破，极大地改变了信道编码领域的研究方向。在过去的许多年中，与 Turbo 码相关的研究和开发成果层出不穷。此外，Turbo 码已被广泛应用于多种应用中，例如第三代移动通信系统（3G）已将 Turbo 码作为基站与移动电话之间通信的标准。
+
+Turbo 码的基本结构与其他编解码方法有三点不同：采用并行级联编码（parallel concatenated encoding）、使用反馈编码器（feedback encoder）、以及采用迭代解码（iterative decoding）。图2.17显示了使用 Turbo 编解码的系统结构。二进制数据序列 $x _ { k } \in \{ 0 , 1 \}$ 被送入 Turbo 编码器，输出三路数据序列。然后这三路序列被送入复用器（MUX: multiplexer）合并为单一数据序列 $d _ { k }$，再送入映射器（mapper）将比特值0转换为 -1。得到的数据序列 $s _ { k }$ 被发送到受噪声 $n _ { k }$ 干扰的接收端。接收端接收到的信号 $z _ { k }$ 通过解复用器（DEMUX: demultiplexer）将 $z _ { k }$ 分离为三路数据序列，然后送入 Turbo 解码器进行数据解码。以下将解释图2.17中 Turbo 编解码系统各组件的工原理。
+
+![](images/chapter_2/6fe4482e7091d53e17064d2c443c6c6bedc9620116368d5ce45a1915db0f3227.jpg)  
+图2.18 Turbo 编码器基本结构
+
+### 2.3.1 Turbo 编码器
+
+Turbo 编码器的结构如图2.18所示。输入数据序列 $x _ { k }$ 被送入 Turbo 编码器的三个组成部分，分别转换为数据序列 $x _ { k }$、$y _ { k } ^ { 1 }$ 和 $y _ { k } ^ { 2 }$（即该 Turbo 编码器的码率为1/3）。从图2.18可以看出，数据序列 $y _ { k } ^ { 1 }$ 是通过将数据序列 $x _ { k }$ 送入子编码器1得到的，而数据序列 $y _ { k } ^ { 2 }$ 则是将 $x _ { k }$ 送入交织器（interleaver，用符号 $\pi$ 表示）以打乱数据序列 $x _ { k }$ 中每个数据的位置，然后将结果送入子编码器2，子编码器2的基本结构可以与子编码器1相同或不同。
+
+### 2.3.2 复用器与解复用器
+
+复用器（MUX: multiplexer）用于将从编码得到的多个数据序列合并为一个数据序列，而解复用器（DEMUX: demultiplexer）的功能与复用器相反，即将输入的数据序列分离为多个数据序列，使其与送入复用器的数据序列相对应，如图2.19所示。
+
+![](images/chapter_2/087e69dd1babc777f9729b0f10cfed167172f4e737adc2a3be5dc86febe51c4d.jpg)  
+(a)
+
+![](images/chapter_2/5f8f8b80f3d62e0f0b84faa5bda202967218bd71be434eb7561dc55ffeaeefc6.jpg)  
+(b)  
+图2.19 (a) 复用器与 (b) 解复用器的工作原理
+
+例如，从图2.19出发，假设 Turbo 编码得到的三路数据序列为 $\left\{ x _ { k } \right\} = \left\{ x _ { 0 } , x _ { 1 } , x _ { 2 } \right\}$、$\left\{ y _ { k } ^ { 1 } \right\} = \left\{ y _ { 0 } ^ { 1 } , y _ { 1 } ^ { 1 } , y _ { 2 } ^ { 1 } \right\}$ 和 $\left\{ y _ { k } ^ { 2 } \right\} = \left\{ y _ { 0 } ^ { 2 } , y _ { 1 } ^ { 2 } , y _ { 2 } ^ { 2 } \right\}$。当这三路序列通过复用器后，输出信号为 $\left\{ d _ { k } \right\} = \left\{ x _ { 0 } , y _ { 0 } ^ { 1 } , y _ { 0 } ^ { 2 } , x _ { 1 } , y _ { 1 } ^ { 1 } , y _ { 1 } ^ { 2 } , x _ { 2 } , y _ { 2 } ^ { 1 } , y _ { 2 } ^ { 2 } \right\}$。类似地，在接收端，如果送入解复用器的数据序列为 $\left\{ \boldsymbol { z } _ { k } \right\} = \left\{ \tilde { x } _ { 0 } , \tilde { y } _ { 0 } ^ { 1 } , \tilde { y } _ { 0 } ^ { 2 } , \tilde { x } _ { 1 } , \tilde { y } _ { 1 } ^ { 1 } , \tilde { y } _ { 1 } ^ { 2 } , \tilde { x } _ { 2 } , \tilde { y } _ { 2 } ^ { 1 } , \tilde { y } _ { 2 } ^ { 2 } \right\}$（其中 $\tilde { m }$ 是受噪声影响后的数据 $m$），则输出结果为三路数据序列 $\left\{ \tilde { x } _ { k } \right\} = \left\{ \tilde { x } _ { 0 } , \tilde { x } _ { 1 } , \tilde { x } _ { 2 } \right\}$、$\left\{ \tilde { y } _ { k } ^ { 1 } \right\} = \left\{ \tilde { y } _ { 0 } ^ { 1 } , \tilde { y } _ { 1 } ^ { 1 } , \tilde { y } _ { 2 } ^ { 1 } \right\}$ 和 $\left\{ \tilde { y } _ { k } ^ { 2 } \right\} = \left\{ \tilde { y } _ { 0 } ^ { 2 } , \tilde { y } _ { 1 } ^ { 2 } , \tilde { y } _ { 2 } ^ { 2 } \right\}$，与送入复用器的数据序列相对应。
+
+### 2.3.3 Turbo 解码器
+
+Turbo 码的解码过程是迭代的，意味着不是只有一个解码器仅执行一次解码，而是由多个子解码器组成（见图2.20）。每个子解码器交替工作，即当一个正在解码时，另一个处于等待状态。一个解码器的解码结果被传递给另一个解码器，用作下一轮解码的辅助信息。两个解码器轮流工作，直到结果收敛到适当的值。注意子解码器的数量与发送端子编码器的数量相同，它们相互配合工作[18]。
+
+图2.20显示了Turbo解码器的基本结构，其工作步骤如下。接收端收到的信号通过解复用器后，得到数据序列 $x _ { k }$、$y _ { k } ^ { 1 }$ 和 $y _ { k } ^ { 2 }$ 的估计值，即 $\tilde { x } _ { k }$、$\tilde { y } _ { k } ^ { 1 }$ 和 $\tilde { y } _ { k } ^ { 2 }$。然后按照以下步骤进行 Turbo 解码：
+
+![](images/chapter_2/10fd225baba7005480e44b98c30e86646c8c8bd540024127f36306476ee93065.jpg)  
+图2.20 Turbo 解码器基本结构
+
+1. 将数据序列 $\tilde { x } _ { k } + \lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 的和与数据序列 $\tilde { y } _ { k } ^ { 1 }$ 送入子解码器1。其中 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 是数据比特 $x _ { k }$ 的先验信息（即数据比特 $x _ { k }$ 的外部信息 LLR）。在第一轮解码中，$\lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 的值为零（意味着每个数据比特 $x _ { k } = 0$ 或 $x _ { k } = 1$ 的概率相等）。解码结果包含两部分：第一部分是数据比特 $x _ { k }$ 的 LLR 值，即 $\lambda ( x _ { k } )$；第二部分是数据比特 $y _ { k } ^ { 1 }$ 的 LLR 值，即 $\lambda \left( y _ { k } ^ { 1 } \right)$。
+
+2. 计算从子解码器1得到的数据比特 $x _ { k }$ 的外部信息 LLR，即 $\lambda _ { 1 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$，关系如下
+
+$$
+\lambda _ { 1 } ^ { \mathrm { e x t } } \left( x _ { k } \right) = \lambda \left( x _ { k } \right) - \lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)
+$$
+
+3. $\lambda _ { 1 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 被送入交织器 ($\pi$) 后，作为从子解码器1得到的先验信息传递给子解码器2。注意，在子解码器1和2之间需要执行交织 $\pi { \left( x _ { k } \right) }$ 操作，以便打乱数据比特的顺序，使其与子解码器2中使用的数据比特顺序一致。
+
+4. 从子解码器1得到的先验信息和数据序列 $\tilde { y } _ { k } ^ { 2 }$ 被送入子解码器2。解码结果包含两部分：第一部分是数据比特 $\pi \big ( \boldsymbol { x } _ { k } \big )$ 的 LLR 值，即 $\lambda { \Big ( } \pi { \Big ( } x _ { k } { \Big ) } { \Big ) }$；第二部分是数据比特 $y _ { k } ^ { 2 }$ 的 LLR 值，即 $\lambda \left( y _ { k } ^ { 2 } \right)$。
+
+5. $\lambda { \Big ( } \pi { \Big ( } x _ { k } { \Big ) } { \Big ) }$ 被送入解交织器 $\left( \pi ^ { - 1 } \right)$，得到 $\lambda ( x _ { k } )$。该值用于判断每个数据比特应为0还是1（当达到 Turbo 解码预设的迭代次数时）。
+
+6. 计算从子解码器2得到的数据比特 $x _ { k }$ 的外部信息 LLR，即 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$，关系如下
+
+$$
+\lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right) = \lambda \left( x _ { k } \right) - \lambda _ { 1 } ^ { \mathrm { e x t } } \left( x _ { k } \right)
+$$
+
+7. 步骤 $1-6$ 构成一轮完整的 Turbo 解码。下一轮 Turbo 解码将返回到步骤1重新开始，此时数据序列 $\tilde { x } _ { k } + \lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 的和会发生变化，因为 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( x _ { k } \right)$ 是上一轮 Turbo 解码得到的新值，但数据序列 $\tilde { x } _ { k }$ 保持不变。
+
+8. 当 Turbo 解码达到预设的迭代次数后，使用从子解码器2得到的 LLR 值 $\lambda ( x _ { k } )$ 送入阈值检测器（threshold detector）来估计最优的数据序列 $x _ { k }$，得到 $\hat { x } _ { k }$ 的估计值，关系如下
+
+$$
+\hat { x } _ { k } = \left\{ { 0 , \ \mathrm { i f } \ \lambda \big ( { x } _ { k } \big ) \leq 0 } \right.\tag{2.31}
+$$
+
+注意，在子解码器之间传递的信息仅限于外部信息部分。仅在子解码器之间交换这部分信息被认为是 Turbo 码成功的关键因素。
+
+### 2.3.4 交织器
+
+交织器（interleaver）的功能是打乱每个输入数据比特的位置，使输出数据尽可能具有随机性。换言之，交织器的作用是将可能发生在连续多个比特错误（error burst）中的每个错误比特分散到数据序列的其他位置。因此，交织器被认为是影响 Turbo 码性能的重要因素[26]，有助于降低错误平层（error floor）[2, 4]的影响。在实际应用中，性能最优的交织器必须使其输出端的数据序列尽可能具有随机性。因此，理想交织器（ideal interleaver）就是随机交织器（random interleaver）[26]，但在实际中难以实现。因此，设计适合信道的交织器以获得最佳性能是至关重要的（详见[26]）。本节将介绍几种值得关注的交织器工作原理。
+
+## 行-列交织器
+
+行-列交织器（row-column interleaver）是最简单的交织器，其功能是打乱数据块内的数据位置。这种交织器具有存储器的特性，数据按行写入存储器，按列读出。例如，假设一个数据块共有20个数据，即 $\{ \mathrm { X } _ { 1 } \ \mathrm { X } _ { 2 } \ \mathrm { X } _ { 3 } \ \dots \ \mathrm { X } _ { 2 0 } \}$。这些数据按行写入存储器，如图2.21(a)所示。然后交织器按列读出数据，得到输出数据，如图2.21(b)所示。在实际应用中，交织器使用的行数和列数可根据应用的特点进行调整。
+
+## 伪随机交织器
+
+伪随机交织器（pseudo-random interleaver）[26] 由伪随机数生成器或查找表（look-up table）定义，查找表中包含从1到N的随机排列数字，其中N是要进行位置交换的数据比特数（即送入交织器的数据块大小）。这种交织器的性能取决于交织器的大小（N越大，性能越好）。通常，选择使用这种交织器的标准是基于系统仿真来确定哪种交织器具有最佳性能。
+
+## S-随机交织器
+
+S-随机交织器（S-random interleaver）[27] 的工作方式与伪随机交织器类似，但附加了约束条件：输入数据序列中相距小于或等于S个位置的所有数据比特，在输出时都必须相距不小于S个位置。
+
+![](images/chapter_2/fac3563a103b1d5d0b08c509e4402d76dff1068acdf3d0960927c906ae7f1771.jpg)
+
+<table><tr><td>$X _ { 1 }$</td><td>$X _ { 2 }$</td><td>$X _ { 3 }$</td><td>$X _ { 4 }$</td></tr><tr><td>$X _ { 5 }$</td><td>$X _ { 6 }$</td><td>$X _ { 7 }$</td><td>$X _ { 8 }$</td></tr><tr><td>$X _ { 9 }$</td><td>$\Chi _ { 1 0 }$</td><td>$\Chi _ { 1 1 }$</td><td>$X _ { 1 2 }$</td></tr><tr><td>$\mathrm { X } _ { 1 3 }$</td><td>$X _ { 1 4 }$</td><td>$\mathrm { X } _ { 1 5 }$</td><td>$X _ { 1 6 }$</td></tr><tr><td>$X _ { 1 7 }$</td><td>$X _ { 1 8 }$</td><td>$\Chi _ { 1 9 }$</td><td>$\Chi _ { 2 0 }$</td></tr></table>
+
+(a) 按行写入数据
+
+<table><tr><td>$X _ { 1 }$</td><td>$X _ { 5 }$</td><td>$X _ { 9 }$</td><td>$X _ { 1 3 }$</td><td>$X _ { 1 7 }$</td><td>$X _ { 2 }$</td><td>$X _ { 6 }$</td><td>$\Chi _ { 1 0 }$</td><td>$X _ { 1 4 }$</td><td>$X _ { 1 8 }$</td><td>••</td><td>••</td><td>$\Chi _ { 2 0 }$</td></tr></table>
+
+(b) 按列读出结果  
+图2.21 行-列交织器的数据写入和读出方式
+
+约束条件 S 用于确保长度小于 S 个采样点的连续错误比特被分散到数据序列的不同位置。在实际应用中，S 必须小于 N/2 的平方根[28]，并且这种交织器的增益通常大于 S。
+
+## 其他类型交织器
+
+此外，还有许多其他类型的交织器，每种交织器适用于不同的应用场景。在实际中，交织器是针对每个应用的使用条件进行设计的（目前尚无明确规定哪种交织器适用于哪种应用）。
+
+例如，对于短数据序列，奇偶交织器（odd-even interleaver）[26] 在低 SNR 条件下性能优于伪随机交织器，但在高 SNR 条件下性能低于伪随机交织器。此外，对于长数据序列，S-随机交织器的性能优于伪随机交织器。
+
+### 2.3.5 实验结果
+
+本节将展示图2.17中信道下 Turbo 编解码系统的仿真结果。输入数据序列 $x _ { k } \in \{ 0 , 1 \}$ 的长度为4096比特，周期为 T，送入如图2.18所示结构的 Turbo 编码器。本实验中使用的子编码器1和2如图2.6所示，使用的交织器为 S-随机交织器，$S = 14$。Turbo 编码的结果是三路数据序列 $x _ { k }$、$y _ { k } ^ { 1 }$ 和 $y _ { k } ^ { 2 }$。然后将这三路序列送入复用器合并为单一数据序列 $d _ { k }$，再送入映射器将比特值0转换为 -1。接收端接收到的信号 $z _ { k }$ 受噪声 $n _ { k } \sim \mathcal N \left( 0 , \sigma ^ { 2 } \right)$（其中 $\sigma ^ { 2 } = N _ { 0 } / ( 2 T )$）干扰，被送入解复用器将 $z _ { k }$ 分离为三部分数据序列 $\tilde { x } _ { k }$、$\tilde { y } _ { k } ^ { 1 }$ 和 $\tilde { y } _ { k } ^ { 2 }$，然后送入如图2.20所示结构的 Turbo 解码器进行数据解码，使用的迭代次数为10次。
+
+![](images/chapter_2/e8dd18e03e587cf89a8886a9155ef85ecc7062d2c8e299968a1518edc3a82ee2.jpg)  
+图2.22 不同迭代次数下 Turbo 系统的性能
+
+图2.22显示了不同迭代次数下 Turbo 系统的性能，其中 y 轴为误比特率（BER: bit-error rate），x 轴为编码比特能量与单边功率谱密度 $N _ { 0 }$ 之比，定义为
+
+$$
+\frac { E _ { c } } { N _ { 0 } } = 1 0 \log _ { 1 0 } \left( \frac { E _ { b } } { R N _ { 0 } } \right)\tag{2.32}
+$$
+
+单位为分贝（dB），其中 $E _ { b } = 1$ 为输入数据比特能量，$R = 1 / 3$ 为码率。从图中可以看出，系统性能随迭代次数的增加而提高。其中"0.5 次迭代"指的是尚未进行迭代操作时的系统性能（即使用图2.20中从子解码器1获得的 $\lambda ( x _ { k } )$ 值计算 BER）。然而，当 $E _ { c } / N _ { 0 }$ 较高时，系统在特定迭代次数下的性能开始趋于稳定，这种现象称为系统出现错误平层。在实际应用中，可以通过多种方法解决此问题，例如使用预编码器（precoder）[29]等。
+
+![](images/chapter_2/277fbe0801f43ffebda5b8ab63484a158d1ffa6265ad817de43d2bc7c3794c38.jpg)  
+图2.23 不同 $E _ { b } / N _ { 0 }$ 水平下 Turbo 系统的性能
+
+此外，图2.23显示了不同 $E _ { c } / N _ { 0 }$ 水平下 Turbo 系统的性能，其中 y 轴为 BER，x 轴为迭代解码次数。可以清楚地看出，随着迭代次数的增加，系统性能提高（BER降低）。当 $E _ { c } / N _ { 0 }$ 增加到较高水平时，系统在特定迭代次数下的性能开始趋于稳定。
+
+### 2.3.6 串行级联 Turbo 编解码器
+
+图2.17、2.18和2.20所示的编解码系统是使用并行级联 Turbo 码（parallel concatenated turbo code）的结构。本节将介绍串行级联 Turbo 码（serial concatenated turbo code），它是第2.4节将要讨论的 Turbo 均衡的基础。
+
+串行级联 Turbo 码是将两个卷积编码器通过交织器串行连接而成[30]。图2.24显示了一个码率为 $R = 1 / 4$ 的串行级联 Turbo 编码器示例，其中外部编码器（outer encoder）是一个生成多项式为 [1, 1 D]、码率为1/2的系统编码器（systematic encoder），而内部编码器（inner encoder）是一个生成多项式为 $\left[ 1 , \ 1 / \left( 1 \oplus D ^ { 2 } \right) \right]$、码率为1/2的递归系统卷积编码器（recursive systematic convolutional encoder）。
+
+![](images/chapter_2/c9740a861f55d7f5249bb06ba23b59bd180b1c5116389635c2ae7b670e47d848.jpg)  
+图2.24 串行级联 Turbo 编码器
+
+![](images/chapter_2/61720ab2df095af998bc7a02b15b8e866e01d729ca7b1c56772f7e5d01ac94b8.jpg)  
+图2.25 串行级联 Turbo 解码器
+
+同样地，图2.25显示了串行级联 Turbo 解码器，其结构与并行级联 Turbo 解码器类似，即对应于外部码和内部码的 SISO 解码器之间交换软信息（soft information）。解码步骤如下：
+
+1. 内部解码器（inner decoder）使用数据序列 $z _ { k }$ 和作为数据序列 $w _ { k }$ 先验信息的外部信息 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( w _ { k } \right)$ 进行工作，输出数据比特 $w _ { k }$ 的软信息 $\lambda _ { \scriptscriptstyle 1 } \left( w _ { \boldsymbol k } \right)$。
+
+2. 软信息 $\lambda _ { \scriptscriptstyle 1 } \left( w _ { \boldsymbol k } \right)$ 被送入解交织器 $( \pi ^ { - 1 } )$ 以打乱数据位置，得到数据比特 $u _ { k }$ 的软信息 $\lambda _ { \mathrm { l } } \left( u _ { k } \right)$。
+
+3. 计算外部信息 $\lambda _ { 1 } ^ { \mathrm { e x t } } \left( u _ { k } \right) = \lambda _ { 1 } \left( u _ { k } \right) - \lambda _ { 2 } ^ { \mathrm { e x t } } \left( u _ { k } \right)$，其中 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( u _ { k } \right)$ 是从外部解码器得到的数据比特 $u _ { k }$ 的外部信息。
+
+4. 外部解码器（outer decoder）使用外部信息 $\lambda _ { 1 } ^ { \mathrm { e x t } } \left( u _ { k } \right)$ 进行工作，输出编码比特的软信息 $\lambda _ { 2 } \left( u _ { k } \right)$ 和信息比特的软信息 $\lambda ( x _ { k } )$ [31]。
+
+5. 计算从外部解码器得到的外部信息 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( u _ { k } \right) = \lambda _ { 2 } \left( u _ { k } \right) - \lambda _ { 1 } ^ { \mathrm { e x t } } \left( u _ { k } \right)$。
+
+6. 外部信息 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( u _ { k } \right)$ 被送入交织器 $( \pi )$ 以打乱数据位置，得到数据比特 $w _ { k }$ 的外部信息 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( w _ { k } \right)$，供内部解码器在下一轮解码中使用。
+
+7. 步骤 $1-6$ 构成一轮完整的串行级联 Turbo 解码。下一轮 Turbo 解码将返回到步骤1重新开始。此时 $z _ { k }$ 保持不变，但 $\lambda _ { 2 } ^ { \mathrm { e x t } } \left( w _ { k } \right)$ 会变为上一轮 Turbo 解码得到的新值。
+
+8. 当 Turbo 解码达到预设的迭代次数后，使用从外部解码器得到的 $\lambda ( x _ { k } )$ 值送入阈值检测器，根据方程(2.31)估算 $x _ { k }$。
+
+注意：图2.24和2.25中的串行级联 Turbo 编解码器已分别包含复用器（MUX）和解复用器（DEMUX）（与图2.18和2.20中的编解码器结构相比较）。
+
+## 2.4 Turbo 均衡
+
+均衡（equalization）是用于解决由信道引起的失真（distortion）问题的方法，这种失真导致信道输出端的信号波形发生畸变。通常，数字通信系统中的接收端会使用均衡器（equalizer）来减少信号失真造成的影响。
+
+考虑图2.26中的编码系统（coded system）。输入数据序列 $x _ { k } \in$ {0, 1} 被送入纠错编码器（ECC encoder）、交织器（interleaver）和映射器（mapper）后，得到数据序列 $s _ { k } \in \{ \pm 1 \}$。然后数据序列 $s _ { k }$ 通过受噪声 $n _ { k }$ 干扰的信道（channel），接收端收到的信号就是数据序列 $z _ { k }$。
+
+![](images/chapter_2/9290299c1583e07e9ecb6c464a2623fbc411f0199722b73f7b54a15b52c4a8c0.jpg)  
+图2.26 包含发送端和接收端A、B、C的数字通信系统结构
+
+接收端的主要功能是估计从发送端发送的数据（即估计 $x _ { k }$ 或 $\hat { x } _ { k }$），可以通过以下三种方式实现：
+
+第一种方式（接收端A）作为最优检测器（optimal detector），因为它使数据解码的错误最小化。即接收端A必须利用关于信道、交织器、映射器和ECC编码器的所有知识来计算并找到最可能的数据序列 $x _ { k }$。因此，通常接收端A的复杂度非常高，无法在实际应用中使用。
+
+第二种方式（接收端B）是不使用迭代解码过程的常规接收端（conventional receiver）的特性。接收端B通过另一种方式解决信号失真问题，即将信道视为具有某个码率的卷积编码器，可以使用网格图进行数据解码。如果信道抽头（tap）数量不多，这种方法是可以实现的，因为抽头数量会影响网格图中的状态数[4]。然而，如果信道抽头数量较多，则将均衡过程分为两个步骤：
+
+第一步是将信号调整为具有少量抽头的部分响应目标或PR目标（partial-response target）[10, 32]，其频率响应尽可能与信道的频率响应一致。这一步有助于减少噪声放大（noise enhancement）的问题，并使整个系统的总响应具有有限数量的抽头。
+
+第二步是进行最大似然（ML: maximum-likelihood）或最大后验（MAP: maximum a posteriori）数据解码。
+
+这种分为两步的均衡过程是部分响应最大似然（PRML: partial-response maximum-likelihood）技术的基础，该技术广泛应用于磁记录系统[32]。
+
+完成数据检测后，得到数据序列 $s _ { k }$ 的估计值（$\hat { s } _ { k }$）或数据比特 $s _ { k }$ 的软信息 $\lambda { \left( s _ { k } \right) }$，具体取决于所使用的检测器类型。例如，如果使用维特比检测器，则输出为 $\hat { s } _ { \scriptscriptstyle k }$；如果使用 BCJR 检测器，则输出为 $\lambda { \left( s _ { k } \right) }$。然后检测器将结果发送给解映射器（de-mapper）、解交织器（deinterleaver）和纠错解码器（ECC decoder），以估计数据序列 $x _ { k }$ 或 $\hat { x } _ { k }$。
+
+第三种方式（接收端C）是 Turbo 均衡（turbo equalization）过程的结构。实际上，Turbo 概念（使用两个子解码器交换软信息以解码数据）也可以应用于均衡，这种技术称为 Turbo 均衡，使用该技术的接收端称为"Turbo 均衡器（turbo equalizer）"[21]。该系统可以被视为串行级联 Turbo 码，其中信道充当内部码（inner code），ECC编码器充当外部码（outer code）。此外，解码器的结构与图2.25中的串行级联 Turbo 解码器相同，只是内部解码器被替换为 SISO 均衡器（SISO equalizer），如图2.26或图2.27所示。
+
+![](images/chapter_2/8f10f79722d0453fcbea376b1d4c8fa731bc35edff42886375b3e64a0f54ea1c.jpg)
+
+![](images/chapter_2/2ff1568410be9972ace9e140b6180337ae132366cd4ab82d9268ec0abc7b65ab.jpg)
+
+![](images/chapter_2/c26ce08b982e9f5ee3ebe439ef68a463762815aca8837854f9c72848a0ad3989.jpg)  
+图2.27 Turbo 均衡器的结构
+
+![](images/chapter_2/19b95993ddbb524ffe8fbe906adb50270f27b491b6803925d9c45351239cf8f0.jpg)  
+图2.28 发送端电路（用于 Turbo 均衡器解码数据）
+
+这种结构的优点在于，所使用的 ECC 码不必是 Turbo 码也能使系统具有良好的性能。例如，[33]的研究表明，Turbo 均衡器能够有效地用于 PR-IV 信道，该信道使用多项式为 $1/(1 \oplus D ^ { 2 })$ 的预编码器（precoder）并将卷积码作为 ECC 码。然而，使用迭代解码系统的新型硬盘驱动器倾向于使用 LDPC 码[5, 8, 17]作为 ECC 码，因为其性能最优（详见第4章）。
+
+注意事项：SISO 均衡器是一个技术术语，用于指代能够输出软信息（用于迭代解码过程）的检测器。但均衡器是用于将信号调整为符合目标响应（target response）的电路，然后利用该目标响应构建用于 SISO 均衡器[5, 8]数据检测的网格图。
+
+本书将重点关注 Turbo 均衡器的工作原理，因为它是使用迭代解码系统的硬盘驱动器的关键组成部分。第5章将展示 Turbo 均衡器的性能和优势，其可应用于解决各种问题，例如定时恢复（timing recovery）[34-36]和热粗糙度检测与校正（TA: thermal asperity）[37]等。
+
+### 2.4.1 Turbo 均衡器的性能
+
+考虑图2.28中码率为8/9的数字通信系统。信息比特 $x _ { k }$ 每个扇区大小为3636比特，周期为 T，使用码率为 $R = 1 / 2$、生成多项式为 $\left[ 1 , \frac { 1 \oplus D \oplus D ^ { 3 } \oplus D ^ { 4 } } { 1 \oplus D \oplus D ^ { 4 } } \right]$ 的递归系统卷积编码器进行编码。然后送入删余器（puncturer）[2]将码率从1/2提高到8/9，每8个比特中删除7个校验比特（parity bit）（例如，考虑图2.8(a)中的卷积编码器，校验比特就是数据比特 $y _ { k }$），得到每个扇区4095比特的数据序列。然后送入映射器和 S-随机交织器（$S = 16$），得到数据序列 $a _ { k }$、$1 / \left( 1 \oplus D ^ { 2 } \right)$ 和多项式为 $1 - D ^ { 2 }$ 的 PR-IV 信道。
+
+接收端接收到的数据序列 $z _ { k }$ 受噪声 $n _ { k } \sim \mathcal { N } \big ( 0 , \sigma ^ { 2 } \big )$（其中 $\sigma ^ { 2 } = N _ { 0 } / ( 2 T )$）干扰，使用如图2.27所示结构的 Turbo 均衡器进行数据解码，只是在外部解码器输入端增加了反向删余器（depuncturer），在外部解码器输出端增加了另一个删余器（puncturer）。此外，SISO 均衡器和 SISO 解码器基于 BCJR 算法，SISO 均衡器中使用的网格图由预编码器和信道的组合目标响应构建[33]。
+
+图2.29显示了以 BER 形式表示的 Turbo 均衡器在各迭代轮次下的性能。每个 BER 值是通过向系统输入多个扇区的数据（每个扇区3636比特）直到在第10次迭代解码时出现超过1000个比特错误而获得的。此外，"0.5次迭代"指的是 SISO 均衡器输出端在尚未进行迭代操作时的性能（可视为未编码系统的性能）。从图中可以看出，系统性能随迭代次数的增加而提高，直到某个 $E _ { c } / N _ { 0 }$ 水平使系统性能开始不再变化。例如，如果系统使用7次迭代，则当 $E _ { c } / N _ { 0 } > 5.5$ dB 时，系统性能开始趋于稳定（即系统出现错误平层）。
+
+图2.30显示了以扇区错误率（SER: sector error rate）形式表示的 Turbo 均衡器性能与 $E _ { c } / N _ { 0 }$ 的关系。即如果在一个扇区内发生一个或多个比特错误，则认为该扇区发生错误。从图中可以看出
+
+![](images/chapter_2/39bdcb4ff2ee153555c286604d0a7e84546b9dd2ecfd17cae83a9f85382e98ec.jpg)  
+图2.29 Turbo 均衡器性能：BER 与 $E _ { c } / N _ { 0 }$ 的关系
+
+![](images/chapter_2/4a27fe1d92c6623f78ef58001fa87957d2423f40f6e31ca6430e5433e6b470ed.jpg)  
+图2.30 Turbo 均衡器性能：SER 与 $E _ { c } / N _ { 0 }$ 的关系
+
+随着迭代次数的增加，系统的 SER 降低，直到某个 $E _ { c } / N _ { 0 }$ 水平时系统性能开始趋于稳定。此外，图2.31显示了以 SER 形式表示的 Turbo 均衡器性能与迭代次数的关系。发现在某个 $E _ { c } / N _ { 0 }$ 水平，当迭代次数增加时，系统 SER 降低，直到某个迭代次数。例如，在 $E _ { c } / N _ { 0 } = 5.5$ dB 时，系统性能持续改善直到第7次迭代，之后即使迭代次数继续增加，系统性能也保持不变。
+
+![](images/chapter_2/239cd91e29726581c8985ca48a48c26462aac875565157f98bd93fa3d1d3d8b5.jpg)  
+图2.31 Turbo 均衡器性能：SER 与迭代次数的关系
+
+从实验结果可以得出结论：使用迭代数据解码的系统（称为编码系统）的性能始终优于未编码系统。这就是为什么现代硬盘驱动器开始将迭代数据解码系统（以 Turbo 均衡器的形式）应用于读取通道芯片中。
+
+## 2.5 本章小结
+
+Turbo 码是一种高性能纠错码（ECC），复杂度不高，已被用作第三代移动通信系统（3G）的通信标准。Turbo 编码使用多个卷积编码器以串行或并行方式级联，借助交织器的帮助。而 Turbo 解码使用多个 BCJR 解码器（数量与使用的编码器数量相同）相互交换软信息。此外，Turbo 码的数据解码是迭代解码，可以应用于均衡过程，称为 Turbo 均衡，这是一种已在新型硬盘驱动器中实际使用的迭代解码过程。
+
+因此，本章解释了迭代解码技术的组成部分和原理，从卷积编解码开始，到 BCJR 算法（用于 Turbo 解码器）、Turbo 编解码和 Turbo 均衡，并展示了 Turbo 码和 Turbo 均衡器的性能。实验结果表明，使用迭代解码的系统性能优于未使用迭代解码技术的系统。此外，通常使用迭代解码的系统在迭代次数增加时性能会提高（当系统在足够高的 SNR 下工作时）。
+
+## 2.6 习题
+
+1. 请画出图2.1(b)和2.1(c)中 Turbo 编码器的有限状态机（FSM）和网格图。
+
+2. 根据图2.1中的三种 Turbo 编码器，对以下数据序列进行编码，求出输出数据序列 $y _ { k } ^ { 1 }$ 和 $y _ { k } ^ { 2 }$：
+   2.1) $x _ { k } = \{ 1 \ 1 \ 0 \ 1 \}$
+   2.2) $x _ { k } = \{ 1 \ 0 \ 1 \ 0 \ 1 \}$
+   2.3) $x _ { k } = \{ 1 \ 1 \ 0 \ 1 \ 0 \ 1 \}$
+
+3. 从例2.2出发，使用图2.6中的卷积编码器对以下数据序列进行编码：
+   3.1) {1011}
+   3.2) {110101}
+   3.3) {10110011}
+
+4. 从例2.3出发，对以下数据序列进行解码：
+   4.1) $z _ { k } = \{ 10 \ 01 \ 11 \ 01 \}$
+   4.2) $z _ { k } = \{ 11 \ 10 \ 00 \ 10 \ 01 \}$
+   4.3) $z _ { k } = \{ 01 \ 00 \ 10 \ 11 \ 00 \ 10 \}$
