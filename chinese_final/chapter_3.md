@@ -170,3 +170,96 @@ $$
 $$
 
 **阶段1 (k=1):** 继续计算剩余分支度量和状态度量...
+
+
+$$
+\widetilde{\gamma}_0(b,a) = 0 - \pi |0.9 - (-0.5)|^2 + \frac{(-1)(2)}{2} \approx -7.1575
+$$
+
+$$
+\widetilde{\gamma}_0(a,b) = 0 - \pi |0.9 - (0.5)|^2 + \frac{(+1)(2)}{2} \approx 0.4973
+$$
+
+$$
+\widetilde{\gamma}_0(b,b) = 0 - \pi |0.9 - (1.5)|^2 + \frac{(+1)(2)}{2} \approx -0.1309
+$$
+
+由于 $\sigma^2 = 1/(2\pi)$，然后根据方程(3.12)更新状态度量：
+
+$$
+\begin{array} { r l } & { \tilde{\alpha}_1(a) = \max \{ \tilde{\alpha}_0(a) + \tilde{\gamma}_0(a,a), \ \tilde{\alpha}_0(b) + \tilde{\gamma}_0(b,a) \} } \\ & { \qquad = \max \{ 0 + (-19.0956), \ -\infty + (-7.1575) \} = -19.0956 } \end{array}
+$$
+
+$$
+\begin{array} { c } { { \tilde{\alpha}_1(b) = \max \{ \tilde{\alpha}_0(a) + \tilde{\gamma}_0(a,b), \ \tilde{\alpha}_0(b) + \tilde{\gamma}_0(b,b) \} } } \\ { { = \max \{ 0 + (0.4973), \ -\infty + (-0.1309) \} = 0.4973 } } \end{array}
+$$
+
+**阶段1 (k=1):** 接收 $y_1 = -0.2$ 和 $\lambda_a(a_1) = -2$，计算所有分支度量：
+
+$$
+\widetilde{\gamma}_1(a,a) = 0 - \pi |-0.2 - (-1.5)|^2 + \frac{(-1)(-2)}{2} \approx -4.3093
+$$
+
+$$
+\widetilde{\gamma}_1(b,a) = 0 - \pi |-0.2 - (-0.5)|^2 + \frac{(-1)(-2)}{2} \approx 0.7173
+$$
+
+$$
+\widetilde{\gamma}_1(a,b) = 0 - \pi |-0.2 - (0.5)|^2 + \frac{(+1)(-2)}{2} \approx -2.5394
+$$
+
+$$
+\widetilde{\gamma}_1(b,b) = 0 - \pi |-0.2 - (1.5)|^2 + \frac{(+1)(-2)}{2} \approx -10.0792
+$$
+
+更新状态度量 $\tilde{\alpha}_2(a)$ 和 $\tilde{\alpha}_2(b)$：
+
+$$
+\begin{array} { r l } & { \tilde{\alpha}_2(a) = \max \{ \tilde{\alpha}_1(a) + \tilde{\gamma}_1(a,a), \ \tilde{\alpha}_1(b) + \tilde{\gamma}_1(b,a) \} } \\ & { \qquad = \max \{ (-19.0956) + (-4.3093), \ (0.4973) + (0.7173) \} = 1.2146 } \end{array}
+$$
+
+$$
+\begin{array} { r l } & { \tilde{\alpha}_2(b) = \max \{ \tilde{\alpha}_1(a) + \tilde{\gamma}_1(a,b), \ \tilde{\alpha}_1(b) + \tilde{\gamma}_1(b,b) \} } \\ & { \qquad = \max \{ (-19.0956) + (-2.5394), \ (0.4973) + (-10.0792) \} = -9.5819 } \end{array}
+$$
+
+**阶段2和3 (k={2,3}):** 接收数据 $\{ y_2, y_3 \} = \{ 0.3, 0.6 \}$ 和 $\{ \lambda_a(a_2), \lambda_a(a_3) \} = \{ 2, 0 \}$，按上述相同方法计算所有分支度量和状态度量 $\tilde{\alpha}_{k+1}(q)$，结果如图3.3所示。图中每条分支旁的值对应 $\tilde{\gamma}_k(u,q)$，各状态节点处的分数形式中的数字表示 $\tilde{\alpha}_k(u)$ 和 $\tilde{\beta}_k(u)$：
+
+$$
+\frac { \tilde { \alpha } _ { k } \left( u \right) } { \tilde { \beta } _ { k } \left( u \right) }
+$$
+
+对于 $k \in \{0,1,2,3\}$ 和 $u \in \{a,b\}$。前向递归结束时的结果为：
+
+$$
+\tilde{\alpha}_4(a) = -1.7124 \quad \tilde{\alpha}_4(b) = -0.4558
+$$
+
+5. 初始化后向状态度量 $\tilde{\beta}_4(u) = \tilde{\alpha}_4(u)$，对于 $u \in \{a,b\}$：
+
+$$
+\tilde{\beta}_4(a) = -1.7124 \quad \tilde{\beta}_4(b) = -0.4558
+$$
+
+## 后向递归
+
+**阶段3 (k=3):** 接收 $y_3 = 0.6$ 和 $\lambda_a(a_3) = 0$，计算所有分支度量：
+
+$$
+\begin{array} { l } { \displaystyle \tilde{\gamma}_3(a,a) = 0 - \pi |0.6 - (-1.5)|^2 + \frac{(-1)(0)}{2} \approx -13.8544 } \\ { \displaystyle \tilde{\gamma}_3(b,a) = 0 - \pi |0.6 - (-0.5)|^2 + \frac{(-1)(0)}{2} \approx -3.8013 } \\ { \displaystyle \tilde{\gamma}_3(a,b) = 0 - \pi |0.6 - (0.5)|^2 + \frac{(+1)(0)}{2} \approx -0.0314 } \\ { \displaystyle \tilde{\gamma}_3(b,b) = 0 - \pi |0.6 - (1.5)|^2 + \frac{(+1)(0)}{2} \approx -2.5447 } \end{array}
+$$
+
+更新状态度量 $\tilde{\beta}_3(a)$ 和 $\tilde{\beta}_3(b)$：
+
+$$
+\begin{array} { r l } & { \tilde{\beta}_3(a) = \max \{ \tilde{\gamma}_3(a,a) + \tilde{\beta}_4(a), \ \tilde{\gamma}_3(a,b) + \tilde{\beta}_4(b) \} } \\ & { \qquad = \max \{ (-13.8544) + (-1.7124), \ (-0.0314) + (-0.4558) \} = -0.4872 } \end{array}
+$$
+
+$$
+\begin{array} { r l } & { \tilde{\beta}_3(b) = \max \{ \tilde{\gamma}_3(b,a) + \tilde{\beta}_4(a), \ \tilde{\gamma}_3(b,b) + \tilde{\beta}_4(b) \} } \\ & { \qquad = \max \{ (-3.8013) + (-1.7124), \ (-2.5447) + (-0.4558) \} = -3.0005 } \end{array}
+$$
+
+然后根据方程(3.9)计算 $\lambda_p(a_3)$：
+
+$$
+\begin{array} { r l } & { \lambda_p(a_3) \approx \max \{ (\tilde{\alpha}_3(a) + \tilde{\gamma}_3(a,b) + \tilde{\beta}_4(b)), \ (\tilde{\alpha}_3(b) + \tilde{\gamma}_3(b,b) + \tilde{\beta}_4(b)) \} } \\ & { \qquad - \max \{ (\tilde{\alpha}_3(a) + \tilde{\gamma}_3(a,a) + \tilde{\beta}_4(a)), \ (\tilde{\alpha}_3(b) + \tilde{\gamma}_3(b,a) + \tilde{\beta}_4(a)) \} } \\ & { \qquad = \max \{ (-9.9642 - 0.0314 - 0.4558), \ (2.0889 - 2.5447 - 0.4558) \} } \\ & { \qquad - \max \{ (-9.9642 - 13.8544 - 1.7124), \ (2.0889 - 3.8013 - 1.7124) \} } \\ & { \qquad = (-0.9116) - (-3.4248) = 2.5132 } \end{array}
+$$
