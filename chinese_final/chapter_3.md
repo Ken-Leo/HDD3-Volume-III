@@ -407,3 +407,83 @@ $$
 **例3.4** 从例3.2出发，请使用Log-MAP算法解码数据 $y_k$，设数据比特 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{ -1, 2, 1, 2, -2 \}$。
 
 解：从例3.2可知，Log-MAP算法接收数据 $y_k = \{ 1.2, -0.7, -0.2, 0.5, -0.7 \}$ 和 $\lambda_a(a_k) = \{ -1, 2, 1, 2, -2 \}$ 用于数据解码。Log-MAP算法的各种参数值如图3.6所示。
+
+
+解码数据比特为：
+
+$$
+\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3, \hat{a}_4 \} = \{ 1, -1, 1, 1, 1 \}
+$$
+
+与使用Log-MAP算法解码的数据比特 $\{ a_k \}$ 一致。
+
+## 3.4 SOVA算法
+
+软输出维特比算法（简称SOVA算法）[19]是一种能够输出数据比特LLR值的算法，与MAP（或BCJR）、Max-Log-MAP和Log-MAP算法类似。一般来说，SOVA算法的性能与Max-Log-MAP相当，但复杂度更低[39]，因此SOVA算法在许多实际应用中广受欢迎，包括采用迭代解码系统的新型硬盘驱动器。
+
+**注意：** 读者应先理解维特比算法的工作原理（参见文献[10]第4章），再学习SOVA算法的原理，以便更容易理解SOVA算法。
+
+SOVA算法的工作方式类似于维特比算法[13]，但有两个重要的区别：
+
+1) SOVA算法使用修正的分支度量（modified branch metric），其中包含了数据比特输入的先验概率影响。
+2) SOVA算法提供软输出，用于指示每个数据比特判决的可信度。
+
+考虑图2.10中的信道模型，维特比算法在第k阶段从时间k的状态u到时间k+1的状态q的分支度量 $\rho_k(u,q)$ 为[10, 13]：
+
+$$
+{ \rho } _ { k } \left( u , q \right) = { \ln } \left( p \left( { y } _ { k } \mid { a } _ { k } \right) \right) = { \ln } \left( \frac { 1 } { \sqrt { 2 \pi { \sigma } ^ { 2 } } } \right) - \frac { 1 } { 2 { \sigma } ^ { 2 } } { \left| y _ { k } - \hat { r } \left( u , q \right) \right| } ^ { 2 }\tag{3.21}
+$$
+
+其中 $\hat{r}(u,q)$ 是与网格图中状态转移(u,q)对应的信道输出，$\sigma^2$ 是噪声 $n_k$ 的方差。
+
+输入数据比特 $a_k$ 的先验概率可以按照方程(3.10)合并到分支度量中。因此，SOVA算法中使用的分支度量为：
+
+$$
+\widetilde { \gamma } _ { k } \left( u , q \right) = \ln \left( p \left( y _ { k } ; a _ { k } \right) \right) = \ln \left( \frac { 1 } { \sqrt { 2 \pi \sigma ^ { 2 } } } \right) - \frac { 1 } { 2 \sigma ^ { 2 } } \left| y _ { k } - \widehat { r } \left( u , q \right) \right| ^ { 2 } + \frac { \hat { a } \left( u , q \right) \lambda _ { a } \left( a _ { k } \right) } { 2 }\tag{3.22}
+$$
+
+其中 $p(y_k; a_k) = p(y_k | a_k) p(a_k)$，$\hat{a}(u,q)$ 是与状态转移(u,q)对应的信道输入数据，$\lambda_a(a_k)$ 是输入数据比特 $a_k$ 的先验概率值。
+
+SOVA算法在网格图中搜索具有最大度量的路径。在时间k+1处状态q的路径度量等于方程(3.22)中分支度量之和：
+
+$$
+\Phi _ { k + 1 } \left( q \right) = \sum _ { i = 0 } ^ { k } \tilde { \gamma } _ { i }\tag{3.23}
+$$
+
+其中 $\tilde{\gamma}_i$ 是与到达时间k+1处状态q的"幸存路径（survivor path）"对应的时间i处的分支度量。因此，SOVA算法的工作方式与维特比算法类似，根据具有最大路径度量的路径（称为"ML路径"或最大似然路径）来选择输入数据序列（输入数据序列的估计 $\hat{a}_k$），唯一的区别是SOVA算法使用方程(3.22)中的分支度量。此外，SOVA算法还输出每个数据比特的LLR值，用于指示数据比特的取值及其可信度。
+
+### 3.4.1 数据比特LLR的计算
+
+SOVA算法可以按如下方式计算每个数据比特的LLR值。考虑图3.7中第k阶段的网格图。时间k+1处状态q的路径度量 $\Phi_{k+1}(q)$ 可由下式求得：
+
+$$
+\Phi _ { k + 1 } \left( q \right) = \ln \left( p \left( \mathbf { y } _ { 0 } ^ { k } ; \mathbf { a } _ { 0 } ^ { k } \right) \right)\tag{3.24}
+$$
+
+其中 $\mathbf{y}_0^k = [y_0, y_1, ..., y_k]$ 是从时间0到时间k的待解码数据序列，$\mathbf{a}_0^k = [a_0, a_1, ..., a_k]$ 是与 $\mathbf{y}_0^k$ 对应的输入数据序列。方程(3.24)可重新整理为：
+
+$$
+p \left( \mathbf { y } _ { 0 } ^ { k } : \mathbf { a } _ { 0 } ^ { k } \right) = e ^ { \Phi _ { k + 1 } ( q ) }\tag{3.25}
+$$
+
+SOVA算法输出的数据比特判决可信度（对于二进制码）可以按如下方式获得。从图3.7可以看出，有两条状态转移路径到达时间k+1处的状态q，即(u,q)和(s,q)，其路径度量分别为 $\Phi_{k+1}^{(1)}(q)$ 和 $\Phi_{k+1}^{(2)}(q)$。假设 $\Phi_{k+1}^{(1)}(q) > \Phi_{k+1}^{(2)}(q)$，则路径(1)是到达状态q的最佳状态转移路径。因此，SOVA算法选择路径(1)作为到达状态q的幸存路径的一部分，即 $\mathbf{S}_{k+1}(q)$。
+
+定义路径度量差为：
+
+$$
+\Delta _ { k + 1 } \left( q \right) = \Phi _ { k + 1 } ^ { \left( 1 \right) } \left( q \right) - \Phi _ { k + 1 } ^ { \left( 2 \right) } \left( q \right)\tag{3.26}
+$$
+
+其中 $\Delta_{k+1}(q) \geq 0$ 始终成立。因此，正确判决的概率可由下式求得[19, 40]：
+
+$$
+\mathrm { P r } \big [ \mathrm { c o r r e c t ~ d e c i s i o n ~ a t } \Psi _ { k + 1 } = q \big ] = \frac { e ^ { \Phi _ { k + 1 } ^ { ( 1 ) } \left( q \right) } } { e ^ { \Phi _ { k + 1 } ^ { ( 1 ) } \left( q \right) } + e ^ { \Phi _ { k + 1 } ^ { ( 2 ) } \left( q \right) } } = \frac { e ^ { \Delta _ { k + 1 } \left( q \right) } } { 1 + e ^ { \Delta _ { k + 1 } \left( q \right) } }\tag{3.27}
+$$
+
+其中 $\mathrm{Pr}[x]$ 是x的概率，正确判决的LLR值为：
+
+$$
+\mathrm { L L R } = \ln \left( \frac { \mathrm { P r } \big [ \mathrm { c o r r e c t ~ d e c i s i o n ~ a t } \Psi _ { k + 1 } = q \big ] } { 1 - \mathrm { P r } \big [ \mathrm { c o r r e c t ~ d e c i s i o n ~ a t } \Psi _ { k + 1 } = q \big ] } \right) = \Delta _ { k + 1 } ( q )\tag{3.28}
+$$
+
+这意味着维特比算法中合并路径的路径度量差等于正确判决概率的LLR值。
