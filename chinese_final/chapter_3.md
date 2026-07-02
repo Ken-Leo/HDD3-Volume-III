@@ -487,3 +487,112 @@ $$
 $$
 
 这意味着维特比算法中合并路径的路径度量差等于正确判决概率的LLR值。
+
+
+与方程(3.28)类似，比特误差的LLR值等于 $\Delta_k^d$。因此，综合两种情况可以看出，第d条路径（被丢弃路径）中时间 $k-\delta$ 处的数据比特误差的LLR值为：
+
+$$
+\lambda(\hat{e}_{k-\delta}^d) = \ln\left(\frac{p(\hat{e}_{k-\delta}^d = 1)}{p(\hat{e}_{k-\delta}^d = -1)}\right) = \begin{cases} \infty, & \text{if } \hat{a}_{k-\delta} = \hat{a}_{k-\delta}^d \\ \Delta_k^d, & \text{if } \hat{a}_{k-\delta} \neq \hat{a}_{k-\delta}^d \end{cases}\tag{3.31}
+$$
+
+在实际应用中，每条被丢弃路径都为数据比特 $\hat{a}_{k-\delta}$ 被正确解码的可信度提供证据。因此，所有可能的被丢弃路径对 $\hat{a}_{k-\delta}$ 的总误差可由下式求得：
+
+$$
+\hat{e}_{k-\delta} = \sum_{d=0}^{\delta} \oplus \hat{e}_{k-\delta}^d = \hat{e}_{k-\delta}^0 \oplus \hat{e}_{k-\delta}^1 \oplus \ldots \oplus \hat{e}_{k-\delta}^\delta\tag{3.32}
+$$
+
+因此，数据比特 $\hat{a}_{k-\delta}$ 的LLR值可写为[40]：
+
+$$
+\lambda(\hat{a}_{k-\delta}) = \hat{a}_{k-\delta} \lambda(\hat{e}_{k-\delta}) = \hat{a}_{k-\delta} \lambda\left(\sum_{d=0}^{\delta} \oplus \hat{e}_{k-\delta}^d\right)\tag{3.33}
+$$
+
+其中 $\hat{a}_{k-\delta} \in \{\pm 1\}$ 决定LLR的符号（即维特比算法解码的数据比特估计值），$\lambda(\hat{e}_{k-\delta}) \geq 0$ 决定 $\hat{a}_{k-\delta}$ 的可信度大小。也就是说，$\lambda(\hat{e}_{k-\delta})$ 越大，维特比算法解码出的数据比特 $\hat{a}_{k-\delta}$ 的正确性越高（反之亦然）。
+
+定义对数似然比的代数运算[40]如下：
+
+$$
+\lambda(x_1) \boxplus \lambda(x_2) \triangleq \lambda(x_1 \oplus x_2)\tag{3.34}
+$$
+
+其中 $x_1$ 和 $x_2$ 是属于{-1, 1}的二进制随机变量，$\boxplus$ 是LLR代数运算符，其关系如下：
+
+$$
+\lambda(x) \boxplus \infty = \lambda(x) \quad \quad \lambda(x) \boxplus -\infty = -\lambda(x) \quad \quad \lambda(x) \boxplus 0 = 0
+$$
+
+其中 $\infty$ 表示非常高的可信度，$-\infty$ 表示完全不可信，0 表示可信度模糊。
+
+利用方程(3.34)，方程(3.33)中数据比特 $\hat{a}_{k-\delta}$ 的LLR值可重新整理为：
+
+$$
+\begin{array} { r l } { \lambda(\hat{a}_{k-\delta}) = \hat{a}_{k-\delta} \lambda\left(\sum_{d=0}^{\delta} \oplus \hat{e}_{k-\delta}^d\right) = \hat{a}_{k-\delta} \sum_{d=0}^{\delta} \boxplus \lambda(\hat{e}_{k-\delta}^d) } \\ { = \hat{a}_{k-\delta} \{ \lambda(\hat{e}_{k-\delta}^0) \boxplus \lambda(\hat{e}_{k-\delta}^1) \boxplus \ldots \boxplus \lambda(\hat{e}_{k-\delta}^\delta) \} } \end{array}\tag{3.35}
+$$
+
+根据方程(3.31)和LLR代数运算的性质，如果方程(3.35)中只对 $\hat{a}_{k-\delta}^d \neq \hat{a}_{k-\delta}$ 的d进行求和，则可得到[40]：
+
+$$
+\lambda(\hat{a}_{k-\delta}) = \hat{a}_{k-\delta} \cdot \min_{d \in \{0,1,\ldots,\delta\}} \Delta_k^d\tag{3.36}
+$$
+
+同样地，利用LLR代数运算的性质[40]，方程(3.36)可近似为：
+
+$$
+\lambda(\hat{a}_{k-\delta}) \approx \hat{a}_{k-\delta} \cdot \min_{d \in \{0,1,\ldots,\delta\}} \Delta_k^d\tag{3.37}
+$$
+
+即数据比特 $\hat{a}_{k-\delta}$ 的可信度取决于幸存路径上路径度量差 $\Delta_k^d$ 的最小值。因此，方程(3.37)中 $\lambda(\hat{a}_{k-\delta})$ 的符号是数据比特 $\hat{a}_{k-\delta}$ 的估计值，其大小是解码数据比特的可信度。
+
+### 3.4.2 对SOVA算法的观察
+
+从方程(3.37)可以看出，数据比特的LLR值取决于方程(3.26)中所示的路径度量差，即 $\Delta_k(q) = \Phi_k^{(1)}(q) - \Phi_k^{(2)}(q)$，其中 $\Phi_k^{(i)}(q)$ 是方程(3.23)中分支度量的和（$i = \{1,2\}$），分支度量 $\tilde{\gamma}_k(u,q)$ 由方程(3.22)求得。
+
+然而，为了降低计算路径度量差 $\Delta_k(q)$ 的复杂度，SOVA算法可以使用以下形式的分支度量，而不会影响SOVA算法的性能：
+
+$$
+\widetilde { \gamma } _ { k } \left( u , q \right) \approx - \frac { 1 } { 2 \sigma ^ { 2 } } \big | y _ { k } - \widehat { r } \left( u , q \right) \big | ^ { 2 } + \frac { \widehat { a } \left( u , q \right) \lambda _ { a } \left( a _ { k } \right) } { 2 }\tag{3.38}
+$$
+
+因为方程(3.26)中计算路径度量差时结果保持不变。
+
+### 3.4.3 SOVA算法步骤总结
+
+设 $\pi_{k+1}(q)$ 是时间k+1处状态q的前驱节点，用于存储使得到达时间k+1处状态q的最佳状态转移之前的状态（即时间k处的状态）。该状态转移被视为幸存路径 $\mathbf{S}_{k+1}(q)$ 的一部分。例如，考虑图3.7中的网格图。假设路径(1)是使 $\Phi_{k+1}(q)$ 最大的最佳路径，则可得到 $\pi_{k+1}(q) = u$，即状态u是使得到达时间k+1处状态q的最佳状态转移的先驱状态。因此，SOVA算法的工作原理可按图3.9中的步骤总结。
+
+**例3.5** 从例2.4出发，请使用SOVA算法解码数据 $y_k$，设 $\lambda_a(a_k) = \{ -1, 2, 1, 2 \}$，解码深度 $\delta = 3$。
+
+解：从例2.4可知，需要使用SOVA算法检测的数据为：
+
+$$
+y_k = \{ y_0, y_1, y_2, y_3 \} = \{ 0.9, -0.2, 0.3, 0.6 \}
+$$
+
+信道 $H(D) = 1 + 0.5D$ 的网格图如图2.13所示，有两个状态：状态(a)和状态(b)。因此，SOVA算法的数据解码步骤如下：
+
+**SOVA算法**
+
+**硬解码**（与维特比算法步骤相同）
+
+1. 初始化路径度量 $\Phi_0(u) = 0$，对于所有 $u \in \{ 0, 1, ..., Q-1 \}$
+2. 对于 $k = 0, 1, ..., L+\nu-1+\delta$（其中 $\delta$ 是解码深度）
+   设 $y_k = 0$ 用于 $k \geq L+\nu$
+   对于 $q = 0, 1, ..., Q-1$
+   根据方程(3.38)计算 $\tilde{\gamma}_k(u,q)$，对所有使(u,q)为真的u
+   根据方程(3.23)计算最佳状态转移对应的 $\Phi_{k+1}(q)$
+   计算并记录路径度量差 $\Delta_{k+1}(q)$ 根据方程(3.26)
+   记录前驱节点 $\pi_{k+1}(q)$（用于查找第d条路径或被丢弃路径）
+   记录幸存路径 $\mathbf{S}_{k+1}(q)$
+3. 根据ML路径（具有最大 $\Phi_{L+\nu+\delta}$ 的幸存路径）解码输入数据序列 $\hat{\mathbf{a}}_0^{L-1}$
+
+**软解码**（计算LLR）
+
+4. 初始化LLR幅度 $|\lambda(\hat{a}_k)| = +\infty$，对于 $k = 0, 1, ..., L-1$
+5. 对于 $k = \delta, \delta+1, ..., L-1+\delta$
+   对于 $d = 0, 1, ..., \delta$
+   比较ML路径解码的数据比特 $\hat{a}_{k-\delta}$ 与第d条路径解码的数据比特 $\hat{a}_{k-\delta}^d$
+   若 $\hat{a}_{k-\delta}^d \neq \hat{a}_{k-\delta}$，按以下关系更新LLR幅度：
+   $|\lambda(\hat{a}_{k-\delta})| = \min\{ |\lambda(\hat{a}_{k-\delta})|, \Delta_{k+1}^d \}$
+   解码数据比特 $a_{k-\delta}$ 的MAP-LLR值：
+   $\lambda_p(\hat{a}_{k-\delta}) = \hat{a}_{k-\delta} |\lambda(\hat{a}_{k-\delta})|$
+
+图3.9 SOVA算法步骤[19, 40]
