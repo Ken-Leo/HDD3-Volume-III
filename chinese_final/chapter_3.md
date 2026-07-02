@@ -263,3 +263,62 @@ $$
 $$
 \begin{array} { r l } & { \lambda_p(a_3) \approx \max \{ (\tilde{\alpha}_3(a) + \tilde{\gamma}_3(a,b) + \tilde{\beta}_4(b)), \ (\tilde{\alpha}_3(b) + \tilde{\gamma}_3(b,b) + \tilde{\beta}_4(b)) \} } \\ & { \qquad - \max \{ (\tilde{\alpha}_3(a) + \tilde{\gamma}_3(a,a) + \tilde{\beta}_4(a)), \ (\tilde{\alpha}_3(b) + \tilde{\gamma}_3(b,a) + \tilde{\beta}_4(a)) \} } \\ & { \qquad = \max \{ (-9.9642 - 0.0314 - 0.4558), \ (2.0889 - 2.5447 - 0.4558) \} } \\ & { \qquad - \max \{ (-9.9642 - 13.8544 - 1.7124), \ (2.0889 - 3.8013 - 1.7124) \} } \\ & { \qquad = (-0.9116) - (-3.4248) = 2.5132 } \end{array}
 $$
+
+
+由于 $\lambda_p(a_3) > 0$，Max-Log-MAP算法解码数据比特为 $\hat{a}_3 = +1$。
+
+**阶段2 (k=2):** 接收 $y_2 = 0.3$ 和 $\lambda_a(a_2) = 2$，计算所有分支度量：
+
+$$
+\widetilde{\gamma}_2(a,a) = 0 - \pi |0.3 - (-1.5)|^2 + \frac{(-1)(2)}{2} \approx -11.1788
+$$
+
+$$
+\widetilde{\gamma}_2(b,a) = 0 - \pi |0.3 - (-0.5)|^2 + \frac{(-1)(2)}{2} \approx -3.0106
+$$
+
+$$
+\widetilde{\gamma}_2(a,b) = 0 - \pi |0.3 - (0.5)|^2 + \frac{(+1)(2)}{2} \approx 0.8743
+$$
+
+$$
+\widetilde{\gamma}_2(b,b) = 0 - \pi |0.3 - (1.5)|^2 + \frac{(+1)(2)}{2} \approx -3.5239
+$$
+
+更新状态度量 $\tilde{\beta}_2(a)$ 和 $\tilde{\beta}_2(b)$：
+
+$$
+\begin{array} { r l } & { \tilde{\beta}_2(a) = \max \{ \tilde{\gamma}_2(a,a) + \tilde{\beta}_3(a), \ \tilde{\gamma}_2(a,b) + \tilde{\beta}_3(b) \} } \\ & { \qquad = \max \{ (-11.1788) + (-0.4872), \ (0.8743) + (-3.0005) \} = -2.1262 } \end{array}
+$$
+
+$$
+\begin{array} { r l } & { \tilde{\beta}_2(b) = \max \{ \tilde{\gamma}_2(b,a) + \tilde{\beta}_3(a), \ \tilde{\gamma}_2(b,b) + \tilde{\beta}_3(b) \} } \\ & { \qquad = \max \{ (-3.0106) + (-0.4872), \ (-3.5239) + (-3.0005) \} = -3.4978 } \end{array}
+$$
+
+根据方程(3.9)计算 $\lambda_p(a_2)$：
+
+$$
+\begin{array} { r l } & { \lambda_p(a_2) \approx \max \{ (\tilde{\alpha}_2(a) + \tilde{\gamma}_2(a,b) + \tilde{\beta}_3(b)), \ (\tilde{\alpha}_2(b) + \tilde{\gamma}_2(b,b) + \tilde{\beta}_3(b)) \} } \\ & { \qquad - \max \{ (\tilde{\alpha}_2(a) + \tilde{\gamma}_2(a,a) + \tilde{\beta}_3(a)), \ (\tilde{\alpha}_2(b) + \tilde{\gamma}_2(b,a) + \tilde{\beta}_3(a)) \} } \\ & { = \max \{ (1.2146 + 0.8743 - 3.0005), \ (-9.5819 - 3.5239 - 3.0005) \} } \\ & { \qquad - \max \{ (1.2146 - 11.1788 - 0.4872), \ (-9.5819 - 3.0106 - 0.4872) \} } \\ & { = (-0.9116) - (-10.451) = 9.5394 } \end{array}
+$$
+
+由于 $\lambda_p(a_2) > 0$，Max-Log-MAP算法解码数据比特为 $\hat{a}_2 = +1$。
+
+**阶段1和0 (k={1,0}):** 接收数据 $\{ y_1, y_0 \} = \{ -0.2, 0.9 \}$ 和 $\{ \lambda_a(a_0), \lambda_a(a_1) \} = \{ 2, -2 \}$，按相同方法计算所有分支度量并更新状态度量 $\tilde{\beta}_k(u)$，结果如图3.3所示。后向递归结束时得到：
+
+$$
+\lambda_p(a_0) = 24.221 \quad \lambda_p(a_1) = -12.168
+$$
+
+即Max-Log-MAP算法解码数据比特 $a_0$ 和 $a_1$ 为 $\hat{a}_0 = +1$ 和 $\hat{a}_1 = -1$。
+
+9. 算法结束时，Max-Log-MAP算法输出的数据比特 $a_k$ 的MAP-LLR值为 $\{ \lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3) \} \approx \{ 24.22, -12.17, 9.54, 2.51 \}$，解码数据比特为 $\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3 \} = \{ 1, -1, 1, 1 \}$（最后一个比特在系统中并非真实存在，而是卷积运算产生的结果），这与发射端发送的数据比特 $\{ a_k \}$ 一致，表明使用Max-Log-MAP算法进行数据解码未发生错误。
+
+**例3.2** 从例2.5出发，请使用Max-Log-MAP算法解码数据 $y_k$，设数据比特 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{ 1, -1, 2, 1, -1 \}$。
+
+解：从例2.5可知，需要使用Max-Log-MAP算法检测的数据为：
+
+$$
+y_k = \{ y_0, y_1, y_2, y_3, y_4 \} = \{ 1.2, -0.7, -0.2, 0.5, -0.7 \}
+$$
+
+信道 $H(D) = 1 - D^2$ 的网格图如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
