@@ -78,3 +78,95 @@ $$
 $$
 \widetilde { \gamma } _ { k } \left( u , q ight) = \ln \left( { rac { 1 } { \sqrt { 2 \pi \sigma ^ { 2 } } } } ight) - { rac { 1 } { 2 \sigma ^ { 2 } } } igl ert y _ { k } - \widehat { r } \left( u , q ight) igr ert ^ { 2 } + { rac { \hat { a } \left( u , q ight) \lambda _ { a } \left( a _ { k } ight) } { 2 } }	ag{3.10}
 $$
+
+## 计算方程(3.5)中的 \tilde { \alpha } _ { k } \left( u \right)
+
+对方程(2.14)两边取对数，可得：
+
+$$
+\widetilde { \alpha } _ { k + 1 } \left( q \right) = \ln \left( \sum _ { u = 0 } ^ { Q - 1 } e ^ { \widetilde { \gamma } _ { k } \left( u , q \right) + \widetilde { \alpha } _ { k } \left( u \right) } \right)	ag{3.11}
+$$
+
+## 计算方程(3.5)中的 \tilde{\alpha}_k(u)
+
+对方程(2.14)两边取对数，可得：
+
+$$
+\widetilde{\alpha}_{k+1}(q) = \ln\left(\sum_{u=0}^{Q-1} e^{\widetilde{\gamma}_k(u,q) + \widetilde{\alpha}_k(u)}\right)\tag{3.11}
+$$
+
+
+## 计算方程(3.5)中的 $\tilde { \alpha } _ { k } \left( u \right)$
+
+对方程(2.14)两边取对数，可得：
+
+$$
+\widetilde { \alpha } _ { k + 1 } \left( q \right) = \ln \left( \sum _ { u = 0 } ^ { Q - 1 } e ^ { \widetilde { \gamma } _ { k } \left( u , q \right) + \widetilde { \alpha } _ { k } \left( u \right) } \right)\tag{3.11}
+$$
+
+根据方程(3.1)，可近似计算方程(3.11)为：
+
+$$
+\tilde { \alpha } _ { k + 1 } \left( q \right) \approx \max _ { \forall u } \left( \tilde { \gamma } _ { k } \left( u , q \right) + \tilde { \alpha } _ { k } \left( u \right) \right)\tag{3.12}
+$$
+
+对于所有在网格图中使状态转移(u, q)为真的状态q。
+
+## 计算方程(3.6)中的 $\widetilde { \beta } _ { k + 1 } \left( q \right)$
+
+对方程(2.16)两边取对数，可得：
+
+$$
+\widetilde { \beta } _ { k } \left( u \right) = \ln \left( \sum _ { q = 0 } ^ { Q - 1 } e ^ { \widetilde { \beta } _ { k + 1 } \left( q \right) + \widetilde { \gamma } _ { k } \left( u , q \right) } \right)\tag{3.13}
+$$
+
+同样地，根据方程(3.1)，可近似计算方程(3.13)为：
+
+$$
+\tilde { \beta } _ { k } \left( u \right) \approx \max _ { \forall q } \left( \tilde { \beta } _ { k + 1 } \left( q \right) + \tilde { \gamma } _ { k } \left( u , q \right) \right)\tag{3.14}
+$$
+
+对于所有在网格图中使状态转移(u, q)为真的状态u。
+
+
+## 3.2.1 Max-Log-MAP算法步骤总结
+
+Max-Log-MAP算法的操作步骤与图2.12中的BCJR算法相同，唯一的区别在于Max-Log-MAP算法使用方程(3.9)计算数据比特 $a_k$ 的LLR值，其中参数 $\tilde{\gamma}_k(u,q)$、$\tilde{\alpha}_k(u)$ 和 $\tilde{\beta}_{k+1}(q)$ 分别由方程(3.10)、(3.12)和(3.14)求得。图3.2总结了Max-Log-MAP算法的操作步骤。
+
+**注意：** 在实际应用中使用图3.2中的Max-Log-MAP算法时，无需对每个状态u和每个时刻k的状态度量 $\tilde{\alpha}_k(u)$ 和 $\tilde{\beta}_k(u)$ 进行归一化处理，这与BCJR算法中所做的不同，因为Max-Log-MAP算法不会遇到数值下溢问题。
+
+**Max-Log-MAP算法步骤**
+
+1. 初始化状态度量 $\left[ \tilde{\alpha}_0(0), \tilde{\alpha}_0(1), ..., \tilde{\alpha}_0(Q-1) \right] = \left[ 0, -\infty, ..., -\infty \right]$
+2. 前向递归 (forward recursion)
+   - 对于 $k = 0, 1, ..., L + \nu - 1$
+   - 对于 $q = 0, 1, ..., Q - 1$
+     - 根据方程(3.10)计算 $\tilde{\gamma}_k(u,q)$，对于所有使(u,q)为真的u
+     - 根据方程(3.12)计算 $\tilde{\alpha}_{k+1}(q)$
+3. 初始化状态度量 $\left[ \tilde{\beta}_{L+\nu}(0), \tilde{\beta}_{L+\nu}(1), ..., \tilde{\beta}_{L+\nu}(Q-1) \right] = \left[ 0, -\infty, ..., -\infty \right]$
+4. 后向递归 (backward recursion)
+   - 对于 $k = L + \nu - 1, L + \nu - 2, ..., 0$
+   - 对于 $u = 0, 1, ..., Q - 1$
+     - 根据方程(3.10)计算 $\tilde{\gamma}_k(u,q)$，对于所有使(u,q)为真的q
+     - 根据方程(3.14)计算 $\tilde{\beta}_k(u)$
+   - 根据方程(3.9)计算 $\lambda_p(a_k)$
+   - 根据方程(2.25)判决 $a_k$
+
+**例3.1** 从例2.4出发，请展示如何使用Max-Log-MAP算法解码数据 $y_k$，设数据比特 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{2, -2, 2, 0\}$。
+
+解：从例2.4知需要检测的数据为：
+$$y_k = \{y_0, y_1, y_2, y_3\} = \{0.9, -0.2, 0.3, 0.6\}$$
+
+信道 $H(D) = 1 + 0.5D$ 的网格图如图2.13所示，有两个状态：(a)和(b)。
+
+1. 初始化状态度量 $\tilde{\alpha}_0(a) = 0$ 和 $\tilde{\alpha}_0(b) = -\infty$
+
+## 前向递归
+
+**阶段0 (k=0):** 算法接收 $y_0 = 0.9$ 和 $\lambda_a(a_0) = 2$，根据方程(3.10)计算分支度量：
+
+$$
+\widetilde{\gamma}_0(a,a) = 0 - \frac{1}{2\sigma^2} |0.9 - (-1.5)|^2 + \frac{(-1)(2)}{2} \approx -19.0956
+$$
+
+**阶段1 (k=1):** 继续计算剩余分支度量和状态度量...
