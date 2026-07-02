@@ -322,3 +322,88 @@ y_k = \{ y_0, y_1, y_2, y_3, y_4 \} = \{ 1.2, -0.7, -0.2, 0.5, -0.7 \}
 $$
 
 信道 $H(D) = 1 - D^2$ 的网格图如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
+
+
+从图3.4中的分支度量和状态度量，根据方程(3.9)可计算数据比特 $a_k$ 的MAP-LLR值：
+
+$$
+\{ \lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3), \lambda_p(a_4) \} \approx \{ 7.28, -26.65, 7.28, -10.57, 5.54 \}
+$$
+
+解码数据比特为：
+
+$$
+\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3, \hat{a}_4 \} = \{ 1, -1, 1, -1, 1 \}
+$$
+
+与发射端发送的数据比特 $\{ a_k \}$ 一致（最后两个比特在系统中并非真实存在，而是输入数据与信道卷积产生的结果），表明使用Max-Log-MAP算法进行数据解码未发生错误。
+
+## 3.2.2 对Max-Log-MAP算法的观察
+
+如上所述，Max-Log-MAP算法利用方程(3.1)中的最大值函数来近似BCJR算法的状态度量 $\alpha_k(u)$ 和 $\beta_{k+1}(q)$。因此，Max-Log-MAP算法不可避免地会面临近似误差，并且由于两个状态度量在每个时刻都是递归计算的，近似误差会沿整个数据序列 $y$ 传播。
+
+一般来说，当Max-Log-MAP算法在高SNR下工作时，近似误差问题较小。然而，当在低SNR下工作时，Max-Log-MAP算法的性能较差（因为近似误差的幅度与系统中的噪声相当[24]，并且面临近似误差传播问题）。尽管Max-Log-MAP算法的复杂度低于BCJR算法，但其性能也明显劣于BCJR算法。因此，在选择使用哪种算法时，用户需要在复杂度和可接受的性能之间进行权衡。然而，第3.3节将介绍Log-MAP算法，该算法从Max-Log-MAP算法发展而来，性能等同于BCJR算法，但复杂度低得多。
+
+## 3.3 Log-MAP算法
+
+由于Max-Log-MAP算法使用方程(3.1)来近似BCJR算法的各种参数，因此面临近似误差问题，导致性能劣于BCJR算法。然而，方程(3.1)中的近似误差可以通过使用雅可比对数（Jacobian logarithm）[24, 38]来纠正（参见附录A的证明）：
+
+$$
+\begin{array} { r } { \ln \left( e ^ { x _ { 1 } } + e ^ { x _ { 2 } } \right) = \max \left( x _ { 1 } , x _ { 2 } \right) + \ln \left( 1 + e ^ { - \left| x _ { 1 } - x _ { 2 } \right| } \right) } \\ { = \max \left( x _ { 1 } , x _ { 2 } \right) + f _ { c } \left( \left| x _ { 1 } - x _ { 2 } \right| \right) } \end{array}\tag{3.15}
+$$
+
+其中 $f_c(|x_1 - x_2|) = \ln(1 + e^{-|x_1 - x_2|})$ 是纠错函数。此外，为便于解释Log-MAP算法的工作原理，定义新的最大值函数如下：
+
+$$
+\max^* \left( x _ { 1 } , x _ { 2 } \right) = \max \left( x _ { 1 } , x _ { 2 } \right) + f _ { c } \left( \left| x _ { 1 } - x _ { 2 } \right| \right)\tag{3.16}
+$$
+
+因此，方程(3.1)中的 $\ln(e^{x_1} + e^{x_2} + ... + e^{x_n})$ 可以通过以下方式精确计算。设已知值 $x$，且有 $x = \ln(e^{x_1} + e^{x_2} + ... + e^{x_{n-1}}) = \ln(\Delta)$，其中 $\Delta = e^{x_1} + e^{x_2} + ... + e^{x_{n-1}} = e^x$，则可得到：
+
+$$
+\begin{array} { r l } & { \ln \left( e ^ { x _ { 1 } } + e ^ { x _ { 2 } } + \ldots + e ^ { x _ { n - 1 } } + e ^ { x _ { n } } \right) = \ln \left( \Delta + e ^ { x _ { n } } \right) = \ln \left( e ^ { \ln \left( \Delta \right) } + e ^ { x _ { n } } \right) } \\ & { \qquad = \max \left( \ln \left( \Delta \right) , x _ { n } \right) + f _ { c } \left( \left| \ln \left( \Delta \right) - x _ { n } \right| \right) } \\ & { \qquad = \max \left( x , x _ { n } \right) + f _ { c } \left( \left| x - x _ { n } \right| \right) } \\ & { \qquad = \max ^ { * } \left( x , x _ { n } \right) } \end{array}\tag{3.17}
+$$
+
+Log-MAP算法的工作方式与Max-Log-MAP算法相同，唯一的区别在于它利用方程(3.16)和(3.17)来代替方程(3.1)，以近似BCJR算法的各种参数。因此，从方程(3.9)出发，Log-MAP算法计算数据比特 $a_k$ 的LLR值如下：
+
+$$
+\lambda _ { k } = \max _ { ( u , q ) \in S _ { 1 } } ^ { * } \left( \hat { \alpha } _ { k } \left( u \right) + \tilde { \gamma } _ { k } \left( u , q \right) + \hat { \beta } _ { k + 1 } \left( q \right) \right) - \max _ { ( u , q ) \in S _ { - 1 } } ^ { * } \left( \hat { \alpha } _ { k } \left( u \right) + \tilde { \gamma } _ { k } \left( u , q \right) + \hat { \beta } _ { k + 1 } \left( q \right) \right)\tag{3.18}
+$$
+
+其中分支度量 $\tilde{\gamma}_k(u,q)$ 由方程(3.10)求得，且：
+
+$$
+\hat { \alpha } _ { k + 1 } \left( q \right) = \max _ { \forall u } ^ { * } \left( \tilde { \gamma } _ { k } \left( u , q \right) + \hat { \alpha } _ { k } \left( u \right) \right)\tag{3.19}
+$$
+
+$$
+\hat { \beta } _ { k } \left( u \right) = \max _ { \forall q } ^ { * } \left( \hat { \beta } _ { k + 1 } \left( q \right) + \tilde { \gamma } _ { k } \left( u , q \right) \right)\tag{3.20}
+$$
+
+在实际应用中，Log-MAP算法的性能等同于BCJR算法，但计算资源消耗较少，且对噪声方差的敏感度也低于BCJR算法。然而，尽管Log-MAP算法的性能优于Max-Log-MAP算法，但其复杂度也更高。因此，在选择使用哪种算法时，用户需要在复杂度和可接受的性能之间进行权衡。
+
+**例3.3** 从例3.1出发，请使用Log-MAP算法解码数据 $y_k$，设数据比特 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{ 1, -4, 3, -2 \}$。
+
+解：从例3.1可知，Log-MAP算法接收数据 $y_k = \{ 0.9, -0.2, 0.3, 0.6 \}$ 和 $\lambda_a(a_k) = \{ 1, -4, 3, -2 \}$ 用于数据解码。使用例3.1中所示的相同方法，Log-MAP算法的各种参数值如图3.5所示，其中每条分支旁的值对应 $\tilde{\gamma}_k(u,q)$，各状态节点处的分数形式中的数字表示 $\hat{\alpha}_k(u)$ 和 $\hat{\beta}_k(u)$：
+
+$$
+\frac { \hat { \alpha } _ { k } \left( u \right) } { \hat { \beta } _ { k } \left( u \right) }
+$$
+
+对于 $k \in \{ 0, 1, 2, 3 \}$ 和 $u \in \{ a, b \}$。
+
+根据图3.5中的分支度量和状态度量，按方程(3.18)可计算数据比特 $a_k$ 的MAP-LLR值：
+
+$$
+\{ \lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3) \} \approx \{ 23.60, -16.32, 12.22, -1.49 \}
+$$
+
+解码数据比特为：
+
+$$
+\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3 \} = \{ 1, -1, 1, -1 \}
+$$
+
+**例3.4** 从例3.2出发，请使用Log-MAP算法解码数据 $y_k$，设数据比特 $a_k$ 的先验信息为 $\lambda_a(a_k) = \{ -1, 2, 1, 2, -2 \}$。
+
+解：从例3.2可知，Log-MAP算法接收数据 $y_k = \{ 1.2, -0.7, -0.2, 0.5, -0.7 \}$ 和 $\lambda_a(a_k) = \{ -1, 2, 1, 2, -2 \}$ 用于数据解码。Log-MAP算法的各种参数值如图3.6所示。
