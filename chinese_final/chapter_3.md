@@ -596,3 +596,140 @@ $$
    $\lambda_p(\hat{a}_{k-\delta}) = \hat{a}_{k-\delta} |\lambda(\hat{a}_{k-\delta})|$
 
 图3.9 SOVA算法步骤[19, 40]
+
+
+**阶段6 (k=6):** 计算 $\lambda_p(a_3)$。解码数据比特 $\hat{a}_3 = 1$。图3.10(f)显示第d条路径（被丢弃路径）及其数据比特 $\hat{a}_3^d$ 和路径度量差 $\Delta_7^d$。此时 $\{ \hat{a}_3^0, \hat{a}_3^1, \hat{a}_3^2 \} \neq \hat{a}_3$，数据比特 $a_3$ 的LLR幅度为：
+
+$$
+|\lambda(\hat{a}_3)| = \min\{ +\infty, \Delta_7^0, \Delta_7^1, \Delta_7^2 \} = 9.5398
+$$
+
+数据比特 $a_3$ 的LLR值为 $\lambda(\hat{a}_3) = \hat{a}_3 |\lambda(\hat{a}_3)| = (1)(9.5398) = 9.5398$
+
+因此，SOVA算法输出的数据比特 $a_k$ 的MAP-LLR值为：
+
+$$
+\{ \lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3) \} \approx \{ 4.2832, -4.2832, 4.2832, 9.5398 \}
+$$
+
+解码数据比特为：
+
+$$
+\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3 \} = \{ 1, -1, 1, 1 \}
+$$
+
+与发射端发送的数据比特 $\{ a_k \}$ 一致（最后一个比特在系统中并非真实存在，而是输入数据与信道卷积的结果），表明使用SOVA算法进行数据解码未发生错误。
+
+**例3.6** 从例2.5出发，请使用SOVA算法解码数据 $y_k$，设 $\lambda_a(a_k) = \{ -1, 1, 2, -1, 1 \}$，解码深度 $\delta = 3$。
+
+解：从例2.5可知，需要使用SOVA算法检测的数据为：
+
+$$
+y_k = \{ y_0, y_1, y_2, y_3, y_4 \} = \{ 1.2, -0.7, -0.2, 0.5, -0.7 \}
+$$
+
+信道 $H(D) = 1 - D^2$ 的网格图如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
+
+按照例3.5中所述方法使用SOVA算法进行数据解码，可得到路径度量差 $\Delta_{k+1}(q)$ 和先驱状态 $\pi_{k+1}(q)$，结果如图3.11所示。根据图3.11中的数据，按方程(3.37)可计算数据比特 $a_k$ 的MAP-LLR值：
+
+$$
+\{ \lambda_p(a_0), \lambda_p(a_1), \lambda_p(a_2), \lambda_p(a_3), \lambda_p(a_4) \} \approx \{ 16.59, -17.85, 24.88, -12.57, 17.08 \}
+$$
+
+解码数据比特为：
+
+$$
+\{ \hat{a}_0, \hat{a}_1, \hat{a}_2, \hat{a}_3, \hat{a}_4 \} = \{ 1, -1, 1, -1, 1 \}
+$$
+
+与发射端发送的数据比特 $\{ a_k \}$ 一致，表明使用SOVA算法进行数据解码未发生错误。
+
+## 3.5 双向SOVA算法
+
+第3.4节中描述的SOVA算法步骤较为复杂，可能难以理解。本节将介绍另一种形式的SOVA算法工作原理，称为"双向SOVA算法（bi-directional SOVA）"[41, 42]，其输出的数据比特LLR值与SOVA算法接近，且更易于实际应用。
+
+考虑图2.10中的信道模型。SOVA算法输出的数据比特 $a_k$ 的MAP-LLR值根据方程(2.23)为：
+
+$$
+\lambda _ { p } \left( a _ { k } \right) = \ln \left( { \frac { \operatorname { P r } \left[ a _ { k } = 1 \mid \mathbf { y } \right] } { \operatorname { P r } \left[ a _ { k } = - 1 \mid \mathbf { y } \right] } } \right)\tag{3.39}
+$$
+
+其中 $a_k \in \{-1, 1\}$ 是信道输入数据，$\mathbf{y} = [y_0, y_1, ..., y_{L+\nu-1}]$ 是待解码数据序列，$L$ 是输入数据序列长度，$\nu$ 是信道记忆长度。
+
+双向SOVA算法利用网格图解码信道输入数据，根据具有最大路径度量的路径（ML路径）选择输入数据序列 $\mathbf{a} = [a_0, a_1, ..., a_{L-1}]$。到达时间k+1处状态q的路径度量由方程(3.24)求得：
+
+$$
+\Phi _ { k + 1 } \left( q \right) = \ln \left( p \left( \mathbf { y } _ { 0 } ^ { k } ; \mathbf { a } _ { 0 } ^ { k } \right) \right)\tag{3.40}
+$$
+
+即沿到达时间k+1处状态q的幸存路径的分支度量之和。分支度量由方程(3.38)求得：
+
+$$
+\widetilde { \gamma } _ { k } \left( u , q \right) = \ln \left( p \left( y _ { k } ; a _ { k } \right) \right) \approx - \frac { 1 } { 2 \sigma ^ { 2 } } { \left| y _ { k } - \widehat { r } \left( u , q \right) \right| } ^ { 2 } + \frac { \hat { a } \left( u , q \right) \lambda _ { a } \left( a _ { k } \right) } { 2 }\tag{3.41}
+$$
+
+根据贝叶斯规则：
+
+$$
+p \left( \mathbf { a } \mid \mathbf { y } \right) = { \frac { p \left( \mathbf { a } ; \mathbf { y } \right) } { p \left( \mathbf { y } \right) } } { = { \frac { p \left( \mathbf { y } \mid \mathbf { a } \right) p \left( \mathbf { a } \right) } { p \left( \mathbf { y } \right) } } }\tag{3.42}
+$$
+
+由于 $p(\mathbf{y})$ 是与维特比算法选择幸存路径无关的常数，因此利用方程(3.25)可得到ML路径的概率正比于：
+
+$$
+p \left( \mathbf { a } \mid \mathbf { y } \right) \sim \exp \left\{ \Phi _ { L + \nu } ^ { \mathrm { m a x } } \right\}\tag{3.43}
+$$
+
+其中 $\Phi_{L+\nu}^{\mathrm{max}}$ 是时间 $L+\nu$ 处ML路径的最大路径度量。即输入数据序列的估计 $\hat{\mathbf{a}} = [\hat{a}_0, \hat{a}_1, ..., \hat{a}_{L-1}]$ 根据ML路径解码。
+
+定义 $\Phi_k^c$ 为数据比特 $a_k^c$ 与ML路径在时间k处的数据比特 $\hat{a}_k$ 相反的路径的最大路径度量。因此，如果ML路径在时间k处的数据比特为 $\hat{a}_k = 1$，则"互补比特"为 $a_k^c = -1$，可得：
+
+$$
+p \left( a _ { k } = 1 | \mathbf { y } \right) \sim \exp \left\{ \Phi _ { L + \nu } ^ { \mathrm { m a x } } \right\} \qquad \text{和} \qquad p \left( a _ { k } = -1 | \mathbf { y } \right) \sim \exp \left\{ \Phi _ { k + 1 } ^ { c } \right\}\tag{3.44}
+$$
+
+方程(3.44)中两个概率的比值，即数据比特 $a_k$ 的MAP-LLR值为：
+
+$$
+\ln \left\{ { \frac { p \left( a _ { k } = 1 | \mathbf { y } \right) } { p \left( a _ { k } = - 1 | \mathbf { y } \right) } } \right\} \sim \ln \left\{ { \frac { e ^ { \Phi _ { L + \nu } ^ { \operatorname { m a x } } } } { e ^ { \Phi _ { k + 1 } ^ { c } } } } \right\} = \Phi _ { L + \nu } ^ { \operatorname { m a x } } - \Phi _ { k + 1 } ^ { c }\tag{3.45}
+$$
+
+设 $\Phi_{k+1}^{(1)}$ 是所有 $a_k = 1$ 的路径中的最大路径度量，$\Phi_{k+1}^{(-1)}$ 是所有 $a_k = -1$ 的路径中的最大路径度量。考虑以下两种情况：
+
+1) 如果ML路径解码的数据比特为 $\hat{a}_k = 1$，则互补比特为 $-1$，因此 $\Phi_{k+1}^{(1)} = \Phi_{L+\nu}^{\mathrm{max}}$ 且 $\Phi_{k+1}^{(-1)} = \Phi_{k+1}^c$，可得：
+
+$$
+\ln \left\{ \frac { p \left( a _ { k } = 1 | \mathbf { y } \right) } { p \left( a _ { k } = - 1 | \mathbf { y } \right) } \right\} \sim \ln \left( \frac { e ^ { \Phi _ { L + \nu } ^ { \mathrm { m a x } } } } { e ^ { \Phi _ { k + 1 } ^ { c } } } \right) = \Phi _ { L + \nu } ^ { \mathrm { m a x } } - \Phi _ { k + 1 } ^ { c } = \Phi _ { k + 1 } ^ { ( 1 ) } - \Phi _ { k + 1 } ^ { ( - 1 ) }\tag{3.46}
+$$
+
+2) 如果ML路径解码的数据比特为 $\hat{a}_k = -1$，则互补比特为1，因此 $\Phi_{k+1}^{(-1)} = \Phi_{L+\nu}^{\mathrm{max}}$ 且 $\Phi_{k+1}^{(1)} = \Phi_{k+1}^c$，可得：
+
+$$
+\ln \left\{ \frac { p \left( a _ { k } = 1 | \mathbf { y } \right) } { p \left( a _ { k } = - 1 | \mathbf { y } \right) } \right\} \sim \ln \left( \frac { e ^ { \Phi _ { k + 1 } ^ { c } } } { e ^ { \Phi _ { L + \nu } ^ { \mathrm { m a x } } } } \right) = \Phi _ { k + 1 } ^ { c } - \Phi _ { L + \nu } ^ { \mathrm { m a x } } = \Phi _ { k + 1 } ^ { ( 1 ) } - \Phi _ { k + 1 } ^ { ( - 1 ) }\tag{3.47}
+$$
+
+方程(3.46)和(3.47)表明，无论ML路径的数据比特估计值如何，数据比特 $a_k$ 的MAP-LLR值都等于：
+
+$$
+\lambda _ { p } \left( a _ { k } \right) = \ln \left\{ \frac { p \left( a _ { k } = 1 \mid \mathbf { y } \right) } { p \left( a _ { k } = - 1 \mid \mathbf { y } \right) } \right\} \sim \Phi _ { k + 1 } ^ { ( 1 ) } - \Phi _ { k + 1 } ^ { ( - 1 ) }\tag{3.48}
+$$
+
+即数据比特 $a_k$ 的LLR值等于所有 $a_k = 1$ 的路径中的最大路径度量与所有 $a_k = -1$ 的路径中的最大路径度量之差。LLR的大小 $|\lambda_p(a_k)|$ 表示解码数据比特的可信度，LLR的符号表示数据比特的估计值：
+
+$$
+\hat { a } _ { k } = \left\{ \begin{array} { l l } { - 1 , } & { \mathrm { i f } \ \lambda _ { p } \left( a _ { k } \right) \le 0 } \\ { 1 , } & { \mathrm { i f } \ \lambda _ { p } \left( a _ { k } \right) > 0 } \end{array} \right.\tag{3.49}
+$$
+
+### 3.5.1 数据比特LLR的计算
+
+双向SOVA算法的工作原理分为两个步骤：
+
+1) 按照维特比算法的步骤解码数据，以找到输入数据序列的估计 $[\hat{a}_0, \hat{a}_1, ..., \hat{a}_{L-1}]$，该估计对应于ML路径，即在时间 $L+\nu$ 处具有最大路径度量的路径 $\Phi_{L+\nu}^{\mathrm{max}}$。记录 $\Phi_{L+\nu}^{\mathrm{max}}$ 和每个时间k、每个状态u的路径度量 $\Phi_k(u)$。
+
+2) 按照原始网格图进行反向解码（backward decoding），如图3.12所示，以计算分支度量 $\tilde{\gamma}_k^b(\Psi_k = u, \Psi_{k+1} = q)$（简写为 $\tilde{\gamma}_k^b(u,q)$）和路径度量 $\Phi_k^b(u)$，从时间 $k = L+\nu$ 到 $k = 0$。路径度量计算如下[41, 42]：
+
+$$
+\Phi _ { k } ^ { b } \left( u \right) = \max _ { \forall q } \left\{ \tilde { \gamma } _ { k } ^ { b } \left( u , q \right) + \Phi _ { k + 1 } ^ { b } \left( q \right) \right\}\tag{3.50}
+$$
+
+其中初始化所有状态q的分支度量 $\Phi_{L+\nu}^b(q) = 0$。然后记录每个时间和每个状态u,q的 $\tilde{\gamma}_k^b(u,q)$ 和 $\Phi_k^b(u)$，用于计算输入数据比特的LLR值。
