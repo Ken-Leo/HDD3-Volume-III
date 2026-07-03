@@ -15,7 +15,7 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 | Ch5 迭代解码应用 | P168-P207 | p155-p194 |
 | Ch6 BPMR技术 | P208-P241 | p195-p228 |
 | Ch7 BPMR系统设计 | P242-P275 | p229-p262 |
-| Ch8 HAMR | P276-P318 | p263-p305 |
+| Ch8 HAMR | P276-P319 | p263-p306 |
 | 附录A | P320-P321 | p307-p308 |
 | 附录B | P322 | p309 |
 | 附录C | P324 | p311 |
@@ -29,7 +29,7 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 - [x] Ch5: 612行 / 35图 / 46公式 ✓
 - [x] Ch6: 498行 / 46图 / 25公式 ✓
 - [x] Ch7: 998行 / 53图 / 100公式 ✓
-- [x] Ch8: 564行（§8.1-§8.7.1，mineru重新提取完成，§8.4.4-§8.7.1为全新内容）✓
+- [x] Ch8: 572行 / 29图（§8.1-§8.7.1完整，mineru重新提取完成）✓
 - [ ] 附录A-D: 未提取（PDF P320-P326，主要含图）
 - [x] 参考文献: 547行（appendix.md，[30]-[144]）
 
