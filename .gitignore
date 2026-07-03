@@ -12,3 +12,13 @@
 # 排除系统文件和mineru提取副产品
 .DS_Store
 source_final/HDD3-Volume Ill - Advanced Receiver Design/
+
+# 排除项目工作文件（已追踪的旧文件通过git rm --cached移除）
+*.sh
+*.log
+*.pdf
+AGENTS.md
+.codegraph/
+.omo/
+.opencode/
+mineru_test/
