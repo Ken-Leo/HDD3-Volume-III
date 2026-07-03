@@ -18,7 +18,7 @@ $$
 
 由于方程(8.1)中的$k_B T$是常数，因此通过减小体积V来增加数据容量需要使用具有更高$K_u$值的记录介质，以保持$K_u V$不变并满足方程(8.1)。然而，在实际中，$K_u$与"矫顽力$H_c$"[43]成正比，矫顽力是指使比特数据的磁化方向改变到相反方向所需的磁场强度。因此，当$K_u$较大时，$H_c$也较大，这意味着写磁头必须使用非常强的磁场（大于$H_c$）才能将比特数据稳定地写入记录介质。此外，通过减小体积V来增加数据容量还需要考虑当前写磁头能产生的最大磁场强度，因为这限制了$K_u$（或$H_c$）的最大值。
 
-![](images/chapter_7/fc411565854f53657b073f5786274e2601c238bae315da988b3d15837044fc20.jpg)  
+![](../images/chapter_8/fc411565854f53657b073f5786274e2601c238bae315da988b3d15837044fc20.jpg)  
 图8.1 HAMR系统的数据写入过程
 
 因此，可以总结出当前硬盘驱动器中使用的垂直磁记录技术的最大面密度由两个重要因素决定：超顺磁极限和写磁头能产生的最大磁场强度。
@@ -59,7 +59,7 @@ $$
 T(x) = T_\mathrm{write} \exp\left(-\frac{(x-c)^2}{2\sigma_t^2}\right) + 300\tag{8.4}
 $$
 
-![](images/chapter_7/0ce454d316aa6dfa4b4d1521e44354b9c822a675b31faed7816f3d6d13347b37.jpg)  
+![](../images/chapter_8/0ce454d316aa6dfa4b4d1521e44354b9c822a675b31faed7816f3d6d13347b37.jpg)  
 图8.2 $\sigma_t = 382$ nm和$T_\mathrm{peak} = 200°C$时由方程(8.3)得到的温度分布
 
 其中$c$是温度分布中心相对于原点（参考点）在沿磁道方向的位置（单位为纳米），$T_\mathrm{write}$是写入比特数据期间的温度，与最高温度的关系为：
@@ -76,20 +76,20 @@ $$
 
 磁滞回线[1, 43]是表示记录介质的磁化强度M与总外加磁场$H_\mathrm{tot}$之间关系的曲线。磁滞回线反映了系统需要向记录介质施加多少磁场，才能使比特数据稳定地存储在记录介质中。在实际中，通用磁记录系统中使用的记录介质可以用单一的磁滞回线来定义，因为记录介质上每个位置具有相同的磁特性（具有相同的矫顽力$H_c$，并假设温度相同）。因此，数据写入时，系统必须施加总磁场$H_\mathrm{tot}$使其大于记录介质的$H_c$，以使比特数据稳定地存储在记录介质中，并使写入比特数据的区域达到磁滞回线定义的$M_r$（剩磁）。
 
-![](images/chapter_7/951c34e205b1bb5e6ccaeedff8476c3dd815807a82595982abbc6acb42483cba.jpg)  
+![](../images/chapter_8/951c34e205b1bb5e6ccaeedff8476c3dd815807a82595982abbc6acb42483cba.jpg)  
 (左)
 
-![](images/chapter_7/d3118588054dd5908fd632819246397f5ca806a930c1fb8c2a6ec2fcebb2e27e.jpg)  
+![](../images/chapter_8/d3118588054dd5908fd632819246397f5ca806a930c1fb8c2a6ec2fcebb2e27e.jpg)  
 (右)  
 图8.3 (左) 室温下的磁滞回线（Loop 1）和高温下的磁滞回线（Loop 2），(右) 用|H_c|归一化的M-h曲线（即M-H曲线），得到有效场，假设M和h随温度变化
 
 然而，在HAMR系统的写入过程中，记录介质会被附着在写磁头上的激光加热，然后再写入比特数据，之后记录介质快速冷却至室温。因此，用于描述HAMR系统写入过程的磁滞回线有两个：Loop 1和Loop 2，如图8.3(左)所示。Loop 1是记录介质在室温下的磁滞回线，Loop 2是被加热后（温度远高于室温）的记录介质的磁滞回线。从图8.3(左)可以看出，温度较高的记录介质的$H_c$和$M_r$会降低，从而使系统可以使用不太强的总磁场$H_\mathrm{tot}$将比特数据写入记录介质。
 
-![](images/chapter_7/725ab0daadae62fdeb2468be3f73fa6d8d12bb897e9ca849f5e122cc2a761f5d.jpg)
+![](../images/chapter_8/725ab0daadae62fdeb2468be3f73fa6d8d12bb897e9ca849f5e122cc2a761f5d.jpg)
 
-![](images/chapter_7/1c2ab41e086dae4a4ea383a650265bb61af5fecb88641966f8a3cbe3cb7866dc.jpg)
+![](../images/chapter_8/1c2ab41e086dae4a4ea383a650265bb61af5fecb88641966f8a3cbe3cb7866dc.jpg)
 
-![](images/chapter_7/25aa3e5d643d338170e536093f14aaba1011cbe1bfbb666168e4b536f178d3a4.jpg)  
+![](../images/chapter_8/25aa3e5d643d338170e536093f14aaba1011cbe1bfbb666168e4b536f178d3a4.jpg)  
 图8.4 纵向磁记录写入过程和反转位置$x_0$
 
 ### 8.3.3 威廉姆斯-康斯托克模型
@@ -201,7 +201,7 @@ $$
 
 从图8.5可以看出，虚线（$T_\mathrm{peak} = 0°C$, $c = 0$ nm）表示记录介质温度为$0°C$（假设为尚未加热的正常状态），温度分布中心与$x_0$位置对齐（即$c = 0$ nm）。在这种情况下，$M(x)$相对于$x_0$位置呈反对称分布，且在$x_0$处为零。然后，如果使用$T_\mathrm{peak} = 400°C$的激光加热记录介质（即长划线所示，$T_\mathrm{peak} = 400°C$, $c = 0$ nm），则磁化强度降低。由于温度分布中心与$x_0$位置对齐，$M(x)$的降低仍然是对称的。最后，实线（$T_\mathrm{peak} = 400°C$, $c = 300$ nm）显示了当温度分布中心向右偏移$x_0$位置300 nm时的$M(x)$，发现$M(x)$的降低相对于$x_0$不再对称。由于$x_0$右侧的记录介质比左侧更热，因此$x_0$右侧的磁化强度绝对值小于左侧。
 
-![](images/chapter_7/4eb2e593e4640f7b83d0e1eecaa410e9feccd113578812b54d82e41516826b9d.jpg)  
+![](../images/chapter_8/4eb2e593e4640f7b83d0e1eecaa410e9feccd113578812b54d82e41516826b9d.jpg)  
 图8.5 温度$T_\mathrm{peak}$和对齐参数c对磁化强度$M(x)$的影响
 
 此外，磁化梯度可以通过对方程(8.17)求导得到：
@@ -222,7 +222,7 @@ $$
 
 磁化强度相对于总磁场$H_\mathrm{tot}$在$x_0$位置处（温度为$T_0$）矫顽力$H_c$处的导数可由方程(8.12)得到：
 
-![](images/chapter_7/c38489202c7eac9c766fdeeac067f7228e2a3408faa85c005d65878244665da5.jpg)  
+![](../images/chapter_8/c38489202c7eac9c766fdeeac067f7228e2a3408faa85c005d65878244665da5.jpg)  
 图8.6 纵向记录系统的写磁头、记录介质和磁力线
 
 $$
@@ -241,7 +241,7 @@ $$
 
 垂直于磁盘平面的分量为：
 
-![](images/chapter_7/cff3b326ef30d5c56b89ccdb7e5d2603ec3715db50fc378d37b0cabaa3caf871c.jpg)  
+![](../images/chapter_8/cff3b326ef30d5c56b89ccdb7e5d2603ec3715db50fc378d37b0cabaa3afc871.jpg)  
 图8.7 纵向HAMR系统中Karlqvist写磁头磁场的$x$分量，由方程(8.21)得到
 
 $$
@@ -288,14 +288,14 @@ $$
 
 图8.8显示了利用方程(8.27)计算得到的峰值温度 $T_{\mathrm{peak}}$ 和对齐参量 c 对退磁场 $H_d$ 的影响，所用参数与图8.5相同，并取 $\tilde{g} = 300$ nm 和 $\delta = 16$ nm。虚线（$T_{\mathrm{peak}} = 0\;^\circ\mathrm{C}$，$c = 0$ nm）表示介质温度为 $0\;^\circ\mathrm{C}$ 且温度轮廓中心与 $x_0$ 位置对齐的情况——此时只有磁化反转对退磁场 $H_d$ 有贡献，$H_d$ 关于 $x_0$ 呈反对称，且在 $x_0$ 处近似为零。当使用峰值温度为 $T_{\mathrm{peak}} = 400\;^\circ\mathrm{C}$ 的激光加热介质时（长虚线：$T_{\mathrm{peak}}=400\;^\circ\mathrm{C}$，$c=0$ nm），磁化强度降低，导致 $H_d$ 也相应减小。但由于温度轮廓中心与 $x_0$ 位置对齐，$H_d$ 的减小仍保持对称。最后，实线（$T_{\mathrm{peak}}=400\;^\circ\mathrm{C}$，$c=300$ nm）显示了温度轮廓中心向右偏移 $x=0$ 位置 300 nm 时的 $H_d$ 值。结果表明 $H_d$ 的减小关于 $x_0$ 不再对称，且由于 $x_0$ 右侧的介质比左侧更热，$x_0$ 右侧的磁化强度和 $H_d$（绝对值）均小于左侧。此外在此情况下，$H_d \neq 0$ 在 $x_0$ 处，零交点相对于 $x_0$ 位置略微向左偏移。
 
-![](images/chapter_8/5f3fdd527f1e1b00c4d88d259de49fcb24d94bc3600be7cb8f4c9246ae9b9810.jpg)  
+![](../images/chapter_8/5f3fdd527f1e1b00c4d88d259de49fcb24d94bc3600be7cb8f4c9246ae9b9810.jpg)  
 图8.8 峰值温度 $T_{\mathrm{peak}}$ 和对齐参量 c 对退磁场 $H_d$ 的影响
 
 通常，退磁场梯度 $dH_d/dx$ 可通过对方程(8.27)求关于 x 的导数得到，但这种方法可能产生奇异性问题[130]。因此，这里利用卷积的微分性质来处理：
 
-![](images/chapter_8/484ee9bc736d9b489aa8273c0ea546894ebab4f3a971cd54d7ac1a5b5ce50672.jpg)
+![](../images/chapter_8/484ee9bc736d9b489aa8273c0ea546894ebab4f3a971cd54d7ac1a5b5ce50672.jpg)
 
-![](images/chapter_8/411c3ea71d88d0ec0b1292cc6e95a4b1a843858fa045bafc036ef6e2bff2ea57.jpg)
+![](../images/chapter_8/411c3ea71d88d0ec0b1292cc6e95a4b1a843858fa045bafc036ef6e2bff2ea57.jpg)
 
 $$
 { \frac { d } { d x } } { \Bigl [ } f { \bigl ( } x { \bigr ) } * g { \bigl ( } x { \bigr ) } { \Bigr ] } = { \frac { d f { \bigl ( } x { \bigr ) } } { d x } } * g { \bigl ( } x { \bigr ) } = f { \bigl ( } x { \bigr ) } * { \frac { d g { \bigl ( } x { \bigr ) } } { d x } }\tag{8.28}
@@ -345,7 +345,7 @@ $$
 
 这可以通过方程(8.21)的写磁头磁场 $H_h$ 和给定的介质矫顽力 $H_c$ 轻松求解 $x_0$。此外，还可以在方程(8.23)和(8.24)中使用 $\tilde{H} = H_c$，这有助于简化方程(8.15)的求解以得到反转参数 a。然而，使用方程(8.33)求解 $x_0$ 时，有时可能得到多个 $x_0$ 值。在这种情况下，我们假设存储在介质中的反转（或数据比特）仅位于最左侧的位置（根据图8.4所定义的模型）。
 
-![](images/chapter_8/945a7f8231fbe4732ad65312a41bb5137ba98095efab91204c803e0d4ca1a51d.jpg)  
+![](../images/chapter_8/945a7f8231fbe4732ad65312a41bb5137ba98095efab91204c803e0d4ca1a51d.jpg)  
 图8.11 退磁场对求解 $x_0$ 位置的影响
 
 ## 8.4.7 求反转参数 a
@@ -386,7 +386,7 @@ $$
 
 图8.12(a)显示了垂直记录系统的写磁头、介质和磁力线。所使用的介质具有一个称为 SUL（软磁底层）或"keeper"的特殊附加层，帮助磁场从一个磁极传递到另一个磁极，从而使介质中的磁化方向垂直于介质表面。通过使用图8.12(b)中写磁头和介质的等效模型，可以求得写磁头磁场[141]。然而，从图8.12(b)来看，写磁头的磁极像在介质下方关于 x 轴对称分布。如果将图8.12(b)顺时针旋转90度，磁场特征将类似于图8.6中水平记录系统的模型。因此，可以采用 Karlqvist 的概念[138]来近似估计垂直记录系统的写磁头磁场（只需将坐标从 x 变换为 y，从 y 变换为 x），结果为[139]：
 
-![](images/chapter_8/661a620d96d41caf8c3dbe22fae6f99a5ef6fc4ff3fc342eaf00060748e27a3b.jpg)  
+![](../images/chapter_8/661a620d96d41caf8c3dbe22fae6f99a5ef6fc4ff3fc342eaf00060748e27a3b.jpg)  
 图8.12 垂直记录系统的写磁头、介质和磁力线
 
 $$
@@ -397,7 +397,7 @@ $$
 
 类似地，热威廉姆斯-康斯托克模型仅考虑介质厚度中点处的磁场，即 $y = d + \delta/2$，如图8.12(b)所示，在此情况下不考虑平行于介质表面的磁场分量 $H_x(x,y)$。实际中，方程(8.39)的磁场近似仅在 $x > 0$ 时可靠且准确。但由于垂直 HAMR 系统中反转位置通常距离写磁头磁极边缘较远，因此可以可靠地将方程(8.39)用于垂直 HAMR 系统热威廉姆斯-康斯托克模型方程(8.15)的分析[139]。图8.13显示了根据方程(8.39)绘制的垂直 HAMR 系统的 Karlqvist 写磁头磁场，其中 $H_0 = 800$ kA/m，$\tilde{g} = 300$ nm，$y = 50$ nm，$x=0$ 为间隙中心点。
 
-![](images/chapter_8/f4de4661bf61c808462656172e41a96d4b807e5ca25adbe6a2b51aef62ec4265.jpg)  
+![](../images/chapter_8/f4de4661bf61c808462656172e41a96d4b807e5ca25adbe6a2b51aef62ec4265.jpg)  
 图8.13 垂直 HAMR 系统的 Karlqvist 写磁头磁场（方程(8.39)）
 
 此外，通过对方程(8.39)求导，可得到反转中心 $x_0$ 处的写磁头磁场梯度：
@@ -422,7 +422,7 @@ $$
 
 类似地，假设磁化反转具有如方程(8.17)所示的反正切函数特征，则将方程(8.18)和(8.42)代入方程(8.41)，得到退磁场 $H_d$ 为：
 
-![](images/chapter_8/376aadf299f887c7d28414595c80eafa150d8267788a61f9400ce916d23d7a29.jpg)  
+![](../images/chapter_8/376aadf299f887c7d28414595c80eafa150d8267788a61f9400ce916d23d7a29.jpg)  
 图8.14 垂直 HAMR 系统中峰值温度 $T_{\mathrm{peak}}$ 和对齐参量 c 对 $H_d$ 的影响
 
 $$
@@ -453,10 +453,10 @@ $$
 
 同样地，反转中心位置 $x_0$ 仍可通过求解方程(8.32)得到。对于具有大光斑尺寸的 HAMR 系统，热梯度较小，使得退磁场 $H_d$ 的影响非常小（可忽略），如图8.16所示。该图显示了利用方程(8.43)计算退磁场对求解 $x_0$ 的影响，参数与图8.11相同。结果表明，考虑和不考虑 $H_d$ 影响所得到的 $x_0$ 位置差异非常小（仅几纳米），即使 HAMR 系统在高温下工作也是如此。因此，为简化垂直 HAMR 系统的分析，可使用方程(8.33)通过方程(8.39)的写磁头磁场 $H_h$ 和给定的介质矫顽力 $H_c$ 来求解 $x_0$。
 
-![](images/chapter_8/f6c9c89f4a816a90159149f3bce58cf6dae40d34e6ed4ac1537e29f13b06d5de.jpg)  
+![](../images/chapter_8/f6c9c89f4a816a90159149f3bce58cf6dae40d34e6ed4ac1537e29f13b06d5de.jpg)  
 图8.15 垂直 HAMR 系统中峰值温度 $T_{\mathrm{peak}}$ 和对齐参量 c 对 $dH_d/dx$ 的影响
 
-![](images/chapter_8/22bec7611193a44bb5c0873288e8deae1e3b3bfe2fee4f60dfc7c0790979bc25.jpg)  
+![](../images/chapter_8/22bec7611193a44bb5c0873288e8deae1e3b3bfe2fee4f60dfc7c0790979bc25.jpg)  
 图8.16 退磁场对垂直 HAMR 系统中 $x_0$ 位置求解的影响
 
 然后按照第8.4节所述的步骤，可以求得垂直 HAMR 系统的反转参数 a 为[139]：
@@ -483,7 +483,7 @@ $$
 
 在实际中，加热过程和介质的磁化状态是二维的，因为温度轮廓服从高斯分布（方程(8.2)），导致反转在沿磁道方向和跨磁道方向上都发生变化。因此，解决此问题的方法是利用"微磁道模型"[142, 143]来近似估计反转曲率。该方法将一个数据磁道划分为 N 个宽度为 $\Delta z$ 的子磁道，如图8.17所示。设 $T(x,z)$ 为介质加热后的温度轮廓，其中 $x$ 为沿磁道方向，$z$ 为跨磁道方向。每个子磁道的温度轮廓近似为一维函数 $T(x, z=i\Delta z)$，其中 $-N/2 \le i \le N/2$（子磁道数量越多，近似越精确）。然后对每个子磁道独立应用热威廉姆斯-康斯托克模型，以求得各子磁道的反转中心和反转参数。
 
-![](images/chapter_8/27270895e79f1c2b4f0473c38bbce405d598eaf99a9b920680b95248790e73d7.jpg)  
+![](../images/chapter_8/27270895e79f1c2b4f0473c38bbce405d598eaf99a9b920680b95248790e73d7.jpg)  
 图8.17 HAMR 通道的微磁道模型
 
 此外，设每个子磁道的读磁头响应为 $h(\boldsymbol{a}_i, t-\boldsymbol{\tau}_i)$，它取决于子磁道的反转参数 $a_i$ 和反转中心的相对位置 $v(t-\tau_i)$，其中 $x_{0,i} = \tau_i v$ 是第 i 个子磁道的反转中心，$v$ 是介质移动速度。因此，来自读磁头的总脉冲信号响应 $p(t)$ 为[142]：
@@ -514,15 +514,15 @@ $$
 
 表8.1 水平 HAMR 系统分析所用的参数值
 
-| 参数 | 使用值 | | 参数 | 使用值 |
-|------|--------|---------|------|--------|
-| $H_c$ [A/m] | $-2000T(x)+16\times10^5$ | | $T_{\mathrm{peak}}$ [°C] | 可变 |
-| $M_r$ [A/m] | $-1200T(x)+12\times10^5$ | | $\sigma_t$ [nm] | 可变 |
-| $S^*$ | 0.7 | | 磁道宽度 [nm] | 120 |
-| $H_0$ [A/m] | $19\times10^5$ | | 子磁道数量 N | 2001 |
-| $\tilde{g}$ [nm] | 100 | | $C$ | $2.13\times10^4$ |
-| $d$ [nm] | 19 | | $g_r$ [nm] | 5 |
-| $\delta$ [nm] | 2 | | $\sigma_r$ [nm] | 1000 |
+| 参数               | 使用值                      |     | 参数                       | 使用值              |
+| ---------------- | ------------------------ | --- | ------------------------ | ---------------- |
+| $H_c$ [A/m]      | $-2000T(x)+16\times10^5$ |     | $T_{\mathrm{peak}}$ [°C] | 可变               |
+| $M_r$ [A/m]      | $-1200T(x)+12\times10^5$ |     | $\sigma_t$ [nm]          | 可变               |
+| $S^*$            | 0.7                      |     | 磁道宽度 [nm]                | 120              |
+| $H_0$ [A/m]      | $19\times10^5$           |     | 子磁道数量 N                  | 2001             |
+| $\tilde{g}$ [nm] | 100                      |     | $C$                      | $2.13\times10^4$ |
+| $d$ [nm]         | 19                       |     | $g_r$ [nm]               | 5                |
+| $\delta$ [nm]    | 2                        |     | $\sigma_r$ [nm]          | 1000             |
 
 本节将基于热威廉姆斯-康斯托克模型和微磁道模型，展示水平和垂直 HAMR 系统的特性，研究介质中的反转中心 $x_0$ 和反转参数 a。这里假设所使用的激光器始终位于跨磁道方向的磁道中心。
 
@@ -532,45 +532,45 @@ $$
 
 图8.18显示了激光器位于间隙中心左侧（$c=0$ nm）不同位置时，各子磁道中发生的反转中心 $x_0$ 和反转参数 a。可以发现，各子磁道中反转发生的位置不同（不对齐，因此看似曲线），这是因为温度轮廓在沿磁道和跨磁道方向上均为高斯分布——磁道中心温度最高，磁道边缘温度最低。由于矫顽力与温度呈线性反比关系，各子磁道中的反转位置不同，从而在跨磁道方向上形成了"反转曲率"。
 
-![](images/chapter_8/b88bbb3606f251a2480a0f4dcc7d46a996b888c46e0afeba8bda7866f76c6a4f.jpg)
+![](../images/chapter_8/b88bbb3606f251a2480a0f4dcc7d46a996b888c46e0afeba8bda7866f76c6a4f.jpg)
 
-![](images/chapter_8/b4fbd24e90432bb16da8a1861bcec5825c01ce86530da177adcec7d26f645d46.jpg)  
+![](../images/chapter_8/b4fbd24e90432bb16da8a1861bcec5825c01ce86530da177adcec7d26f645d46.jpg)  
 图8.18 水平 HAMR 系统中激光器位于间隙中心左侧不同位置时，各子磁道的反转中心 $x_0$ 和反转参数 a
 
 从图8.18（上）可见，当激光器远离间隙中心（c 值减小）时，$x_0$ 位置也逐渐远离间隙中心，直至到达矫顽力梯度为正的区域（见图8.19）。如果继续将激光器移离间隙中心，$x_0$ 位置会反向移回间隙中心。此外还可观察到，当 $x_0$ 位置远离间隙中心时，反转的曲率相应增大。这是因为 $x_0$ 位置靠近峰值温度点，该区域跨磁道方向热梯度变化最大。例如，图8.18中当激光器位于 $c=-96$ nm 时反转曲率最大（此时 $x_0 \approx -90$ nm，接近 c 值）。此外，图8.18（下）显示了各子磁道在跨磁道方向上的反转参数 a 的轮廓。可以看出，随着激光器远离间隙中心直至写磁头磁场 $H_h$ 较小的区域，a 值逐渐增大。例如，$c=-96$ nm 时 a 值快速增加，因为系统的 $H_d$ 较小且矫顽力梯度接近于零（见图8.19）。在此情况下，a 值在磁道中心最大，在磁道边缘最小。如果反转位置 $x_0$ 发生在写磁头磁场梯度和矫顽力梯度均为正的区域，那么矫顽力梯度的增加会导致反转参数 a 增大。由于矫顽力梯度向磁道边缘递减，磁道中心的 a 值增长速度远快于磁道边缘。此外，当 $c=-128$ nm 时，a 值的轮廓仍保持相同特征，即磁道中心的 a 值大于磁道边缘。
 
-![](images/chapter_8/fc4e73019c6e7b56eef4f595ca9b0cec11a2a80ee7dbd1105d549a8716fcdaa1.jpg)  
+![](../images/chapter_8/fc4e73019c6e7b56eef4f595ca9b0cec11a2a80ee7dbd1105d549a8716fcdaa1.jpg)  
 图8.19 水平 HAMR 系统中激光器位于间隙中心左侧不同位置时的矫顽力 $H_c$
 
 图8.19显示了激光器位于间隙中心左侧不同位置时的写磁头磁场 $H_h$ 和矫顽力 $H_c$。可以发现，$H_c$ 和 $H_h$ 曲线的交点（即 $H_c = H_h$）随激光器位置的不同而变化。反转位置 $x_0$ 发生在 $-x$ 轴方向上 $H_c = H_h$ 的位置（根据图8.4中写磁头和介质的运动特征）。由图可见，$H_c$ 和 $H_h$ 曲线的交点与图8.18（上）中磁道中心处发生的反转中心 $x_0$ 位置一致。
 
 类似地，图8.20显示了激光器位于间隙中心右侧（$c=0$ nm）不同位置时，各子磁道中发生的反转中心 $x_0$ 和反转参数 a。可以发现，$x_0$ 出现在矫顽力梯度全部为负的区域。当激光器远离间隙中心时，$x_0$ 位置距峰值温度点更远（$x_0$ 位置移近间隙中心）。此外，距离间隙中心较远的位置（如 $c=128$ nm），反转的曲率很小（a 值的轮廓变化不大）。然而，由于 $x_0$ 被推至低温区域（c 值增大时），得到的反转参数增大，如图8.20（下）所示。
 
-![](images/chapter_8/17bc87171de9131d08be78e679418de8e1ada820583ea9ac5f780be0e07d834e.jpg)
+![](../images/chapter_8/17bc87171de9131d08be78e679418de8e1ada820583ea9ac5f780be0e07d834e.jpg)
 
-![](images/chapter_8/45a543482634c2a8ca2a1bd5a2e134b6dcea2c6ea3208696d4da1ea0e170b74f.jpg)  
+![](../images/chapter_8/45a543482634c2a8ca2a1bd5a2e134b6dcea2c6ea3208696d4da1ea0e170b74f.jpg)  
 图8.20 水平 HAMR 系统中激光器位于间隙中心右侧不同位置时，各子磁道的反转中心 $x_0$ 和反转参数 a
 
 图8.21显示了激光器位于间隙中心右侧不同位置时的写磁头磁场 $H_h$ 和矫顽力 $H_c$。反转位置 $x_0$ 发生在 $-x$ 轴方向上 $H_c \approx H_h$ 的位置（即 $H_c$ 和 $H_h$ 曲线的交点，对应矫顽力梯度为负的区域）。由图可见，$H_c$ 和 $H_h$ 曲线的交点与图8.20（下）中磁道中心处发生的反转中心 $x_0$ 位置一致。
 
-![](images/chapter_8/c537d43e546a809964c44b0052c5f80e380c2a7e7e3839d4960e6702877c8080.jpg)  
+![](../images/chapter_8/c537d43e546a809964c44b0052c5f80e380c2a7e7e3839d4960e6702877c8080.jpg)  
 图8.21 激光器位于间隙中心右侧不同位置时的矫顽力 $H_c$
 
 衡量 HAMR 系统数据容量的另一个重要参数是 $\mathrm{PW}_{50}$，即读磁头测得的孤立反转响应的半高全宽。$\mathrm{PW}_{50}$ 值越小，意味着数据容量越大。因此，研究温度轮廓对 HAMR 系统中 $\mathrm{PW}_{50}$ 的影响非常重要。在实际中，读出信号的 $\mathrm{PW}_{50}$ 由各子磁道中发生的反转曲率（$x_0$ 位置）和反转参数 a 决定。因此，改变激光器位置会影响介质的矫顽力和温度轮廓，从而导致 $x_0$、a 以及 $\mathrm{PW}_{50}$ 发生相应变化。通常，$\mathrm{PW}_{50}$ 在 a 值较大且反转曲率较小时较大。图8.22显示了利用方程(8.52)计算得到的激光器位于不同位置时的读磁头孤立反转响应，其中 $x_i$ 为沿磁道方向的位置（图8.22中的 x 轴）。由图可见，在不同激光器位置测得的 $\mathrm{PW}_{50}$ 值各不相同。
 
-![](images/chapter_8/f46e87a263586dcc3c3243ae6065ea959d86378024948778de65672803435873.jpg)  
+![](../images/chapter_8/f46e87a263586dcc3c3243ae6065ea959d86378024948778de65672803435873.jpg)  
 图8.22 激光器位于不同位置时的读磁头孤立反转响应
 
 介质的矫顽力和温度轮廓发生变化，导致 $x_0$ 和 a（以及 $\mathrm{PW}_{50}$）相应改变。通常，$\mathrm{PW}_{50}$ 在 a 值较大且反转曲率较小时较大。图8.22显示了利用方程(8.52)计算得到的激光器位于不同位置时的读磁头孤立反转响应，其中 $x_i$ 为沿磁道方向的位置（图8.22中的 x 轴）。由图可见，在不同激光器位置测得的 $\mathrm{PW}_{50}$ 值各不相同。
 
-![](images/chapter_8/7fb079e63085638e8318847eda2426205bb6459b9d02cc765a6966b529b464eb.jpg)  
+![](../images/chapter_8/7fb079e63085638e8318847eda2426205bb6459b9d02cc765a6966b529b464eb.jpg)  
 图8.23 水平 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置的 $\mathrm{PW}_{50}$ 值
 
 图8.23显示了不同 $T_{\mathrm{peak}}$ 下各激光器位置处的 $\mathrm{PW}_{50}$ 值。可以看出，当激光器位置靠近间隙中心时，$\mathrm{PW}_{50}$ 较小（此处 $\mathrm{PW}_{50}$ 最小值出现在间隙中心稍右侧）。如果将激光器向远离间隙中心的方向移动（两侧均如此），读出信号的宽度会增加。然而，尽管在 $c < -100$ nm 的激光器位置 $\mathrm{PW}_{50}$ 似乎有所下降，这一现象在使用高 $H_c$ 介质的 HAMR 系统中始终存在 [139]。在实际中，$\mathrm{PW}_{50}$ 与 a 值成正比，与反转曲率成反比。即，如果各子磁道的反转位置不在同一基准线上（产生曲率），则所有子磁道的总响应宽度将大于各子磁道反转位置共线的情况（这一现象在图8.18中清晰可见）。因此，实验结果表明激光器位置对系统性能影响较大。若能找到最佳激光器位置，则使用较高 $T_{\mathrm{peak}}$ 的 HAMR 系统可获得较小的 $\mathrm{PW}_{50}$ 值，从而提高系统数据容量。
 
 此外，图8.24显示了系统使用三种不同间隙写磁头磁场 $H_0$ 时，读出信号的 $\mathrm{PW}_{50}$ 随 $T_{\mathrm{peak}}$ 的变化。通常，当 $T_{\mathrm{peak}}$ 升高时（介质 $H_c$ 降低），$\mathrm{PW}_{50}$ 减小。随后当 $T_{\mathrm{peak}}$ 达到一定高度时（此处 $T_{\mathrm{peak}} > 400 ^\circ \mathrm{C}$），$\mathrm{PW}_{50}$ 趋于稳定，这一现象在使用低 $H_c$ 介质时更为明显 [139]。从图中还可发现，在给定 $T_{\mathrm{peak}}$ 的情况下，使用高 $H_0$ 的系统可获得较小的 $\mathrm{PW}_{50}$。
 
-![](images/chapter_8/c737e5539ec1eef9f7621da86b85969df9593ba96d7f925db9c8ef5d48900913.jpg)  
+![](../images/chapter_8/c737e5539ec1eef9f7621da86b85969df9593ba96d7f925db9c8ef5d48900913.jpg)  
 图8.24 水平 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下读出信号的 $\mathrm{PW}_{50}$ 值
 
 使用高 $H_0$ 可获得 $\mathrm{PW}_{50}$ 较小的读出信号。同样地，在给定 $H_0$ 的情况下，可以找到使读出信号 $\mathrm{PW}_{50}$ 最小的最佳 $T_{\mathrm{peak}}$ 值。
@@ -581,15 +581,17 @@ $$
 
 图8.25显示了当最高温度 $T_{\mathrm{peak}}$ 分别为 320、360、400、440 和 480°C（分别表示为 –20%、–10%、0%、10% 和 20%）时，各子磁道中发生的 $x_0$ 和 a 值。其中，0% 表示默认值，A% 表示使用的 $T_{\mathrm{peak}}$ 与默认值（即 $400 ^\circ \mathrm{C}$）相差 A%。$x_0$ 为负值表示位于间隙中心左侧的位置。从图中可以看出，当 $T_{\mathrm{peak}}$ 增大时，$x_0$ 位置向远离间隙中心的方向移动，同时 a 值减小。此外，不同 $T_{\mathrm{peak}}$ 下 $x_0$ 和 a 的平均值（所有子磁道的平均值）列于表8.2。类似地，如果将参数 $H_c$、$\tilde{g}$、$H_0$ 和 d 调整为与默认值相差 ±20% 和 ±10%，也会导致 $x_0$ 和 a 发生相应变化。各参数调整情况下 $x_0$ 和 a 的平均值如表8.2所示。这些实验结果可作为选择适当参数以最大化系统性能的参考依据。
 
-![](images/chapter_8/2c4603533a4cf1650893edd6c29784291763686f0f4527a3555182c2551bfad3.jpg)
+![](../images/chapter_8/2c4603533a4cf1650893edd6c29784291763686f0f4527a3555182c2551bfad3.jpg)
 
-![](images/chapter_8/4eabbeee24ac17b4afbc645b6414bff777ef0f02c76a55d2e12c8142e4fcaddc.jpg)  
+![](../images/chapter_8/4eabbeee24ac17b4afbc645b6414bff777ef0f02c76a55d2e12c8142e4fcaddc.jpg)  
 图8.25 水平 HAMR 系统中不同最高温度下各子磁道的反转中心 $x_0$ 和反转参数 a [144]
 
 表8.2 反转中心 $x_0$ 和反转参数 a 的平均值 [144]
+
 <table><tr><td rowspan=2 colspan=1>参数</td><td rowspan=2 colspan=1>平均值</td><td rowspan=1 colspan=5>参数变化百分比</td></tr><tr><td rowspan=1 colspan=1>−20%</td><td rowspan=1 colspan=1>-10%</td><td rowspan=1 colspan=1>0%</td><td rowspan=1 colspan=1>+10%</td><td rowspan=1 colspan=1>+20%</td></tr><tr><td rowspan=2 colspan=1>最高温度 $\scriptstyle T _ { \mathrm { p e a k } }$ </td><td rowspan=1 colspan=1>x0[nm]</td><td rowspan=1 colspan=1>-58.46</td><td rowspan=1 colspan=1>-60.18</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–63.69</td><td rowspan=1 colspan=1>−65.49</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.79</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.46</td><td rowspan=1 colspan=1>5.37</td></tr><tr><td rowspan=2 colspan=1>矫顽力 $H _ { c }$ </td><td rowspan=1 colspan=1> $x _ { 0 }$ [nm]</td><td rowspan=1 colspan=1>–54.57</td><td rowspan=1 colspan=1>–58.13</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>−66.06</td><td rowspan=1 colspan=1>-70.65</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.69</td><td rowspan=1 colspan=1>5.55</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.84</td></tr><tr><td rowspan=2 colspan=1>写磁头间隙 $\tilde { g }$ </td><td rowspan=1 colspan=1>x[nm]</td><td rowspan=1 colspan=1>–53.34</td><td rowspan=1 colspan=1>–57.67</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–66.13</td><td rowspan=1 colspan=1>-70.32</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.52</td><td rowspan=1 colspan=1>5.54</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.59</td><td rowspan=1 colspan=1>5.62</td></tr><tr><td rowspan=2 colspan=1>间隙写磁头磁场 $H _ { 0 }$ </td><td rowspan=1 colspan=1>x0 [nm]</td><td rowspan=1 colspan=1>–57.72</td><td rowspan=1 colspan=1>–59.83</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–64.01</td><td rowspan=1 colspan=1>–66.11</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.61</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.52</td><td rowspan=1 colspan=1>5.48</td></tr><tr><td rowspan=2 colspan=1>飞行高度 d</td><td rowspan=1 colspan=1> $x _ { 0 }$ [nm]</td><td rowspan=1 colspan=1>–64.39</td><td rowspan=1 colspan=1>–63.15</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–60.70</td><td rowspan=1 colspan=1>–59.51</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.46</td><td rowspan=1 colspan=1>5.51</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.61</td><td rowspan=1 colspan=1>5.67</td></tr></table>
 
 表8.3 垂直 HAMR 系统分析使用的参数
+
 <table><tr><td rowspan=1 colspan=1>参数</td><td rowspan=1 colspan=1>使用值</td><td rowspan=1 colspan=3></td><td rowspan=1 colspan=1>参数</td><td rowspan=1 colspan=1> $\dot { \bar { \boldsymbol { \rho } } } \dot { \boldsymbol { \eta } } \dot { \bar { \boldsymbol { \eta } } } \big \| \tilde { \boldsymbol { \beta } }$ </td></tr><tr><td rowspan=2 colspan=1> $H _ { c }$ [A/m]</td><td rowspan=2 colspan=1> $- 2 0 0 0 T ( x ) + 2 1 { \times } 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $T _ { \mathrm { p e a k } }$   $[ ^ { \circ } \mathrm { C } ]$ </td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1> $M _ { r }$ [A/m]</td><td rowspan=2 colspan=1> $- 1 2 0 0 T ( x ) + 1 2 { \times } 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $\sigma _ { t }$ [nm]</td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1> $S ^ { * }$ </td><td rowspan=2 colspan=1>0.7</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1>磁道宽度 [nm]</td></tr><tr><td rowspan=1 colspan=3></td></tr><tr><td rowspan=2 colspan=1> $H _ { 0 }$ [nm]</td><td rowspan=2 colspan=1> $1 9 \times 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1>子磁道数 N</td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1>g[nm]</td><td rowspan=2 colspan=1>80</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $C$ </td></tr><tr><td rowspan=1 colspan=1></td><td></td></tr><tr><td rowspan=2 colspan=1>y[nm]</td><td rowspan=2 colspan=1>16</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $g _ { r }$ [nm]</td></tr></table>
 
 ## 8.7.2 垂直 HAMR 系统
@@ -600,17 +602,17 @@ $$
 
 图8.28显示了垂直 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置处的 $\mathrm{PW}_{50}$ 值，其变化特征与图8.23中水平 HAMR 系统的 $\mathrm{PW}_{50}$ 相似。即，当激光器位于间隙中心右侧时，$\mathrm{PW}_{50}$ 最小。同样地，若系统使用最佳激光器位置，则采用较高 $T_{\mathrm{peak}}$ 的系统可获得 $\mathrm{PW}_{50}$ 较小的读出信号，从而提高系统数据容量。
 
-![](images/chapter_8/8acbb481f78f5f6cd0c7bae28e30f496dea103f2bed54e07d1ee44c1a03772c0.jpg)
+![](../images/chapter_8/8acbb481f78f5f6cd0c7bae28e30f496dea103f2bed54e07d1ee44c1a03772c0.jpg)
 
-![](images/chapter_8/e867e111462e9fdc6f71a202880ec19219de2edc652948a941eaf2d574c99744.jpg)  
+![](../images/chapter_8/e867e111462e9fdc6f71a202880ec19219de2edc652948a941eaf2d574c99744.jpg)  
 图8.26 垂直 HAMR 系统中激光器位于间隙中心左侧不同位置时各子磁道的反转中心 x0 和反转参数 a
 
-![](images/chapter_8/ccb249285fcb899733c317b859967293477ee2a52b3a416a69e0e1814bc137fc.jpg)
+![](../images/chapter_8/ccb249285fcb899733c317b859967293477ee2a52b3a416a69e0e1814bc137fc.jpg)
 
-![](images/chapter_8/d30a724361e0adf0b1b9ac1b82b3ac99d6306a5a92245bbdb49800ed787a1790.jpg)  
+![](../images/chapter_8/d30a724361e0adf0b1b9ac1b82b3ac99d6306a5a92245bbdb49800ed787a1790.jpg)  
 图8.27 垂直 HAMR 系统中激光器位于间隙中心右侧不同位置时各子磁道的反转中心 x0 和反转参数 a
 
-![](images/chapter_8/91fea4daa9ba17383515b01980640af10cd7667b2735840a826407ff98926567.jpg)  
+![](../images/chapter_8/91fea4daa9ba17383515b01980640af10cd7667b2735840a826407ff98926567.jpg)  
 图8.28 垂直 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置的 $\mathrm{PW}_{50}$ 值
 
 ## 8.7.3 使用热威廉姆斯-康斯托克模型的注意事项
@@ -649,5 +651,4 @@ HAMR 技术可将数据容量提升至超过 1 $\mathrm{Tb}/\mathrm{in}^2$，并
 
 8. 请使用 SCILAB 程序绘制图8.19和图8.21中的曲线。
 
-![](images/chapter_8/10f2b350c949df8cc6d6cac8446c505f8dd60f1ed8e177d07237bb4758b42567.jpg)
-
+![](../images/chapter_8/10f2b350c949df8cc6d6cac8446c505f8dd60f1ed8e177d07237bb4758b42567.jpg)

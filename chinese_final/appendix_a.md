@@ -20,3 +20,15 @@ $$
 { \begin{array} { r l } & { \ln \left( e ^ { a } + e ^ { b } \right) = \ln \left( e ^ { b } \left\{ { \frac { e ^ { a } } { e ^ { b } } } + 1 \right\} \right) = \ln \left( e ^ { b } \left\{ 1 + e ^ { a - b } \right\} \right) } \\ & { \qquad = \ln \left( e ^ { b } \right) + \ln \left( 1 + e ^ { - ( b - a ) } \right) } \\ & { \qquad = b + \ln \left( 1 + e ^ { - ( b - a ) } \right) } \end{array} }\tag{ก.3}
 $$
 
+
+![](../images/appendix/1a3e238fd0cd75d9fe9d0a9c59a03ad9570a65024dd240bcd533b1025b567454.jpg)
+
+$$
+\ln \left( e ^ { a } + e ^ { b } \right) = \operatorname* { m a x } \left( a , b \right) + \ln \left( 1 + e ^ { - \left| a - b \right| } \right)
+$$
+
+(ก.4)
+
+这与方程(3.15)一致，证毕。
+
+![](../images/appendix/9c4c673437f202060fce990e1f9f5c02a603fe8f9f9fe127d9d85c648a9665dd.jpg)

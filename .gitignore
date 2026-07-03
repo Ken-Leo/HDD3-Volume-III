@@ -1,7 +1,14 @@
+# 仅追踪以下文件/目录
+/*
+!/.gitignore
+!/README.md
+!/chinese_final
+!/source_final
+!/images
+!/chinese_final/**
+!/source_final/**
+!/images/**
+
+# 排除系统文件和mineru提取副产品
 .DS_Store
-*.pdf
-__pycache__/
-*.pyc
-node_modules/
-.env
-.direnv/
+source_final/HDD3-Volume Ill - Advanced Receiver Design/
