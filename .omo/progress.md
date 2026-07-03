@@ -5,6 +5,7 @@ Goal: Full book translation (Ch1-8 + Appendixes)
 
 ## Page Mapping
 Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
+Total: PDF 348页全部提取完成
 
 | Chapter | Physical Pages | Logical Pages |
 |---------|---------------|---------------|
@@ -16,10 +17,12 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 | Ch6 BPMR技术 | P208-P241 | p195-p228 |
 | Ch7 BPMR系统设计 | P242-P275 | p229-p262 |
 | Ch8 HAMR | P276-P319 | p263-p306 |
-| 附录A | P320-P321 | p307-p308 |
-| 附录B | P322 | p309 |
-| 附录C | P324 | p311 |
-| 附录D | P326 | p313 |
+| 附录A 雅可比对数 | P319-P321 | p306-p308 |
+| 附录B tanh规则 | P322-P323 | p309-p310 |
+| 附录C 方程等价性 | P324-P325 | p311-p312 |
+| 附录D PR2软估计 | P326-P329 | p313-p316 |
+| 参考文献 | P330-P339 | p317-p326 |
+| 索引 | P340-P348 | p327-p335 |
 
 ## Extraction Status
 - [x] Ch1: 318行 / 27图 / 24公式 ✓
@@ -48,6 +51,7 @@ Offset: Physical = Logical + 13 (Physical P14 = Logical p1)
 - [x] Ch7: 完成（689行，标题已修复）
 - [x] Ch8: 完成（653行，§8.1-§8.9全部翻译完成）✓
 - [x] 附录A: 完成（22行，雅可比对数函数推导）✓
+- [x] 附录B: 完成（33行，双曲正切规则tanh rule）✓
 - [x] 参考文献: 完成（546行，无需翻译）
 
 ## Translation Log
