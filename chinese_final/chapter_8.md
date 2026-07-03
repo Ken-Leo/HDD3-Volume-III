@@ -561,3 +561,115 @@ $$
 ![](images/chapter_8/f46e87a263586dcc3c3243ae6065ea959d86378024948778de65672803435873.jpg)  
 图8.22 激光器位于不同位置时的读磁头孤立反转响应
 
+介质的矫顽力和温度轮廓发生变化，导致 $x_0$ 和 a（以及 $\mathrm{PW}_{50}$）相应改变。通常，$\mathrm{PW}_{50}$ 在 a 值较大且反转曲率较小时较大。图8.22显示了利用方程(8.52)计算得到的激光器位于不同位置时的读磁头孤立反转响应，其中 $x_i$ 为沿磁道方向的位置（图8.22中的 x 轴）。由图可见，在不同激光器位置测得的 $\mathrm{PW}_{50}$ 值各不相同。
+
+![](images/chapter_8/7fb079e63085638e8318847eda2426205bb6459b9d02cc765a6966b529b464eb.jpg)  
+图8.23 水平 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置的 $\mathrm{PW}_{50}$ 值
+
+图8.23显示了不同 $T_{\mathrm{peak}}$ 下各激光器位置处的 $\mathrm{PW}_{50}$ 值。可以看出，当激光器位置靠近间隙中心时，$\mathrm{PW}_{50}$ 较小（此处 $\mathrm{PW}_{50}$ 最小值出现在间隙中心稍右侧）。如果将激光器向远离间隙中心的方向移动（两侧均如此），读出信号的宽度会增加。然而，尽管在 $c < -100$ nm 的激光器位置 $\mathrm{PW}_{50}$ 似乎有所下降，这一现象在使用高 $H_c$ 介质的 HAMR 系统中始终存在 [139]。在实际中，$\mathrm{PW}_{50}$ 与 a 值成正比，与反转曲率成反比。即，如果各子磁道的反转位置不在同一基准线上（产生曲率），则所有子磁道的总响应宽度将大于各子磁道反转位置共线的情况（这一现象在图8.18中清晰可见）。因此，实验结果表明激光器位置对系统性能影响较大。若能找到最佳激光器位置，则使用较高 $T_{\mathrm{peak}}$ 的 HAMR 系统可获得较小的 $\mathrm{PW}_{50}$ 值，从而提高系统数据容量。
+
+此外，图8.24显示了系统使用三种不同间隙写磁头磁场 $H_0$ 时，读出信号的 $\mathrm{PW}_{50}$ 随 $T_{\mathrm{peak}}$ 的变化。通常，当 $T_{\mathrm{peak}}$ 升高时（介质 $H_c$ 降低），$\mathrm{PW}_{50}$ 减小。随后当 $T_{\mathrm{peak}}$ 达到一定高度时（此处 $T_{\mathrm{peak}} > 400 ^\circ \mathrm{C}$），$\mathrm{PW}_{50}$ 趋于稳定，这一现象在使用低 $H_c$ 介质时更为明显 [139]。从图中还可发现，在给定 $T_{\mathrm{peak}}$ 的情况下，使用高 $H_0$ 的系统可获得较小的 $\mathrm{PW}_{50}$。
+
+![](images/chapter_8/c737e5539ec1eef9f7621da86b85969df9593ba96d7f925db9c8ef5d48900913.jpg)  
+图8.24 水平 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下读出信号的 $\mathrm{PW}_{50}$ 值
+
+使用高 $H_0$ 可获得 $\mathrm{PW}_{50}$ 较小的读出信号。同样地，在给定 $H_0$ 的情况下，可以找到使读出信号 $\mathrm{PW}_{50}$ 最小的最佳 $T_{\mathrm{peak}}$ 值。
+
+## 参数调整的影响
+
+本节将展示调整各参数——最高温度（$T_{\mathrm{peak}}$）、矫顽力（$H_c$）、写磁头间隙（g）、间隙写磁头磁场（$H_0$）以及飞行高度（d）——对水平 HAMR 系统中反转中心位置 $x_0$ 和反转参数 a 的影响，该分析使用最高温度 $T_{\mathrm{peak}} = 400 ^\circ \mathrm{C}$ 且 $c = 0$ nm。所使用的其他参数均为表8.1中列出的默认值。
+
+图8.25显示了当最高温度 $T_{\mathrm{peak}}$ 分别为 320、360、400、440 和 480°C（分别表示为 –20%、–10%、0%、10% 和 20%）时，各子磁道中发生的 $x_0$ 和 a 值。其中，0% 表示默认值，A% 表示使用的 $T_{\mathrm{peak}}$ 与默认值（即 $400 ^\circ \mathrm{C}$）相差 A%。$x_0$ 为负值表示位于间隙中心左侧的位置。从图中可以看出，当 $T_{\mathrm{peak}}$ 增大时，$x_0$ 位置向远离间隙中心的方向移动，同时 a 值减小。此外，不同 $T_{\mathrm{peak}}$ 下 $x_0$ 和 a 的平均值（所有子磁道的平均值）列于表8.2。类似地，如果将参数 $H_c$、$\tilde{g}$、$H_0$ 和 d 调整为与默认值相差 ±20% 和 ±10%，也会导致 $x_0$ 和 a 发生相应变化。各参数调整情况下 $x_0$ 和 a 的平均值如表8.2所示。这些实验结果可作为选择适当参数以最大化系统性能的参考依据。
+
+![](images/chapter_8/2c4603533a4cf1650893edd6c29784291763686f0f4527a3555182c2551bfad3.jpg)
+
+![](images/chapter_8/4eabbeee24ac17b4afbc645b6414bff777ef0f02c76a55d2e12c8142e4fcaddc.jpg)  
+图8.25 水平 HAMR 系统中不同最高温度下各子磁道的反转中心 $x_0$ 和反转参数 a [144]
+
+表8.2 反转中心 $x_0$ 和反转参数 a 的平均值 [144]
+<table><tr><td rowspan=2 colspan=1>参数</td><td rowspan=2 colspan=1>平均值</td><td rowspan=1 colspan=5>参数变化百分比</td></tr><tr><td rowspan=1 colspan=1>−20%</td><td rowspan=1 colspan=1>-10%</td><td rowspan=1 colspan=1>0%</td><td rowspan=1 colspan=1>+10%</td><td rowspan=1 colspan=1>+20%</td></tr><tr><td rowspan=2 colspan=1>最高温度 $\scriptstyle T _ { \mathrm { p e a k } }$ </td><td rowspan=1 colspan=1>x0[nm]</td><td rowspan=1 colspan=1>-58.46</td><td rowspan=1 colspan=1>-60.18</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–63.69</td><td rowspan=1 colspan=1>−65.49</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.79</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.46</td><td rowspan=1 colspan=1>5.37</td></tr><tr><td rowspan=2 colspan=1>矫顽力 $H _ { c }$ </td><td rowspan=1 colspan=1> $x _ { 0 }$ [nm]</td><td rowspan=1 colspan=1>–54.57</td><td rowspan=1 colspan=1>–58.13</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>−66.06</td><td rowspan=1 colspan=1>-70.65</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.69</td><td rowspan=1 colspan=1>5.55</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.84</td></tr><tr><td rowspan=2 colspan=1>写磁头间隙 $\tilde { g }$ </td><td rowspan=1 colspan=1>x[nm]</td><td rowspan=1 colspan=1>–53.34</td><td rowspan=1 colspan=1>–57.67</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–66.13</td><td rowspan=1 colspan=1>-70.32</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.52</td><td rowspan=1 colspan=1>5.54</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.59</td><td rowspan=1 colspan=1>5.62</td></tr><tr><td rowspan=2 colspan=1>间隙写磁头磁场 $H _ { 0 }$ </td><td rowspan=1 colspan=1>x0 [nm]</td><td rowspan=1 colspan=1>–57.72</td><td rowspan=1 colspan=1>–59.83</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–64.01</td><td rowspan=1 colspan=1>–66.11</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.67</td><td rowspan=1 colspan=1>5.61</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.52</td><td rowspan=1 colspan=1>5.48</td></tr><tr><td rowspan=2 colspan=1>飞行高度 d</td><td rowspan=1 colspan=1> $x _ { 0 }$ [nm]</td><td rowspan=1 colspan=1>–64.39</td><td rowspan=1 colspan=1>–63.15</td><td rowspan=1 colspan=1>–61.92</td><td rowspan=1 colspan=1>–60.70</td><td rowspan=1 colspan=1>–59.51</td></tr><tr><td rowspan=1 colspan=1>a [nm]</td><td rowspan=1 colspan=1>5.46</td><td rowspan=1 colspan=1>5.51</td><td rowspan=1 colspan=1>5.56</td><td rowspan=1 colspan=1>5.61</td><td rowspan=1 colspan=1>5.67</td></tr></table>
+
+表8.3 垂直 HAMR 系统分析使用的参数
+<table><tr><td rowspan=1 colspan=1>参数</td><td rowspan=1 colspan=1>使用值</td><td rowspan=1 colspan=3></td><td rowspan=1 colspan=1>参数</td><td rowspan=1 colspan=1> $\dot { \bar { \boldsymbol { \rho } } } \dot { \boldsymbol { \eta } } \dot { \bar { \boldsymbol { \eta } } } \big \| \tilde { \boldsymbol { \beta } }$ </td></tr><tr><td rowspan=2 colspan=1> $H _ { c }$ [A/m]</td><td rowspan=2 colspan=1> $- 2 0 0 0 T ( x ) + 2 1 { \times } 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $T _ { \mathrm { p e a k } }$   $[ ^ { \circ } \mathrm { C } ]$ </td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1> $M _ { r }$ [A/m]</td><td rowspan=2 colspan=1> $- 1 2 0 0 T ( x ) + 1 2 { \times } 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $\sigma _ { t }$ [nm]</td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1> $S ^ { * }$ </td><td rowspan=2 colspan=1>0.7</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1>磁道宽度 [nm]</td></tr><tr><td rowspan=1 colspan=3></td></tr><tr><td rowspan=2 colspan=1> $H _ { 0 }$ [nm]</td><td rowspan=2 colspan=1> $1 9 \times 1 0 ^ { 5 }$ </td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1>子磁道数 N</td></tr><tr><td rowspan=1 colspan=2></td></tr><tr><td rowspan=2 colspan=1>g[nm]</td><td rowspan=2 colspan=1>80</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $C$ </td></tr><tr><td rowspan=1 colspan=1></td><td></td></tr><tr><td rowspan=2 colspan=1>y[nm]</td><td rowspan=2 colspan=1>16</td><td rowspan=2 colspan=2></td><td rowspan=1 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1> $g _ { r }$ [nm]</td></tr></table>
+
+## 8.7.2 垂直 HAMR 系统
+
+本节将展示垂直 HAMR 系统的反转特性。系统分析使用的参数列于表8.3。
+
+图8.26和图8.27分别显示了激光器位于间隙中心左侧和右侧不同位置时，各子磁道中发生的反转中心 $x_0$ 和反转参数 a。可以看出，$x_0$ 和 a 的变化特征与水平 HAMR 系统相似。然而，当激光器向间隙中心右侧移动更远时，a 值减小（这与图8.20中水平 HAMR 系统的情况相反）。这是因为方程(8.39)定义的写磁头磁场 $H_h$ 在磁极边缘区域的近似效果不佳。因此，当反转发生在该区域附近时，根据方程(8.39)使用的 $H_h$ 值导致写磁头磁场梯度非常大，从而使得到的反转参数减小 [133]。
+
+图8.28显示了垂直 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置处的 $\mathrm{PW}_{50}$ 值，其变化特征与图8.23中水平 HAMR 系统的 $\mathrm{PW}_{50}$ 相似。即，当激光器位于间隙中心右侧时，$\mathrm{PW}_{50}$ 最小。同样地，若系统使用最佳激光器位置，则采用较高 $T_{\mathrm{peak}}$ 的系统可获得 $\mathrm{PW}_{50}$ 较小的读出信号，从而提高系统数据容量。
+
+![](images/chapter_8/8acbb481f78f5f6cd0c7bae28e30f496dea103f2bed54e07d1ee44c1a03772c0.jpg)
+
+![](images/chapter_8/e867e111462e9fdc6f71a202880ec19219de2edc652948a941eaf2d574c99744.jpg)  
+图8.26 垂直 HAMR 系统中激光器位于间隙中心左侧不同位置时各子磁道的反转中心 x0 和反转参数 a
+
+![](images/chapter_8/ccb249285fcb899733c317b859967293477ee2a52b3a416a69e0e1814bc137fc.jpg)
+
+![](images/chapter_8/d30a724361e0adf0b1b9ac1b82b3ac99d6306a5a92245bbdb49800ed787a1790.jpg)  
+图8.27 垂直 HAMR 系统中激光器位于间隙中心右侧不同位置时各子磁道的反转中心 x0 和反转参数 a
+
+![](images/chapter_8/91fea4daa9ba17383515b01980640af10cd7667b2735840a826407ff98926567.jpg)  
+图8.28 垂直 HAMR 系统中不同 $T_{\mathrm{peak}}$ 下各激光器位置的 $\mathrm{PW}_{50}$ 值
+
+## 8.7.3 使用热威廉姆斯-康斯托克模型的注意事项
+
+使用热威廉姆斯-康斯托克模型中的方程(8.15)计算水平 HAMR 和垂直 HAMR 系统的反转参数 a，以及使用方程(8.33)计算反转中心 $x_0$ 时，应注意以下几点：
+
+用于计算 a 和 $x_0$ 的各方程基于以下假设：写磁头和介质模型以及介质中的运动方向和磁化反转方向均符合图8.4所示，即：
+
+介质相对于写磁头向左运动。因此，求得的 $x_0$ 值为负，表示 $x_0$ 位置位于写磁头间隙中心的左侧。
+
+磁化状态从 $+M_r$ 变为 $-M_r$，这意味着反转是在负矫顽力（negative coercivity）作用下写成的。
+
+因此，在使用各方程计算 a 和 $x_0$ 时，必须将磁化强度 $M_r$ 设为负值、矫顽力 $H_c$ 设为负值、矫顽力梯度 $dH_c/dT$ 设为正值。此外，对于水平 HAMR 系统，须将间隙写磁头磁场 $H_0$ 设为负值；对于垂直 HAMR 系统，须将 $H_0$ 设为正值。
+
+## 8.8 本章小结
+
+HAMR 技术可将数据容量提升至超过 1 $\mathrm{Tb}/\mathrm{in}^2$，并且有望在不久的将来实际应用于硬盘驱动器。本文利用方程(8.15)的热威廉姆斯-康斯托克模型和微磁道模型分析了 HAMR 系统，研究了反转特性（反转中心 $x_0$ 和反转参数 a）以及读磁头读出信号的 $\mathrm{PW}_{50}$ 值。通常，$\mathrm{PW}_{50}$ 越小，系统数据容量越大。因此，具有较小 $\mathrm{PW}_{50}$ 的 HAMR 系统是理想目标。然而，$x_0$、a 和 $\mathrm{PW}_{50}$ 取决于多种因素，包括激光器位置、使用的最高温度、写磁头和读磁头的特性以及介质的磁性能等。在实际中，$\mathrm{PW}_{50}$ 与 a 值成正比，与反转曲率成反比（由各子磁道的 $x_0$ 决定）。因此，研究 HAMR 系统的各种行为至关重要，以便为选择适合系统的参数提供参考，从而实现系统性能最大化。
+
+本章重点关注 HAMR 系统的写入过程（write process），该过程导致读磁头获得的读出信号与常规磁记录系统（水平和垂直）的读出信号特征不同。然而，HAMR 系统中使用的读取过程和译码方式与常规磁记录系统相同，即可使用现有硬盘驱动器中采用的常规接收电路（或 PRML 检测电路）。
+
+## 8.9 习题
+
+1. 请解释 HAMR 技术的基本概念和工作原理。
+
+2. 请解释并推导方程(8.8)中的威廉姆斯-康斯托克模型。
+
+3. 请解释并推导方程(8.15)中的热威廉姆斯-康斯托克模型。
+
+4. 请推导方程(8.29)。
+
+5. 请推导方程(8.37)。
+
+6. 请推导方程(8.47)。
+
+7. 请解释微磁道模型的重要性。
+
+8. 请使用 SCILAB 程序绘制图8.19和图8.21中的曲线。
+
+![](images/chapter_8/10f2b350c949df8cc6d6cac8446c505f8dd60f1ed8e177d07237bb4758b42567.jpg)
+
+# 附录 A
+
+# 雅可比对数函数
+
+本附录将推导方程(3.15)中的雅可比对数函数（Jacobian logarithm），即
+
+$$
+\ln \left( e ^ { a } + e ^ { b } \right) = \operatorname* { m a x } \left( a , b \right) + \ln \left( 1 + e ^ { - \left| a - b \right| } \right)\tag{ก.1}
+$$
+
+其中 a 和 b 为任意常数。推导分为两种情况：1) 当 $a > b$ 时，
+
+$$
+{ \begin{array} { r l } & { \ln \left( e ^ { a } + e ^ { b } \right) = \ln \left( e ^ { a } \left\{ 1 + { \frac { e ^ { b } } { e ^ { a } } } \right\} \right) = \ln \left( e ^ { a } \left\{ 1 + e ^ { b - a } \right\} \right) } \\ & { \qquad = \ln \left( e ^ { a } \right) + \ln \left( 1 + e ^ { - ( a - b ) } \right) } \\ & { \qquad = a + \ln \left( 1 + e ^ { - ( a - b ) } \right) } \end{array} }\tag{ก.2}
+$$
+
+2) 当 $b > a$ 时，
+
+$$
+{ \begin{array} { r l } & { \ln \left( e ^ { a } + e ^ { b } \right) = \ln \left( e ^ { b } \left\{ { \frac { e ^ { a } } { e ^ { b } } } + 1 \right\} \right) = \ln \left( e ^ { b } \left\{ 1 + e ^ { a - b } \right\} \right) } \\ & { \qquad = \ln \left( e ^ { b } \right) + \ln \left( 1 + e ^ { - ( b - a ) } \right) } \\ & { \qquad = b + \ln \left( 1 + e ^ { - ( b - a ) } \right) } \end{array} }\tag{ก.3}
+$$
+
