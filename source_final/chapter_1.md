@@ -86,9 +86,7 @@ $$
 
 เมื่อ ท คือเลขจำนวนเต็มบวก
 
-![](../images/chapter_1/_unused_a890c7af11a4cbeab45332d11f4dfaf606c6f0db22b2d6f46100e90d53ab8dcd.jpg)
 
-![](../images/chapter_1/_unused_aff673ec985bb849abbca7483ff837c956d57273e3c04fca72e5bd7c94d6030d.jpg)
 
 ![](../images/chapter_1/fig_1_5_a.jpg)
 
@@ -146,7 +144,6 @@ $$
 
 ในหัวข้อนี้จะอธิบายพื้นฐานและคำศัพท์ที่น่าสนใจที่เกี่ยวข้องกับการถอดรหัสแบบวนซ้ำ เพื่อให้ ผู้อ่านเข้าใจความหมายของคำเหล่านี้ ก่อนศึกษาเนื้อหาในบทที่ 2 – 4
 
-![](../images/chapter_1/_unused_efba52fc36e6e4678e0af321c59a879e1182f45b2f37dc033f77e41ed786e9a2.jpg)
 
 ## 1.5.1 การตัดสินใจแบบฮาร์ดและแบบซอฟต์
 
@@ -190,9 +187,7 @@ $$
 
 เนื่องจาก $p ( a = + 1 ) = 1 - p ( a = - 1 )$ ดังนั้นสมการ (1.12) จัดรูปใหม่ได้เป็น
 
-![](../images/chapter_1/_unused_c612c1e64f66e045ea68154e28b85d4fd94e49890c160a6ecaa3210279b45c02.jpg)
 
-![](../images/chapter_1/_unused_67dcc58c07221aa115080cae40a6681b53bda8f2f4edaf47ba4094d56d48c34b.jpg)
 
 $$
 e ^ { \lambda ( a ) } = \frac { p ( a = + 1 ) } { 1 - p ( a = + 1 ) }\tag{1.13}
@@ -228,7 +223,6 @@ $$
 \begin{array} { c } { { p \big ( x = i \mid y \big ) = p \big ( x = i ; y \big ) / p \big ( y \big ) } } \\ { { { } } } \\ { { = p \big ( y \mid x = i \big ) p \big ( x = i \big ) / p \big ( y \big ) } } \end{array}\tag{1.17}
 $$
 
-![](../images/chapter_1/_unused_db0aeba28c74e54a71cdd51b60b75b5c61510c14003e3bd1b101f8dc1c0386d6.jpg)
 
 เมื่อ $i \in \{ 0 , 1 \}$ และ $p \big ( a ; b \big )$ คือฟังก์ชันความหนาแน่นความน่าจะเป็นร่วม (oit pdf) ระหว่าง ตัวแปรสุ่ม a และ b ดังนั้นค่า LLR ของบิตข้อมูล x เมื่อกำหนดค่า y มาให้ จะนิยามโดย
 
@@ -283,7 +277,6 @@ $$
 
 หมายเหตุ สำหรับค่า LLR ของบิตข้อมูล x นั่นคือ $\lambda ( x )$ ในหนังสือเล่มนี้จะนิยามดังนี้
 
-![](../images/chapter_1/_unused_111481879c1a013aecc999d96d8451869f81007c80693026dabdb451b584a049.jpg)
 
 ถ้าค่า LLR มีตัวห้อย (subscript) เป็นพารามิเตอร์ a เช่น ${ \lambda } _ { a } \left( x \right)$ จะหมายถึงค่า LLR แบบ อะพิริออริ (a priori LLR) ของบิตข้อมูล x
 
@@ -313,4 +306,3 @@ $$
 
 0 และของระบบการบันทีกแบบแนวตั้งมิค่าเท่ากับ
 
-![](../images/chapter_1/_unused_11bc6da7d0196e469147cda14ee298d1e88f57cddd23a3d29a55c350b19f7e40.jpg)

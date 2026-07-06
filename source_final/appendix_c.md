@@ -30,7 +30,6 @@ $$
 f \left( \left| \lambda _ { \Phi \left( \mathbf { c } \right) } \right| \right) = \sum _ { i = 1 } ^ { n } f \left( \left| \lambda _ { i } \right| \right)\tag{ค.5}
 $$
 
-![](../images/appendix/_unused_2cc42992ffbbabb2419e0d71e6fa11d21563b9c74a7200dece7801798caeb6f2.jpg)
 
 โดยที่ $f \bigl ( x \bigr ) = - \log \bigl ( \operatorname { t a n h } \left( x / 2 \right) \bigr )$ ตามสมการ (4.33) ซึ่งมีคุณสมบัติที่สำคัญคือ $f ( f ( x ) ) = x$ สำหรับ $x > 0$ ดังนั้นถ้าใส่ฟังก์ชัน f () เข้าไปทั้งสองข้างของสมการ (ค.5) ก็จะได้
 
@@ -46,4 +45,3 @@ $$
 
 ซึ่งตรงกับสมการ (4.32) ตามที่ต้องการ
 
-![](../images/appendix/_unused_f77c0b70d0144d494d0186aba5f321eb933d5b55ba91b17da82d0d2e143063e7.jpg)

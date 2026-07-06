@@ -4,18 +4,18 @@
 
 ## 1.1 数字数据存储系统
 
+![](../images/chapter_1/fig_1_1.jpg)  
 硬盘驱动器中的数字数据存储系统（digital data storage system）可以用图1.1 [1, 5, 7] 中的框图来表示。消息比特（message bits）被发送到纠错编码器（ECC encoder），其中 RS 码（Reed Solomon）[2, 8] 是硬盘驱动器中常用的编码。随后，编码后的数据再次通过调制编码器（modulation encoder）进行编码，以调整数据特性使其适应硬盘驱动器信道。常用的调制编码是 RLL 码（run-length limited code）[5, 9]。来自调制编码器的输出数据被视为将被写入存储介质的"记录比特（recorded bit）"。之后，记录比特被发送到调制器（modulator），将比特数据转换为写入电流波形（write current waveform），然后输入写磁头以将数据写入存储介质。
 
-![](../images/chapter_1/fig_1_1.jpg)  
 图1.1 硬盘驱动器数字数据存储系统的框图 [9, 10]
 
 对于读取过程，读磁头（read head）从存储介质读取数据。当读磁头移动到磁化状态变化的区域时，会产生电压波形信号，通常称为"读回信号（readback signal）"。然后，读回信号被送入读通道进行处理，读通道由各种组件组成，如低通滤波器（LPF）、采样器（sampler 或模数转换器）、均衡器（equalizer）和符号检测器（symbol detector）等。输出数据随后依次通过调制解码器（modulation decoder）和纠错解码器（ECC decoder）进行解码，以获得所需的消息比特估计值以供使用。
 
 ## 1.2 硬盘驱动器的信道模型
 
+![](../images/chapter_1/fig_1_2.jpg)  
 图1.1中的子系统A可以表示为如图1.2 [1, 10] 所示的数学模型。二进制输入数据序列 $a _ { k } \in \{ 0 , 1 \}$ 的比特周期为 T，经过理想微分器（ideal differentiator），其多项式形式为 $1 - D$，其中 D 是延迟 T 的延迟算子，得到转换序列（transition sequence） $b _ { k } \in \{ - 1 , 0 , 1 \}$，其中 $b _ { k } = \pm 1$ 表示正或负的转换（positive or negative transition），$b _ { k } = 0$ 表示无转换（no transition）。然后转换序列 $b _ { k }$ 被发送到冲激响应等于转换脉冲信号 g(t) 的信道，并受到噪声 n(t) 的干扰，得到读回信号 r(t)，其数学方程为
 
-![](../images/chapter_1/fig_1_2.jpg)  
 图1.2 硬盘驱动器的信道模型
 
 $$
@@ -86,9 +86,7 @@ $$
 
 其中 n 是正整数。
 
-![](../images/chapter_1/_unused_a890c7af11a4cbeab45332d11f4dfaf606c6f0db22b2d6f46100e90d53ab8dcd.jpg)
 
-![](../images/chapter_1/_unused_aff673ec985bb849abbca7483ff837c956d57273e3c04fca72e5bd7c94d6030d.jpg)
 
 ![](../images/chapter_1/fig_1_5_a.jpg)
 
@@ -129,13 +127,13 @@ $$
 
 实际的硬盘驱动器信号处理系统（见图1.1）也使用纠错编码（使用 RS 码，因为它可以纠正多个连续比特错误）。也就是说，消息比特被送入纠错编码器和调制编码器，得到图1.2中的输入数据序列 $a _ { k }$。然后在接收端，图1.2中检测到的输入数据序列 $\hat { a } _ { k }$ 被送到调制解码器和纠错解码器，以获得可用的消息比特估计值。这种硬盘驱动器信号处理系统的工作方式从过去一直沿用至今，被认为是"单向处理（one-way processing）"，即符号检测器独立于 ECC 解码器工作。
 
+![](../images/chapter_1/fig_1_7_b.jpg)  
+![](../images/chapter_1/fig_1_7_a.jpg)
 然而，研究 [2-5] 表明，"迭代解码（iterative decoding）"——即符号检测器和 ECC 解码器之间的协同工作——可以显著提高系统的整体性能。使用迭代信号处理系统的硬盘驱动器将具有如图1.7所示的结构，其中增加了迭代编码器（iterative encoder）和 SISO（soft-input soft-output）解码器。此外，子系统 A 中使用的符号检测器必须从维特比检测器更换为 SISO 检测器。迭代编码器是一种纠错编码器，常用的是 LDPC 码（low-density parity-check code）[17]，因为它是性能最强的 ECC 编码 [2, 5]（关于 LDPC 码的详细信息见第4章）。
 
 目前，新型硬盘驱动器已经采用了迭代解码技术（如图1.7所示），其中 SISO 检测器和 SISO 解码器之间交换软信息（soft information）[2]。用于迭代解码的 SISO 检测器可以基于 BCJR 算法 [18] 或 SOVA（soft-output Viterbi algorithm）[19] 开发（详见第2-3章）。而用于解码 LDPC 编码数据的 SISO 解码器则基于消息传递算法（message passing algorithm）[17] 开发（详见第4.4.4节）。
 
-![](../images/chapter_1/fig_1_7_a.jpg)
 
-![](../images/chapter_1/fig_1_7_b.jpg)  
 图1.7 硬盘驱动器迭代信号处理系统的框图
 
 迭代解码技术的工作过程从 SISO 检测器开始，它对接收到的数据进行检测，然后将结果（软信息）发送到 SISO 解码器。然后 SISO 解码器将解码后的结果发送回 SISO 检测器，用于新一轮的检测。此过程循环进行，直到达到设定的迭代次数，SISO 解码器才将输出数据送至调制解码器和 RS 解码器进行后续解码。
@@ -146,7 +144,6 @@ $$
 
 本节将解释与迭代解码相关的基础知识和重要术语，使读者在学习第2-4章内容之前理解这些术语的含义。
 
-![](../images/chapter_1/_unused_efba52fc36e6e4678e0af321c59a879e1182f45b2f37dc033f77e41ed786e9a2.jpg)
 
 ## 1.5.1 硬判决与软判决
 
@@ -189,9 +186,7 @@ $$
 
 由于 $p ( a = + 1 ) = 1 - p ( a = - 1 )$，方程 (1.12) 可重新整理为
 
-![](../images/chapter_1/_unused_c612c1e64f66e045ea68154e28b85d4fd94e49890c160a6ecaa3210279b45c02.jpg)
 
-![](../images/chapter_1/_unused_67dcc58c07221aa115080cae40a6681b53bda8f2f4edaf47ba4094d56d48c34b.jpg)
 
 $$
 e ^ { \lambda ( a ) } = \frac { p ( a = + 1 ) } { 1 - p ( a = + 1 ) }\tag{1.13}
@@ -225,7 +220,6 @@ $$
 \begin{array} { c } { { p \big ( x = i \mid y \big ) = p \big ( x = i ; y \big ) / p \big ( y \big ) } } \\ { { { } } } \\ { { = p \big ( y \mid x = i \big ) p \big ( x = i \big ) / p \big ( y \big ) } } \end{array}\tag{1.17}
 $$
 
-![](../images/chapter_1/_unused_db0aeba28c74e54a71cdd51b60b75b5c61510c14003e3bd1b101f8dc1c0386d6.jpg)
 
 其中 $i \in \{ 0 , 1 \}$，$p \big ( a ; b \big )$ 是随机变量 a 和 b 的联合概率密度函数（joint pdf）。因此，给定 y 时比特数据 x 的 LLR 定义为
 
@@ -280,7 +274,6 @@ $$
 
 注意，对于比特数据 x 的 LLR，即 $\lambda ( x )$，本书定义如下
 
-![](../images/chapter_1/_unused_111481879c1a013aecc999d96d8451869f81007c80693026dabdb451b584a049.jpg)
 
 如果 LLR 的下标为参数 a，例如 ${ \lambda } _ { a } \left( x \right)$，表示比特数据 x 的先验 LLR（a priori LLR）。
 
@@ -310,4 +303,3 @@ $$
 
 垂直记录系统的结果为
 
-![](../images/chapter_1/_unused_11bc6da7d0196e469147cda14ee298d1e88f57cddd23a3d29a55c350b19f7e40.jpg)

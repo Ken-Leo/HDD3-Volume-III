@@ -26,7 +26,6 @@ $$
 G \big ( D \big ) = \big [ G _ { 1 } \big ( D \big ) , G _ { 2 } \big ( D \big ) \big ] = \big [ 1 \oplus D , 1 \oplus D ^ { 2 } \big ]\tag{2.2}
 $$
 
-![](../images/chapter_2/_unused_fdd6f0486f8903842f50ee814e393ac2a6981accc0a8426c8ea4b7e701803dc6.jpg)  
 (ก)
 
 ![](../images/chapter_2/fig_2_1_a.jpg)  
@@ -53,7 +52,6 @@ $$
 ซึ่งเมื่อนำบิตข้อมูล $\{ x _ { k } \}$ มาเข้ารหัสด้วยวงจรเข้ารหัส   
 คอนโวลูชันจะมีขั้นตอนการทำงานดังนี้
 
-![](../images/chapter_2/_unused_affcb8197897396222aa4bbbe14ffb9054eb03772958b753fe07c505eacf11dc.jpg)
 
 ขั้นที่หนึ่ง กำหนดให้สถานะของเรจิสเตอร์แบบเลื่อนทั้งหมด นั่นคือ $\mathrm { S } _ { 1 }$ และ $\mathrm { S } _ { 2 }$ มีค่าเป็น 0   
 (ทำให้เป็นสถานะ 00) โดยขั้นตอนนี้เป็นเพียงการเตรียมความพร้อมของวงจรเข้า   
@@ -278,7 +276,6 @@ $$
 \begin{array} { r l r } {  { p \big ( \psi _ { k + 1 } = q \mid \psi _ { k } = u \big ) = p \big ( a _ { k } = \hat { a } \big ( u , q \big ) ; \psi _ { k } = u \big ) / p \big ( \Psi _ { k } = u \big ) } } \\ & { } & \\ & { } & { = p \big ( \Psi _ { k } = u \mid a _ { k } = \hat { a } \big ( u , q \big ) \big ) p \big ( a _ { k } = \hat { a } \big ( u , q \big ) \big ) / p \big ( \Psi _ { k } = u \big ) } \end{array}
 $$
 
-![](../images/chapter_2/_unused_3752693ef013b3f25d0274e904e23f0855af1cf3bb0ea2529482c16a92dd8d1b.jpg)
 
 ในทางปฏิบัติค่าความน่าจะเป็นในสมการ (2.11) จะเรียกว่าความน่าจะเป็นอะพิรืออริ (a priori probability) ของบิตข้อมูล $a _ { k }$ จากนั้นแทนค่าสมการ (2.10) และ (2.11) ลงในสมการ (2.9) จะ ได้ว่าเมตริกสาขาของอัลกอริทึม BCJR มีค่าเท่ากับ
 
@@ -663,7 +660,6 @@ $$
 
 8. ระยะที่ 1 และ 0 (เมื่อ $k = \{ 1 , 0 \} )$ อัลกอริทึม BCJR รับข้อมูล $y _ { 1 } = - 0 . 2$ และ $y _ { 0 } = 0 . 9$ มาใช้คำนวณหาเมตริกสาขาทั้งหมดและปรับค่าเมตริกสถานะ ${ \beta } _ { k } \left( u \right)$ สำหรับ $u \in \{ a , b \}$ เช่นเดียวกันกับวิธีการที่อธิบายในขั้นตอนที่ 6 และ 7 ก็จะได้ค่า $\Upsilon _ { k } \left( u , q \right)$ และ ${ \beta } _ { k } \left( u \right)$ ตามที่ แสดงในรูปที่ 2.14 ดังนั้นเมื่อสิ้นสุดการเวียนเกิดแบบย้อนกลับจะได้
 
-![](../images/chapter_2/_unused_010e5053e2bfd182f51dcc744acc26471e349a760563ea4cbefeea23c6c1a8e9.jpg)
 
 นันคืออัลกอริทึม BCJR จะถอดรหัสบิตข้อมูล $a _ { 0 }$ และ $a _ { 1 }$ ได้เป็น $\hat { a } _ { 0 } = + 1$ และ $\hat { a } _ { 1 } = - 1$
 
@@ -796,7 +792,6 @@ $$
 
 วงจรอินเทอร์ลีฟเวอร์แบบสุ่ม S (S-random interleaver) [27] จะทำงานคล้ายกับวงจรอินเทอร์ ลีฟเวอร์แบบสุ่มเทียม เพียงแต่มีเงื่อนไขบังคับ (conรtraint) เพิ่มเติมว่า บิตข้อมูลทุกตัวในลำดับ ข้อมูลอินพุตที่อยู่ห่างกันน้อยกว่าหรือเท่ากับ S ตำแหน่ง จะถูกทำให้อยู่ห่างกันไม่น้อยกว่า S
 
-![](../images/chapter_2/_unused_fac3563a103b1d5d0b08c509e4402d76dff1068acdf3d0960927c906ae7f1771.jpg)
 
 <table><tr><td rowspan=1 colspan=1> $X _ { 1 }$ </td><td rowspan=1 colspan=1> $X _ { 2 }$ </td><td rowspan=1 colspan=1> $X _ { 3 }$ </td><td rowspan=1 colspan=1> $X _ { 4 }$ </td></tr><tr><td rowspan=1 colspan=1> $X _ { 5 }$ </td><td rowspan=1 colspan=1> $X _ { 6 }$ </td><td rowspan=1 colspan=1> $X _ { 7 }$ </td><td rowspan=1 colspan=1> $X _ { 8 }$ </td></tr><tr><td rowspan=1 colspan=1> $X _ { 9 }$ </td><td rowspan=1 colspan=1> $\Chi _ { 1 0 }$ </td><td rowspan=1 colspan=1> $\Chi _ { 1 1 }$ </td><td rowspan=1 colspan=1> $X _ { 1 2 }$ </td></tr><tr><td rowspan=1 colspan=1> $\mathrm { X } _ { 1 3 }$ </td><td rowspan=1 colspan=1> $X _ { 1 4 }$ </td><td rowspan=1 colspan=1> $\mathrm { X } _ { 1 5 }$ </td><td rowspan=1 colspan=1> $X _ { 1 6 }$ </td></tr><tr><td rowspan=1 colspan=1> $X _ { 1 7 }$ </td><td rowspan=1 colspan=1> $X _ { 1 8 }$ </td><td rowspan=1 colspan=1> $\Chi _ { 1 9 }$ </td><td rowspan=1 colspan=1> $\Chi _ { 2 0 }$ </td></tr></table>
 

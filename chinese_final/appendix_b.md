@@ -14,7 +14,6 @@ $$
 \begin{array} { r l } { \operatorname { p } _ { t } [ \Phi ( \mathbf { x } ) - 1 ] = E \left\{ \Phi ( \mathbf { x } ) \right\} } \\ { \ } & { = ( 1 ) \operatorname { P r } _ { [ \tilde { \mathbf { e } } ] } ( \mathbf { x } ) = 1 ] + ( 0 ) \operatorname { P r } _ { [ \tilde { \mathbf { e } } ] } ( \mathbf { \Phi } \mathbf { e } ) = 0 ] } \\ { \ } & { = \frac { 1 } { 2 } \Bigg ( 1 - E \left[ \underset { \mathrm { i } \sim 1 } { \overset { \times } { \prod } } \left( 1 - 2 \epsilon _ { s } \right) \right] } \\ { \ } &  = \frac { 1 } { 2 } \Bigg ( 1 - \underset { \mathrm { i } \sim 1 } { \overset { \times } { \prod } } \left( 1 - 2 E \left[ \epsilon _ { s } \right] \right) \Bigg ) \quad \ ( \underset { \mathrm { i } \sim 1 } { \overset { \cdot } { \prod } } \mathrm { a r s i m m a n ~ m a x i n ~ f i a \bar { \mathbf { k } } \bar { \mathbf { q } } \cdot \mathbf { n } \bar { \mathbf { q } } \bar { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } ) } \\ { \ } &  = \frac { 1 } { 2 } \Bigg ( 1 - \underset { \mathrm { i } \sim 1 } { \overset { \cdot } { \prod } } \left( 1 - \frac { 2 E ^ { d } } { 1 + \epsilon ^ { k } } \right) \Bigg ) \quad \ ( \underset { \mathrm { i } \sim 1 } { \overset { \cdot } { \prod } } \mathrm { a r s i m m a \bar { \mathbf { n } } } ) \mathrm  a r s i n ~ f i a \bar { \mathbf { k } } \bar { \mathbf { q } } \cdot \mathbf { n } \bar { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde { \mathbf { n } } \tilde  \mathbf  n \end{array}
 $$
 
-![](../images/appendix/_unused_c87249c1fe612a6b3a1340531f5d95267fe2fdc9d919b3cbb7afe280c7277ee8.jpg)
 
 其中 $E [ . ]$ 为期望算子，且由于 $\mathrm { P r } \big [ \Phi ( \mathbf { c } ) = 0 \big ] =$ $1 - \mathrm { P r } \big [ \Phi ( \mathbf { c } ) = 1 \big ]$，因此 $\Phi ( \mathbf { c } )$ 的对数似然比（LLR）值为
 
@@ -30,4 +29,3 @@ $$
 
 与方程(4.30)一致，得证。
 
-![](../images/appendix/_unused_bf800668762ad4f63171637ffb183d3d10d9c014ed6ecd42a7e705e6452422ed.jpg)
