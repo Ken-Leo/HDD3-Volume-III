@@ -40,9 +40,7 @@ $$
 
 ![](../images/chapter_1/fig_1_3_a.jpg)
 
-![](../images/chapter_1/fig_1_3_b.jpg)
-
-![](../images/chapter_1/fig_1_3_c.jpg)  
+![](../images/chapter_1/fig_1_3_b.jpg)  
 图1.3 转换脉冲信号（a）纵向记录（b）垂直记录 2
 
 $$
@@ -65,9 +63,7 @@ $$
 
 ![](../images/chapter_1/fig_1_4_a.jpg)
 
-![](../images/chapter_1/fig_1_4_b.jpg)
-
-![](../images/chapter_1/fig_1_4_c.jpg)  
+![](../images/chapter_1/fig_1_4_b.jpg)  
 图1.4 双比特脉冲信号（a）纵向记录（b）垂直记录
 
 如图1.4所示，该双比特响应被视为硬盘驱动器记录系统中"信道（channel）"的代表。
@@ -104,9 +100,7 @@ EEPR2 [1 4 6 4 1] 表示 EEPR2 目标，其 D 域传递函数 H(D) $= 1 + 4 D + 
 
 此外，从方程 (1.7) 和 (1.8) 可以看出，所有 PR 目标的系数均为整数。然而，如果使用系数为实数的目标，称为"广义部分响应目标（GPR: generalized partial response target）"，则系统的整体性能将优于使用 PR 目标。感兴趣的读者可以在 [10, 14, 15] 中学习适用于硬盘驱动器信道的均衡器和目标设计技术。
 
-![](../images/chapter_1/fig_1_6_a.jpg)
-
-![](../images/chapter_1/fig_1_6_b.jpg)  
+![](../images/chapter_1/fig_1_6.jpg)  
 图1.6 理想信道模型
 
 ## 1.3 理想信道模型
@@ -127,8 +121,7 @@ $$
 
 实际的硬盘驱动器信号处理系统（见图1.1）也使用纠错编码（使用 RS 码，因为它可以纠正多个连续比特错误）。也就是说，消息比特被送入纠错编码器和调制编码器，得到图1.2中的输入数据序列 $a _ { k }$。然后在接收端，图1.2中检测到的输入数据序列 $\hat { a } _ { k }$ 被送到调制解码器和纠错解码器，以获得可用的消息比特估计值。这种硬盘驱动器信号处理系统的工作方式从过去一直沿用至今，被认为是"单向处理（one-way processing）"，即符号检测器独立于 ECC 解码器工作。
 
-![](../images/chapter_1/fig_1_7_b.jpg)  
-![](../images/chapter_1/fig_1_7_a.jpg)
+![](../images/chapter_1/fig_1_7.jpg)  
 然而，研究 [2-5] 表明，"迭代解码（iterative decoding）"——即符号检测器和 ECC 解码器之间的协同工作——可以显著提高系统的整体性能。使用迭代信号处理系统的硬盘驱动器将具有如图1.7所示的结构，其中增加了迭代编码器（iterative encoder）和 SISO（soft-input soft-output）解码器。此外，子系统 A 中使用的符号检测器必须从维特比检测器更换为 SISO 检测器。迭代编码器是一种纠错编码器，常用的是 LDPC 码（low-density parity-check code）[17]，因为它是性能最强的 ECC 编码 [2, 5]（关于 LDPC 码的详细信息见第4章）。
 
 目前，新型硬盘驱动器已经采用了迭代解码技术（如图1.7所示），其中 SISO 检测器和 SISO 解码器之间交换软信息（soft information）[2]。用于迭代解码的 SISO 检测器可以基于 BCJR 算法 [18] 或 SOVA（soft-output Viterbi algorithm）[19] 开发（详见第2-3章）。而用于解码 LDPC 编码数据的 SISO 解码器则基于消息传递算法（message passing algorithm）[17] 开发（详见第4.4.4节）。
@@ -169,9 +162,7 @@ $$
 
 对数似然比（LLR）是迭代解码过程中各种算法（如 BCJR 算法、SOVA 和 LDPC 等）中广泛使用的度量或信息指标。本书使用符号 $\lambda ( x )$ 表示比特数据 $x \in \{ 0 , 1 \}$ 的 LLR 值
 
-![](../images/chapter_1/fig_1_8_a.jpg)
-
-![](../images/chapter_1/fig_1_8_b.jpg)  
+![](../images/chapter_1/fig_1_8.jpg)  
 图1.8 比特数据 a 的 LLR 值与概率 $p ( a = + 1 )$ 的关系
 
 即方程 (1.10) 所定义的比特1与比特0概率之比的自然对数。
@@ -247,9 +238,7 @@ $$
 
 SISO（soft-input soft-output）解码器是一种使用软信息进行数据解码的解码器，它接收软信息作为输入进行处理，并输出软信息作为结果。
 
-![](../images/chapter_1/fig_1_9_a.jpg)
-
-![](../images/chapter_1/fig_1_9_b.jpg)  
+![](../images/chapter_1/fig_1_9.jpg)  
 图1.9 使用 SISO 解码器的数字通信系统
 
 考虑图1.9中的通信系统。数据序列 $x _ { k } \in \{ 0 , 1 \}$ 被发送到编码器（encoder）和映射器（mapper），得到数据序列 $u _ { k } \in \{ - 1 , 1 \}$。然后 SISO 解码器对信号 $y _ { k } = u _ { k } + n _ { k }$（其中 $n _ { k }$ 是 AWGN 噪声）进行数据解码，并借助数据序列 ${ \lambda } _ { a } \left( x _ { k } \right)$，其中 ${ \lambda } _ { a } \left( x _ { k } \right)$ 是比特数据 $x _ { k }$ 的先验 LLR（a priori LLR），即
@@ -302,4 +291,24 @@ M \left( \Omega \right) = \exp \left\{ - \pi \left| \Omega \right| \mathrm { N D
 $$
 
 垂直记录系统的结果为
+
+$$
+M \left( \Omega \right) = \exp \left\{ - \pi \left| \Omega \right| \mathrm { N D } \right\} \left( 1 + \exp \left\{ - j 2 \pi \Omega \right\} \right)
+$$
+
+其中 $\exp \{ \cdot \}$ 是指数函数，$\Omega = f T$ 是归一化频率（normalized frequency），$f$ 是以赫兹为单位的频率，$|x|$ 是 $x$ 的绝对值，$j = \sqrt { - 1 }$。
+
+4. 从第3题中双比特响应傅里叶变换的结果出发，使用 SCILAB 程序绘制不同 ND 值下信道的频率响应，如图1.5所示。
+
+5. 请解释图1.2中的真实信道模型与图1.6中的理想信道模型之间的区别。
+
+6. 请解释图1.7中硬盘驱动器迭代信号处理系统的工作原理。
+
+7. 请解释软信息（soft information）的含义。
+
+8. 请解释对数似然比（LLR: log-likelihood ratio）的含义。
+
+9. 请解释先验 LLR 和后验 LLR 的含义。
+
+10. 请解释 SISO 检测器和 SISO 解码器的含义
 
