@@ -288,4 +288,4 @@
 
 [144] A. Kaewpukdee, N. Chirdchoo, and P. Kovintavewat, 'Transition characteristics of longitudinal heat-assisted magnetic recording systems," submitted to I-SEEC 2011, Nakhon Pathom, Thailand, December 15-18, 2011.
 
-![](../images/appendix/12bfc386521959c90df001132a53487bc612cfee1753364d144941bd90c7bf23.jpg)
+![](../images/appendix/_unused_12bfc386521959c90df001132a53487bc612cfee1753364d144941bd90c7bf23.jpg)

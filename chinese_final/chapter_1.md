@@ -1,5 +1,3 @@
-![](../images/chapter_1/101a561f5954e478fb5d49c33c99d1fea42c3920fe28dea0b50421fbe4550cc8.jpg)
-
 ## 概述
 
 本章将介绍用于替代硬盘驱动器中磁记录系统的读通道（read channel）[1] 的数学模型，使读者了解作为后续章节学习基础的硬盘驱动器信号处理系统。此外，还解释了迭代解码技术（iterative decoding）[2-5] 在硬盘驱动器信号处理系统中的概念和基础知识，使读者理解迭代解码技术在新型硬盘驱动器 [6] 中已开始实际应用的优势，因为它能有效提升系统性能。
@@ -8,8 +6,7 @@
 
 硬盘驱动器中的数字数据存储系统（digital data storage system）可以用图1.1 [1, 5, 7] 中的框图来表示。消息比特（message bits）被发送到纠错编码器（ECC encoder），其中 RS 码（Reed Solomon）[2, 8] 是硬盘驱动器中常用的编码。随后，编码后的数据再次通过调制编码器（modulation encoder）进行编码，以调整数据特性使其适应硬盘驱动器信道。常用的调制编码是 RLL 码（run-length limited code）[5, 9]。来自调制编码器的输出数据被视为将被写入存储介质的"记录比特（recorded bit）"。之后，记录比特被发送到调制器（modulator），将比特数据转换为写入电流波形（write current waveform），然后输入写磁头以将数据写入存储介质。
 
-![](../images/chapter_1/b9868fd3a61a1ea8b10e73293f5afe0f83e935b2d5849bb63cfe9c6229095a96.jpg)  
-1.2  
+![](../images/chapter_1/fig_1_1.jpg)  
 图1.1 硬盘驱动器数字数据存储系统的框图 [9, 10]
 
 对于读取过程，读磁头（read head）从存储介质读取数据。当读磁头移动到磁化状态变化的区域时，会产生电压波形信号，通常称为"读回信号（readback signal）"。然后，读回信号被送入读通道进行处理，读通道由各种组件组成，如低通滤波器（LPF）、采样器（sampler 或模数转换器）、均衡器（equalizer）和符号检测器（symbol detector）等。输出数据随后依次通过调制解码器（modulation decoder）和纠错解码器（ECC decoder）进行解码，以获得所需的消息比特估计值以供使用。
@@ -18,7 +15,7 @@
 
 图1.1中的子系统A可以表示为如图1.2 [1, 10] 所示的数学模型。二进制输入数据序列 $a _ { k } \in \{ 0 , 1 \}$ 的比特周期为 T，经过理想微分器（ideal differentiator），其多项式形式为 $1 - D$，其中 D 是延迟 T 的延迟算子，得到转换序列（transition sequence） $b _ { k } \in \{ - 1 , 0 , 1 \}$，其中 $b _ { k } = \pm 1$ 表示正或负的转换（positive or negative transition），$b _ { k } = 0$ 表示无转换（no transition）。然后转换序列 $b _ { k }$ 被发送到冲激响应等于转换脉冲信号 g(t) 的信道，并受到噪声 n(t) 的干扰，得到读回信号 r(t)，其数学方程为
 
-![](../images/chapter_1/22cf38fc96755f268ada1f9befec29f4bc2ef1e83aedafd2acfe98d6eeb02ebb.jpg)  
+![](../images/chapter_1/fig_1_2.jpg)  
 图1.2 硬盘驱动器的信道模型
 
 $$
@@ -41,11 +38,11 @@ $$
 
 其中 ln(.) 是自然对数（natural logarithm），$\mathrm { P W } _ { 5 0 }$ 是脉冲 $g ^ { \prime } ( t )$（即 $g ( t )$ 的导数）的半高全宽宽度，erf() 是误差函数（error function），其定义为
 
-![](../images/chapter_1/f12f19d57353d4e14a24979bab6cb112a74b79676d1e012a5c2c2905b14a2637.jpg)
+![](../images/chapter_1/fig_1_3_a.jpg)
 
-![](../images/chapter_1/db7b09ca3e31da008c8dd990aa82fb3c943b0120b9c368cd3dd62d736f83c45f.jpg)
+![](../images/chapter_1/fig_1_3_b.jpg)
 
-![](../images/chapter_1/7b0d126c9a23eb9a0616ec6df95ed7b9e542e13e589c29541fae0c5ea73843e1.jpg)  
+![](../images/chapter_1/fig_1_3_c.jpg)  
 图1.3 转换脉冲信号（a）纵向记录（b）垂直记录 2
 
 $$
@@ -66,11 +63,11 @@ $$
 m ( t ) = g ( t ) - g ( t - T )\tag{1.6}
 $$
 
-![](../images/chapter_1/015766f8c3c730647a699382fa7e56054b5066d5cc460d43cb4d289eef81877b.jpg)
+![](../images/chapter_1/fig_1_4_a.jpg)
 
-![](../images/chapter_1/7f6579e14bea5e9d0fee7129a59941689d4bef6d109ea813ffa4dbba065766d5.jpg)
+![](../images/chapter_1/fig_1_4_b.jpg)
 
-![](../images/chapter_1/3166dd462f6694b673431e7d2081291dedaea9e58ea612b71dca58071b3e57a4.jpg)  
+![](../images/chapter_1/fig_1_4_c.jpg)  
 图1.4 双比特脉冲信号（a）纵向记录（b）垂直记录
 
 如图1.4所示，该双比特响应被视为硬盘驱动器记录系统中"信道（channel）"的代表。
@@ -89,13 +86,13 @@ $$
 
 其中 n 是正整数。
 
-![](../images/chapter_1/a890c7af11a4cbeab45332d11f4dfaf606c6f0db22b2d6f46100e90d53ab8dcd.jpg)
+![](../images/chapter_1/_unused_a890c7af11a4cbeab45332d11f4dfaf606c6f0db22b2d6f46100e90d53ab8dcd.jpg)
 
-![](../images/chapter_1/aff673ec985bb849abbca7483ff837c956d57273e3c04fca72e5bd7c94d6030d.jpg)
+![](../images/chapter_1/_unused_aff673ec985bb849abbca7483ff837c956d57273e3c04fca72e5bd7c94d6030d.jpg)
 
-![](../images/chapter_1/81d91bb79074986f9b7a49339a048e6c71c086be375c9bba2b6305de2d4e8d68.jpg)
+![](../images/chapter_1/fig_1_5_a.jpg)
 
-![](../images/chapter_1/a45bbe1ca5bc724659d741f9e46e6017660a15fd9c3b2c191f473e329c90e8be.jpg)  
+![](../images/chapter_1/fig_1_5_b.jpg)  
 (b) 归一化频率 (fT)  
 图1.5 各种目标对于记录信道的频率响应 (a) 纵向 (b) 垂直
 
@@ -109,9 +106,9 @@ EEPR2 [1 4 6 4 1] 表示 EEPR2 目标，其 D 域传递函数 H(D) $= 1 + 4 D + 
 
 此外，从方程 (1.7) 和 (1.8) 可以看出，所有 PR 目标的系数均为整数。然而，如果使用系数为实数的目标，称为"广义部分响应目标（GPR: generalized partial response target）"，则系统的整体性能将优于使用 PR 目标。感兴趣的读者可以在 [10, 14, 15] 中学习适用于硬盘驱动器信道的均衡器和目标设计技术。
 
-![](../images/chapter_1/877833063d93e864a3eb26a5a92b62d515d738f6fd306999ae19143f30b70cd5.jpg)
+![](../images/chapter_1/fig_1_6_a.jpg)
 
-![](../images/chapter_1/ba8a70aaccdedb1893288a3c36bc89756b15e0c4a6c891b664f73118e95eba42.jpg)  
+![](../images/chapter_1/fig_1_6_b.jpg)  
 图1.6 理想信道模型
 
 ## 1.3 理想信道模型
@@ -136,9 +133,9 @@ $$
 
 目前，新型硬盘驱动器已经采用了迭代解码技术（如图1.7所示），其中 SISO 检测器和 SISO 解码器之间交换软信息（soft information）[2]。用于迭代解码的 SISO 检测器可以基于 BCJR 算法 [18] 或 SOVA（soft-output Viterbi algorithm）[19] 开发（详见第2-3章）。而用于解码 LDPC 编码数据的 SISO 解码器则基于消息传递算法（message passing algorithm）[17] 开发（详见第4.4.4节）。
 
-![](../images/chapter_1/ad60e1c87a71563776e299e27d22b54b1ba34248b2070c82e52bf1c7ba7742ca.jpg)
+![](../images/chapter_1/fig_1_7_a.jpg)
 
-![](../images/chapter_1/eacbc2196baf1facc1ff7d9d3dc0bc49050d1f2cc528412109a057dd95410057.jpg)  
+![](../images/chapter_1/fig_1_7_b.jpg)  
 图1.7 硬盘驱动器迭代信号处理系统的框图
 
 迭代解码技术的工作过程从 SISO 检测器开始，它对接收到的数据进行检测，然后将结果（软信息）发送到 SISO 解码器。然后 SISO 解码器将解码后的结果发送回 SISO 检测器，用于新一轮的检测。此过程循环进行，直到达到设定的迭代次数，SISO 解码器才将输出数据送至调制解码器和 RS 解码器进行后续解码。
@@ -149,7 +146,7 @@ $$
 
 本节将解释与迭代解码相关的基础知识和重要术语，使读者在学习第2-4章内容之前理解这些术语的含义。
 
-![](../images/chapter_1/efba52fc36e6e4678e0af321c59a879e1182f45b2f37dc033f77e41ed786e9a2.jpg)
+![](../images/chapter_1/_unused_efba52fc36e6e4678e0af321c59a879e1182f45b2f37dc033f77e41ed786e9a2.jpg)
 
 ## 1.5.1 硬判决与软判决
 
@@ -175,9 +172,9 @@ $$
 
 对数似然比（LLR）是迭代解码过程中各种算法（如 BCJR 算法、SOVA 和 LDPC 等）中广泛使用的度量或信息指标。本书使用符号 $\lambda ( x )$ 表示比特数据 $x \in \{ 0 , 1 \}$ 的 LLR 值
 
-![](../images/chapter_1/833c8ee5c270e812a27aa636008fa32d14f12514d131cb5ff16eb19ba39356ae.jpg)
+![](../images/chapter_1/fig_1_8_a.jpg)
 
-![](../images/chapter_1/031af0133c9a7441f11009d39759271c006e8ca5451c2707be7f9ad20ac473de.jpg)  
+![](../images/chapter_1/fig_1_8_b.jpg)  
 图1.8 比特数据 a 的 LLR 值与概率 $p ( a = + 1 )$ 的关系
 
 即方程 (1.10) 所定义的比特1与比特0概率之比的自然对数。
@@ -192,9 +189,9 @@ $$
 
 由于 $p ( a = + 1 ) = 1 - p ( a = - 1 )$，方程 (1.12) 可重新整理为
 
-![](../images/chapter_1/c612c1e64f66e045ea68154e28b85d4fd94e49890c160a6ecaa3210279b45c02.jpg)
+![](../images/chapter_1/_unused_c612c1e64f66e045ea68154e28b85d4fd94e49890c160a6ecaa3210279b45c02.jpg)
 
-![](../images/chapter_1/67dcc58c07221aa115080cae40a6681b53bda8f2f4edaf47ba4094d56d48c34b.jpg)
+![](../images/chapter_1/_unused_67dcc58c07221aa115080cae40a6681b53bda8f2f4edaf47ba4094d56d48c34b.jpg)
 
 $$
 e ^ { \lambda ( a ) } = \frac { p ( a = + 1 ) } { 1 - p ( a = + 1 ) }\tag{1.13}
@@ -228,7 +225,7 @@ $$
 \begin{array} { c } { { p \big ( x = i \mid y \big ) = p \big ( x = i ; y \big ) / p \big ( y \big ) } } \\ { { { } } } \\ { { = p \big ( y \mid x = i \big ) p \big ( x = i \big ) / p \big ( y \big ) } } \end{array}\tag{1.17}
 $$
 
-![](../images/chapter_1/db0aeba28c74e54a71cdd51b60b75b5c61510c14003e3bd1b101f8dc1c0386d6.jpg)
+![](../images/chapter_1/_unused_db0aeba28c74e54a71cdd51b60b75b5c61510c14003e3bd1b101f8dc1c0386d6.jpg)
 
 其中 $i \in \{ 0 , 1 \}$，$p \big ( a ; b \big )$ 是随机变量 a 和 b 的联合概率密度函数（joint pdf）。因此，给定 y 时比特数据 x 的 LLR 定义为
 
@@ -256,9 +253,9 @@ $$
 
 SISO（soft-input soft-output）解码器是一种使用软信息进行数据解码的解码器，它接收软信息作为输入进行处理，并输出软信息作为结果。
 
-![](../images/chapter_1/1925f72ac05757d6cc72319d9907218067280586a46824cc6b8ce5244dba00fa.jpg)
+![](../images/chapter_1/fig_1_9_a.jpg)
 
-![](../images/chapter_1/023e56b726c3cf083dcfacd03c4d5c57baa2cfd892369f2c3f185d44db0d008d.jpg)  
+![](../images/chapter_1/fig_1_9_b.jpg)  
 图1.9 使用 SISO 解码器的数字通信系统
 
 考虑图1.9中的通信系统。数据序列 $x _ { k } \in \{ 0 , 1 \}$ 被发送到编码器（encoder）和映射器（mapper），得到数据序列 $u _ { k } \in \{ - 1 , 1 \}$。然后 SISO 解码器对信号 $y _ { k } = u _ { k } + n _ { k }$（其中 $n _ { k }$ 是 AWGN 噪声）进行数据解码，并借助数据序列 ${ \lambda } _ { a } \left( x _ { k } \right)$，其中 ${ \lambda } _ { a } \left( x _ { k } \right)$ 是比特数据 $x _ { k }$ 的先验 LLR（a priori LLR），即
@@ -283,7 +280,7 @@ $$
 
 注意，对于比特数据 x 的 LLR，即 $\lambda ( x )$，本书定义如下
 
-![](../images/chapter_1/111481879c1a013aecc999d96d8451869f81007c80693026dabdb451b584a049.jpg)
+![](../images/chapter_1/_unused_111481879c1a013aecc999d96d8451869f81007c80693026dabdb451b584a049.jpg)
 
 如果 LLR 的下标为参数 a，例如 ${ \lambda } _ { a } \left( x \right)$，表示比特数据 x 的先验 LLR（a priori LLR）。
 
@@ -313,4 +310,4 @@ $$
 
 垂直记录系统的结果为
 
-![](../images/chapter_1/11bc6da7d0196e469147cda14ee298d1e88f57cddd23a3d29a55c350b19f7e40.jpg)
+![](../images/chapter_1/_unused_11bc6da7d0196e469147cda14ee298d1e88f57cddd23a3d29a55c350b19f7e40.jpg)

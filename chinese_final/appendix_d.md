@@ -12,7 +12,7 @@ $$
 
 其中 $m _ { i } \in \{ 0 , \pm 2 , \pm 4 \}$。定义
 
-![](../images/appendix/bf117d47254d7d5a32ffaa39d912e4baf0501f9437081a1accc22c1bb2277add.jpg)  
+![](../images/appendix/_unused_bf117d47254d7d5a32ffaa39d912e4baf0501f9437081a1accc22c1bb2277add.jpg)  
 图D.1 PR2信道
 
 $$
@@ -69,7 +69,7 @@ $$
 \begin{array} { r l } & { \tilde { r } _ { k } = \left\{ \frac { \left( - 2 e ^ { - a } e ^ { - b } e ^ { - c } \right) + 2 e ^ { a } e ^ { b } e ^ { c } + \left( - e ^ { - a } e ^ { - b } e ^ { c } \right) + \left( - e ^ { a } e ^ { - b } e ^ { - c } \right) + e ^ { - a } e ^ { b } e ^ { c } + e ^ { a } e ^ { b } e ^ { - c } } { 4 \cosh \left( a \right) \cosh \left( b \right) \cosh \left( c \right) } \right\} } \\ & { \qquad = \left\{ \frac { - 2 e ^ { - \left( a + b + c \right) } + 2 e ^ { \left( a + b + c \right) } - e ^ { - \left( a + b - c \right) } - e ^ { - \left( c + a + b + c \right) } + e ^ { \left( c - a + b + c \right) } } { 4 \cosh \left( a \right) \cosh \left( b \right) \cosh \left( c \right) } \right\} } \\ & { \qquad = \left\{ \frac { 2 \sinh \left( a + b + c \right) + \sinh \left( a + b - c \right) + \sinh \left( - a + b + c \right) } { 2 \cosh \left( a \right) \cosh \left( b \right) \cosh \left( c \right) } \right\} } \end{array}\tag{ง.6}
 $$
 
-![](../images/appendix/4feeca1530c17304f1dd1cf5cfb7bee457d4ce4946d498eab225374b0cc3f264.jpg)
+![](../images/appendix/_unused_4feeca1530c17304f1dd1cf5cfb7bee457d4ce4946d498eab225374b0cc3f264.jpg)
 
 将 $a = \lambda _ { \scriptscriptstyle k } / 2 , b = \lambda _ { \scriptscriptstyle k - 1 } / 2 .$ 和 $c = \lambda _ { k - 2 } / 2$ 代入方程(ง.6)，可得最终结果
 

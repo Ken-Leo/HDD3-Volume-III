@@ -30,7 +30,7 @@ $$
 f \left( \left| \lambda _ { \Phi \left( \mathbf { c } \right) } \right| \right) = \sum _ { i = 1 } ^ { n } f \left( \left| \lambda _ { i } \right| \right)\tag{ค.5}
 $$
 
-![](../images/appendix/2cc42992ffbbabb2419e0d71e6fa11d21563b9c74a7200dece7801798caeb6f2.jpg)
+![](../images/appendix/_unused_2cc42992ffbbabb2419e0d71e6fa11d21563b9c74a7200dece7801798caeb6f2.jpg)
 
 其中 $f \bigl ( x \bigr ) = - \log \bigl ( \operatorname { t a n h } \left( x / 2 \right) \bigr )$ 如方程(4.33)所示，它具有一个重要性质：对于 $x > 0$，有 $f ( f ( x ) ) = x$。因此对式(ค.5)两边应用 $f ()$ 函数，可得
 
@@ -46,4 +46,4 @@ $$
 
 这正是方程(4.32)，证毕。
 
-![](../images/appendix/f77c0b70d0144d494d0186aba5f321eb933d5b55ba91b17da82d0d2e143063e7.jpg)
+![](../images/appendix/_unused_f77c0b70d0144d494d0186aba5f321eb933d5b55ba91b17da82d0d2e143063e7.jpg)

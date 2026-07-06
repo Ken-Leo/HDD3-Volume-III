@@ -270,9 +270,9 @@ $$
 
 本节将介绍使用二维目标和二维均衡器来降低ISI和ITI影响的方法，其性能优于一维均衡器[108]。此外，该方法还可应用于其他二维数据存储系统，如全息数据存储系统[122]、二维光存储系统（TwoDOS: 2D optical storage system）[123]或多磁头读取的水平/垂直数据存储系统[124, 125]等。
 
-![](../images/chapter_7/daf939f8ca3e6d31545f4ac22f6bd4f467b7c5d9cca4c847e9a1676c3c3e6f07.jpg)
+![](../images/chapter_7/fig_7_3_a.jpg)
 
-![](../images/chapter_7/ab4b19b8de2eb980209bff419faea59795772fc143f498fd7e8dc0921cea576f.jpg)  
+![](../images/chapter_7/fig_7_3_b.jpg)  
 图7.3 用于二维目标和二维均衡器设计的信道模型[108]
 
 图7.3展示了使用多磁头读取数据的BPMR信道模型，用于二维目标和二维均衡器的设计。由于岛（或比特）的位置已确定在记录介质中，因此读回信号由比特位置（而非时间索引）决定。设参数$j$和$k$分别表示岛在跨磁道和沿磁道方向的位置，其中$j = 0$对应中间磁道。从图7.3可知，输入数据序列$a_{j,k} \in \{\pm 1\}$被送入具有二维脉冲响应$H(m,n)$的BPMR信道，得到的读回信号$r_{j,k}$可写为：
@@ -289,7 +289,7 @@ $$
 
 其中$f_{m,n}$是$F(D_z, D_x)$的系数，$\{M, K\}$是正整数，$D_z$和$D_x$分别是跨磁道和沿磁道方向单位延迟算子。
 
-![](../images/chapter_7/99ebe321182ab604d81fe6d8af2c5dcea6a1c9d2bbdc447438b61fc90b79aeb5.jpg)
+![](../images/chapter_7/_unused_99ebe321182ab604d81fe6d8af2c5dcea6a1c9d2bbdc447438b61fc90b79aeb5.jpg)
 
 将读回信号的特性整形为所需的二维目标$G(D_z, D_x)$：
 
@@ -317,7 +317,7 @@ $$
 z_k = z_{0,k} = \sum_{m=-M}^{M} \sum_{n=-K}^{K} f_{m,n} r_{-m,k-n} = \mathbf{f}^\mathrm{T} \mathbf{r}_k\tag{7.46}
 $$
 
-![](../images/chapter_7/6fb0ea9a9670cbf475940c1a185fae2090d0b2a1f3dd8697b33faafbaa720afe.jpg)
+![](../images/chapter_7/_unused_6fb0ea9a9670cbf475940c1a185fae2090d0b2a1f3dd8697b33faafbaa720afe.jpg)
 
 这是数据$r_{j,k}$和$f_{m,n}$之间的二维卷积。其中$\mathbf{f} = [f_{-M,-K} \ f_{-M,-K+1} \ \dots \ f_{-M,K} \ f_{-M+1,-K} \ \dots \ f_0 \ \dots \ f_{M,K-1} \ f_{M,K}]^\mathrm{T}$是均衡器的列向量（即将矩阵F的每行元素排列成向量f），有$N(2M+1)$个元素；$\mathbf{r}_k = [r_{M,k+K} \ r_{M,k+K-1} \ \ldots \ r_{M,k-K} \ r_{M-1,k+K} \ \ldots \ r_{0,k} \ \ldots \ r_{-M,k-K+1} \ r_{-M,k-K}]^\mathrm{T}$是对应于向量f的读回信号列向量。类似地，中间磁道的目标输出为：
 
@@ -341,7 +341,7 @@ $$
 
 MMSE目标设计方法使用莫尼克约束$g_{0,0} = 1$（以避免得到$\mathbf{f} = \mathbf{g} = \mathbf{0}$的解）。此外，为避免使用复杂度极高的二维维特比检测器[108]，对g施加另一个约束：将所有相邻磁道的目标系数设为零（zero-ITI forcing constraint），以消除ITI的影响，从而可以使用通用（一维）维特比检测器。满足这两个约束条件的$3 \times 3$目标G（ISI和ITI长度均为3）示例如下：
 
-![](../images/chapter_7/5ebb8d67749e1f4fa4c5c0e59cf8a0ff67c6f7c7af09081f5d87702b5fd4bbec.jpg)
+![](../images/chapter_7/_unused_5ebb8d67749e1f4fa4c5c0e59cf8a0ff67c6f7c7af09081f5d87702b5fd4bbec.jpg)
 
 $$
 \mathbf{G} = \left[ \begin{array}{ccc} 0 & 0 & 0 \\ g_{0,0} & 1 & g_{0,2} \\ 0 & 0 & 0 \end{array} \right]\tag{7.50}
@@ -379,9 +379,9 @@ $$
 
 其中$\boldsymbol{\lambda}$是列向量，其元素为7个拉格朗日乘子（对应于矩阵$\mathbf{E}^\mathrm{T}$的行数）。对式(7.55)分别对$\mathbf{f}$、$\mathbf{g}$和$\boldsymbol{\lambda}$求导并令结果为零，可得：
 
-![](../images/chapter_7/0e56679269d57d1129eaf1c2e8ef1e5c7314499393a02e94f4f62afd811f545e.jpg)
+![](../images/chapter_7/fig_7_4_a.jpg)
 
-![](../images/chapter_7/9e70c6acd1c1602b73c31599ce11c7522a4e60e47ec73bc64f3dac8d450ed999.jpg)  
+![](../images/chapter_7/fig_7_4_b.jpg)  
 图7.4 等效信道模型
 
 $$
@@ -406,15 +406,15 @@ $$
 
 假设完全均衡（perfect equalization），图7.1的模型可简化为图7.4的等效信道模型，其中$w_k \sim \mathcal{N}(0, \sigma^2)$是AWGN噪声。实际上，维特比检测器的工作原理基于trellis图[13]。图7.5定义了trellis图中的符号：$\Psi_k = [a_k \ a_{k-1} \ \dots \ a_{k-\nu+1}]$是时刻k的状态(state)，$Q = |\mathcal{A}|^\nu$是可能的状态总数，$|\mathcal{A}|$是输入数据的所有可能值数目，$\nu$是信道（或目标）的记忆长度，$(u, q)$表示从状态u到状态q的转移。
 
-![](../images/chapter_7/ba1bfe3ce9db6ec255c24cda49fde236c564a968b69536d20fcd2bcb5248a2b8.jpg)  
+![](../images/chapter_7/fig_7_5.jpg)  
 图7.5 trellis图说明
 
-![](../images/chapter_7/b770ef2375c4faaf3472234739ecda24c7c6c223e652948de8c3ade51232dc0d.jpg)  
+![](../images/chapter_7/fig_7_6.jpg)  
 图7.6 PR4信道的trellis图，$H(D) = 1 - D^2$
 
 图7.6展示了PR4信道（即$G(D) = 1 - D^2$）的trellis图示例，其中有$Q = 2^2 = 4$个状态，用(0)、(1)、(2)和(3)表示，输入数据$a_{0,k} \in \{\pm 1\}$。在维特比算法中，每个时刻需要计算的是：从状态u到状态q的转移在时刻k的分支度量（branch metric）$\lambda_k(u, q)$；状态q在时刻k+1的路径度量（path metric）$\Phi_{k+1}(q)$；以及状态q在时刻k+1的前驱（predecessor）$\pi_{k+1}(q)$，它保存导致最佳转移路径的起始状态。例如，考虑时刻$k+1$的状态(2)，有2条转移路径：(1,2)和(3,2)。维特比算法只选择到达状态(2)的最佳路径。假设(1,2)是最佳转移路径，则$\pi_{k+1}(2) = 1$。
 
-![](../images/chapter_7/de3044392eb21d99358c307b1b984fad84d8b10d62b267259752951e91740adf.jpg)
+![](../images/chapter_7/_unused_de3044392eb21d99358c307b1b984fad84d8b10d62b267259752951e91740adf.jpg)
 
 使数据序列误差概率最小的检测器是"最大似然序列检测器（MLSD）"[13]，可通过维特比算法实现，因此称为"维特比检测器"。从图7.4的模型可知，维特比检测器选择使条件概率最大的输入数据序列$a_{0,k}$：
 
@@ -446,7 +446,7 @@ $$
 \Phi_{k+1}(q) = \sum_{i=0}^{k} \lambda_i\tag{7.63}
 $$
 
-![](../images/chapter_7/f3a6e1a357b2628b90eccc4fdfa5276b705d116145cd1e7b6beec9a842642a54.jpg)
+![](../images/chapter_7/_unused_f3a6e1a357b2628b90eccc4fdfa5276b705d116145cd1e7b6beec9a842642a54.jpg)
 
 (A-1) 初始化所有状态p的路径度量$\Phi_0(p) = 0$  
 (A-2) For $k = 0, 1, ..., S+\nu-1$  
@@ -464,7 +464,7 @@ $$
 
 由于维特比检测器需要处理整个序列后才能判决哪个输入序列最可能，因此在实际中，维特比检测器的复杂度取决于多个因素：输入数据可能值的数目$|\mathcal{A}|$、输入数据序列的长度S和目标记忆长度$\nu$。维特比算法的计算示例可参考[10]的第4章。
 
-![](../images/chapter_7/e50f1305a185691413efc1796a7d0f67fea5c2b68ceb7821b0a84e5cb6aca7ab.jpg)
+![](../images/chapter_7/fig_7_2_a.jpg)
 
 ### 7.6.2 二维维特比检测器
 
@@ -488,7 +488,7 @@ $$
 
 图7.8显示了由式(7.64)的二维目标G构建的trellis图一个分支中的转移细节，其中时刻k的每个状态由2个数据决定：中间磁道在时刻k-2和k-1的输入数据（即$a_{0,k-2}$和$a_{0,k-1}$）。
 
-![](../images/chapter_7/a86b331a8612390fb4e1ffabd8337ceda972cf895a6385746ba88651fc5cd433.jpg)  
+![](../images/chapter_7/_unused_a86b331a8612390fb4e1ffabd8337ceda972cf895a6385746ba88651fc5cd433.jpg)  
 图7.8 由对称零角二维目标构建的trellis图一个分支中的转移
 
 因此，由对称零角二维目标构建的trellis图总共有$2 \times 2 = 4$个状态。每个分支由符号x/y表示，其中$x = [a_{-1,k-1} \ a_{0,k} \ a_{1,k-1}]$是时刻k的目标输入数据（包括上磁道在时刻k-1的输入、中间磁道在时刻k的输入和下磁道在时刻k-1的输入），$y = d_k$是对应于该分支转移的时刻k的目标输出。因此，时刻k的每个状态总共有$2 \times 2 \times 2 = 8$个分支，分为2组（每组4个分支），每组分支转移到时刻$k+1$的2个不同状态。
@@ -501,7 +501,7 @@ $$
 
 其中$*$是卷积算子，$g_{0,k}$是对应于中间磁道输入数据$a_{0,k}$的目标$G_0(D)$的系数。图7.9显示了由二维目标G构建的trellis图。
 
-![](../images/chapter_7/3a7835c39982f37e5683f6cdf14328c7d4098f2647621def8a2c2b28012c4e09.jpg)  
+![](../images/chapter_7/fig_79.jpg)  
 图7.9 由式(7.64)的二维目标G构建的trellis图
 
 使用此trellis图解码数据的维特比检测器称为"改进的二维维特比检测器（modified 2D Viterbi detector）"[126]，它是所有二维维特比检测器中复杂度最低的。
@@ -522,9 +522,9 @@ $$
 
 由于BPMR系统使用对称二维目标，因此可以将上磁道$a_{-1,k}$和下磁道$a_{1,k}$的输入数据合并，其值为：
 
-![](../images/chapter_7/06e7587628e3caf8b0c8968a145263fb41534194031fb95ff31626046fa6bd7e.jpg)
+![](../images/chapter_7/fig_7_10_a.jpg)
 
-![](../images/chapter_7/45aff2c1599a99678e03016723bf8d99e0fecea35f77f84d538737c8117eb894.jpg)  
+![](../images/chapter_7/fig_7_10_b.jpg)  
 图7.10 由对称二维目标构建的trellis图一个分支中的转移
 
 $$
@@ -537,9 +537,9 @@ $$
 
 这里，式(7.15)的$3 \times 3$非对称二维目标是指上磁道和下磁道系数不等的二维目标G，即$G_{-1}(D) \neq G_1(D)$。因此，BPMR系统的接收端必须使用复杂度最高的全复杂度二维维特比检测器（full-complexity 2D Viterbi detector）来解码数据。图7.11显示了由非对称二维目标构建的trellis图一个分支中的转移细节。这里假设二维目标G的记忆长度为$\nu = 2$，所有可能的输入模式数为$|\mathcal{A}| = 2 \times 2 \times 2 = 8$。因此，由非对称二维目标构建的trellis图共有$|\mathcal{A}|^\nu = 8^2 = 64$个状态，其中时刻k的每个状态由所有磁道在时刻k-2和k-1的输入数据决定。每个状态在时刻k有$2 \times 2 \times 2 = 8$个分支，分别转移到时刻k+1的8个不同状态。此外，每个分支由符号$x/y$表示，其中$x = [a_{-1,k} \ a_{0,k} \ a_{1,k}]$是时刻k的目标输入数据（来自上磁道、中间磁道和下磁道），$y = d_k$是对应于该分支转移的时刻k的目标输出。
 
-![](../images/chapter_7/00504c739880e173fe6952b151e40269c9577aa327712d431b52d225defaacc0.jpg)
+![](../images/chapter_7/fig_7_11_a.jpg)
 
-![](../images/chapter_7/1adf72a4f4cdd14405c4e2ec9f81c748a3bb86fda7a62a02d041b4f7a706f5f3.jpg)  
+![](../images/chapter_7/fig_7_11_b.jpg)  
 图7.11 由非对称二维目标构建的trellis图一个分支中的转移
 
 ## 7.7 实验结果
@@ -554,7 +554,7 @@ $$
 
 系统1：使用一维目标（§7.1）和一维维特比检测器（§7.6.1），称为"1D target"。
 
-![](../images/chapter_7/6ef6b46791a5884178174ce441ad0bb91004b719a87cb51ef20dda521cdbbf76.jpg)
+![](../images/chapter_7/_unused_6ef6b46791a5884178174ce441ad0bb91004b719a87cb51ef20dda521cdbbf76.jpg)
 
 系统2：使用零角二维目标（§7.2）和改进的二维维特比检测器（§7.6.2.1），称为"Zero-corner 2D target"。
 
@@ -584,9 +584,9 @@ $$
 
 在容量为$3.5 \ \mathrm{Tb/in}^2$时，由式(6.13)可得$T_x = T_z \approx 13.6$ nm，且：
 
-![](../images/chapter_7/96811bff3abf16eaa69e1b02efd32e1dfa0992026f4757ae74a9a641328ab1ee.jpg)
+![](../images/chapter_7/fig_7_12_a.jpg)
 
-![](../images/chapter_7/b31e3565e409ab7bfd62b3497b3b9e432f03f9b15d5d058d8149b91e5fa1da7b.jpg)  
+![](../images/chapter_7/fig_7_12_b.jpg)  
 图7.12 使用不同目标的系统性能
 
 $$
@@ -595,9 +595,9 @@ $$
 
 图7.12比较了使用不同目标的系统性能。可以看出，在数据容量$\leq 2 \ \mathrm{Tb/in}^2$时，所有系统的性能相近（因为ITI的严重程度低于ISI）。因此，当BPMR系统数据容量不高（$\leq 2 \ \mathrm{Tb/in}^2$）时，应选择"1D target"，以便使用复杂度低且性能尚可的一维维特比检测器。然而，当数据容量增加（$> 2 \ \mathrm{Tb/in}^2$）时，"1D target"系统的性能开始劣于使用二维目标的系统（因为ITI变得更加严重）。因此，当BPMR系统具有高数据容量（$\geq 2.5 \ \mathrm{Tb/in}^2$）时，应选择二维目标，因为它在降低ITI影响方面优于一维目标。从图7.12还发现，使用"Symmetric 2D target"和"Asymmetric 2D target"的系统性能优于使用"Zero-corner 2D target"的系统，特别是在高数据容量（$\geq 3 \ \mathrm{Tb/in}^2$）时。这是因为当ITI非常严重时（从矩阵H第一行和第三行的系数可以看出），使用"Symmetric 2D target"或"Asymmetric 2D target"可以比使用"Zero-corner 2D target"更好地降低ITI影响。此外，在本实验中还发现使用"Symmetric 2D target"和"Asymmetric 2D target"的系统性能相同，因为信道响应（即矩阵H）是对称的，且系统没有磁道误配准影响，使得设计的对称和非对称二维目标系数非常接近，从而导致系统性能相同。
 
-![](../images/chapter_7/6e53f11c6a2a3f0352f6675f4f25e912f9aca8ef4a633fdd1b13c0d0e4363bf1.jpg)
+![](../images/chapter_7/fig_7_13_a.jpg)
 
-![](../images/chapter_7/07a4de6d07f1c21b2bd027d321240859beb8a1046b70dfb8637991b7ba81ee78.jpg)  
+![](../images/chapter_7/fig_7_13_b.jpg)  
 图7.13 用于二维目标和二维均衡器设计的BPMR信道模型（3磁头）[108]
 
 ### 7.7.1 二维均衡器的性能
@@ -606,9 +606,9 @@ $$
 
 图7.14比较了使用一维均衡器的BPMR系统（使用"1D target"和"Zero-corner 2D target"）和使用3磁头二维均衡器的BPMR系统（这里称为"1D target with 2D-EQ"）的性能，其中使用的二维目标形式如式(7.50)（可视为一维目标，能使用一维维特比检测器）。从图可以看出，当系统使用相同类型的目标（这里是一维目标）时，使用二维均衡器的系统性能总是优于使用一维均衡器的系统，特别是在高数据容量时。这是因为二维均衡器在降低ITI影响方面优于一维均衡器。
 
-![](../images/chapter_7/1371692ea0ca05fad1852a31cb8c7dbca879c8f6468c02fe98c85e9c39e46886.jpg)
+![](../images/chapter_7/fig_7_14_a.jpg)
 
-![](../images/chapter_7/568e7235c89549e11449d56c48990d0d8ce298ccc3e07755530c61738170516a.jpg)  
+![](../images/chapter_7/fig_7_14_b.jpg)  
 图7.14 使用一维和二维均衡器的系统性能
 
 尽管二维均衡器的性能优于一维均衡器，但使用二维均衡器需要系统配备3个磁头，这在实践中难以实现（特别是应用于当前使用的垂直记录系统时）。然而，如果要将二维均衡器用于单磁头BPMR系统，也可以通过使用缓冲器来存储3个读回信号（即系统读取3次数据），然后将这3个读回信号一起用二维均衡器处理。这是因为BPMR系统中的每个岛在记录介质中有确定的位置，因此3个读回信号的同步并不困难[108]。
@@ -617,9 +617,9 @@ $$
 
 本节将展示在有介质噪声和磁道误配准（TMR）影响的BPMR系统中，二维目标和一维均衡器的性能，如图7.15所示。使用式(6.15)的时域连续信道$P(z,x)$来包含介质噪声的影响，并使用式(6.21)来包含TMR的影响。这里，磁头获得的读回信号为：
 
-![](../images/chapter_7/adb80679ba10ff538a724ad8dfab4ceb4b51c84dbc6a9a1a630b9caf76e18d19.jpg)
+![](../images/chapter_7/fig_7_15_a.jpg)
 
-![](../images/chapter_7/016f5c9e35762ac86fb80c96e46984289d85f92f5dc4c191e4f9623172e19e8d.jpg)  
+![](../images/chapter_7/fig_7_15_b.jpg)  
 图7.15 包含介质噪声和磁道误配准影响的单磁头BPMR信道模型
 
 $$
@@ -634,24 +634,24 @@ $$
 
 如§4.6.2所述，使用迭代解码技术（软检测器和LDPC解码器协同工作）[3, 21]的系统可以显著提高性能，相比不使用迭代解码技术的系统。
 
-![](../images/chapter_7/5bcbd478309388acab1f55d939837ba8f8a45bd65c9885279658f2b19fd31391.jpg)  
+![](../images/chapter_7/fig_7_16.jpg)  
 图7.16 具有介质噪声影响的系统性能（使用不同目标）
 
-![](../images/chapter_7/1ebfae1f5c40e7adfd12cfb664b5d5e23cf3d901696998aab2c9f5b081095173.jpg)  
+![](../images/chapter_7/fig_7_17.jpg)  
 图7.17 具有磁道误配准影响的系统性能（使用不同目标）
 
 因此，本节将展示使用迭代解码技术的BPMR系统的性能。
 
-![](../images/chapter_7/a514428afb227a660481d141417d95b941f29282ea75c35c83ff396cb423738a.jpg)  
+![](../images/chapter_7/fig_7_18.jpg)  
 图7.18 (a)编码器 (b)解码器，添加到图7.2的BPMR系统中
 
 由于迭代解码技术必须用于编码系统，因此可以通过添加图7.18所示的编码器和解码器，将图7.2中的未编码BPMR系统变为编码系统。即在发送端，每个磁道的消息比特$\{u_{m,k}\}$（$m \in \{0, \pm 1\}$，每磁道3640比特）使用码率为8/9的规则(3,27)LDPC码[17]进行编码，得到每磁道4095比特的数据序列$\{a_{m,k}\}$，如图7.18(a)所示，其中校验矩阵每列有3个1，每行有27个1。然后数据序列$\{a_{m,k}\}$根据图7.2送入信道H。在接收端，图7.2中均衡器的输出$z_k$被送入图7.18(b)所示的Turbo均衡器[21]，这是二维SOVA检测器（2D-SOVA detector）[120]和LDPC解码器之间的迭代工作。LDPC解码基于消息传递算法（Message-Passing）[17]，进行3次内部迭代，得到中间磁道消息比特的估计值$\hat{u}_{0,k}$。
 
 二维SOVA检测器是双向SOVA（bi-directional SOVA）[42]，如§3.5所述。只是2D-SOVA检测器使用的trellis图具有更多的状态Q、从每个状态出发的分支多于两条、或每个状态转移有多条分支（与二维维特比检测器的trellis图相同），这取决于系统中使用的二维目标类型。然而，如果BPMR系统使用一维目标（1D target），则Turbo均衡器使用SOVA检测器[19, 42]（普通或双向均可，如§3.4和§3.5所述），而不是2D-SOVA检测器。
 
-![](../images/chapter_7/1b71f6c328679fd383cfd1e029f5edf9433ab710c0642d3f4d5c0d3d8719d570.jpg)
+![](../images/chapter_7/fig_7_19_a.jpg)
 
-![](../images/chapter_7/9a41d2ab803c08fe43aff734e12bc6fca7200a9aeadb278351c42f46da6251ac.jpg)  
+![](../images/chapter_7/fig_7_19_b.jpg)  
 图7.19 第5次迭代时使用不同目标的迭代BPMR系统性能
 
 以下实验比较了使用3种目标（1D target、Zero-corner 2D target和Symmetric 2D target）的迭代BPMR系统的性能。使用的均衡器有15个抽头，SNR定义为：

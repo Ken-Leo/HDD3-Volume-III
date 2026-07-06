@@ -8,7 +8,7 @@
 
 本章将介绍这些类MAP算法的工作原理，包括Max-Log-MAP[23, 24, 38, 39]、Log-MAP[23, 24]和SOVA（软输出维特比算法）[19, 42]，它们的性能接近或等同于BCJR算法，同时还将展示所有算法的性能并比较其复杂度。
 
-![](../images/chapter_3/16478bf0024cb8345da28a410d528f6c5a435a2e49eb076e050e604a727526b2.jpg)  
+![](../images/chapter_3/fig_3_1.jpg)  
 图3.1 MAP、Log-MAP、Max-Log-MAP和SOVA的关系
 
 ## 3.1 引言
