@@ -160,11 +160,9 @@ $$
 
 ### 2.2.1 信道模型与网格图
 
-![](../images/chapter_2/fig_2_10_a.jpg)
-![](../images/chapter_2/fig_2_10_b.jpg)  
+ 
 考虑图2.10中的信道模型。接收端接收到的信号（即待解码的信号）的第 k 个序列为
-
-
+![](../images/chapter_2/fig_2_10.jpg)  
 图2.10 信道模型
 
 ![](../images/chapter_2/fig_2_11.jpg)  
