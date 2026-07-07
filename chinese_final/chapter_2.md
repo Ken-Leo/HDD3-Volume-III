@@ -14,8 +14,6 @@
 
 ### 2.1.1 编码
 
-![](../images/chapter_2/fig_2_1_a.jpg)  
-![](../images/chapter_2/fig_2_1_b.jpg)  
 卷积编码器（convolutional encoder）使用移位寄存器（shift register）和模二加法器（modulo-2 adder）进行数据编码。它对一个输入数据序列进行编码，并生成一个或多个输出数据序列。如果卷积编码器对1比特输入数据进行编码，产生 n 比特输出数据，则该卷积编码器的码率（code rate）为 $R = 1 / n$。图2.1显示了码率为 $R = 1 / 2$ 的卷积编码器示例，其中 D 是单位延迟算子（unit delay operator），用于表示移位寄存器。在实际中，卷积编码器用生成多项式（generator polynomial）表示，其方程为 [1]
 
 $$
@@ -28,24 +26,22 @@ $$
 G \big ( D \big ) = \big [ G _ { 1 } \big ( D \big ) , G _ { 2 } \big ( D \big ) \big ] = \big [ 1 \oplus D , 1 \oplus D ^ { 2 } \big ]\tag{2.2}
 $$
 
-(ก)
-
-(ข)
-
-(ค)  
+![](../images/chapter_2/fig_2_1_a.png)  
+(a)
+![](../images/chapter_2/fig_2_1_b.jpg)  
+(b)
+![](../images/chapter_2/fig_2_1_c.jpg) 
+(c)
 图2.1 (a) 卷积编码器, (b) 系统卷积编码器, 以及 (c) 递归系统卷积编码器
 
 其中 $\oplus$ 是模二加法算子，$G _ { 1 } ( D )$ 是输出数据 $y _ { k } ^ { 1 }$ 的生成多项式，$G _ { 2 } ( D )$ 是输出数据 $y _ { k } ^ { 2 }$ 的生成多项式，存储器数为 $\mu = 2$。
 
 此外，系统卷积编码器（systematic convolutional encoder）是一种输出数据序列之一等于输入数据的卷积编码器，如图2.1(b)所示，其生成多项式为 $[1, 1 \oplus D ^ { 2 }]$。带有反馈的系统卷积编码器称为递归系统卷积编码器（recursive systematic convolutional encoder），如图2.1(c)所示，其生成多项式为 $\left[ 1 , 1 / \left( 1 \oplus D ^ { 2 } \right) \right]$。通常，递归系统卷积编码器比其他类型的卷积编码器更常用 [2]。
 
-![](../images/chapter_2/fig_2_2.jpg)  
-![](../images/chapter_2/fig_2_3_a.jpg)
-![](../images/chapter_2/fig_2_3_b.jpg)  
-![](../images/chapter_2/fig_2_4.jpg)  
-![](../images/chapter_2/fig_2_5.jpg)  
+
 一般来说，卷积码的分析借助有限状态机（FSM: finite state machine），这是一个展示系统输入数据、起始状态（start state）、下一状态（next state）和输出数据变化的模型（详见 [10] 第4.3.1节）。图2.2（左）显示了图2.1(a)中卷积编码器的有限状态机，共有 $2 ^ { \mu } = 4$ 个状态：00、01、10 和 11。箭头线表示状态转移路径，箭头旁的值 $x / y ^ { 1 } y ^ { 2 }$ 表示输入比特 x 和输出比特 $y ^ { 1 }$、$y ^ { 2 }$ 的值。此外，网格图（trellis diagram）用于表示每个时刻的状态转移，也可以用来解释卷积码的工作原理。图2.2（右）显示了图2.1(a)中卷积编码器的网格图。即在第 k 阶段的网格图显示了编码器从时刻 k 的一个状态到时刻 k+1 的另一个状态的所有可能状态转移。箭头旁的值与有限状态机中的 $x / y ^ { 1 } y ^ { 2 }$ 相同。由于沿着网格图行走的路径（path）由一组分支（branch）组成，每个阶段一个分支，因此每个码字（codeword）（即卷积编码器的输出数据）必须对应于网格图中唯一的一条路径（unique path）（见图2.5）。
 
+![](../images/chapter_2/fig_2_2.jpg)  
 图2.2 图2.1(a)的有限状态机图和网格图
 
 例2.1 请展示图2.1(a)中卷积编码器的编码步骤，当输入数据比特为 {x0, x1, x2, x3} = {1 0 1 1} 时。
@@ -75,13 +71,17 @@ $$
 Y _ { i } \left( D \right) = G _ { i } \left( D \right) X \left( D \right)\tag{2.3}
 $$
 
-
+![](../images/chapter_2/fig_2_3_a.jpg)
+![](../images/chapter_2/fig_2_3_b.jpg)  
 图2.3 例2.1中卷积编码的步骤
 
+
+![](../images/chapter_2/fig_2_4.jpg) 
 图2.4 例2.1中的状态转移图
 
 其中 $Y _ { i } \left( D \right) = \sum _ { k } y _ { k } ^ { i } D ^ { k }$ 是输出数据 $y _ { k } ^ { i }$ 的 D 变换结果，$i \in \left\{ 1 , 2 \right\}$，$G _ { i } ( D )$ 是输出数据 $y _ { k } ^ { i }$ 的生成多项式，$X ( D ) = \sum _ { k } x _ { k } D ^ { k }$ 是输入数据的 D 变换结果。例如，从例2.1（图2.1(a)）可得 $X \left( D \right) = 1 + D ^ { 2 } + D ^ { 3 }$，$G _ { i } \left( D \right)$ 由方程(2.2)给出。因此两组编码输出数据 $\left\{ y _ { k } ^ { 1 } , y _ { k } ^ { 2 } \right\}$ 为
 
+![](../images/chapter_2/fig_2_5.jpg)  
 图2.5 例2.1中的网格图（显示码字的唯一可能路径）
 
 $$
@@ -93,23 +93,25 @@ $$
 $$
 
 即 $\left\{ y _ { 0 } ^ { 1 } , y _ { 1 } ^ { 1 } , y _ { 2 } ^ { 1 } , y _ { 3 } ^ { 1 } , y _ { 4 } ^ { 1 } , y _ { 5 } ^ { 1 } \right\} = \left\{ 1 \ 1 \ 1 \ 0 \ 1 \ 0 \right\}$ 和 $\left\{ y _ { 0 } ^ { 2 } , y _ { 1 } ^ { 2 } , y _ { 2 } ^ { 2 } , y _ { 3 } ^ { 2 } , y _ { 4 } ^ { 2 } , y _ { 5 } ^ { 2 } \right\} = \left\{ 1 \ 0 \ 0 \ 1 \ 1 \ 1 \right\}$，与图2.3至图2.5得到的输出数据一致。
-
-![](../images/chapter_2/fig_2_6.jpg)  
+ 
 例2.2 考虑图2.6中的卷积编码器，其生成多项式以八进制数表示为 $(g _ { 1 } , g _ { 2 } ) = ( 1 7 , 1 1 )$，即二进制(001111, 001001)。其中 $g _ { 1 }$ 称为反馈多项式（feedback polynomial），$g _ { 2 }$ 称为前馈多项式（feedforward polynomial）。在某些书籍中，生成多项式以 D 域的分数形式表示为 $\frac { g _ { 2 } ( D ) } { g _ { 1 } ( D ) } = \frac { 1 + D ^ { 3 } } { 1 + D + D ^ { 2 } + D ^ { 3 } }$。请绘制有限状态机图，并对数据比特 11011100 进行编码（最左边的比特是第一个被编码的数据）。
-
-![](../images/chapter_2/fig_2_7.jpg)  
+ 
 解法 该卷积编码器的有限状态机图如图2.7所示。对于数据比特 11011100 的编码，步骤与例2.1类似：首先将所有移位寄存器的状态设为 0，然后逐比特输入数据到电路中，逐一计算编码器的输出数据。当所有输入数据比特输入完毕后，再输入若干尾比特，直到所有移位寄存器的值恢复为 0。
 
+![](../images/chapter_2/fig_2_6.jpg) 
 图2.6 生成多项式以八进制数表示的卷积编码器 (91, 92) = (17, 11)
 
+
+![](../images/chapter_2/fig_2_7.jpg) 
 图2.7 图2.6中卷积编码器的有限状态机（FSM）图
 
 若操作正确，需要输入到编码器中的尾比特为 111，编码结果为 10101110001。
 
-(a) 卷积编码器
 
 ![](../images/chapter_2/fig_2_8_a.jpg)  
-![](../images/chapter_2/fig_2_8_b.jpg)  
+(a) 卷积编码器
+![](../images/chapter_2/fig_2_8_b.png)  
+(b) 网格图
 图2.8 (a) 卷积编码器 和 (b) 网格图
 
 ### 2.1.2 解码
@@ -126,9 +128,7 @@ $$
 
 其中 $\tilde { x } _ { k } \left( u , q \right)$ 和 $\tilde { y } _ { k } \left( u , q \right)$ 是对应于状态转移 $(u, q)$ 的比特数据 $x _ { k }$ 和 $y _ { k }$。此外，在时刻 $k+1$ 时状态 q 的路径度量（path metric）定义为
 
-
-![](../images/chapter_2/fig_2_9_a.jpg)
-![](../images/chapter_2/fig_2_9_b.jpg)  
+![](../images/chapter_2/fig_2_9.jpg)  
 图2.9 网格图显示数据序列 $z _ { k } = \{ 1 1 ~ 0 1 ~ 1 0 ~ 1 1 ~ 0 0 \}$ 的解码过程
 
 $$
