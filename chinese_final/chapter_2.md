@@ -14,8 +14,8 @@
 
 ### 2.1.1 编码
 
-![](../images/chapter_2/fig_2_1_b.jpg)  
 ![](../images/chapter_2/fig_2_1_a.jpg)  
+![](../images/chapter_2/fig_2_1_b.jpg)  
 卷积编码器（convolutional encoder）使用移位寄存器（shift register）和模二加法器（modulo-2 adder）进行数据编码。它对一个输入数据序列进行编码，并生成一个或多个输出数据序列。如果卷积编码器对1比特输入数据进行编码，产生 n 比特输出数据，则该卷积编码器的码率（code rate）为 $R = 1 / n$。图2.1显示了码率为 $R = 1 / 2$ 的卷积编码器示例，其中 D 是单位延迟算子（unit delay operator），用于表示移位寄存器。在实际中，卷积编码器用生成多项式（generator polynomial）表示，其方程为 [1]
 
 $$
@@ -39,8 +39,11 @@ $$
 
 此外，系统卷积编码器（systematic convolutional encoder）是一种输出数据序列之一等于输入数据的卷积编码器，如图2.1(b)所示，其生成多项式为 $[1, 1 \oplus D ^ { 2 }]$。带有反馈的系统卷积编码器称为递归系统卷积编码器（recursive systematic convolutional encoder），如图2.1(c)所示，其生成多项式为 $\left[ 1 , 1 / \left( 1 \oplus D ^ { 2 } \right) \right]$。通常，递归系统卷积编码器比其他类型的卷积编码器更常用 [2]。
 
-![](../images/chapter_2/fig_2_5.jpg)  
 ![](../images/chapter_2/fig_2_2.jpg)  
+![](../images/chapter_2/fig_2_3_a.jpg)
+![](../images/chapter_2/fig_2_3_b.jpg)  
+![](../images/chapter_2/fig_2_4.jpg)  
+![](../images/chapter_2/fig_2_5.jpg)  
 一般来说，卷积码的分析借助有限状态机（FSM: finite state machine），这是一个展示系统输入数据、起始状态（start state）、下一状态（next state）和输出数据变化的模型（详见 [10] 第4.3.1节）。图2.2（左）显示了图2.1(a)中卷积编码器的有限状态机，共有 $2 ^ { \mu } = 4$ 个状态：00、01、10 和 11。箭头线表示状态转移路径，箭头旁的值 $x / y ^ { 1 } y ^ { 2 }$ 表示输入比特 x 和输出比特 $y ^ { 1 }$、$y ^ { 2 }$ 的值。此外，网格图（trellis diagram）用于表示每个时刻的状态转移，也可以用来解释卷积码的工作原理。图2.2（右）显示了图2.1(a)中卷积编码器的网格图。即在第 k 阶段的网格图显示了编码器从时刻 k 的一个状态到时刻 k+1 的另一个状态的所有可能状态转移。箭头旁的值与有限状态机中的 $x / y ^ { 1 } y ^ { 2 }$ 相同。由于沿着网格图行走的路径（path）由一组分支（branch）组成，每个阶段一个分支，因此每个码字（codeword）（即卷积编码器的输出数据）必须对应于网格图中唯一的一条路径（unique path）（见图2.5）。
 
 图2.2 图2.1(a)的有限状态机图和网格图
@@ -64,7 +67,6 @@ $$
 
 最后一步，选择尾比特的值的简单原则是：考虑哪些数据比特能使移位寄存器中的值全为零。此处输入两个 0 比特到电路中即可使编码器回到状态 00，编码过程结束。第一个尾比特输出 $\mathrm { Y } _ { 1 } = 1$ 和 $\mathrm { Y } _ { 2 } = 1$，第二个尾比特输出 $\mathrm { Y } _ { 1 } = 0$ 和 $\mathrm { Y } _ { 2 } = 1$。
 
-![](../images/chapter_2/fig_2_4.jpg)  
 上述编码示例如图2.3所示。若以状态转移图表示则如图2.4所示，若以网格图表示则如图2.5所示。可以看出图2.3至图2.5给出了相同的结果。
 
 此外，卷积编码还可以通过 D 变换（D transform）[1] 实现。即卷积编码器得到的输出数据等于
@@ -73,9 +75,7 @@ $$
 Y _ { i } \left( D \right) = G _ { i } \left( D \right) X \left( D \right)\tag{2.3}
 $$
 
-![](../images/chapter_2/fig_23_a.jpg)
 
-![](../images/chapter_2/fig_23_b.jpg)  
 图2.3 例2.1中卷积编码的步骤
 
 图2.4 例2.1中的状态转移图
@@ -106,9 +106,9 @@ $$
 
 若操作正确，需要输入到编码器中的尾比特为 111，编码结果为 10101110001。
 
-![](../images/chapter_2/fig_2_8_a.jpg)  
 (a) 卷积编码器
 
+![](../images/chapter_2/fig_2_8_a.jpg)  
 ![](../images/chapter_2/fig_2_8_b.jpg)  
 图2.8 (a) 卷积编码器 和 (b) 网格图
 
@@ -126,8 +126,8 @@ $$
 
 其中 $\tilde { x } _ { k } \left( u , q \right)$ 和 $\tilde { y } _ { k } \left( u , q \right)$ 是对应于状态转移 $(u, q)$ 的比特数据 $x _ { k }$ 和 $y _ { k }$。此外，在时刻 $k+1$ 时状态 q 的路径度量（path metric）定义为
 
-![](../images/chapter_2/fig_2_9_a.jpg)
 
+![](../images/chapter_2/fig_2_9_a.jpg)
 ![](../images/chapter_2/fig_2_9_b.jpg)  
 图2.9 网格图显示数据序列 $z _ { k } = \{ 1 1 ~ 0 1 ~ 1 0 ~ 1 1 ~ 0 0 \}$ 的解码过程
 
@@ -160,8 +160,8 @@ $$
 
 ### 2.2.1 信道模型与网格图
 
-![](../images/chapter_2/fig_2_10_b.jpg)  
 ![](../images/chapter_2/fig_2_10_a.jpg)
+![](../images/chapter_2/fig_2_10_b.jpg)  
 考虑图2.10中的信道模型。接收端接收到的信号（即待解码的信号）的第 k 个序列为
 
 
@@ -508,8 +508,8 @@ $$
 \alpha _ { 2 } \left( b \right) = 0 . 0 0 0 1 / \left( 0 . 7 5 3 7 + 0 . 0 0 0 1 \right) \approx 0 . 0 0 0 1
 $$
 
-![](../images/chapter_2/fig_2_14_b.jpg)  
 ![](../images/chapter_2/fig_2_14_a.jpg)
+![](../images/chapter_2/fig_2_14_b.jpg)  
 4. 阶段 2 和 3（$k = \{ 2 , 3 \}$）：BCJR 算法接收数据 $y _ { 2 } = 0 . 3$ 和 $y _ { 3 } = 0 . 6$，以与步骤 2 和 3 相同的方法计算所有分支度量并更新状态度量 $\alpha _ { k + 1 } ( q )$ 对于 $q \in \{ a , b \}$。得到的 $\gamma _ { k } ( u , q )$ 和 $\alpha _ { k + 1 } ( q )$ 如图2.14所示。每条分支旁的值是对应于状态转移 $(u, q)$ 的 $\gamma _ { k } ( u , q )$，每个状态节点处的数字表示状态度量 $\alpha _ { k } ( u )$ 和 $\beta _ { k } ( u )$，以分数形式表示
 
 $$
@@ -650,8 +650,8 @@ $$
 y _ { k } = r _ { k } + n _ { k } = \{ 1 . 2 , ~ - 0 . 7 , ~ - 0 . 2 , ~ 0 . 5 , ~ - 0 . 7 \} = \{ y _ { 0 } , ~ y _ { 1 } , ~ y _ { 2 } , ~ y _ { 3 } , ~ y _ { 4 } \}
 $$
 
-![](../images/chapter_2/fig_2_15_b.jpg)  
 ![](../images/chapter_2/fig_2_15_a.jpg)
+![](../images/chapter_2/fig_2_15_b.jpg)  
 然后构造信道 $H ( D ) = 1 - D ^ { 2 }$ 的网格图，如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
 
 
@@ -676,8 +676,8 @@ $$
 
 与发送端发送的数据比特 $a _ { k }$ 一致（最后两个比特在系统中并不真实存在，而是由输入数据与信道进行卷积运算产生的），表明使用BCJR算法解码数据时没有发生错误。
 
-![](../images/chapter_2/fig_2_17_a.jpg)
 
+![](../images/chapter_2/fig_2_17_a.jpg)
 ![](../images/chapter_2/fig_2_17_b.jpg)  
 图2.17 使用Turbo编解码的系统结构
 
@@ -696,8 +696,8 @@ Turbo 编码器的结构如图2.18所示。输入数据序列 $x _ { k }$ 被送
 
 ### 2.3.2 复用器与解复用器
 
-![](../images/chapter_2/fig_2_19_b.jpg)  
 ![](../images/chapter_2/fig_2_19_a.jpg)  
+![](../images/chapter_2/fig_2_19_b.jpg)  
 复用器（MUX: multiplexer）用于将从编码得到的多个数据序列合并为一个数据序列，而解复用器（DEMUX: demultiplexer）的功能与复用器相反，即将输入的数据序列分离为多个数据序列，使其与送入复用器的数据序列相对应，如图2.19所示。
 
 (a)
@@ -855,9 +855,9 @@ $$
 
 完成数据检测后，得到数据序列 $s _ { k }$ 的估计值（$\hat { s } _ { k }$）或数据比特 $s _ { k }$ 的软信息 $\lambda { \left( s _ { k } \right) }$，具体取决于所使用的检测器类型。例如，如果使用维特比检测器，则输出为 $\hat { s } _ { \scriptscriptstyle k }$；如果使用 BCJR 检测器，则输出为 $\lambda { \left( s _ { k } \right) }$。然后检测器将结果发送给解映射器（de-mapper）、解交织器（deinterleaver）和纠错解码器（ECC decoder），以估计数据序列 $x _ { k }$ 或 $\hat { x } _ { k }$。
 
-![](../images/chapter_2/fig_2_27_c.jpg)  
-![](../images/chapter_2/fig_2_27_b.jpg)
 ![](../images/chapter_2/fig_2_27_a.jpg)
+![](../images/chapter_2/fig_2_27_b.jpg)
+![](../images/chapter_2/fig_2_27_c.jpg)  
 第三种方式（接收端C）是 Turbo 均衡（turbo equalization）过程的结构。实际上，Turbo 概念（使用两个子解码器交换软信息以解码数据）也可以应用于均衡，这种技术称为 Turbo 均衡，使用该技术的接收端称为"Turbo 均衡器（turbo equalizer）"[21]。该系统可以被视为串行级联 Turbo 码，其中信道充当内部码（inner code），ECC编码器充当外部码（outer code）。此外，解码器的结构与图2.25中的串行级联 Turbo 解码器相同，只是内部解码器被替换为 SISO 均衡器（SISO equalizer），如图2.26或图2.27所示。
 
 

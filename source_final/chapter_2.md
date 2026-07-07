@@ -95,9 +95,9 @@ $$
 Y _ { i } \left( D \right) = G _ { i } \left( D \right) X \left( D \right)\tag{2.3}
 $$
 
-![](../images/chapter_2/fig_23_a.jpg)
+![](../images/chapter_2/fig_2_3_a.jpg)
 
-![](../images/chapter_2/fig_23_b.jpg)  
+![](../images/chapter_2/fig_2_3_b.jpg)  
 รูปที่ 23 ขั้นตอนการเข้ารหัสคอนโวลูชันในตัวอย่างที่ 2.1
 
 ![](../images/chapter_2/fig_2_4.jpg)  
