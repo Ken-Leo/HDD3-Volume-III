@@ -674,8 +674,7 @@ $$
 与发送端发送的数据比特 $a _ { k }$ 一致（最后两个比特在系统中并不真实存在，而是由输入数据与信道进行卷积运算产生的），表明使用BCJR算法解码数据时没有发生错误。
 
 
-![](../images/chapter_2/fig_2_17_a.jpg)
-![](../images/chapter_2/fig_2_17_b.jpg)  
+![](../images/chapter_2/fig_2_17.jpg)  
 图2.17 使用Turbo编解码的系统结构
 
 ## 2.3 Turbo 码
