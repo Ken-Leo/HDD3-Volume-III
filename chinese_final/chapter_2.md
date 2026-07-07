@@ -692,12 +692,12 @@ Turbo 编码器的结构如图2.18所示。输入数据序列 $x _ { k }$ 被送
 
 ### 2.3.2 复用器与解复用器
 
-![](../images/chapter_2/fig_2_19_a.jpg)  
-![](../images/chapter_2/fig_2_19_b.jpg)  
 复用器（MUX: multiplexer）用于将从编码得到的多个数据序列合并为一个数据序列，而解复用器（DEMUX: demultiplexer）的功能与复用器相反，即将输入的数据序列分离为多个数据序列，使其与送入复用器的数据序列相对应，如图2.19所示。
 
+![](../images/chapter_2/fig_2_19_a.jpg)  
 (a)
 
+![](../images/chapter_2/fig_2_19_b.jpg)  
 (b)  
 图2.19 (a) 复用器与 (b) 解复用器的工作原理
 
@@ -705,9 +705,9 @@ Turbo 编码器的结构如图2.18所示。输入数据序列 $x _ { k }$ 被送
 
 ### 2.3.3 Turbo 解码器
 
-![](../images/chapter_2/fig_2_20.jpg)  
 Turbo 码的解码过程是迭代的，意味着不是只有一个解码器仅执行一次解码，而是由多个子解码器组成（见图2.20）。每个子解码器交替工作，即当一个正在解码时，另一个处于等待状态。一个解码器的解码结果被传递给另一个解码器，用作下一轮解码的辅助信息。两个解码器轮流工作，直到结果收敛到适当的值。注意子解码器的数量与发送端子编码器的数量相同，它们相互配合工作[18]。
 
+![](../images/chapter_2/fig_2_20.jpg) 
 图2.20显示了Turbo解码器的基本结构，其工作步骤如下。接收端收到的信号通过解复用器后，得到数据序列 $x _ { k }$、$y _ { k } ^ { 1 }$ 和 $y _ { k } ^ { 2 }$ 的估计值，即 $\tilde { x } _ { k }$、$\tilde { y } _ { k } ^ { 1 }$ 和 $\tilde { y } _ { k } ^ { 2 }$。然后按照以下步骤进行 Turbo 解码：
 
 图2.20 Turbo 解码器基本结构
@@ -800,9 +800,10 @@ $$
 
 图2.17、2.18和2.20所示的编解码系统是使用并行级联 Turbo 码（parallel concatenated turbo code）的结构。本节将介绍串行级联 Turbo 码（serial concatenated turbo code），它是第2.4节将要讨论的 Turbo 均衡的基础。
 
-![](../images/chapter_2/fig_2_24.jpg)  
+ 
 串行级联 Turbo 码是将两个卷积编码器通过交织器串行连接而成[30]。图2.24显示了一个码率为 $R = 1 / 4$ 的串行级联 Turbo 编码器示例，其中外部编码器（outer encoder）是一个生成多项式为 [1, 1 D]、码率为1/2的系统编码器（systematic encoder），而内部编码器（inner encoder）是一个生成多项式为 $\left[ 1 , \ 1 / \left( 1 \oplus D ^ { 2 } \right) \right]$、码率为1/2的递归系统卷积编码器（recursive systematic convolutional encoder）。
 
+![](../images/chapter_2/fig_2_24.jpg) 
 图2.24 串行级联 Turbo 编码器
 
 ![](../images/chapter_2/fig_2_25.jpg)  
@@ -832,9 +833,9 @@ $$
 
 均衡（equalization）是用于解决由信道引起的失真（distortion）问题的方法，这种失真导致信道输出端的信号波形发生畸变。通常，数字通信系统中的接收端会使用均衡器（equalizer）来减少信号失真造成的影响。
 
-![](../images/chapter_2/fig_2_26.jpg)  
 考虑图2.26中的编码系统（coded system）。输入数据序列 $x _ { k } \in$ {0, 1} 被送入纠错编码器（ECC encoder）、交织器（interleaver）和映射器（mapper）后，得到数据序列 $s _ { k } \in \{ \pm 1 \}$。然后数据序列 $s _ { k }$ 通过受噪声 $n _ { k }$ 干扰的信道（channel），接收端收到的信号就是数据序列 $z _ { k }$。
 
+![](../images/chapter_2/fig_2_26.jpg)  
 图2.26 包含发送端和接收端A、B、C的数字通信系统结构
 
 接收端的主要功能是估计从发送端发送的数据（即估计 $x _ { k }$ 或 $\hat { x } _ { k }$），可以通过以下三种方式实现：
@@ -851,13 +852,9 @@ $$
 
 完成数据检测后，得到数据序列 $s _ { k }$ 的估计值（$\hat { s } _ { k }$）或数据比特 $s _ { k }$ 的软信息 $\lambda { \left( s _ { k } \right) }$，具体取决于所使用的检测器类型。例如，如果使用维特比检测器，则输出为 $\hat { s } _ { \scriptscriptstyle k }$；如果使用 BCJR 检测器，则输出为 $\lambda { \left( s _ { k } \right) }$。然后检测器将结果发送给解映射器（de-mapper）、解交织器（deinterleaver）和纠错解码器（ECC decoder），以估计数据序列 $x _ { k }$ 或 $\hat { x } _ { k }$。
 
-![](../images/chapter_2/fig_2_27_a.jpg)
-![](../images/chapter_2/fig_2_27_b.jpg)
-![](../images/chapter_2/fig_2_27_c.jpg)  
 第三种方式（接收端C）是 Turbo 均衡（turbo equalization）过程的结构。实际上，Turbo 概念（使用两个子解码器交换软信息以解码数据）也可以应用于均衡，这种技术称为 Turbo 均衡，使用该技术的接收端称为"Turbo 均衡器（turbo equalizer）"[21]。该系统可以被视为串行级联 Turbo 码，其中信道充当内部码（inner code），ECC编码器充当外部码（outer code）。此外，解码器的结构与图2.25中的串行级联 Turbo 解码器相同，只是内部解码器被替换为 SISO 均衡器（SISO equalizer），如图2.26或图2.27所示。
 
-
-
+![](../images/chapter_2/fig_2_27.jpg)  
 图2.27 Turbo 均衡器的结构
 
 ![](../images/chapter_2/fig_2_28.jpg)  
