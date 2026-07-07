@@ -686,9 +686,7 @@ $$
 \left\{ \lambda _ { p } \left( a _ { 0 } \right) , \lambda _ { p } \left( a _ { 1 } \right) , \lambda _ { p } \left( a _ { 2 } \right) , \lambda _ { p } \left( a _ { 3 } \right) , \lambda _ { p } \left( a _ { 4 } \right) \right\} = \left\{ 4 . 7 7 8 , - 2 7 . 6 4 6 , 4 . 7 7 8 , - 1 2 . 5 6 6 , 4 . 5 2 5 \right\}
 $$
 
-![](../images/chapter_2/fig_2_15_a.jpg)
-
-![](../images/chapter_2/fig_2_15_b.jpg)  
+![](../images/chapter_2/fig_2_15.jpg)  
 รูปที่ 2.15 แผนภาพเทรลลิสสำหรับช่องสัญญาณ $H ( D ) = 1 - D ^ { 2 }$ เมื่อข้อมูลอินพุตคือ $a _ { k } \in \{ \pm 1 \}$
 
 ![](../images/chapter_2/fig_2_16.jpg)  

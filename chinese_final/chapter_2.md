@@ -517,17 +517,17 @@ $$
 对于每个 $k \in \{ 0 , 1 , 2 , 3 \}$ 和 $u \in \{ a , b \}$。也就是说，前向递归结束时（归一化后）得到
 
 $$
-\alpha _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \mathrm { a n d } \quad \alpha _ { 4 } \left( b \right) = 0 . 7 7 8 6
-
-![](../images/chapter_2/fig_2_14.jpg)  
-图2.14 例2.4中BCJR算法的内部计算
+\alpha_{ 4 } \left( a \right) = 0.2214 \quad \mathrm { and } \quad \alpha_{4} \left( b \right) = 0.7786
+$$
 
 5. 初始化状态度量 $\beta _ { 4 } \left( u \right) = \alpha _ { 4 } \left( u \right)$ 对于 $u \in \{ a , b \}$，即
 
 $$
-\beta _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \quad \mathrm { a n d } \quad \beta _ { 4 } \left( b \right) = 0 . 7 7 8 6
+\beta_{ 4 } \left( a \right) = 0.2214 \quad \quad \mathrm { and } \quad \beta_{ 4 } \left( b \right) = 0.7786
 $$
-$$
+
+![](../images/chapter_2/fig_2_14.jpg)  
+图2.14 例2.4中BCJR算法的内部计算
 
 ## 后向递归
 
@@ -648,11 +648,10 @@ $$
 y _ { k } = r _ { k } + n _ { k } = \{ 1 . 2 , ~ - 0 . 7 , ~ - 0 . 2 , ~ 0 . 5 , ~ - 0 . 7 \} = \{ y _ { 0 } , ~ y _ { 1 } , ~ y _ { 2 } , ~ y _ { 3 } , ~ y _ { 4 } \}
 $$
 
-![](../images/chapter_2/fig_2_15_a.jpg)
-![](../images/chapter_2/fig_2_15_b.jpg)  
+  
 然后构造信道 $H ( D ) = 1 - D ^ { 2 }$ 的网格图，如图2.15所示，共有四个状态：状态(a)、(b)、(c)和(d)。
 
-
+![](../images/chapter_2/fig_2_15.jpg)
 图2.15 信道 $H ( D ) = 1 - D ^ { 2 }$ 的网格图，输入数据为 $a _ { k } \in \{ \pm 1 \}$
 
 ![](../images/chapter_2/fig_2_16.jpg)  
