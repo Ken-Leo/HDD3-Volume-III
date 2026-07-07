@@ -549,9 +549,7 @@ $$
 \alpha _ { 4 } \left( a \right) = 0 . 2 2 1 4 \quad \mathrm { ~ \updownarrow 6 \ 7 e ^ { \circ } ~ } \quad \alpha _ { 4 } \left( b \right) = 0 . 7 7 8 6
 $$
 
-![](../images/chapter_2/fig_2_14_a.jpg)
-
-![](../images/chapter_2/fig_2_14_b.jpg)  
+![](../images/chapter_2/fig_2_14.jpg)  
 รูปที่ 2.14 การคำนวณภายในอัลกอริทึม BCJR ในตัวอย่างที่ 2.4
 
 5. กำหนดค่าเริ่มต้นของเมตริกสถานะ $\beta _ { 4 } \left( u \right) = \alpha _ { 4 } \left( u \right)$ สำหรับ $u \in \{ a , b \}$ นั่นคือ
